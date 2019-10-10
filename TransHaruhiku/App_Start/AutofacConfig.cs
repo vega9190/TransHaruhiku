@@ -1,7 +1,13 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using System.Web.Mvc;
+using Autofac;
+using Autofac.Integration.Mvc;
+using TransHaruhiku.Controllers;
 using TransHaruhiku.Models.DbModels;
+using TransHaruhiku.Services;
+using TransHaruhiku.Services.Impl;
 
-namespace TransHaruhiku.App_Start
+namespace TransHaruhiku
 {
     public class AutofacConfig
     {
@@ -10,20 +16,24 @@ namespace TransHaruhiku.App_Start
         public static void Configure()
         {
             var builder = new ContainerBuilder();
-         
 
             // Registro de Servicios
-            //builder.RegisterAssemblyTypes(typeof(IExpedientesService).Assembly)
-            //    .AsImplementedInterfaces()
-            //    .InstancePerLifetimeScope()
-            //    .Where(t => t.Name.EndsWith("Service"))
-            //    .PropertiesAutowired();
+            builder.RegisterAssemblyTypes(typeof(IPedidosService).Assembly)
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope()
+                .Where(t => t.Name.EndsWith("Service"))
+                .PropertiesAutowired();
+
+            // Registro Controladores
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
 
             // Registro de DbContext
             builder.RegisterType<TransHaruhikuDbContext>().AsSelf().InstancePerLifetimeScope();
-
-            Container = builder.Build();
+            
+            // Registro de dependencias de autofac
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }

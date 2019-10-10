@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using log4net;
-using TransHaruhiku.App_Start;
 using TransHaruhiku.Models.DbModels;
 
 namespace TransHaruhiku
@@ -11,10 +10,6 @@ namespace TransHaruhiku
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-
             log4net.Config.XmlConfigurator.Configure();
             var logger = LogManager.GetLogger("App");
             logger.Debug("Iniciando proceso de Arranque de la Aplicación.");
@@ -23,6 +18,9 @@ namespace TransHaruhiku
             Database.SetInitializer<TransHaruhikuDbContext>(null);
 
             AutofacConfig.Configure();
+            AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
 }
