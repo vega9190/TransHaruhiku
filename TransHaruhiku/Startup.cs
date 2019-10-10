@@ -1,7 +1,5 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
 
-[assembly: OwinStartupAttribute(typeof(TransHaruhiku.Startup))]
 namespace TransHaruhiku
 {
     public partial class Startup
