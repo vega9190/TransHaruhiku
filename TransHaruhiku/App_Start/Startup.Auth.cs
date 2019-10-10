@@ -18,7 +18,7 @@ namespace TransHaruhiku
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = MyAuthentication.ApplicationCookie,
-                LoginPath = new PathString("/Login"),
+                LoginPath = new PathString("/Home"),
                 Provider = new CookieAuthenticationProvider(),
                 CookieHttpOnly = true,
                 ExpireTimeSpan = TimeSpan.FromHours(12), // adjust to your needs

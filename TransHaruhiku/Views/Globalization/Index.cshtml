@@ -1,0 +1,39 @@
+﻿@using System.Threading;
+@using System.Resources;
+@using System.Collections;
+@using System.Linq;
+
+@{
+    string CurrentCulture = Thread.CurrentThread.CurrentCulture.Name;
+    if (CurrentCulture.Length > 2)
+    {
+        CurrentCulture = CurrentCulture.Substring(0, 2);
+    }
+    ResourceSet languages = (ResourceSet)ViewBag.i18n;
+    int total = 0;
+    if (languages != null)
+    {
+        total = languages.Cast<object>().Count();
+    }
+    int i = 1;
+}
+
+@if (total > 0)
+{
+    <text>Globalize.addCultureInfo("@CurrentCulture", {
+    messages: {</text>
+    foreach (DictionaryEntry entry in languages)
+    {
+        if (i == total)
+        {
+            <text>"@entry.Key":"@Html.Raw(entry.Value)"</text>
+        }
+        else
+        {
+            <text>"@entry.Key":"@Html.Raw(entry.Value)",</text>
+        }
+        i++;
+    }
+    <text>}
+        });</text>
+}

@@ -1,0 +1,20 @@
+﻿@using TransHaruhiku.Globalization.Views.Shared
+
+@if (Request.IsAuthenticated)
+{
+    <div>
+        @*<ul>
+            <li>*@
+        @*<text>@LayoutStrings.Bienvenida <strong> @Session["Nombre"] </strong> </text>*@
+        @*</li>*@
+        <br/>
+        @*<li>*@
+       @* @Html.ActionLink("Log Off", "Logoff", "Login", null, new { @class = "alogonUnir" })*@
+        @*</li>
+        </ul>*@
+    </div>
+}
+else
+{
+    @*@Html.ActionLink("Gestor UNIR", "VolverGestor", "Autenticacion", null, new { @class = "alogonUnirNoAuten" })*@
+}
