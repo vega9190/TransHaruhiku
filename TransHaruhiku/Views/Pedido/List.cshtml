@@ -25,42 +25,41 @@
 <div id="page-alcance-listar">
     <div class="box-fieldset">
         <span class="field-title">@ListStrings.TextFiltros</span>
-        <div class="row">
-            <div class="box-datos-generales">
-                <ul class="box-form box-left">
-                    <li>
-                        <label for="txt-nombre" class="small grid-15 mobile-grid-100">@ListStrings.LabelNombre </label>
-                        <input id="txt-nombre" class="small grid-15 mobile-grid-100" type="text" />
-                    </li>
-                    <li>
-                        <label for="txt-carnet" class="small grid-15 mobile-grid-100">@ListStrings.LabelCarnet </label>
-                        <input id="txt-carnet" class="small grid-15 mobile-grid-100" type="text" />
-                    </li>
-                    <li>
-                        <label for="txt-container" class="small grid-15 mobile-grid-100">@ListStrings.LabelContainer </label>
-                        <input id="txt-container" class="small grid-15 mobile-grid-100" type="text" />
-                    </li>
-                </ul>
-                <div class="padding-right0">
-                    <ul class="box-form box-left">
+        <div class="clearfix">
+            <div class="grid-100 mobile-grid-100">
+                <div class="grid-50">
+                    <ul class="box-form">
                         <li>
-                            <label for="txt-fecha-desde" class="small grid-15 mobile-grid-100"> @ListStrings.LabelFechaDesde </label>
-                            <input id="txt-fecha-desde" class="datepicker small input-generales" type="text" />
+                            <label for="txt-nombre" class="grid-20 mobile-grid-100">@ListStrings.LabelNombre </label>
+                            <input id="txt-nombre" class="grid-55 mobile-grid-100" type="text" />
                         </li>
                         <li>
-                            <label for="txt-fecha-hasta" class="small grid-15 mobile-grid-100"> @ListStrings.LabelFechaHasta </label>
-                            <input id="txt-fecha-hasta" class="datepicker small input-generales" type="text" />
+                            <label for="txt-carnet" class="grid-20 mobile-grid-100">@ListStrings.LabelCarnet </label>
+                            <input id="txt-carnet" class="grid-55 mobile-grid-100" type="text" />
+                        </li>
+                        <li>
+                            <label for="txt-container" class="grid-20 mobile-grid-100">@ListStrings.LabelContainer </label>
+                            <input id="txt-container" class="grid-55 mobile-grid-100" type="text" />
+                        </li>
+                    </ul>          
+                </div>
+                <div class="grid-50">
+                    <ul class="box-form">
+                        <li>
+                            <label for="txt-fecha-desde" class="grid-20 mobile-grid-100"> @ListStrings.LabelFechaDesde </label>
+                            <input id="txt-fecha-desde" class="datepicker grid-30 mobile-grid-100" type="text" />
+                        </li>
+                        <li>
+                            <label for="txt-fecha-hasta" class="grid-20 mobile-grid-100"> @ListStrings.LabelFechaHasta </label>
+                            <input id="txt-fecha-hasta" class="datepicker grid-30 mobile-grid-100" type="text" />
                         </li>
                     </ul>
-
-                </div>                
-                <div class="clear clearfix"></div>
+                </div>
             </div>
         </div>
-
         <div class="align-right">
-            <button id="btn-buscar" class="button">@ListStrings.ButtonBuscar</button>
             <button id="btn-limpiar" class="button">@ListStrings.ButtonLimpiar</button>
+            <button id="btn-buscar" class="button">@ListStrings.ButtonBuscar</button>
         </div>
 
     </div>
@@ -79,6 +78,9 @@
                 </div>
             }
         }*@
-        <table id="tb-alcance" class="display"></table>
+        <div class="box-buttons">
+            <button id="btn-crear" class="button">@ListStrings.ButtonNuevo</button>
+        </div>
+        <table id="tb-pedidos" class="display"></table>
     </div>
 </div>

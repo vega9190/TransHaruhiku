@@ -123,6 +123,9 @@
   <data name="ButtonLimpiar" xml:space="preserve">
     <value>Limpiar</value>
   </data>
+  <data name="ButtonNuevo" xml:space="preserve">
+    <value>Crear</value>
+  </data>
   <data name="LabelCarnet" xml:space="preserve">
     <value>Carnet:</value>
   </data>

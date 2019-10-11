@@ -79,6 +79,15 @@ namespace TransHaruhiku.Globalization.Views.Pedido {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crear.
+        /// </summary>
+        public static string ButtonNuevo {
+            get {
+                return ResourceManager.GetString("ButtonNuevo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Carnet:.
         /// </summary>
         public static string LabelCarnet {

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using TransHaruhiku.Models.TransferStruct;
 using TransHaruhiku.Services;
 
 namespace TransHaruhiku.Controllers
@@ -16,6 +17,13 @@ namespace TransHaruhiku.Controllers
         {
             _pedidosService.ASD();
             return View();
+        }
+
+        public ActionResult Buscar()
+        {
+            var transfer = new ClientTransfer();
+
+            return Json(transfer);
         }
     }
 }
