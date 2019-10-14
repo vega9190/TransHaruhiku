@@ -23,8 +23,10 @@ Nombre NVARCHAR(25) NOT NULL
 CREATE TABLE th.Pedidos(
 IdPedido INT PRIMARY KEY IDENTITY(1,1),
 Descripcion NVARCHAR(500) NOT NULL,
-Contenedor NVARCHAR(50) NOT NULL,
+Contenedor NVARCHAR(100) NULL,
 Fecha DATETIME NOT NULL,
+Direccion NVARCHAR(500) NULL,
+DireccionUrl NVARCHAR(500) NULL,
 IdCliente INT NOT NULL,
 IdEstadoPedido INT NOT NULL,
 FOREIGN KEY(IdCliente) REFERENCES th.Clientes(IdCliente),
@@ -97,3 +99,13 @@ IdTipoPago INT NOT NULL,
 FOREIGN KEY (IdPedido) REFERENCES th.Pedidos(IdPedido),
 FOREIGN KEY (IdTipoPago) REFERENCES th.TiposPagos(IdTipoPago)
 )
+
+
+
+INSERT INTO th.EstadosPedidos VALUES ('Inicio')
+INSERT INTO th.EstadosPedidos VALUES ('En Proceso')
+INSERT INTO th.EstadosPedidos VALUES ('Finalizado')
+
+INSERT INTO th.Clientes VALUES ('123456', 'Douglas', 'Vega', 'direccion 1', 'url direccion', 'hola@sd.com', '486')
+
+INSERT INTO th.Pedidos VALUES ('ASD','4561',GETDATE(),1,1,'Dirección','dirección url')

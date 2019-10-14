@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using TransHaruhiko.Models.DbModels.Entidades;
-using TransHaruhiko.Parameters.Pedidos;
 
 namespace TransHaruhiko.Services
 {
     public interface IPedidosService
     {
         void ASD();
-        List<Pedido> Buscar(SearchPedidoParameters parameters);
+        IQueryable<Pedido> Buscar();
     }
 }

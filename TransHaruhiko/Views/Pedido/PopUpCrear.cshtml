@@ -1,0 +1,43 @@
+﻿@using TransHaruhiko.CustomHelpers
+@using TransHaruhiko.Globalization.Views.Pedido
+
+@{
+    Layout = null;
+}
+
+
+<div id="popup-pedido-crear">
+    <div class="row">
+        <h2 align="center"> @CreateStrings.TitleCrear </h2>
+        <div class="grid-40 mobile-grid-100">
+            <div class="row">
+                <ul class="box-form">
+                    <li>
+                        <label for="cbx-clientes-crear" class="grid-15 mobile-grid-100">@CreateStrings.LabelCliente </label>
+                        <select id="cbx-clientes-crear" class="grid-40 mobile-grid-100"></select>
+                    </li>
+                    <li>
+                        <label for="txt-descripcion-crear" class="grid-15 mobile-grid-100">@CreateStrings.LabelDescripcion </label>
+                        <textarea id="txt-descripcion-crear" class="grid-15 mobile-grid-100" maxlength="250"> </textarea>
+                    </li>
+                    <li>
+                        <label for="txt-contenedor-crear" class="grid-15 mobile-grid-100">@CreateStrings.LabelContenedor </label>
+                        <input id="txt-contenedor-crear" class="grid-15 mobile-grid-100" type="text"/>
+                    </li>
+                    
+                    <li>
+                        <label for="txt-direccion-crear" class="grid-15 mobile-grid-100">@CreateStrings.LabelDireccion </label>
+                        <input id="txt-direccion-crear" class="grid-40 mobile-grid-100"/>
+                    </li>
+                    <li>
+                        <label for="txt-direccion-url-crear" class="grid-15 mobile-grid-100">@CreateStrings.LabelDireccionUrl </label>
+                        <input id="txt-direccion-url-crear" class="grid-40 mobile-grid-100"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Pedidos/Crear.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Globalization/Pedidos/List")"></script>
