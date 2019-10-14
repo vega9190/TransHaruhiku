@@ -1,0 +1,86 @@
+﻿@using TransHaruhiko.CustomHelpers
+@using TransHaruhiko.Globalization.Views.Pedido
+@{
+    ViewBag.Title = ListStrings.Tittle;
+    ViewBag.TitlePage = ListStrings.TittleListado;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@section Stylesheet
+{
+    <link href="@Url.Content("~/Content/plugins/qtip2.3.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/plugins/jstree/default/style.min.css")" rel="stylesheet" type="text/css" />
+}*@
+@section JavaScript{
+    <script type="text/javascript" src="@Url.Content("~/Globalization/Pedido/List")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Globalization/Common/Common")"></script>
+
+    @*<script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/plugins/jstree.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/plugins/qtip2.3.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/plugins/combo-multiselect.js")"></script>*@
+    <script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Pedidos/List.js")"></script>
+    @*<script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Alcance/List - Copia.js")"></script>*@
+    <script type="text/javascript"> var RolUsuario = "@Session["Rol"]" </script>
+}
+
+<div id="page-alcance-listar">
+    <div class="box-fieldset">
+        <span class="field-title">@ListStrings.TextFiltros</span>
+        <div class="clearfix">
+            <div class="grid-100 mobile-grid-100">
+                <div class="grid-50">
+                    <ul class="box-form">
+                        <li>
+                            <label for="txt-nombre" class="grid-20 mobile-grid-100">@ListStrings.LabelNombre </label>
+                            <input id="txt-nombre" class="grid-55 mobile-grid-100" type="text" />
+                        </li>
+                        <li>
+                            <label for="txt-carnet" class="grid-20 mobile-grid-100">@ListStrings.LabelCarnet </label>
+                            <input id="txt-carnet" class="grid-55 mobile-grid-100" type="text" />
+                        </li>
+                        <li>
+                            <label for="txt-container" class="grid-20 mobile-grid-100">@ListStrings.LabelContainer </label>
+                            <input id="txt-container" class="grid-55 mobile-grid-100" type="text" />
+                        </li>
+                    </ul>          
+                </div>
+                <div class="grid-50">
+                    <ul class="box-form">
+                        <li>
+                            <label for="txt-fecha-desde" class="grid-20 mobile-grid-100"> @ListStrings.LabelFechaDesde </label>
+                            <input id="txt-fecha-desde" class="datepicker grid-30 mobile-grid-100" type="text" />
+                        </li>
+                        <li>
+                            <label for="txt-fecha-hasta" class="grid-20 mobile-grid-100"> @ListStrings.LabelFechaHasta </label>
+                            <input id="txt-fecha-hasta" class="datepicker grid-30 mobile-grid-100" type="text" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="align-right">
+            <button id="btn-limpiar" class="button">@ListStrings.ButtonLimpiar</button>
+            <button id="btn-buscar" class="button">@ListStrings.ButtonBuscar</button>
+        </div>
+
+    </div>
+    <div class="box-fieldset">
+        <span class="field-title">@ListStrings.TextSeccionResultado</span>
+        @*@if (string.IsNullOrEmpty(Session["Rol"] as string))
+            {
+            <script> window.location.href = '@Url.Action("Logoff", "Login")'; </script>
+        }
+        else
+        {
+            if (!Session["Rol"].Equals("Lector"))
+            {
+                <div class="box-buttons">
+                    <button id="btn-nuevo-alcance" class="button">@ListStrings.ButtonNuevo</button>
+                </div>
+            }
+        }*@
+        <div class="box-buttons">
+            <button id="btn-crear" class="button">@ListStrings.ButtonNuevo</button>
+        </div>
+        <table id="tb-pedidos" class="display"></table>
+    </div>
+</div>
