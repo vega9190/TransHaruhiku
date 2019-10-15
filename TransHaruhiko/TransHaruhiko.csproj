@@ -141,6 +141,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\GlobalizationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ParametricoController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="CustomHelpers\UtilsHelpers.cs" />
@@ -172,6 +173,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LayoutStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbModels\Entidades\Rol.cs" />
+    <Compile Include="Models\DbModels\Entidades\Trabajador.cs" />
+    <Compile Include="Models\DbModels\Entidades\Usuario.cs" />
     <Compile Include="Models\DbModels\TransHaruhikoDbContext.cs" />
     <Compile Include="Models\DbModels\Entidades\Cliente.cs" />
     <Compile Include="Models\DbModels\Entidades\EstadoPedido.cs" />
@@ -185,10 +189,13 @@
     <Compile Include="Parameters\Pedidos\SaveParameters.cs" />
     <Compile Include="Parameters\Pedidos\SearchParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\pages\Login\Index.js" />
     <Compile Include="Services\IClientesService.cs" />
     <Compile Include="Services\Impl\ClienteService.cs" />
     <Compile Include="Services\Impl\PedidosService.cs" />
+    <Compile Include="Services\Impl\UsuariosService.cs" />
     <Compile Include="Services\IPedidosService.cs" />
+    <Compile Include="Services\IUsuariosService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +259,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Pedido\PopUpCrear.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Login\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

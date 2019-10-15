@@ -18,5 +18,6 @@ namespace TransHaruhiko.Models.DbModels
         //Expedientes
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }

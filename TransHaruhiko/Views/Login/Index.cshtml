@@ -1,0 +1,27 @@
+﻿@using TransHaruhiko.CustomHelpers
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogIn.cshtml";
+}
+
+
+<div id="login">
+    @*<h2 align="center"> </h2>*@
+    <div class="grid-100 mobile-grid-100">
+        <div class="grid-80">
+            
+                    <label for="txt-usuario" class="grid-10 mobile-grid-100"> Usuario  </label>
+                    <input id="txt-usuario" class="grid-25 mobile-grid-100" type="text"/>
+            <br/>    
+                    <label for="txt-password" class="grid-10 mobile-grid-100">Contraseña</label>
+                    <input id="txt-password" class="grid-25 mobile-grid-100" type="text" />
+                    
+            <br /><br />
+                    <button id="btn-login" class="button">Ingresar</button>
+                
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Login/Index.js")"></script>
+@*<script type="text/javascript" src="@Url.Content("~/Globalization/Pedidos/List")"></script>*@
