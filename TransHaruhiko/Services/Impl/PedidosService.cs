@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TransHaruhiko.Models.DbModels;
 using TransHaruhiko.Models.DbModels.Entidades;
+using TransHaruhiko.Models.Enum;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Parameters.Pedidos;
 
@@ -15,17 +17,29 @@ namespace TransHaruhiko.Services.Impl
         {
             _dbContext = dbContext;
         }
-
-        public void ASD()
-        {
-            var s = _dbContext.Clientes.Where(a => true).ToList();
-            var sd = "asd";
-        }
-
+        
         public IQueryable<Pedido> Buscar()
         {
             IQueryable<Pedido> queriable = _dbContext.Pedidos;
             return queriable;
+        }
+
+        public BaseResult Guardar(SaveParameters parameters)
+        {
+            var result = new BaseResult();
+
+            var pedido = new Pedido
+            {
+                ClienteId = parameters.IdCliente,
+                Descripcion = parameters.Descripcion,
+                Direccion = parameters.Direccion,
+                DireccionUrl = parameters.DireccionUrl,
+                Fecha = DateTime.Now,
+                EstadoId = (int)EstadosEnum.Inicio
+            };
+            _dbContext.Pedidos.Add(pedido);
+            _dbContext.SaveChanges();
+            return result;
         }
     }
 }

@@ -17,11 +17,10 @@ namespace TransHaruhiko.Controllers
 
         public ActionResult List()
         {
-            _pedidosService.ASD();
             return View();
         }
 
-        public ActionResult Buscar(SearchPedidoParameters parameters)
+        public ActionResult Buscar(SearchParameters parameters)
         {
             var queriable = _pedidosService.Buscar();
             if (!string.IsNullOrEmpty(parameters.Nombre))
@@ -62,7 +61,8 @@ namespace TransHaruhiko.Controllers
                         a.Cliente.Id,
                         a.Cliente.Carnet,
                         a.Cliente.Nombres,
-                        a.Cliente.Apellidos
+                        a.Cliente.Apellidos,
+                        NombreCompleto = (a.Cliente.Nombres + " " + a.Cliente.Apellidos).Trim()
                     },
                     Estado = new
                     {
@@ -72,20 +72,20 @@ namespace TransHaruhiko.Controllers
                 }
             });
 
-            var order = parameters.GetEnum(SearchPedidoParameters.PedidoOrderColumn.Nombre);
+            var order = parameters.GetEnum(SearchParameters.PedidoOrderColumn.Nombre);
             switch (order)
             {
-                case SearchPedidoParameters.PedidoOrderColumn.Id:
+                case SearchParameters.PedidoOrderColumn.Id:
                     querySelect = parameters.Ascendente
                         ? querySelect.OrderBy(a => a.Pedido.Id)
                         : querySelect.OrderByDescending(a => a.Pedido.Id);
                     break;
-                case SearchPedidoParameters.PedidoOrderColumn.Nombre:
+                case SearchParameters.PedidoOrderColumn.Nombre:
                     querySelect = parameters.Ascendente
                         ? querySelect.OrderBy(a => a.Pedido.Cliente.Nombres).ThenBy(a=> a.Pedido.Cliente.Apellidos)
                         : querySelect.OrderByDescending(a => a.Pedido.Cliente.Nombres).ThenByDescending(a=> a.Pedido.Cliente.Apellidos);
                     break;
-                case SearchPedidoParameters.PedidoOrderColumn.Fecha:
+                case SearchParameters.PedidoOrderColumn.Fecha:
                     querySelect = parameters.Ascendente
                         ? querySelect.OrderBy(a => a.Pedido.Fecha)
                         : querySelect.OrderByDescending(a => a.Pedido.Fecha);
@@ -100,8 +100,7 @@ namespace TransHaruhiko.Controllers
                 var returnData = new
                 {
                     a.Pedido,
-                    FechaPedido = a.Pedido.Fecha.ToString("dd/MM/yyyy"),
-                    NombreCompleto = (a.Pedido.Cliente.Nombres + ' ' + a.Pedido.Cliente.Apellidos).Trim()
+                    FechaPedido = a.Pedido.Fecha.ToString("dd/MM/yyyy")
                 };
                 return returnData;
             });
@@ -115,6 +114,17 @@ namespace TransHaruhiko.Controllers
             return Json(transfer);
         }
 
+        public ActionResult Guardar(SaveParameters parameters)
+        {
+            var transfer = new ClientTransfer();
+            var res = _pedidosService.Guardar(parameters);
+
+            if (res.HasErrors)
+                transfer.Errors.AddRange(res.Errors);
+            if (res.HasWarnings)
+                transfer.Warnings.AddRange(res.Warnings);
+            return Json(transfer);
+        }
         #region PopUps
         public ActionResult PopUpCrear()
         {

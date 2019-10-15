@@ -141,6 +141,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\GlobalizationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ParametricoController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="CustomHelpers\UtilsHelpers.cs" />
     <Compile Include="Global.asax.cs">
@@ -175,13 +176,17 @@
     <Compile Include="Models\DbModels\Entidades\Cliente.cs" />
     <Compile Include="Models\DbModels\Entidades\EstadoPedido.cs" />
     <Compile Include="Models\DbModels\Entidades\Pedido.cs" />
+    <Compile Include="Models\Enum\EstadosEnum.cs" />
     <Compile Include="Models\TransferStruct\BaseResult.cs" />
     <Compile Include="Models\TransferStruct\ClientTransfer.cs" />
     <Compile Include="Models\TransferStruct\InfoPagination.cs" />
     <Compile Include="Models\ViewModel\BaseListViewModel.cs" />
     <Compile Include="Models\ViewModel\SimpleListViewModel.cs" />
-    <Compile Include="Parameters\Pedidos\SearchPedidoParameters.cs" />
+    <Compile Include="Parameters\Pedidos\SaveParameters.cs" />
+    <Compile Include="Parameters\Pedidos\SearchParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IClientesService.cs" />
+    <Compile Include="Services\Impl\ClienteService.cs" />
     <Compile Include="Services\Impl\PedidosService.cs" />
     <Compile Include="Services\IPedidosService.cs" />
     <Compile Include="Startup.cs" />
@@ -209,7 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Enum\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

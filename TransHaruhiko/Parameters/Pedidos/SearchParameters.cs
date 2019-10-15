@@ -3,7 +3,7 @@ using TransHaruhiko.Models.ViewModel;
 
 namespace TransHaruhiko.Parameters.Pedidos
 {
-    public class SearchPedidoParameters : BaseListViewModel
+    public class SearchParameters : BaseListViewModel
     {
         public enum PedidoOrderColumn
         {

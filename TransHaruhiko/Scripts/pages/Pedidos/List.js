@@ -186,7 +186,7 @@
                                 row.push(value.FechaPedido);
                                 row.push(value.Pedido.Descripcion);
                                 row.push(value.Pedido.Cliente.Carnet);
-                                row.push(value.NombreCompleto);
+                                row.push(value.Pedido.Cliente.NombreCompleto);
                                 row.push(value.Pedido.Contenedor);
                                 row.push('<span class="btn-estados" >' + value.Pedido.Estado.Nombre + '</span>');
                                 row.push(tempAcciones);
@@ -239,7 +239,7 @@ function PopUpCrearPedido() {
         } else {
             $.blockUI({ message: null });
             $.ajax({
-                url: SiteUrl + 'Alcance/Guardar',
+                url: SiteUrl + 'Pedido/Guardar',
                 data: $.toJSON(params),
                 success: function (data) {
                     $.unblockUI();
@@ -273,13 +273,11 @@ function PopUpCrearPedido() {
         url: SiteUrl + 'Pedido/PopUpCrear',
         open: function (event, ui) {
             popup = $(this);
-            $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
             $.unblockUI();
         },
         buttons: buttons,
-        maxWidth: 1200,
-        heigth: 1000,
-        width: 1000
+        heigth: 500,
+        width: 800
     }, false, function () {
     });
 }
