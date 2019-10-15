@@ -3,11 +3,9 @@
     $('#cbx-clientes-crear').combobox(DefaultCombobox({
         url: SiteUrl + 'Parametrico/SimpleSearchCliente',
         toolbar: {
-            reset: function () {}
+            reset: function() {}
         }
-    }))
-   
-
+    }));
 });
 
 

@@ -1,0 +1,27 @@
+﻿@using TransHaruhiko.Globalization.Views.Pedido
+@{
+    Layout = null;
+}
+
+
+<div id="popup-observacion" class="grid-container">
+    <div class="grid-100 mobile-grid-100">
+        <div class="grid-70">
+            <ul class="box-form">
+                <li>
+                    <input id="txt-id-observacion" class="hide" type="text" />
+                    <label for="txt-descripcion-observacion" class="grid-25 mobile-grid-100">@ObservacionStrings.LabelObservacion </label>
+                    <textarea id="txt-descripcion-observacion" class="grid-70 mobile-grid-100" maxlength="250"> </textarea>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="align-right">
+        <button id="btn-limpiar-observacion" class="button">@ListStrings.ButtonLimpiar</button>
+        <button id="btn-guardar-observacion" class="button">@ListStrings.ButtonGuardar</button>
+    </div>
+    <div class="box-fieldset">
+        <span class="field-title">@ObservacionStrings.TextSeccionResultado</span>
+        <table id="tb-observaciones" class="display"></table>
+    </div>
+</div>

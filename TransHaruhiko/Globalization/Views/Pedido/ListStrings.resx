@@ -120,6 +120,9 @@
   <data name="ButtonBuscar" xml:space="preserve">
     <value>Buscar</value>
   </data>
+  <data name="ButtonGuardar" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
   <data name="ButtonLimpiar" xml:space="preserve">
     <value>Limpiar</value>
   </data>

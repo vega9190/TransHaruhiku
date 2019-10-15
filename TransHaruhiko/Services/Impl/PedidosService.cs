@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TransHaruhiko.Globalization.Services.Pedidos;
 using TransHaruhiko.Models.DbModels;
 using TransHaruhiko.Models.DbModels.Entidades;
 using TransHaruhiko.Models.Enum;
@@ -49,7 +50,7 @@ namespace TransHaruhiko.Services.Impl
             var pedido = _dbContext.Pedidos.Find(idPedido);
             if (pedido == null)
             {
-                result.Errors.Add("No existe el pedido.");
+                result.Errors.Add(PedidoStrings.ErrorNoPedido);
                 return result;
             }
 

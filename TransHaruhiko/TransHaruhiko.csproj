@@ -142,6 +142,7 @@
     <Compile Include="Controllers\GlobalizationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ObservacionController.cs" />
     <Compile Include="Controllers\ParametricoController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="CustomHelpers\UtilsHelpers.cs" />
@@ -158,6 +159,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ListStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Scripts\Pedidos\ObservacionStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObservacionStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Services\Observaciones\ObservacionStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObservacionStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Services\Pedidos\PedidoStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PedidoStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Views\Pedido\CreateStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,11 +184,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ListStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Views\Pedido\ObservacionStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObservacionStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Views\Shared\LayoutStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LayoutStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbModels\Entidades\Observacion.cs" />
     <Compile Include="Models\DbModels\Entidades\Rol.cs" />
     <Compile Include="Models\DbModels\Entidades\Trabajador.cs" />
     <Compile Include="Models\DbModels\Entidades\Usuario.cs" />
@@ -187,14 +209,17 @@
     <Compile Include="Models\ViewModel\BaseListViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\SimpleListViewModel.cs" />
+    <Compile Include="Parameters\Observaciones\SaveParameters.cs" />
+    <Compile Include="Parameters\Observaciones\SearchParameters.cs" />
     <Compile Include="Parameters\Pedidos\SaveParameters.cs" />
     <Compile Include="Parameters\Pedidos\SearchParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Scripts\pages\Login\Index.js" />
     <Compile Include="Services\IClientesService.cs" />
     <Compile Include="Services\Impl\ClienteService.cs" />
+    <Compile Include="Services\Impl\ObservacionesService.cs" />
     <Compile Include="Services\Impl\PedidosService.cs" />
     <Compile Include="Services\Impl\UsuariosService.cs" />
+    <Compile Include="Services\IObservacionesService.cs" />
     <Compile Include="Services\IPedidosService.cs" />
     <Compile Include="Services\IUsuariosService.cs" />
     <Compile Include="Startup.cs" />
@@ -235,6 +260,18 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Scripts\Pedidos\ObservacionStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ObservacionStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Services\Observaciones\ObservacionStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ObservacionStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Services\Pedidos\PedidoStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PedidoStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Views\Pedido\CreateStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateStrings.Designer.cs</LastGenOutput>
@@ -243,6 +280,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Views\Pedido\ObservacionStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ObservacionStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Views\Shared\LayoutStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -266,6 +307,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Pedido\PopUpObservacion.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

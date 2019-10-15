@@ -59,6 +59,7 @@ CREATE TABLE th.Trabajadores(
 IdTrabajador INT PRIMARY KEY IDENTITY(1,1),
 Nombres NVARCHAR(50) NOT NULL,
 Apellidos NVARCHAR(50) NOT NULL,
+Carnet NVARCHAR(25) NOT NULL,
 Email NVARCHAR(50) NOT NULL,
 Telefono NVARCHAR(25) NOT NULL,
 Direccion NVARCHAR(500) NOT NULL,
@@ -142,6 +143,7 @@ INSERT INTO th.Roles VALUES ('Operador')
 INSERT INTO th.Roles VALUES ('Gerente')
 INSERT INTO th.Roles VALUES ('Administrador')
 
-INSERT INTO th.Trabajadores VALUES ('Trabajador', 'Trabajador APP', 'asd@hotmail.com', '8794', 'dirección', 1)
+INSERT INTO th.Trabajadores VALUES ('Trabajador', 'Trabajador APP', '123', 'asd@hotmail.com', '8794', 'dirección', 1)
 
 INSERT INTO th.Usuarios VALUES ('adm', 'adm', 1, 1, 1)
+

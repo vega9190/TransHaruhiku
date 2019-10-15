@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
     var tabla = $('#tb-pedidos');
     $('#btn-buscar').button();
     $('#btn-limpiar').button();
@@ -15,7 +16,7 @@
         tabla.table('update');
     });
     $('#btn-crear').click(function() {
-        PopUpCrearPedido();
+        PopUpCrear();
     });
     //////////// TABLA  //////////////////////
     tabla.table({
@@ -129,7 +130,8 @@
                 console.log($(nRow).data('data'));
             });
 
-            $('.btn-observaciones', nRow).click(function() {
+            $('.btn-observaciones', nRow).click(function () {
+                PopUpObservaciones($(nRow).data('data').Pedido.Id);
                 console.log($(nRow).data('data'));
             });
 
@@ -240,7 +242,7 @@
 });
 
 /////////////////// PopUp Crear /////////////////////////
-function PopUpCrearPedido() {
+function PopUpCrear() {
     $.blockUI({ message: null });
     var popup = null;
     var buttons = {};
@@ -312,5 +314,232 @@ function PopUpCrearPedido() {
         heigth: 500,
         width: 800
     }, false, function () {
+    });
+}
+
+function PopUpObservaciones(idPedido) {
+    $.blockUI({ message: null });
+    var popup = null;
+    var buttons = {};
+    /***************************************************************************/
+    buttons[Globalize.localize('Cerrar')] = function () {
+        popup.dialog('close');
+    };
+    /***************************************************************************/
+    showPopupPage({
+        title: Globalize.localize('TituloPopUp'),
+        url: SiteUrl + 'Pedido/PopUpObservacion',
+        open: function (event, ui) {
+            popup = $(this);
+            $.unblockUI();
+        },
+        buttons: buttons,
+        heigth: 500,
+        width: 700
+    }, false, function () {
+        var tablaObservaciones = $('#tb-observaciones', popup);
+        $('#btn-limpiar-observacion', popup).button();
+        $('#btn-guardar-observacion', popup).button();
+
+        $('#btn-limpiar-observacion', popup).click(function () {
+            $('#txt-descripcion-observacion', popup).val("");
+            $('#txt-id-observacion', popup).val("");
+        });
+
+        $('#btn-guardar-observacion', popup).click(function () {
+            var params = {};
+
+            params.Descripcion = $('#txt-descripcion-observacion', popup).val().trim();
+            params.UsuarioRol = RolUsuario;
+            params.IdPedido = idPedido;
+            params.IdObservacion = $('#txt-id-observacion', popup).val();
+            var warnings = new Array();
+
+            if (isEmpty(params.Descripcion))
+                warnings.push(Globalize.localize('ErrorNoDescripcion'));
+
+            if (warnings.length > 0) {
+                showCustomErrors({
+                    title: Globalize.localize('TextInformacion'),
+                    warnings: warnings
+                });
+                return false;
+            } else {
+                $.blockUI({ message: null });
+                $.ajax({
+                    url: SiteUrl + 'Observacion/Guardar',
+                    data: $.toJSON(params),
+                    success: function (data) {
+                        $.unblockUI();
+                        if (data.HasErrors) {
+                            showErrors(data.Errors);
+                        } else {
+                            if (data.HasWarnings) {
+                                showCustomErrors({
+                                    title: Globalize.localize('TextInformacion'),
+                                    warnings: data.Warnings
+                                });
+                            } else {
+                                showMessage(Globalize
+                                    .localize('MessageOperacionExitosamente'),
+                                    true);
+                                $('#btn-limpiar-observacion', popup).click();
+                                tablaObservaciones.table('update');
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        //////////// TABLA  //////////////////////
+        tablaObservaciones.table({
+            bInfo: true,
+            bJQueryUI: true,
+            responsive: {
+                details: {
+                    type: 'inline'
+                }
+            },
+            //aaSorting: [[5, 'asc']],
+            aoColumns: [
+                {
+                    className: 'hide',
+                    sTitle: "Id",
+                    sWidth: "70px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnFecha'),
+                    sWidth: "100px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnObservacion'),
+                    sWidth: "250px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnUsuario'),
+                    sWidth: "130px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnAcciones'),
+                    sWidth: "100px",
+                    bSortable: false
+                }
+            ],
+            bServerSide: true,
+            sAjaxSource: SiteUrl + 'Observacion/Buscar',
+            fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                $('.btn-editar-observacion', nRow).click(function () {
+                    data = $(nRow).data('data');
+                    $('#txt-descripcion-observacion', popup).val(data.Observacion.Descripcion);
+                    $('#txt-id-observacion', popup).val(data.Observacion.Id);
+                });
+
+                $('.btn-eliminar-eliminar', nRow).click(function () {
+                    data = $(nRow).data('data');
+                    var popup = null;
+                    showConfirmation({
+                        title: Globalize.localize('TitlePopUp'),
+                        open: function (event, ui) {
+                            popup = $(this);
+                        },
+                        message: Globalize.localize('TextConfirmarEliminar'),
+                        buttonFunctionYes: function () {
+                            $.blockUI({ message: null });
+                            $.ajax({
+                                url: SiteUrl + 'Observacion/Eliminar',
+                                data: $.toJSON({ idObservacion: data.Observacion.Id }),
+                                success: function (data) {
+                                    popup.dialog('close');
+                                    if (data.HasErrors) {
+                                        showErrors(data.Errors);
+                                    } else {
+                                        if (data.HasWarnings) {
+                                            showCustomErrors({
+                                                title: Globalize.localize('TextInformacion'),
+                                                warnings: data.Warnings
+                                            });
+                                        } else {
+                                            showMessage(Globalize
+                                                .localize('MessageOperacionExitosamente'),
+                                                true);
+                                            tablaObservaciones.table('update');
+                                        }
+                                    }
+                                    $.unblockUI();
+                                }
+                            });
+                        }
+                    });
+                });
+
+                return nRow;
+            },
+            fnServerData: function (sSource, aoData, fnCallback) {
+                var paramsTabla = {};
+                $.each(aoData,
+                    function (index, value) {
+                        paramsTabla[value.name] = value.value;
+                    });
+                var params = {};
+                params.PageIndex = (paramsTabla.iDisplayStart / paramsTabla.iDisplayLength) + 1;
+                params.ItemsPerPage = paramsTabla.iDisplayLength;
+                params.OrderColumnPosition = paramsTabla.iSortCol_0;
+                params.OrderColumnName = decode(paramsTabla.iSortCol_0 - 2,
+                    [
+                        1, 'fecha'
+                    ]);
+                params.OrderDirection = paramsTabla.sSortDir_0;
+                /******************************************************************/
+
+                params.IdPedido = idPedido;
+
+                /******************************************************************/
+                tablaObservaciones.block({ message: null });
+                $.ajax({
+                    url: sSource,
+                    data: $.toJSON(params),
+                    success: function (data) {
+                        tablaObservaciones.unblock();
+                        if (data.HasErrors) {
+                            showErrors(data.Errors);
+                        } else {
+                            var rows = [];
+                            $.each(data.Data,
+                                function (index, value) {
+                                    var row = [];
+                                    var tempAcciones = '<div class="box-icons">';
+                                    tempAcciones += '<span title="' +
+                                        Globalize.localize('TextEditar') +
+                                        '" class="btn-editar-observacion ui-icon ui-icon-pencil"></span>';
+
+                                    tempAcciones += '<span title="' +
+                                        Globalize.localize('TextEliminar') +
+                                        '" class="btn-eliminar-eliminar ui-icon ui-icon-trash"></span>';
+                                    tempAcciones += '</div>';
+
+                                    row.push(value.Observacion.Id);
+                                    row.push(value.FechaObservacion);
+                                    row.push(value.Observacion.Descripcion);
+                                    row.push(value.Observacion.Usuario.NombreCompleto);
+                                    row.push(tempAcciones);
+                                    rows.push(row);
+                                });
+                            fnCallback({
+                                "sEcho": paramsTabla.sEcho,
+                                "aaData": rows,
+                                "iTotalRecords": data.Pagination.TotalDisplayRecords,
+                                "iTotalDisplayRecords": data.Pagination.TotalRecords
+                            });
+                            tablaObservaciones.table('setData', data.Data);
+                        }
+                    }
+                });
+            }
+        });
+
     });
 }

@@ -22,14 +22,14 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ListStrings {
+    public class ObservacionStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ListStrings() {
+        internal ObservacionStrings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Scripts.Pedidos.ListStrings", typeof(ListStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Scripts.Pedidos.ObservacionStrings", typeof(ObservacionStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,51 +70,6 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Carnet.
-        /// </summary>
-        public static string ColumnCarnet {
-            get {
-                return ResourceManager.GetString("ColumnCarnet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cliente.
-        /// </summary>
-        public static string ColumnCliente {
-            get {
-                return ResourceManager.GetString("ColumnCliente", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Contenedor.
-        /// </summary>
-        public static string ColumnContenedor {
-            get {
-                return ResourceManager.GetString("ColumnContenedor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Descripción.
-        /// </summary>
-        public static string ColumnDescripcion {
-            get {
-                return ResourceManager.GetString("ColumnDescripcion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Estado.
-        /// </summary>
-        public static string ColumnEstado {
-            get {
-                return ResourceManager.GetString("ColumnEstado", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Fecha.
         /// </summary>
         public static string ColumnFecha {
@@ -124,29 +79,20 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Id.
+        ///   Looks up a localized string similar to Observación.
         /// </summary>
-        public static string ColumnId {
+        public static string ColumnObservacion {
             get {
-                return ResourceManager.GetString("ColumnId", resourceCulture);
+                return ResourceManager.GetString("ColumnObservacion", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incoherencia en el rango de fechas..
+        ///   Looks up a localized string similar to Usuario.
         /// </summary>
-        public static string ErrorFechaIncoherente {
+        public static string ColumnUsuario {
             get {
-                return ResourceManager.GetString("ErrorFechaIncoherente", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Seleccione un Cliente..
-        /// </summary>
-        public static string ErrorNoCliente {
-            get {
-                return ResourceManager.GetString("ErrorNoCliente", resourceCulture);
+                return ResourceManager.GetString("ColumnUsuario", resourceCulture);
             }
         }
         
@@ -156,15 +102,6 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         public static string ErrorNoDescripcion {
             get {
                 return ResourceManager.GetString("ErrorNoDescripcion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Está a punto de eliminar el registro, ¿Desea continuar?.
-        /// </summary>
-        public static string TextConfirmarEliminar {
-            get {
-                return ResourceManager.GetString("TextConfirmarEliminar", resourceCulture);
             }
         }
         
@@ -183,33 +120,6 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         public static string TextEliminar {
             get {
                 return ResourceManager.GetString("TextEliminar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Observaciones.
-        /// </summary>
-        public static string TextObservaciones {
-            get {
-                return ResourceManager.GetString("TextObservaciones", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pagos.
-        /// </summary>
-        public static string TextPagos {
-            get {
-                return ResourceManager.GetString("TextPagos", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gestión de pedidos.
-        /// </summary>
-        public static string TituloPopUp {
-            get {
-                return ResourceManager.GetString("TituloPopUp", resourceCulture);
             }
         }
     }

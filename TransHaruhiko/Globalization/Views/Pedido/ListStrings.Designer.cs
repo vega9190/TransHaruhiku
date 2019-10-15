@@ -70,6 +70,15 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Guardar.
+        /// </summary>
+        public static string ButtonGuardar {
+            get {
+                return ResourceManager.GetString("ButtonGuardar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Limpiar.
         /// </summary>
         public static string ButtonLimpiar {

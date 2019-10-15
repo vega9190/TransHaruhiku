@@ -22,7 +22,7 @@ namespace TransHaruhiko.Controllers
             {
                 var usuario = _usuariosService.Get(User.Identity.Name, null);
                 Session["Rol"] = usuario.Rol.Nombre;
-                Session["Nombre"] = usuario.Trabajador.Nombres;
+                Session["Nombre"] = usuario.Trabajador.NombreCompleto;
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -48,14 +48,14 @@ namespace TransHaruhiko.Controllers
                 return View(model);
             }
             
-            var identity = CreateIdentity(usuario.Nickname, usuario.Trabajador.Nombres + " " + usuario.Trabajador.Apellidos, usuario.Rol.Nombre);
+            var identity = CreateIdentity(/*usuario.Nickname*/usuario.Id.ToString(), usuario.Trabajador.NombreCompleto, usuario.Rol.Nombre, usuario.Id);
 
             //authenticationManager.SignOut(MyAuthentication.ApplicationCookie);
             authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
 
             return RedirectToAction("Index", "Home");
         }
-        private ClaimsIdentity CreateIdentity(string userPrincipal, string nombre, string roles)
+        private ClaimsIdentity CreateIdentity(string userPrincipal, string nombre, string roles, int id)
         {
             var identity = new ClaimsIdentity(MyAuthentication.ApplicationCookie, ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 
@@ -67,7 +67,7 @@ namespace TransHaruhiko.Controllers
             {
 
                 identity.AddClaim(new Claim(ClaimTypes.Role, roles));
-                
+
                 Session["Rol"] = roles;
                 Session["Nombre"] = nombre;
             }

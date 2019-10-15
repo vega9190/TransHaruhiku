@@ -17,5 +17,7 @@ namespace TransHaruhiko.Models.DbModels.Entidades
         public string Telefono { get; set; }
         public string Direccion { get; set; }
         public bool Activo { get; set; }
+
+        public string NombreCompleto => (Nombres + " " + Apellidos).Trim();
     }
 }

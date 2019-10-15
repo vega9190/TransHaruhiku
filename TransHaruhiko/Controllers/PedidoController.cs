@@ -144,6 +144,10 @@ namespace TransHaruhiko.Controllers
             return View();
         }
 
+        public ActionResult PopUpObservacion()
+        {
+            return View();
+        }
         #endregion
     }
 }

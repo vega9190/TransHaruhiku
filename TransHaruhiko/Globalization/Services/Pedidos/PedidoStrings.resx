@@ -117,55 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ColumnAcciones" xml:space="preserve">
-    <value>Acciones</value>
-  </data>
-  <data name="ColumnCarnet" xml:space="preserve">
-    <value>Carnet</value>
-  </data>
-  <data name="ColumnCliente" xml:space="preserve">
-    <value>Cliente</value>
-  </data>
-  <data name="ColumnContenedor" xml:space="preserve">
-    <value>Contenedor</value>
-  </data>
-  <data name="ColumnDescripcion" xml:space="preserve">
-    <value>Descripción</value>
-  </data>
-  <data name="ColumnEstado" xml:space="preserve">
-    <value>Estado</value>
-  </data>
-  <data name="ColumnFecha" xml:space="preserve">
-    <value>Fecha</value>
-  </data>
-  <data name="ColumnId" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="ErrorFechaIncoherente" xml:space="preserve">
-    <value>Incoherencia en el rango de fechas.</value>
-  </data>
-  <data name="ErrorNoCliente" xml:space="preserve">
-    <value>Seleccione un Cliente.</value>
-  </data>
-  <data name="ErrorNoDescripcion" xml:space="preserve">
-    <value>Introduzca un valor en el campo Descripción.</value>
-  </data>
-  <data name="TextConfirmarEliminar" xml:space="preserve">
-    <value>Está a punto de eliminar el registro, ¿Desea continuar?</value>
-  </data>
-  <data name="TextEditar" xml:space="preserve">
-    <value>Editar</value>
-  </data>
-  <data name="TextEliminar" xml:space="preserve">
-    <value>Eliminar</value>
-  </data>
-  <data name="TextObservaciones" xml:space="preserve">
-    <value>Observaciones</value>
-  </data>
-  <data name="TextPagos" xml:space="preserve">
-    <value>Pagos</value>
-  </data>
-  <data name="TituloPopUp" xml:space="preserve">
-    <value>Gestión de pedidos</value>
+  <data name="ErrorNoPedido" xml:space="preserve">
+    <value>No existe el pedido.</value>
   </data>
 </root>
