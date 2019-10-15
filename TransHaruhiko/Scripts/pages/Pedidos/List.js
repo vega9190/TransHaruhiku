@@ -74,21 +74,54 @@
         fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
             $('.btn-estados', nRow)
                 .contextMenu({
-                    fnClick: function() {
-                        var _this = $(this);
-                        console.log(_this.data('data'));
-                        //CambiarEstado($(nRow).data('data').Id, _this.data('data').IdEstado);
-                    },
-                    fnLoadServerData: function(callbackRender) {
-                        var menu = [
-                            {
-                                value: 'Cancelar',
-                                fnClick: function() {
-                                    console.log("click cancelar");
+                    fnLoadServerData: function (callbackRender) {
+                        var data = $(nRow).data('data');
+                        if (data.Pedido.Estado.Id === 1) {
+                            var menu = [
+                                {
+                                    value: 'Cancelar',
+                                    fnClick: function() {
+                                        var popup = null;
+                                        showConfirmation({
+                                            title: Globalize.localize('TitlePopUp'),
+                                            open: function (event, ui) {
+                                                popup = $(this);
+                                            },
+                                            message: Globalize.localize('TextConfirmarEliminar'),
+                                            buttonFunctionYes: function () {
+                                                $.blockUI({ message: null });
+                                                $.ajax({
+                                                    url: SiteUrl + 'Pedido/Eliminar',
+                                                    data: $.toJSON({ idPedido: data.Pedido.Id }),
+                                                    success: function (data) {
+                                                        popup.dialog('close');
+                                                        if (data.HasErrors) {
+                                                            showErrors(data.Errors);
+                                                        } else {
+                                                            if (data.HasWarnings) {
+                                                                showCustomErrors({
+                                                                    title: Globalize.localize('TextInformacion'),
+                                                                    warnings: data.Warnings
+                                                                });
+                                                            } else {
+                                                                showMessage(Globalize
+                                                                    .localize('MessageOperacionExitosamente'),
+                                                                    true);
+                                                                tabla.table('update');
+                                                            }
+                                                        }
+                                                        $.unblockUI();
+                                                    }
+                                                });
+                                            }
+                                        });
+                                        return false;
+
+                                    }
                                 }
-                            }
-                        ];
-                        callbackRender(menu);
+                            ];
+                            callbackRender(menu);
+                        }
                     }
                 });
 

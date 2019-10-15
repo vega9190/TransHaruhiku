@@ -187,7 +187,7 @@ namespace TransHaruhiko.Globalization.Scripts.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVISO.
+        ///   Looks up a localized string similar to Gestión de pedidos.
         /// </summary>
         public static string TitlePopUp {
             get {

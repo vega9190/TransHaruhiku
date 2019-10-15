@@ -125,6 +125,19 @@ namespace TransHaruhiko.Controllers
                 transfer.Warnings.AddRange(res.Warnings);
             return Json(transfer);
         }
+
+        public ActionResult Eliminar(int idPedido)
+        {
+            var transfer = new ClientTransfer();
+            var res = _pedidosService.Eliminar(idPedido);
+
+            if (res.HasErrors)
+                transfer.Errors.AddRange(res.Errors);
+            if (res.HasWarnings)
+                transfer.Warnings.AddRange(res.Warnings);
+
+            return Json(transfer);
+        }
         #region PopUps
         public ActionResult PopUpCrear()
         {

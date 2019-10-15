@@ -150,6 +150,9 @@
   <data name="ErrorNoDescripcion" xml:space="preserve">
     <value>Introduzca un valor en el campo Descripción.</value>
   </data>
+  <data name="TextConfirmarEliminar" xml:space="preserve">
+    <value>Está a punto de eliminar un pedid, ¿Desea continuar?</value>
+  </data>
   <data name="TextEditar" xml:space="preserve">
     <value>Editar</value>
   </data>

@@ -160,6 +160,15 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Está a punto de eliminar un pedid, ¿Desea continuar?.
+        /// </summary>
+        public static string TextConfirmarEliminar {
+            get {
+                return ResourceManager.GetString("TextConfirmarEliminar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Editar.
         /// </summary>
         public static string TextEditar {

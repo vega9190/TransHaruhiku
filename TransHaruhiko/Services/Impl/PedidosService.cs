@@ -41,5 +41,21 @@ namespace TransHaruhiko.Services.Impl
             _dbContext.SaveChanges();
             return result;
         }
+
+        public BaseResult Eliminar(int idPedido)
+        {
+            var result = new BaseResult();
+            var pedido = _dbContext.Pedidos.Find(idPedido);
+            if (pedido == null)
+            {
+                result.Errors.Add("No existe el pedido.");
+                return result;
+            }
+
+            pedido.EstadoId = (int) EstadosEnum.Cancelado;
+
+            _dbContext.SaveChanges();
+            return result;
+        }
     }
 }
