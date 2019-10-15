@@ -185,6 +185,7 @@
     <Compile Include="Models\TransferStruct\ClientTransfer.cs" />
     <Compile Include="Models\TransferStruct\InfoPagination.cs" />
     <Compile Include="Models\ViewModel\BaseListViewModel.cs" />
+    <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\SimpleListViewModel.cs" />
     <Compile Include="Parameters\Pedidos\SaveParameters.cs" />
     <Compile Include="Parameters\Pedidos\SearchParameters.cs" />

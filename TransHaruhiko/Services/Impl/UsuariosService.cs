@@ -15,7 +15,9 @@ namespace TransHaruhiko.Services.Impl
 
         public Usuario Get(string userName, string password)
         {
-            return _dbContext.Usuarios.FirstOrDefault(a => a.Nickname == userName && a.Pass == password);
+            return !string.IsNullOrEmpty(password)
+                ? _dbContext.Usuarios.FirstOrDefault(a => a.Nickname == userName && a.Pass == password)
+                : _dbContext.Usuarios.FirstOrDefault(a => a.Nickname == userName);
         }
     }
 }

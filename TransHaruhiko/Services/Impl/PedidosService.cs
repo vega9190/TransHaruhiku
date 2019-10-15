@@ -31,6 +31,7 @@ namespace TransHaruhiko.Services.Impl
             var pedido = new Pedido
             {
                 ClienteId = parameters.IdCliente,
+                Contenedor = parameters.Contenedor,
                 Descripcion = parameters.Descripcion,
                 Direccion = parameters.Direccion,
                 DireccionUrl = parameters.DireccionUrl,

@@ -1,27 +1,39 @@
-﻿@using TransHaruhiko.CustomHelpers
+﻿@model TransHaruhiko.Models.ViewModel.LoginViewModel
 
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LayoutLogIn.cshtml";
 }
+<h2>Login</h2>
 
-
-<div id="login">
-    @*<h2 align="center"> </h2>*@
-    <div class="grid-100 mobile-grid-100">
-        <div class="grid-80">
-            
-                    <label for="txt-usuario" class="grid-10 mobile-grid-100"> Usuario  </label>
-                    <input id="txt-usuario" class="grid-25 mobile-grid-100" type="text"/>
-            <br/>    
-                    <label for="txt-password" class="grid-10 mobile-grid-100">Contraseña</label>
-                    <input id="txt-password" class="grid-25 mobile-grid-100" type="text" />
-                    
-            <br /><br />
-                    <button id="btn-login" class="button">Ingresar</button>
-                
-        </div>
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Usuario, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control", placeholder = "" })
+                        @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Contraseña, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Contraseña, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Contraseña, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id="btn-login" type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </section>
     </div>
 </div>
-<script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Login/Index.js")"></script>
-@*<script type="text/javascript" src="@Url.Content("~/Globalization/Pedidos/List")"></script>*@

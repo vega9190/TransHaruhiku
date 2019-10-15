@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using TransHaruhiko.Models.TransferStruct;
+using Microsoft.Owin.Security;
+using TransHaruhiko.Models.ViewModel;
 using TransHaruhiko.Services;
 
 namespace TransHaruhiko.Controllers
@@ -19,29 +18,72 @@ namespace TransHaruhiko.Controllers
         }
         public virtual ActionResult Index()
         {
-            return View();
-        }
-        public ActionResult ValidarUsuario(string nickName, string password)
-        {
-            var transfer = new ClientTransfer();
-            if (Session != null)
+            if (User.Identity.IsAuthenticated)
             {
-                Session["EsAdministrador"] = false;
-                Session["Usuario"] = null;
+                var usuario = _usuariosService.Get(User.Identity.Name, null);
+                Session["Rol"] = usuario.Rol.Nombre;
+                Session["Nombre"] = usuario.Trabajador.Nombres;
+                return RedirectToAction("Index", "Home");
             }
-            
-            
-            var usuario = _usuariosService.Get(nickName, password);
+            else
+                return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public virtual ActionResult Index(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var authenticationManager = HttpContext.GetOwinContext().Authentication;
+
+
+            var usuario = _usuariosService.Get(model.Usuario, model.Contraseña);
             if (usuario == null)
             {
-                transfer.Errors.Add("Usuario o contraseña incorrectos");
+                ModelState.AddModelError(string.Empty, @"Usuario no valido.");
+                return View(model);
             }
-            if (usuario.Rol.Nombre.Equals("Administrador"))
-                Session["EsAdministrador"] = true;
+            
+            var identity = CreateIdentity(usuario.Nickname, usuario.Trabajador.Nombres + " " + usuario.Trabajador.Apellidos, usuario.Rol.Nombre);
 
-            Session["Usuario"] = usuario;
-            FormsAuthentication.SetAuthCookie(usuario.Trabajador.Nombres + " " + usuario.Trabajador.Apellidos, true);
-            return Json(transfer);
+            //authenticationManager.SignOut(MyAuthentication.ApplicationCookie);
+            authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
+
+            return RedirectToAction("Index", "Home");
+        }
+        private ClaimsIdentity CreateIdentity(string userPrincipal, string nombre, string roles)
+        {
+            var identity = new ClaimsIdentity(MyAuthentication.ApplicationCookie, ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+
+            identity.AddClaim(new Claim(ClaimTypes.Name, userPrincipal));
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, userPrincipal));
+            identity.Label = userPrincipal;
+            
+            if (!string.IsNullOrEmpty(roles))
+            {
+
+                identity.AddClaim(new Claim(ClaimTypes.Role, roles));
+                
+                Session["Rol"] = roles;
+                Session["Nombre"] = nombre;
+            }
+            else
+            {
+                throw new Exception("Necesita rol");
+            }
+
+            return identity;
+        }
+        public virtual ActionResult Logoff()
+        {
+            var authenticationManager = HttpContext.GetOwinContext().Authentication;
+            authenticationManager.SignOut(MyAuthentication.ApplicationCookie);
+
+            return RedirectToAction("Index");
         }
     }
 }

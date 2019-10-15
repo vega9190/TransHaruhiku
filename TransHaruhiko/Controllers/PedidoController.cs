@@ -17,7 +17,6 @@ namespace TransHaruhiko.Controllers
 
         public ActionResult List()
         {
-            var s = User;
             return View();
         }
 

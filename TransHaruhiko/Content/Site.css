@@ -1,3 +1,7 @@
 ﻿textarea {
     resize: none;
 }
+
+.box-current-user {
+    text-align: right;
+}

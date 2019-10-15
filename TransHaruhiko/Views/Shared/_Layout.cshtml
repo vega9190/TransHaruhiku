@@ -95,7 +95,6 @@
         <div id="main-menu" class="clearfix ui-widget-header">
             <ul>
                 <li><a href="@Url.Action("List", "Pedido")">Pedidos</a></li>
-                @*<li><a href="@Url.Action("List", "Alcance")">Alcances</a></li>
                 @if (string.IsNullOrEmpty(Session["Rol"] as string))
                 {
                     <script> window.location.href = '@Url.Action("Logoff", "Login")'; </script>
@@ -104,10 +103,10 @@
                 {
                     if (Session["Rol"].Equals("Administrador"))
                     {
-                        <li><a href="@Url.Action("List", "LogRegla")">Log Reglas</a></li>
-                        <li><a href="@Url.Action("Index", "ParametroConfiguracion")">Parametros Configuración</a></li>
+                        @*<li><a href="@Url.Action("List", "LogRegla")">Log Reglas</a></li>
+                        <li><a href="@Url.Action("Index", "ParametroConfiguracion")">Parametros Configuración</a></li>*@
                     }
-                }*@
+                }
             </ul>
         </div>
 

@@ -7,20 +7,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="shortcut icon" media="all" type="image/x-icon" href="@Url.Content("~/favicon.ico")" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <title>@ViewBag.Title</title>
-    <!--STYLES-->
-    <link href="@Url.ContentCache("Content/utils/reset.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.ContentCache("Content/utils/jqueryui/jquery-ui.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.ContentCache("Content/utils/timepicker/jquery.timepicker.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.ContentCache("Content/utils/datatable/jquery.dataTables.min.css")" rel="stylesheet" />
-    <link href="@Url.ContentCache("Content/utils/datatable/jquery.dataTables_themeroller.css")" rel="stylesheet" />
-    <link href="@Url.ContentCache("Content/utils/datatable/dataTables.responsive.css")" rel="stylesheet" />
-
     <!--[if (gt IE 8) | (IEMobile)]><!-->
     <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.min.js")"></script>
     <link href="@Url.ContentCache("Content/utils/unsemantic/unsemantic-grid-responsive.css")" rel="stylesheet" type="text/css" />
@@ -43,43 +34,15 @@
         }
     </script>
 
-    @RenderSection("Stylesheet", required: false)
     <link href="@Url.ContentCache("Content/utils/utils.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.ContentCache("Content/base.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.ContentCache("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 
-    <!--SCRIPTS-->
-    @*<script type="text/javascript" src="@Url.ContentNoCache("~/Globalization/Views/Shared")"></script>*@
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery-ui.min.js")"></script>
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.ui.datepicker-es.js")"></script>
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.dataTables.js")"></script>
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/dataTables.responsive.min.js")"></script>
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/ColVis.modified.js")"></script>
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.blockUI.js")"></script>
+    <!--SCRIPTS-->    
     <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/json.js")"></script>
     <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/json2.js")"></script>
     <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.maskedinput.js")"></script>
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/date.js")"></script>
 
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/globalize.js")"></script>
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/cultures/globalize.culture.es-ES.js")"></script>
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/utils.js")"></script>
-    @*<script type="text/javascript" src="@Url.ContentCache("~/Scripts/utils.js")"></script>*@
-
-    <script type="text/javascript">
-        Globalize.culture('@System.Configuration.ConfigurationManager.AppSettings["DefaultCulture"]');
-        var imgUrl = "@Url.ContentCache("images/loading-control.gif")";
-        var imgCal = "@Url.ContentCache("images/calendar.gif")";
-        var SiteUrl = '@Url.Content("~")';
-        var imgInformacion = SiteUrl + "images/icon-informacion.png";
-        var ImgLoading = $('<img class="ui-box-message-loading" title="Cargando" alt="Cargando" src="' + imgUrl + '" />');
-        var RegistrosPorPagina = "@System.Configuration.ConfigurationManager.AppSettings["RegistrosPorPagina"]";
-    </script>
-    @*<script type="text/javascript" src="@Url.ContentNoCache("~/Globalization/Scripts/CommonStrings.js")"></script>*@
-    @*<script type="text/javascript" src="@Url.ContentNoCache("~/Globalization/Views/Shared/CommonStrings.js")"></script>*@
-    <script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/app.js")"></script>
-    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/adapt.js")"></script>
-    @RenderSection("JavaScript", required: false)
 
 </head>
 <body>

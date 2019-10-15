@@ -3,6 +3,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
+
 namespace TransHaruhiko
 {
     public static class MyAuthentication
@@ -25,4 +26,5 @@ namespace TransHaruhiko
             });
         }
     }
+    
 }
