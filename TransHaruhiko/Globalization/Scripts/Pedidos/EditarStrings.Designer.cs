@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TransHaruhiko.Globalization.Views.Shared {
+namespace TransHaruhiko.Globalization.Scripts.Pedidos {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace TransHaruhiko.Globalization.Views.Shared {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class LayoutStrings {
+    public class EditarStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal LayoutStrings() {
+        internal EditarStrings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace TransHaruhiko.Globalization.Views.Shared {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Views.Shared.LayoutStrings", typeof(LayoutStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Scripts.Pedidos.EditarStrings", typeof(EditarStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,83 +61,74 @@ namespace TransHaruhiko.Globalization.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bienvenido .
+        ///   Looks up a localized string similar to El fichero ha excedido el tamaño permitido..
         /// </summary>
-        public static string Bienvenida {
+        public static string ErrorArchivoExcedioLongitud {
             get {
-                return ResourceManager.GetString("Bienvenida", resourceCulture);
+                return ResourceManager.GetString("ErrorArchivoExcedioLongitud", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Esta cuenta se ha bloqueado, inténtelo de nuevo más tarde..
+        ///   Looks up a localized string similar to El fichero se encuentra vacío..
         /// </summary>
-        public static string InfoBloqueo {
+        public static string ErrorFicheroVacio {
             get {
-                return ResourceManager.GetString("InfoBloqueo", resourceCulture);
+                return ResourceManager.GetString("ErrorFicheroVacio", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UNIR - Gran Via Rey Juan Carlos I, 41. 26002 Logroño (La Rioja) - Teléfono: +34 941 20 97 43 - Fax -34 902 87 70 37.
+        ///   Looks up a localized string similar to ¿Está seguro de eliminar el fichero?.
         /// </summary>
-        public static string InfoFooter {
+        public static string MessageConfirmDeleteFile {
             get {
-                return ResourceManager.GetString("InfoFooter", resourceCulture);
+                return ResourceManager.GetString("MessageConfirmDeleteFile", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bloqueado..
+        ///   Looks up a localized string similar to Eliminar.
         /// </summary>
-        public static string MensajeBloqueo {
+        public static string TextDelete {
             get {
-                return ResourceManager.GetString("MensajeBloqueo", resourceCulture);
+                return ResourceManager.GetString("TextDelete", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error..
+        ///   Looks up a localized string similar to Descargar.
         /// </summary>
-        public static string MensajeError {
+        public static string TextDownload {
             get {
-                return ResourceManager.GetString("MensajeError", resourceCulture);
+                return ResourceManager.GetString("TextDownload", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred while processing your request..
+        ///   Looks up a localized string similar to No.
         /// </summary>
-        public static string MensajeErrorRequest {
+        public static string TextNo {
             get {
-                return ResourceManager.GetString("MensajeErrorRequest", resourceCulture);
+                return ResourceManager.GetString("TextNo", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gestión de Alcances de Encuestas..
+        ///   Looks up a localized string similar to Subir.
         /// </summary>
-        public static string MensajeGestion {
+        public static string TextSubir {
             get {
-                return ResourceManager.GetString("MensajeGestion", resourceCulture);
+                return ResourceManager.GetString("TextSubir", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gestión de actas y exámenes.
+        ///   Looks up a localized string similar to Si.
         /// </summary>
-        public static string TextHeader {
+        public static string TextYes {
             get {
-                return ResourceManager.GetString("TextHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pedidos - .
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("TextYes", resourceCulture);
             }
         }
     }

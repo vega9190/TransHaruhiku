@@ -139,12 +139,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\ApplicationErrorController.cs" />
     <Compile Include="Controllers\GlobalizationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ObservacionController.cs" />
     <Compile Include="Controllers\ParametricoController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
+    <Compile Include="CustomHelpers\FileManager\FileHelper.cs" />
+    <Compile Include="CustomHelpers\FileManager\FileActionParameters.cs" />
     <Compile Include="CustomHelpers\UtilsHelpers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -153,6 +156,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Scripts\Pedidos\EditarStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditarStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Globalization\Scripts\Pedidos\ListStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -163,6 +171,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ObservacionStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Services\Ficheros\FicheroStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FicheroStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Services\Ficheros\PlantillasGestionFicherosStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlantillasGestionFicherosStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Globalization\Services\Observaciones\ObservacionStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -179,6 +197,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CreateStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Views\Pedido\EditarStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditarStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Views\Pedido\ListStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -194,8 +217,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LayoutStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbModels\Entidades\EstadoFichero.cs" />
+    <Compile Include="Models\DbModels\Entidades\Fichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Observacion.cs" />
     <Compile Include="Models\DbModels\Entidades\Rol.cs" />
+    <Compile Include="Models\DbModels\Entidades\TipoFichero.cs" />
+    <Compile Include="Models\DbModels\Entidades\TipoMime.cs" />
     <Compile Include="Models\DbModels\Entidades\Trabajador.cs" />
     <Compile Include="Models\DbModels\Entidades\Usuario.cs" />
     <Compile Include="Models\DbModels\TransHaruhikoDbContext.cs" />
@@ -203,19 +230,27 @@
     <Compile Include="Models\DbModels\Entidades\EstadoPedido.cs" />
     <Compile Include="Models\DbModels\Entidades\Pedido.cs" />
     <Compile Include="Models\Enum\EstadosEnum.cs" />
+    <Compile Include="Models\Enum\FicheroEstadoEnum.cs" />
+    <Compile Include="Models\Enum\TipoFicheroEnum.cs" />
     <Compile Include="Models\TransferStruct\BaseResult.cs" />
     <Compile Include="Models\TransferStruct\ClientTransfer.cs" />
+    <Compile Include="Models\TransferStruct\FileTransfer.cs" />
     <Compile Include="Models\TransferStruct\InfoPagination.cs" />
+    <Compile Include="Models\TransferStruct\ResultFileContent.cs" />
     <Compile Include="Models\ViewModel\BaseListViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\SimpleListViewModel.cs" />
+    <Compile Include="Parameters\Ficheros\SaveParameter.cs" />
     <Compile Include="Parameters\Observaciones\SaveParameters.cs" />
     <Compile Include="Parameters\Observaciones\SearchParameters.cs" />
+    <Compile Include="Parameters\Pedidos\SaveFicheroParameters.cs" />
     <Compile Include="Parameters\Pedidos\SaveParameters.cs" />
     <Compile Include="Parameters\Pedidos\SearchParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IClientesService.cs" />
+    <Compile Include="Services\IFicherosService.cs" />
     <Compile Include="Services\Impl\ClienteService.cs" />
+    <Compile Include="Services\Impl\FicherosService.cs" />
     <Compile Include="Services\Impl\ObservacionesService.cs" />
     <Compile Include="Services\Impl\PedidosService.cs" />
     <Compile Include="Services\Impl\UsuariosService.cs" />
@@ -230,6 +265,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\pages\Pedidos\Crear.js" />
+    <Content Include="Scripts\pages\Pedidos\Editar.js" />
     <Content Include="Scripts\pages\Pedidos\List.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -240,7 +276,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LayoutError.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
@@ -256,6 +292,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CommonStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Scripts\Pedidos\EditarStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditarStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Scripts\Pedidos\ListStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
@@ -263,6 +303,14 @@
     <EmbeddedResource Include="Globalization\Scripts\Pedidos\ObservacionStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ObservacionStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Services\Ficheros\FicheroStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FicheroStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Services\Ficheros\PlantillasGestionFicherosStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlantillasGestionFicherosStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Services\Observaciones\ObservacionStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -275,6 +323,10 @@
     <EmbeddedResource Include="Globalization\Views\Pedido\CreateStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Views\Pedido\EditarStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditarStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Views\Pedido\ListStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -310,6 +362,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Pedido\PopUpObservacion.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Pedido\Editar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationError\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

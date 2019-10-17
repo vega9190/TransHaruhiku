@@ -25,7 +25,6 @@ namespace TransHaruhiko
             // Registro Controladores
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
-
             // Registro de DbContext
             builder.RegisterType<TransHaruhikoDbContext>().AsSelf().InstancePerLifetimeScope();
             

@@ -126,9 +126,10 @@ $(document).ready(function () {
                     }
                 });
 
-            $('.btn-editar', nRow).click(function() {
-                console.log($(nRow).data('data'));
-            });
+            //$('.btn-editar', nRow).click(function () {
+            //    SiteUrl + 'Acta/Editar/' + $(nRow).data('data').Pedido.Id;
+            //    console.log($(nRow).data('data'));
+            //});
 
             $('.btn-observaciones', nRow).click(function () {
                 PopUpObservaciones($(nRow).data('data').Pedido.Id);
@@ -200,9 +201,11 @@ $(document).ready(function () {
                             function(index, value) {
                                 var row = [];
                                 var tempAcciones = '<div class="box-icons">';
-                                tempAcciones += '<span title="' +
-                                    Globalize.localize('TextEditar') +
-                                    '" class="btn-editar ui-icon ui-icon-pencil"></span>';
+
+                                tempAcciones += '<a '
+                                    + 'href="' + SiteUrl + 'Pedido/Editar/' + value.Pedido.Id + '" '
+                                    + 'title="' + Globalize.localize('TextEditar') + '" '
+                                    + 'class="ui-icon ui-icon-pencil"></a>';
 
                                 tempAcciones += '<span title="' +
                                     Globalize.localize('TextObservaciones') +

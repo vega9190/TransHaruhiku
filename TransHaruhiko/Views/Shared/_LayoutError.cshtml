@@ -1,0 +1,43 @@
+﻿@using System.Configuration
+@using TransHaruhiko.CustomHelpers
+@using TransHaruhiko.Globalization.Views.Shared
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <title>@LayoutStrings.Title @ViewBag.Title</title>
+    <!--STYLES-->
+    <link href="@Url.ContentCache("Content/utils/reset.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.ContentCache("Content/utils/jqueryui/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.ContentCache("Content/utils/utils.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.ContentCache("Content/base.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+    <!--SCRIPTS-->
+    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery-ui.min.js")"></script>
+</head>
+<body>
+    <div id="main-wrapper">
+        <div id="header">
+            <div class="box-logo">
+                <img src="@Url.ContentNoCache("images/logo-unir.png")" alt="UNIR" title="UNIR" />
+            </div>
+            <p class="mensaje">@LayoutStrings.TextHeader</p>
+            <p class="box-current-user">El Usuario conectado</p>
+        </div>
+        <div id="body">
+            <h1>@ViewBag.TitlePage</h1>
+            <div class="ui-widget clearfix">
+                @RenderBody()
+            </div>
+        </div>
+        <div id="footer">
+            <span>@LayoutStrings.InfoFooter</span>
+            <div class="box-build">@Html.Raw(ConfigurationManager.AppSettings["build"])</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -117,58 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cerrar" xml:space="preserve">
-    <value>Cerrar</value>
+  <data name="LabelBL" xml:space="preserve">
+    <value>BL:</value>
   </data>
-  <data name="ErrorArchivoExcedioLongitud" xml:space="preserve">
-    <value>Este fichero ha excedido el tamaño permitido.</value>
+  <data name="LabelCliente" xml:space="preserve">
+    <value>Cliente:</value>
   </data>
-  <data name="ErrorFicheroVacio" xml:space="preserve">
-    <value>Este fichero se encuentra vacio.</value>
+  <data name="LabelContenedor" xml:space="preserve">
+    <value>Contenedor:</value>
   </data>
-  <data name="Guardar" xml:space="preserve">
-    <value>Guardar</value>
+  <data name="LabelCrt" xml:space="preserve">
+    <value>CRT:</value>
   </data>
-  <data name="MessageEliminarElemento" xml:space="preserve">
-    <value>¿Está seguro que desea eliminar este registro?</value>
+  <data name="LabelDam" xml:space="preserve">
+    <value>Dam:</value>
   </data>
-  <data name="MessageOperacionExitosamente" xml:space="preserve">
-    <value>Operación Realizada Exitosamente.</value>
+  <data name="LabelDav" xml:space="preserve">
+    <value>DAV:</value>
   </data>
-  <data name="MessageOperacionSegundoPlanoExitosamente" xml:space="preserve">
-    <value>Operación Realizada Exitosamente. El alcance se vera reflejado en unos minutos (Dependiendo el tamaño del mismo).</value>
+  <data name="LabelDireccion" xml:space="preserve">
+    <value>Dirección:</value>
   </data>
-  <data name="MessageSeleccioneUnaFila" xml:space="preserve">
-    <value>Debe seleccionar al menos una fila del listado</value>
+  <data name="LabelDireccionUrl" xml:space="preserve">
+    <value>URL Dirección:</value>
   </data>
-  <data name="Ok" xml:space="preserve">
-    <value>Aceptar</value>
+  <data name="LabelDui" xml:space="preserve">
+    <value>DUI:</value>
   </data>
-  <data name="TextAcciones" xml:space="preserve">
-    <value>Acciones</value>
+  <data name="LabelFacturaComercial" xml:space="preserve">
+    <value>Factura Comercial:</value>
   </data>
-  <data name="TextDelete" xml:space="preserve">
-    <value>Eliminar</value>
+  <data name="LabelGoc" xml:space="preserve">
+    <value>GOC:</value>
   </data>
-  <data name="TextEdit" xml:space="preserve">
-    <value>Editar</value>
+  <data name="LabelImagenes" xml:space="preserve">
+    <value>Imágenes:</value>
   </data>
-  <data name="TextInformacion" xml:space="preserve">
+  <data name="LabelListaEmpaque" xml:space="preserve">
+    <value>Lista de Empaque:</value>
+  </data>
+  <data name="LabelMic" xml:space="preserve">
+    <value>MIC:</value>
+  </data>
+  <data name="LabelRecibiConforme" xml:space="preserve">
+    <value>Recibí Conforme:</value>
+  </data>
+  <data name="LabelSicoin" xml:space="preserve">
+    <value>Sicoin:</value>
+  </data>
+  <data name="LabelTelefono" xml:space="preserve">
+    <value>Teléfono:</value>
+  </data>
+  <data name="SectionInformacion" xml:space="preserve">
     <value>Información</value>
   </data>
-  <data name="TextNo" xml:space="preserve">
-    <value>No</value>
+  <data name="TabAgenciaDespachante" xml:space="preserve">
+    <value>Agencia Despachante</value>
   </data>
-  <data name="TextOpciones" xml:space="preserve">
-    <value>Opciones</value>
+  <data name="TabDesaduanizacion" xml:space="preserve">
+    <value>Desaduanización</value>
   </data>
-  <data name="TextSi" xml:space="preserve">
-    <value>Si</value>
+  <data name="TabImportadora" xml:space="preserve">
+    <value>Importadora</value>
   </data>
-  <data name="TextSubir" xml:space="preserve">
-    <value>Subir</value>
+  <data name="TabSeguimientos" xml:space="preserve">
+    <value>Seguimientos</value>
   </data>
-  <data name="TitlePopUp" xml:space="preserve">
-    <value>Gestión de pedidos</value>
+  <data name="TabTransportadora" xml:space="preserve">
+    <value>Transportadora</value>
   </data>
 </root>

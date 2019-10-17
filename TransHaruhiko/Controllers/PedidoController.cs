@@ -1,8 +1,17 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Web.Mvc;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Parameters.Pedidos;
 using TransHaruhiko.Services;
 using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Routing;
+using System.Web.Script.Serialization;
+using TransHaruhiko.CustomHelpers.FileManager;
 
 namespace TransHaruhiko.Controllers
 {
@@ -19,7 +28,12 @@ namespace TransHaruhiko.Controllers
         {
             return View();
         }
-
+        public ActionResult Editar(int? id)
+        {
+            ViewBag.IdPedido = id;
+            ViewBag.UploadSizeLimit = 20480;
+            return View();
+        }
         public ActionResult Buscar(SearchParameters parameters)
         {
             var queriable = _pedidosService.Buscar();
@@ -138,6 +152,82 @@ namespace TransHaruhiko.Controllers
 
             return Json(transfer);
         }
+
+        #region Ficheros
+        public  byte[] ReadFully(Stream input)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
+        [HttpPost]
+        [Route("GuardarFicheroBl/{pedidoId}")]
+        public ActionResult GuardarFicheroBl(int pedidoId)
+        {
+            var transfer = new ClientTransfer();
+            var parameters = new SaveFicheroParameters();
+            if (Request.Files.Count > 0)
+            {
+                var file = Request.Files[0];
+                
+                if (file != null && file.ContentLength > 0)
+                {
+                    if (file.ContentLength / 1024 > 20480)
+                    {
+                        transfer.Errors.Add("Este fichero ha excedido el tamaño permitido.");
+                        return Json(transfer);
+                    }
+                    var content = ReadFully(file.InputStream);
+                    parameters.Content = content;
+                    parameters.IdPedido = pedidoId;
+                    parameters.Name = file.FileName;
+                    parameters.MimeType = file.ContentType;
+                }
+            }
+
+            var res = _pedidosService.GuardarFicheroBl(parameters);
+
+            if (res.HasErrors)
+                transfer.Errors.AddRange(res.Errors);
+            if (res.HasWarnings)
+                transfer.Warnings.AddRange(res.Warnings);
+            return Json(transfer);
+        }
+
+        public ActionResult DescargarFicheroBl(int id)
+        {
+            //var transfer = new ClientTransfer();
+            
+            var res = _pedidosService.GetFicheroBl(id);
+            var transfer = new FileTransfer();
+            if (res.HasErrors)
+            {
+                //transfer.Errors.AddRange(res.Errors);
+                return RedirectToError(res.Errors.ToArray());
+            }
+
+            transfer.Content = res.Content;
+            transfer.FileName = res.FileName;
+            return File(transfer);
+        }
+        [HttpPost]
+        public ActionResult EliminarFicheroBl(int idPedido)
+        {
+            var transfer = new ClientTransfer();
+            var res = _pedidosService.EliminarFicheroBl(idPedido);
+
+            if (res.HasErrors)
+                transfer.Errors.AddRange(res.Errors);
+            if (res.HasWarnings)
+                transfer.Warnings.AddRange(res.Warnings);
+
+            return Json(transfer);
+        }
+        #endregion
+
         #region PopUps
         public ActionResult PopUpCrear()
         {
@@ -148,6 +238,29 @@ namespace TransHaruhiko.Controllers
         {
             return View();
         }
+        #endregion
+
+        #region Helpers
+
+
+        public RedirectToRouteResult RedirectToError(string[] errors)
+        {
+            return RedirectToAction("FatalMessage", "ApplicationError", new RouteValueDictionary()
+            {
+                {
+                    "message",
+                    (object) string.Join(";", errors)
+                }
+            });
+        }
+        protected ActionResult File(FileTransfer fileTransfer)
+        {
+            if (fileTransfer.HasErrors)
+                return (ActionResult)this.RedirectToError(fileTransfer.Errors.ToArray());
+            string contentType = string.IsNullOrEmpty(fileTransfer.MimeType) ? "defaultDownloadMimeType" : fileTransfer.MimeType;
+            return (ActionResult)this.File(fileTransfer.Content, contentType, fileTransfer.FileName);
+        }
+
         #endregion
     }
 }

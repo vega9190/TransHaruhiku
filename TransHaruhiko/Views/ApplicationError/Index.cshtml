@@ -1,0 +1,20 @@
+﻿@using TransHaruhiko.Globalization.Scripts.Common
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_LayoutError.cshtml";
+}
+<div id="page-error" class="ui-state-error ui-corner-all box-error">
+    <ul class="list-errors">
+        @{
+            foreach (string error in (List<string>)ViewBag.Errors)
+            {
+                <text>
+                    <li class="item-error">@error</li></text>
+            }
+        }
+    </ul>
+</div>
+<div>
+    <a href="@Url.Action("","")" id="btn-volver" class="button">Ir a la página principal</a>
+</div>

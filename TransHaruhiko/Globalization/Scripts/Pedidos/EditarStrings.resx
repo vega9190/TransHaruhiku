@@ -117,58 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cerrar" xml:space="preserve">
-    <value>Cerrar</value>
-  </data>
   <data name="ErrorArchivoExcedioLongitud" xml:space="preserve">
-    <value>Este fichero ha excedido el tamaño permitido.</value>
+    <value>El fichero ha excedido el tamaño permitido.</value>
   </data>
   <data name="ErrorFicheroVacio" xml:space="preserve">
-    <value>Este fichero se encuentra vacio.</value>
+    <value>El fichero se encuentra vacío.</value>
   </data>
-  <data name="Guardar" xml:space="preserve">
-    <value>Guardar</value>
-  </data>
-  <data name="MessageEliminarElemento" xml:space="preserve">
-    <value>¿Está seguro que desea eliminar este registro?</value>
-  </data>
-  <data name="MessageOperacionExitosamente" xml:space="preserve">
-    <value>Operación Realizada Exitosamente.</value>
-  </data>
-  <data name="MessageOperacionSegundoPlanoExitosamente" xml:space="preserve">
-    <value>Operación Realizada Exitosamente. El alcance se vera reflejado en unos minutos (Dependiendo el tamaño del mismo).</value>
-  </data>
-  <data name="MessageSeleccioneUnaFila" xml:space="preserve">
-    <value>Debe seleccionar al menos una fila del listado</value>
-  </data>
-  <data name="Ok" xml:space="preserve">
-    <value>Aceptar</value>
-  </data>
-  <data name="TextAcciones" xml:space="preserve">
-    <value>Acciones</value>
+  <data name="MessageConfirmDeleteFile" xml:space="preserve">
+    <value>¿Está seguro de eliminar el fichero?</value>
   </data>
   <data name="TextDelete" xml:space="preserve">
     <value>Eliminar</value>
   </data>
-  <data name="TextEdit" xml:space="preserve">
-    <value>Editar</value>
-  </data>
-  <data name="TextInformacion" xml:space="preserve">
-    <value>Información</value>
+  <data name="TextDownload" xml:space="preserve">
+    <value>Descargar</value>
   </data>
   <data name="TextNo" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="TextOpciones" xml:space="preserve">
-    <value>Opciones</value>
-  </data>
-  <data name="TextSi" xml:space="preserve">
-    <value>Si</value>
-  </data>
   <data name="TextSubir" xml:space="preserve">
     <value>Subir</value>
   </data>
-  <data name="TitlePopUp" xml:space="preserve">
-    <value>Gestión de pedidos</value>
+  <data name="TextYes" xml:space="preserve">
+    <value>Si</value>
   </data>
 </root>

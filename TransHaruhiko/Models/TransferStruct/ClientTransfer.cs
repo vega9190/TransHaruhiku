@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TransHaruhiko.Models.TransferStruct
 {
-    internal class ClientTransfer
+    public class ClientTransfer
     {
         /// <summary>
         /// Información devuelta al Servidor. El contienido es libre y de tipo anónimo.

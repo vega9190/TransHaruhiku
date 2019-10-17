@@ -70,6 +70,24 @@ namespace TransHaruhiko.Globalization.Scripts.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Este fichero ha excedido el tamaño permitido..
+        /// </summary>
+        public static string ErrorArchivoExcedioLongitud {
+            get {
+                return ResourceManager.GetString("ErrorArchivoExcedioLongitud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Este fichero se encuentra vacio..
+        /// </summary>
+        public static string ErrorFicheroVacio {
+            get {
+                return ResourceManager.GetString("ErrorFicheroVacio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Guardar.
         /// </summary>
         public static string Guardar {
@@ -183,6 +201,15 @@ namespace TransHaruhiko.Globalization.Scripts.Common {
         public static string TextSi {
             get {
                 return ResourceManager.GetString("TextSi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subir.
+        /// </summary>
+        public static string TextSubir {
+            get {
+                return ResourceManager.GetString("TextSubir", resourceCulture);
             }
         }
         

@@ -46,7 +46,7 @@ Descripcion NVARCHAR(100) NOT NULL
 
 CREATE TABLE th.Ficheros(
 IdFichero INT PRIMARY KEY IDENTITY(1,1),
-NombreFile NVARCHAR(100) NOT NULL,
+Nombre NVARCHAR(100) NOT NULL,
 IdPedido INT NOT NULL,
 IdEstadoFichero INT NOT NULL,
 IdTipoFichero INT NOT NULL,
@@ -126,7 +126,12 @@ FOREIGN KEY (IdPedido) REFERENCES th.Pedidos(IdPedido),
 FOREIGN KEY (IdTipoPago) REFERENCES th.TiposPagos(IdTipoPago)
 )
 
-
+CREATE TABLE th.TiposMimes(
+IdTipoMime INT PRIMARY KEY IDENTITY(1,1),
+Nombre NVARCHAR(500) NOT NULL,
+Descripcion NVARCHAR(500) NOT NULL,
+Extension NVARCHAR(100) NOT NULL
+)
 
 INSERT INTO th.EstadosPedidos VALUES ('Inicio')
 INSERT INTO th.EstadosPedidos VALUES ('En Proceso')
@@ -146,4 +151,35 @@ INSERT INTO th.Roles VALUES ('Administrador')
 INSERT INTO th.Trabajadores VALUES ('Trabajador', 'Trabajador APP', '123', 'asd@hotmail.com', '8794', 'dirección', 1)
 
 INSERT INTO th.Usuarios VALUES ('adm', 'adm', 1, 1, 1)
+
+INSERT INTO th.TiposFicheros VALUES ('Lista de Empaque', 'Lista de Empaque')
+INSERT INTO th.TiposFicheros VALUES ('Factura Comercial', 'Factura Comercial')
+INSERT INTO th.TiposFicheros VALUES ('Sicoin', 'Sicoin')
+INSERT INTO th.TiposFicheros VALUES ('Dam', 'Dam')
+INSERT INTO th.TiposFicheros VALUES ('MIC', 'MIC')
+INSERT INTO th.TiposFicheros VALUES ('CRT', 'CRT')
+INSERT INTO th.TiposFicheros VALUES ('GOC', 'GOC')
+INSERT INTO th.TiposFicheros VALUES ('DUI', 'DUI')
+INSERT INTO th.TiposFicheros VALUES ('DAV', 'DAV')
+INSERT INTO th.TiposFicheros VALUES ('Recibi Conforme', 'Recibí Conforme')
+INSERT INTO th.TiposFicheros VALUES ('Imagenes', 'Imagenes del pedido')
+INSERT INTO th.TiposFicheros VALUES ('BL', 'BL')
+
+INSERT INTO th.EstadosFicheros VALUES ('Recibido')
+INSERT INTO th.EstadosFicheros VALUES ('Validado')
+INSERT INTO th.EstadosFicheros VALUES ('Con Errores')
+
+INSERT INTO th.TiposMimes VALUES ('application/msword' , 'Documento Word (1997)', '.doc')
+INSERT INTO th.TiposMimes VALUES ('application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.ms-word.document.12', 'Documento Word', '.doc, .docx')
+INSERT INTO th.TiposMimes VALUES ('application/vnd.ms-excel', 'Excel Hoja Electrónica (1997)', '.xls')
+INSERT INTO th.TiposMimes VALUES ('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Excel Hoja Electrónica (2007)', '.xlsx')
+INSERT INTO th.TiposMimes VALUES ('application/pdf;binary/octet-stream', 'Pdf', '.pdf')
+INSERT INTO th.TiposMimes VALUES ('image/jpeg;image/pjpeg', 'Formato de Imagen (jpg)', '.jpg')
+INSERT INTO th.TiposMimes VALUES ('image/png', 'Formato de Imagen (png)', '.png')
+INSERT INTO th.TiposMimes VALUES ('image/gif', 'Formato de Imagen (gif)', '.gif')
+INSERT INTO th.TiposMimes VALUES ('application/zip;application/x-zip-compressed', 'Archivo Comprimido (Zip)', '.zip')
+INSERT INTO th.TiposMimes VALUES ('application/x-rar-compressed;application/octet-stream;application/rar', 'Archivo Comprimido (Rar)', '.rar')
+
+select * from th.Ficheros
+
 

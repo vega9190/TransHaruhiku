@@ -58,3 +58,10 @@ $(document).ready(function () {
     /*******************************/
 });
 
+function BlockFullPage() {
+    $('#main-wrapper').block();
+}
+
+function UnblockFullPage() {
+    $('#main-wrapper').unblock();
+}
