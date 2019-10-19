@@ -60,5 +60,19 @@ namespace TransHaruhiko.Services.Impl
             var estados = (int)FicheroEstadoEnum.Recibido == idEstado ? _dbContext.EstadosFicheros.Where(a => a.Id != idEstado).ToList() : new List<EstadoFichero>();
             return estados;
         }
+        public BaseResult CambiarEstado(int idFichero, int idNuevoEstado)
+        {
+            var result = new BaseResult();
+            var fichero = _dbContext.Ficheros.Find(idFichero);
+            if (fichero == null)
+            {
+                result.Errors.Add(FicheroStrings.ErrorNoFichero);
+                return result;
+            }
+
+            fichero.EstadoId = idNuevoEstado;
+            _dbContext.SaveChanges();
+            return result;
+        }
     }
 }

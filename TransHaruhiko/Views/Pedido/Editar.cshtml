@@ -74,6 +74,7 @@
             <li><a href="#tab-agencia-despachante">@EditarStrings.TabAgenciaDespachante</a></li>
             <li><a href="#tab-transportadora">@EditarStrings.TabTransportadora</a></li>
             <li><a href="#tab-desaduanizacion">@EditarStrings.TabDesaduanizacion</a></li>
+            <li><a href="#tab-entrega">@EditarStrings.TabEntrega</a></li>
             <li><a href="#tab-seguimientos">@EditarStrings.TabSeguimientos</a></li>
         </ul>
         <div id="tab-importadora">
@@ -100,12 +101,121 @@
                 </div>
 
             </div>
-            <div>
-                <button id="btn-guardar" class="button">guardar</button>
-                <button id="btn-cancelar" class="button">volver</button>
-            </div>
         </div>
     
+        <div id="tab-agencia-despachante">
+            <div class="box-fieldset">
+                <span class="field-title"></span>
+                <div class="clearfix">
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelSicoin</label>
+                                <div class="box-fileupload left">
+                                    <form id="frm-fichero-sicoin" action="#"></form>
+                                </div>
+                                <div id="box-estado-sicoin" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelDam</label>
+                                <div class="box-fileupload left">
+                                    <form id="frm-fichero-dam" action="#"></form>
+                                </div>
+                                <div id="box-estado-dam" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-transportadora">
+            <div class="box-fieldset">
+                <span class="field-title"></span>
+                <div class="clearfix">
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100">@EditarStrings.LabelMic</label>
+                                <div class="box-fileupload grid-20 mobile-grid-100">
+                                    <form id="frm-fichero-mic" action="#"></form>
+                                </div>
+                            </li>
+                            <li>
+                                <label class="grid-10 mobile-grid-100">@EditarStrings.LabelCrt</label>
+                                <div class="box-fileupload grid-20 mobile-grid-100">
+                                    <form id="frm-fichero-crt" action="#"></form>
+                                </div>
+                            </li>
+
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelGoc</label>
+                                <div class="box-fileupload left">
+                                    <form id="frm-fichero-goc" action="#"></form>
+                                </div>
+                                <div id="box-estado-goc" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-desaduanizacion">
+            <div class="box-fieldset">
+                <span class="field-title"></span>
+                <div class="clearfix">
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelDui</label>
+                                <div class="box-fileupload left">
+                                    <form id="frm-fichero-dui" action="#"></form>
+                                </div>
+                                <div id="box-estado-dui" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelDav</label>
+                                <div class="box-fileupload left">
+                                    <form id="frm-fichero-dav" action="#"></form>
+                                </div>
+                                <div id="box-estado-dav" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-entrega">
+            <div class="box-fieldset">
+                <span class="field-title"></span>
+                <div class="clearfix">
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelRecibiConforme</label>
+                                <div class="box-fileupload left">
+                                    <form id="frm-fichero-recibi-conforme" action="#"></form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         @*<div id="tab-seguimientos">
             <div class="box-fieldset">
                 <span class="field-title">@CommonStrings.SectionFiltros</span>
@@ -138,4 +248,8 @@
         </div>*@
     </div>
     <br />
+    <div>
+        <button id="btn-guardar" class="button">guardar</button>
+        <button id="btn-cancelar" class="button">volver</button>
+    </div>
 </div>

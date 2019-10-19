@@ -180,6 +180,9 @@
   <data name="TabDesaduanizacion" xml:space="preserve">
     <value>Desaduanización</value>
   </data>
+  <data name="TabEntrega" xml:space="preserve">
+    <value>Entrega</value>
+  </data>
   <data name="TabImportadora" xml:space="preserve">
     <value>Importadora</value>
   </data>

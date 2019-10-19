@@ -250,6 +250,15 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entrega.
+        /// </summary>
+        public static string TabEntrega {
+            get {
+                return ResourceManager.GetString("TabEntrega", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Importadora.
         /// </summary>
         public static string TabImportadora {
