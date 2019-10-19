@@ -24,13 +24,16 @@ namespace TransHaruhiko.Services.Impl
             _dbContext = dbContext;
             _ficherosService = ficherosService;
         }
-        
+
         public IQueryable<Pedido> Buscar()
         {
             IQueryable<Pedido> queriable = _dbContext.Pedidos;
             return queriable;
         }
-
+        public Pedido Get(int idPedido)
+        {
+            return _dbContext.Pedidos.Find(idPedido);
+        }
         public BaseResult Guardar(SaveParameters parameters)
         {
             var result = new BaseResult();

@@ -3,7 +3,47 @@
 $(document).ready(function () {
     IdPedido = $('#hd-id-pedido').val();
     CargarFileuploadFichero();
+    CargarPedido();
 });
+/**
+ * cargar pedido
+ */
+function CargarPedido() {
+    $.ajax({
+        url: SiteUrl + 'Pedido/Obtener',
+        data: $.toJSON({ idPedido: IdPedido }),
+        success: function (data) {
+            $.unblockUI();
+            if (data.HasErrors) {
+                showErrors(data.Errors);
+            } else {
+                if (data.HasWarnings) {
+                    showCustomErrors({
+                        title: Globalize.localize('TextInformacion'),
+                        warnings: data.Warnings
+                    });
+                } else {
+                    console.log(data.Data);
+                    $('#lb-cliente').text(data.Data.Pedido.Cliente.NombreCompleto);
+                    $('#lb-estado').text(data.Data.Pedido.Estado.Nombre);
+                    $('#lb-telefono').text(data.Data.Pedido.Cliente.Telefono);
+                    $('#txt-direccion').val(data.Data.Pedido.Direccion);
+                    $('#txt-direccion-url').val(data.Data.Pedido.DireccionUrl);
+                    $('#txt-contenedor').val(data.Data.Pedido.Contenedor);
+                    var ficheroBlIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === 12);
+                    if (ficheroBlIndex >= 0) {
+                        $('#frm-fichero').compFileupload('setFile', {
+                            documento: Globalize.localize('TextDownload'),
+                            filename: data.Data.Pedido.Ficheros[ficheroBlIndex].Nombre,
+                            title: Globalize.localize('TextDownload'),
+                            url: SiteUrl + 'Pedido/DescargarFicheroBl/' + IdPedido
+                        });
+                    }
+                }
+            }
+        }
+    });
+}
 /**
  * cargar componente fileupload para fichero de acta
  */

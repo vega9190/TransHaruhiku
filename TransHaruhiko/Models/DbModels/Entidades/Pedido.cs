@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace TransHaruhiko.Models.DbModels.Entidades
 {
@@ -23,5 +24,6 @@ namespace TransHaruhiko.Models.DbModels.Entidades
         public int EstadoId { get; set; }
         [ForeignKey(nameof(EstadoId))]
         public virtual EstadoPedido Estado { get; set; }
+        public virtual ICollection<Fichero> Ficheros { get; set; }
     }
 }

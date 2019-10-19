@@ -13,5 +13,6 @@ namespace TransHaruhiko.Services
         BaseResult GuardarFicheroBl(SaveFicheroParameters parameters);
         ResultFileContent GetFicheroBl(int idPedido);
         BaseResult EliminarFicheroBl(int idPedido);
+        Pedido Get(int idPedido);
     }
 }

@@ -140,15 +140,15 @@ INSERT INTO th.EstadosPedidos VALUES ('Transportadora')
 INSERT INTO th.EstadosPedidos VALUES ('Finalizado')
 INSERT INTO th.EstadosPedidos VALUES ('Cancelado')
 
-INSERT INTO th.Clientes VALUES ('123456', 'Douglas', 'Vega', 'dirección asd', 'hola@sd.com', '486')
+INSERT INTO th.Clientes VALUES ('123456', 'Douglas', 'Vega', 'direcciï¿½n asd', 'hola@sd.com', '486')
 
-INSERT INTO th.Pedidos VALUES ('ASD','4561',GETDATE(),1,1,'Dirección','dirección url')
+INSERT INTO th.Pedidos VALUES ('ASD','4561',GETDATE(),1,1,'Direcciï¿½n','direcciï¿½n url')
 
 INSERT INTO th.Roles VALUES ('Operador')
 INSERT INTO th.Roles VALUES ('Gerente')
 INSERT INTO th.Roles VALUES ('Administrador')
 
-INSERT INTO th.Trabajadores VALUES ('Trabajador', 'Trabajador APP', '123', 'asd@hotmail.com', '8794', 'dirección', 1)
+INSERT INTO th.Trabajadores VALUES ('Trabajador', 'Trabajador APP', '123', 'asd@hotmail.com', '8794', 'direcciï¿½n', 1)
 
 INSERT INTO th.Usuarios VALUES ('adm', 'adm', 1, 1, 1)
 
@@ -161,7 +161,7 @@ INSERT INTO th.TiposFicheros VALUES ('CRT', 'CRT')
 INSERT INTO th.TiposFicheros VALUES ('GOC', 'GOC')
 INSERT INTO th.TiposFicheros VALUES ('DUI', 'DUI')
 INSERT INTO th.TiposFicheros VALUES ('DAV', 'DAV')
-INSERT INTO th.TiposFicheros VALUES ('Recibi Conforme', 'Recibí Conforme')
+INSERT INTO th.TiposFicheros VALUES ('Recibi Conforme', 'Recibï¿½ Conforme')
 INSERT INTO th.TiposFicheros VALUES ('Imagenes', 'Imagenes del pedido')
 INSERT INTO th.TiposFicheros VALUES ('BL', 'BL')
 
@@ -171,8 +171,8 @@ INSERT INTO th.EstadosFicheros VALUES ('Con Errores')
 
 INSERT INTO th.TiposMimes VALUES ('application/msword' , 'Documento Word (1997)', '.doc')
 INSERT INTO th.TiposMimes VALUES ('application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.ms-word.document.12', 'Documento Word', '.doc, .docx')
-INSERT INTO th.TiposMimes VALUES ('application/vnd.ms-excel', 'Excel Hoja Electrónica (1997)', '.xls')
-INSERT INTO th.TiposMimes VALUES ('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Excel Hoja Electrónica (2007)', '.xlsx')
+INSERT INTO th.TiposMimes VALUES ('application/vnd.ms-excel', 'Excel Hoja Electrï¿½nica (1997)', '.xls')
+INSERT INTO th.TiposMimes VALUES ('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Excel Hoja Electrï¿½nica (2007)', '.xlsx')
 INSERT INTO th.TiposMimes VALUES ('application/pdf;binary/octet-stream', 'Pdf', '.pdf')
 INSERT INTO th.TiposMimes VALUES ('image/jpeg;image/pjpeg', 'Formato de Imagen (jpg)', '.jpg')
 INSERT INTO th.TiposMimes VALUES ('image/png', 'Formato de Imagen (png)', '.png')

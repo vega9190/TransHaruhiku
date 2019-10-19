@@ -127,6 +127,54 @@ namespace TransHaruhiko.Controllers
             transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
             return Json(transfer);
         }
+        public ActionResult Obtener(int idPedido)
+        {
+            var transfer = new ClientTransfer();
+            var pedido = _pedidosService.Get(idPedido);
+            
+            
+            if(pedido == null)
+            {
+                return null;
+            }
+            transfer.Data = new
+            {
+                Pedido = new
+                {
+                    pedido.Id,
+                    pedido.Direccion,
+                    pedido.DireccionUrl,
+                    pedido.Contenedor,
+                    pedido.Fecha,
+                    Cliente = new
+                    {
+                        pedido.Cliente.Id,
+                        pedido.Cliente.Telefono,
+                        NombreCompleto = pedido.Cliente.NombreCompleto
+                    },
+                    Estado = new
+                    {
+                        pedido.Estado.Id,
+                        pedido.Estado.Nombre
+                    },
+                    Ficheros = pedido.Ficheros.Select(a => new {
+                        a.Id,
+                        a.Nombre,
+                        Estado = new {
+                            a.Estado.Id,
+                            a.Estado.Nombre
+                        },
+                        Tipo = new
+                        {
+                            a.Tipo.Id,
+                            a.Tipo.Nombre
+                        }
+                    })
+                }
+            };
+            
+            return Json(transfer);
+        }
 
         public ActionResult Guardar(SaveParameters parameters)
         {

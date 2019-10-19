@@ -142,6 +142,15 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Estado:.
+        /// </summary>
+        public static string LabelEstado {
+            get {
+                return ResourceManager.GetString("LabelEstado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Factura Comercial:.
         /// </summary>
         public static string LabelFacturaComercial {
