@@ -69,7 +69,7 @@ namespace TransHaruhiko.Services.Impl
             return result;
         }
 
-        public BaseResult GuardarFicheroBl(SaveFicheroParameters parameters)
+        public BaseResult GuardarFichero(SaveFicheroParameters parameters)
         {
             var result = new BaseResult();
             var extension = Path.GetExtension(parameters.Name);
@@ -85,14 +85,12 @@ namespace TransHaruhiko.Services.Impl
             }
             else
             {
-                var rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFicheroBL, pedido.Id,
-                    extension);
-                var ficheroActual = _ficherosService.Get(pedido.Id, (int) TipoFicheroEnum.Bl);
+                var rutaArchivo = FileHelper.GetPath(pedido.Id, parameters.IdTipo.Value, extension);
+                var ficheroActual = _ficherosService.Get(parameters.IdPedido.Value, parameters.IdTipo.Value);
                 if (ficheroActual != null)
                 {
-                    var rutaFicheroActual = string.Format(PlantillasGestionFicherosStrings.DirectorioFicheroBL, pedido.Id,
-                        Path.GetExtension(ficheroActual.Nombre));
-
+                    var rutaFicheroActual = FileHelper.GetPath(pedido.Id, parameters.IdTipo.Value, Path.GetExtension(ficheroActual.Nombre));
+                    
                     if (FileHelper.Exist(rutaFicheroActual))
                     {
                         if(!FileHelper.RemoveFile(rutaFicheroActual))
@@ -109,7 +107,7 @@ namespace TransHaruhiko.Services.Impl
                 var fichero = new Fichero
                 {
                     PedidoId = pedido.Id,
-                    TipoId = (int)TipoFicheroEnum.Bl,
+                    TipoId = parameters.IdTipo.Value,
                     EstadoId = (int)FicheroEstadoEnum.Recibido,
                     Nombre = parameters.Name
                 };
@@ -119,17 +117,17 @@ namespace TransHaruhiko.Services.Impl
             return result;
         }
 
-        public ResultFileContent GetFicheroBl(int idPedido)
+        public ResultFileContent GetFichero(int idPedido, int idTipo)
         {
             var result = new ResultFileContent();
-            var fichero = _ficherosService.Get(idPedido, (int) TipoFicheroEnum.Bl);
+            var fichero = _ficherosService.Get(idPedido, idTipo);
 
             if(fichero == null)
                 result.Errors.Add("No existe el fichero del pedido");
             else
             {
-                var rutaFichero = string.Format(PlantillasGestionFicherosStrings.DirectorioFicheroBL, idPedido,
-                    Path.GetExtension(fichero.Nombre));
+                var rutaFichero = FileHelper.GetPath(idPedido, idTipo, Path.GetExtension(fichero.Nombre));
+                
                 if (FileHelper.Exist(rutaFichero))
                 {
                     result.FileName = fichero.Nombre;
@@ -144,17 +142,17 @@ namespace TransHaruhiko.Services.Impl
             return result;
         }
 
-        public BaseResult EliminarFicheroBl(int idPedido)
+        public BaseResult EliminarFichero(int idPedido, int idTipo)
         {
             var result = new ResultFileContent();
-            var fichero = _ficherosService.Get(idPedido, (int)TipoFicheroEnum.Bl);
+            var fichero = _ficherosService.Get(idPedido, idTipo);
 
             if (fichero == null)
                 result.Errors.Add("No existe el fichero del pedido");
             else
             {
-                var rutaFichero = string.Format(PlantillasGestionFicherosStrings.DirectorioFicheroBL, idPedido,
-                    Path.GetExtension(fichero.Nombre));
+                var rutaFichero = FileHelper.GetPath(idPedido, idTipo, Path.GetExtension(fichero.Nombre));
+                
                 if (FileHelper.Exist(rutaFichero))
                 {
                     if(!FileHelper.RemoveFile(rutaFichero))

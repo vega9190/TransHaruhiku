@@ -18,10 +18,12 @@ namespace TransHaruhiko.Controllers
     public class PedidoController : Controller
     {
         private readonly IPedidosService _pedidosService;
+        private readonly IFicherosService _ficherosService;
         
-        public PedidoController(IPedidosService pedidosService)
+        public PedidoController(IPedidosService pedidosService, IFicherosService ficherosService)
         {
             _pedidosService = pedidosService;
+            _ficherosService = ficherosService;
         }
 
         public ActionResult List()
@@ -145,7 +147,6 @@ namespace TransHaruhiko.Controllers
                     pedido.Direccion,
                     pedido.DireccionUrl,
                     pedido.Contenedor,
-                    pedido.Fecha,
                     Cliente = new
                     {
                         pedido.Cliente.Id,
@@ -212,8 +213,8 @@ namespace TransHaruhiko.Controllers
         }
 
         [HttpPost]
-        [Route("GuardarFicheroBl/{pedidoId}")]
-        public ActionResult GuardarFicheroBl(int pedidoId)
+        [Route("GuardarFichero/{pedidoId}/{idTipo}")]
+        public ActionResult GuardarFichero(int pedidoId, int idTipo)
         {
             var transfer = new ClientTransfer();
             var parameters = new SaveFicheroParameters();
@@ -231,25 +232,29 @@ namespace TransHaruhiko.Controllers
                     var content = ReadFully(file.InputStream);
                     parameters.Content = content;
                     parameters.IdPedido = pedidoId;
+                    parameters.IdTipo = idTipo;
                     parameters.Name = file.FileName;
                     parameters.MimeType = file.ContentType;
                 }
             }
 
-            var res = _pedidosService.GuardarFicheroBl(parameters);
+            var res = _pedidosService.GuardarFichero(parameters);
+            var fichero = _ficherosService.Get(parameters.IdPedido.Value, parameters.IdTipo.Value);
 
             if (res.HasErrors)
                 transfer.Errors.AddRange(res.Errors);
             if (res.HasWarnings)
                 transfer.Warnings.AddRange(res.Warnings);
+
+            transfer.Data = new { IdFichero = fichero.Id };
             return Json(transfer);
         }
-
-        public ActionResult DescargarFicheroBl(int id)
+        [Route("DescargarFichero/{pedidoId}/{idTipo}")]
+        public ActionResult DescargarFichero(int pedidoId, int idTipo)
         {
             //var transfer = new ClientTransfer();
             
-            var res = _pedidosService.GetFicheroBl(id);
+            var res = _pedidosService.GetFichero(pedidoId, idTipo);
             var transfer = new FileTransfer();
             if (res.HasErrors)
             {
@@ -259,13 +264,14 @@ namespace TransHaruhiko.Controllers
 
             transfer.Content = res.Content;
             transfer.FileName = res.FileName;
+            
             return File(transfer);
         }
         [HttpPost]
-        public ActionResult EliminarFicheroBl(int idPedido)
+        public ActionResult EliminarFichero(int idPedido, int idTipo)
         {
             var transfer = new ClientTransfer();
-            var res = _pedidosService.EliminarFicheroBl(idPedido);
+            var res = _pedidosService.EliminarFichero(idPedido, idTipo);
 
             if (res.HasErrors)
                 transfer.Errors.AddRange(res.Errors);

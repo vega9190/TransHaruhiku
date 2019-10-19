@@ -142,7 +142,7 @@ INSERT INTO th.EstadosPedidos VALUES ('Cancelado')
 
 INSERT INTO th.Clientes VALUES ('123456', 'Douglas', 'Vega', 'direcci�n asd', 'hola@sd.com', '486')
 
-INSERT INTO th.Pedidos VALUES ('ASD','4561',GETDATE(),1,1,'Direcci�n','direcci�n url')
+INSERT INTO th.Pedidos VALUES ('ASD','4561',GETDATE(),'Direcci�n','direcci�n url',1,1)
 
 INSERT INTO th.Roles VALUES ('Operador')
 INSERT INTO th.Roles VALUES ('Gerente')
@@ -154,14 +154,14 @@ INSERT INTO th.Usuarios VALUES ('adm', 'adm', 1, 1, 1)
 
 INSERT INTO th.TiposFicheros VALUES ('Lista de Empaque', 'Lista de Empaque')
 INSERT INTO th.TiposFicheros VALUES ('Factura Comercial', 'Factura Comercial')
-INSERT INTO th.TiposFicheros VALUES ('Sicoin', 'Sicoin')
+INSERT INTO th.TiposFicheros VALUES ('Sicoin', 'Sistema de control de inventario')
 INSERT INTO th.TiposFicheros VALUES ('Dam', 'Dam')
-INSERT INTO th.TiposFicheros VALUES ('MIC', 'MIC')
+INSERT INTO th.TiposFicheros VALUES ('MIC', 'Manifiesto Internacional de Carga')
 INSERT INTO th.TiposFicheros VALUES ('CRT', 'CRT')
 INSERT INTO th.TiposFicheros VALUES ('GOC', 'GOC')
 INSERT INTO th.TiposFicheros VALUES ('DUI', 'DUI')
 INSERT INTO th.TiposFicheros VALUES ('DAV', 'DAV')
-INSERT INTO th.TiposFicheros VALUES ('Recibi Conforme', 'Recib� Conforme')
+INSERT INTO th.TiposFicheros VALUES ('Recibi Conforme', 'Recií Conforme')
 INSERT INTO th.TiposFicheros VALUES ('Imagenes', 'Imagenes del pedido')
 INSERT INTO th.TiposFicheros VALUES ('BL', 'BL')
 

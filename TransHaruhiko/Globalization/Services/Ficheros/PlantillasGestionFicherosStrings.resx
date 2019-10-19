@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DirectorioFicheroBL" xml:space="preserve">
-    <value>Pedidos/{0}/BL_{0}{1}</value>
+  <data name="DirectorioFichero" xml:space="preserve">
+    <value>Pedidos/{0}/{2}_{0}{1}</value>
   </data>
 </root>

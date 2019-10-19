@@ -115,6 +115,15 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recibido.
+        /// </summary>
+        public static string TextRecibido {
+            get {
+                return ResourceManager.GetString("TextRecibido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subir.
         /// </summary>
         public static string TextSubir {

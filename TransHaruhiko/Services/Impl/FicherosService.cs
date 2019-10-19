@@ -55,5 +55,10 @@ namespace TransHaruhiko.Services.Impl
             var mimes = _dbContext.TiposMimes.Where(a => true).ToList();
             return mimes;
         }
+        public List<EstadoFichero> GetEstadosPermitidos(int idEstado)
+        {
+            var estados = (int)FicheroEstadoEnum.Recibido == idEstado ? _dbContext.EstadosFicheros.Where(a => a.Id != idEstado).ToList() : new List<EstadoFichero>();
+            return estados;
+        }
     }
 }

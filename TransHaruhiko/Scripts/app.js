@@ -65,8 +65,3 @@ function BlockFullPage() {
 function UnblockFullPage() {
     $('#main-wrapper').unblock();
 }
-
-function search(lista, idTipoFichero) {
-    console.log(lista);
-    return lista.Tipo.Id === idTipoFichero;
-}

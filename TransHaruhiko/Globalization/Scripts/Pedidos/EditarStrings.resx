@@ -135,6 +135,9 @@
   <data name="TextNo" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="TextRecibido" xml:space="preserve">
+    <value>Recibido</value>
+  </data>
   <data name="TextSubir" xml:space="preserve">
     <value>Subir</value>
   </data>

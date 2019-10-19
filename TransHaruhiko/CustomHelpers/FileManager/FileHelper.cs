@@ -1,5 +1,7 @@
 ﻿using System.Configuration;
 using System.IO;
+using TransHaruhiko.Globalization.Services.Ficheros;
+using TransHaruhiko.Models.Enum;
 
 namespace TransHaruhiko.CustomHelpers.FileManager
 {
@@ -12,6 +14,62 @@ namespace TransHaruhiko.CustomHelpers.FileManager
                 ? rutaFichero
                 : (rutaAbsoluta + rutaFichero).Replace("/", "\\");
             return rutaCompleta;
+        }
+        public static string GetPath(int idPedido, int idTipo, string extension)
+        {
+            var rutaArchivo = "";
+            switch (idTipo)
+            {
+                case (int)TipoFicheroEnum.ListaEmpaque:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "ListaEmpaque");
+                    break;
+                case (int)TipoFicheroEnum.FacturaComercial:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "FacturaComercial");
+                    break;
+                case (int)TipoFicheroEnum.Sicoin:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "Sicoin");
+                    break;
+                case (int)TipoFicheroEnum.Dam:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "Dam");
+                    break;
+                case (int)TipoFicheroEnum.Mic:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "Mic");
+                    break;
+                case (int)TipoFicheroEnum.Crt:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "Crt");
+                    break;
+                case (int)TipoFicheroEnum.Goc:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "Goc");
+                    break;
+                case (int)TipoFicheroEnum.Dui:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "Dui");
+                    break;
+                case (int)TipoFicheroEnum.Dav:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "Dav");
+                    break;
+                case (int)TipoFicheroEnum.RecibiConforme:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "RecibiConforme");
+                    break;
+                case (int)TipoFicheroEnum.Imagenes:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "Imagenes");
+                    break;
+                case (int)TipoFicheroEnum.Bl:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "Bl");
+                    break;
+            }
+            return rutaArchivo;
         }
         public static bool Exist(string rutaFichero)
         {

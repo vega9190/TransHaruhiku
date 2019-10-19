@@ -22,5 +22,6 @@ namespace TransHaruhiko.Models.DbModels
         public DbSet<Observacion> Observaciones { get; set; }
         public DbSet<Fichero> Ficheros { get; set; }
         public DbSet<TipoMime> TiposMimes { get; set; }
+        public DbSet<EstadoFichero> EstadosFicheros { get; set; }
     }
 }

@@ -61,11 +61,11 @@ namespace TransHaruhiko.Globalization.Services.Ficheros {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pedidos/{0}/BL_{0}{1}.
+        ///   Looks up a localized string similar to Pedidos/{0}/{2}_{0}{1}.
         /// </summary>
-        public static string DirectorioFicheroBL {
+        public static string DirectorioFichero {
             get {
-                return ResourceManager.GetString("DirectorioFicheroBL", resourceCulture);
+                return ResourceManager.GetString("DirectorioFichero", resourceCulture);
             }
         }
     }

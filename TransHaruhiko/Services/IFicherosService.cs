@@ -12,5 +12,6 @@ namespace TransHaruhiko.Services
         BaseResult Guardar(Fichero parameters);
         BaseResult Eliminar(int idFichero);
         List<TipoMime> GetMimes();
+        List<EstadoFichero> GetEstadosPermitidos(int idEstado);
     }
 }

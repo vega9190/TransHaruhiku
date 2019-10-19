@@ -12,10 +12,12 @@ namespace TransHaruhiko.Controllers
     public class ParametricoController : Controller
     {
         private readonly IClientesService _clientesService;
+        private readonly IFicherosService _ficherosService;
 
-        public ParametricoController(IClientesService clientesService)
+        public ParametricoController(IClientesService clientesService, IFicherosService ficherosService)
         {
             _clientesService = clientesService;
+            _ficherosService = ficherosService;
         }
 
         public ActionResult SimpleSearchCliente(SimpleListViewModel parameters)
@@ -44,6 +46,20 @@ namespace TransHaruhiko.Controllers
             transfer.Pagination.TotalPages = totalpages + ((totalElements % parameters.ItemsPerPage) > 0 ? 1 : 0);
             transfer.Pagination.TotalRecords = totalElements; //Total de elementos segun filtro
             transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
+            return Json(transfer);
+        }
+        public ActionResult SearchPosibleEstadosDocumento(int idEstadoActual)
+        {
+            var transfer = new ClientTransfer();
+            var estados = _ficherosService.GetEstadosPermitidos(idEstadoActual);
+
+
+            transfer.Data = estados.Select(a => new
+            {
+                a.Id,
+                Descripcion = a.Nombre
+            });
+
             return Json(transfer);
         }
     }
