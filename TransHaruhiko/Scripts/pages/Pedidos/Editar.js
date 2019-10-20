@@ -2139,12 +2139,13 @@ function CargarSeguimientos() {
             //? null : convertDateClientToServer($('#txt-seguimiento-fecha-hasta').datepicker('getDate'));
 
             params.IdPedido = IdPedido;
-            tbSeguimientos.table('block');
+            
+            tbSeguimientos.block({ message: null });
             $.ajax({
                 url: sSource,
                 data: $.toJSON(params),
                 success: function (data) {
-                    tbSeguimientos.table('unblock');
+                    tbSeguimientos.unblock();
                     if (data.HasErrors) {
                         showErrors(data.Errors);
                     } else {
