@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using TransHaruhiko.Globalization.Controllers;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Parameters.Pedidos;
 using TransHaruhiko.Services;
@@ -55,16 +56,24 @@ namespace TransHaruhiko.Controllers
                     parameters.MimeType = file.ContentType;
                 }
             }
+            var user = User.Identity;
+            if (user == null)
+            {
+                transfer.Errors.Add(CommonControllerStrings.ErrorSinUsuario);
+                return Json(transfer);
+            }
+            parameters.IdUsuario = int.Parse(user.Name);
 
             var res = _pedidosService.GuardarFichero(parameters);
             var fichero = _ficherosService.Get(parameters.IdPedido.Value, parameters.IdTipo.Value);
+            var cambiarEstado = _pedidosService.CambiarEstado(pedidoId);
 
             if (res.HasErrors)
                 transfer.Errors.AddRange(res.Errors);
             if (res.HasWarnings)
                 transfer.Warnings.AddRange(res.Warnings);
 
-            transfer.Data = new { IdFichero = fichero.Id };
+            transfer.Data = new { IdFichero = fichero.Id, EstadoModificado = cambiarEstado };
             return Json(transfer);
         }
         [Route("DescargarFichero/{pedidoId}/{idTipo}")]
@@ -89,7 +98,14 @@ namespace TransHaruhiko.Controllers
         public ActionResult EliminarFichero(int idPedido, int idTipo)
         {
             var transfer = new ClientTransfer();
-            var res = _pedidosService.EliminarFichero(idPedido, idTipo);
+            var user = User.Identity;
+            if (user == null)
+            {
+                transfer.Errors.Add(CommonControllerStrings.ErrorSinUsuario);
+                return Json(transfer);
+            }
+
+            var res = _pedidosService.EliminarFichero(idPedido, idTipo, int.Parse(user.Name));
 
             if (res.HasErrors)
                 transfer.Errors.AddRange(res.Errors);
@@ -102,7 +118,13 @@ namespace TransHaruhiko.Controllers
         public ActionResult CambiarEstado(int idFichero, int idNuevoEstado)
         {
             var transfer = new ClientTransfer();
-            var res = _ficherosService.CambiarEstado(idFichero, idNuevoEstado);
+            var user = User.Identity;
+            if (user == null)
+            {
+                transfer.Errors.Add(CommonControllerStrings.ErrorSinUsuario);
+                return Json(transfer);
+            }
+            var res = _ficherosService.CambiarEstado(idFichero, idNuevoEstado, int.Parse(user.Name));
 
             if (res.HasErrors)
                 transfer.Errors.AddRange(res.Errors);

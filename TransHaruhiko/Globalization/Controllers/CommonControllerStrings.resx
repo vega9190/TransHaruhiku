@@ -117,43 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ColumnDescripcion" xml:space="preserve">
-    <value>Descripción</value>
-  </data>
-  <data name="ColumnFecha" xml:space="preserve">
-    <value>Fecha</value>
-  </data>
-  <data name="ColumnOperador" xml:space="preserve">
-    <value>Operador</value>
-  </data>
-  <data name="ColumnTipo" xml:space="preserve">
-    <value>Tipo</value>
-  </data>
-  <data name="ErrorArchivoExcedioLongitud" xml:space="preserve">
-    <value>El fichero ha excedido el tamaño permitido.</value>
-  </data>
-  <data name="ErrorFicheroVacio" xml:space="preserve">
-    <value>El fichero se encuentra vacío.</value>
-  </data>
-  <data name="MessageConfirmDeleteFile" xml:space="preserve">
-    <value>¿Está seguro de eliminar el fichero?</value>
-  </data>
-  <data name="TextDelete" xml:space="preserve">
-    <value>Eliminar</value>
-  </data>
-  <data name="TextDownload" xml:space="preserve">
-    <value>Descargar</value>
-  </data>
-  <data name="TextNo" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="TextRecibido" xml:space="preserve">
-    <value>Recibido</value>
-  </data>
-  <data name="TextSubir" xml:space="preserve">
-    <value>Subir</value>
-  </data>
-  <data name="TextYes" xml:space="preserve">
-    <value>Si</value>
+  <data name="ErrorSinUsuario" xml:space="preserve">
+    <value>No existe un usuario logueado.</value>
   </data>
 </root>

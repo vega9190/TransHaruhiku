@@ -180,6 +180,13 @@ INSERT INTO th.TiposMimes VALUES ('image/gif', 'Formato de Imagen (gif)', '.gif'
 INSERT INTO th.TiposMimes VALUES ('application/zip;application/x-zip-compressed', 'Archivo Comprimido (Zip)', '.zip')
 INSERT INTO th.TiposMimes VALUES ('application/x-rar-compressed;application/octet-stream;application/rar', 'Archivo Comprimido (Rar)', '.rar')
 
-select * from th.Ficheros
+INSERT INTO th.TiposSeguimientos VALUES ('Documentos', 'Todos los documentos del pedido')
+INSERT INTO th.TiposSeguimientos VALUES ('Estado Pedido', 'Todos los cambios de estados del pedido')
+INSERT INTO th.TiposSeguimientos VALUES ('Estado Fichero', 'Todos los cambios de estados del fichero')
+
+
+
+
+select * from th.TiposSeguimientos
 
 

@@ -1,5 +1,5 @@
 ﻿var IdPedido = null;
-
+var swSeguimientos = false;
 var TipoFicheroEnum = {
     ListaEmpaque: 1,
     FacturaComercial: 2,
@@ -17,6 +17,11 @@ var TipoFicheroEnum = {
 
 $(document).ready(function () {
     IdPedido = $('#hd-id-pedido').val();
+
+    $('#btn-volver').button();
+    $('#btn-volver').click(function () {
+        window.location.href = SiteUrl + 'Pedido/List'
+    });
     CargarFileuploadFicheroBL();
     CargarFileuploadFicheroImagenes();
     CargarFileuploadFicheroFacturaComercial();
@@ -30,6 +35,18 @@ $(document).ready(function () {
     CargarFileuploadFicheroDav();
     CargarFileuploadFicheroRecibiConforme();
     CargarPedido();
+
+    $('.tabs').tabs('option', 'beforeActivate', function (event, ui) {
+        switch (ui.newPanel.selector) {
+            case '#tab-seguimientos':
+                if (!swSeguimientos) {
+                    CargarSeguimientos();
+                    swSeguimientos = true;
+                }
+                break;
+          
+        }
+    });
 });
 /**
  * cargar pedido
@@ -117,8 +134,8 @@ function CargarPedido() {
                                                 showErrors(data.Errors);
                                             } else {
                                                 tempEstado.text(itemMenu.data('data').Descripcion);
-                                                //if (!isNull(tableSeguimientos.data().ifTable))
-                                                //    tableSeguimientos.table('update');
+                                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                    $('#tb-seguimientos').table('update');
                                                 tempEstado.data('data',
                                                 {
                                                     Id: itemMenu.data('data').Id
@@ -185,8 +202,8 @@ function CargarPedido() {
                                                 showErrors(data.Errors);
                                             } else {
                                                 tempEstado.text(itemMenu.data('data').Descripcion);
-                                                //if (!isNull(tableSeguimientos.data().ifTable))
-                                                //    tableSeguimientos.table('update');
+                                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                    $('#tb-seguimientos').table('update');
                                                 tempEstado.data('data',
                                                 {
                                                     Id: itemMenu.data('data').Id
@@ -253,8 +270,8 @@ function CargarPedido() {
                                                 showErrors(data.Errors);
                                             } else {
                                                 tempEstado.text(itemMenu.data('data').Descripcion);
-                                                //if (!isNull(tableSeguimientos.data().ifTable))
-                                                //    tableSeguimientos.table('update');
+                                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                    $('#tb-seguimientos').table('update');
                                                 tempEstado.data('data',
                                                 {
                                                     Id: itemMenu.data('data').Id
@@ -341,8 +358,8 @@ function CargarPedido() {
                                                 showErrors(data.Errors);
                                             } else {
                                                 tempEstado.text(itemMenu.data('data').Descripcion);
-                                                //if (!isNull(tableSeguimientos.data().ifTable))
-                                                //    tableSeguimientos.table('update');
+                                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                    $('#tb-seguimientos').table('update');
                                                 tempEstado.data('data',
                                                 {
                                                     Id: itemMenu.data('data').Id
@@ -409,8 +426,8 @@ function CargarPedido() {
                                                 showErrors(data.Errors);
                                             } else {
                                                 tempEstado.text(itemMenu.data('data').Descripcion);
-                                                //if (!isNull(tableSeguimientos.data().ifTable))
-                                                //    tableSeguimientos.table('update');
+                                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                    $('#tb-seguimientos').table('update');
                                                 tempEstado.data('data',
                                                 {
                                                     Id: itemMenu.data('data').Id
@@ -477,8 +494,8 @@ function CargarPedido() {
                                                 showErrors(data.Errors);
                                             } else {
                                                 tempEstado.text(itemMenu.data('data').Descripcion);
-                                                //if (!isNull(tableSeguimientos.data().ifTable))
-                                                //    tableSeguimientos.table('update');
+                                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                    $('#tb-seguimientos').table('update');
                                                 tempEstado.data('data',
                                                 {
                                                     Id: itemMenu.data('data').Id
@@ -586,7 +603,8 @@ function CargarFileuploadFicheroBL() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Bl,
                         data: dataDocumento.Data
                     });
-                    //ActualizarActaTipoFichero(IdActa, false);
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -609,6 +627,8 @@ function CargarFileuploadFicheroBL() {
                                 return false;
                             } else {
                                 callbackFile();
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
                         }
@@ -682,7 +702,8 @@ function CargarFileuploadFicheroImagenes() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Imagenes,
                         data: dataDocumento.Data
                     });
-                    //ActualizarActaTipoFichero(IdActa, false);
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -705,6 +726,8 @@ function CargarFileuploadFicheroImagenes() {
                                 return false;
                             } else {
                                 callbackFile();
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
                         }
@@ -778,7 +801,8 @@ function CargarFileuploadFicheroListaEmpaque() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.ListaEmpaque,
                         data: dataDocumento.Data
                     });
-                    //ActualizarActaTipoFichero(IdActa, false);
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -801,6 +825,8 @@ function CargarFileuploadFicheroListaEmpaque() {
                                 return false;
                             } else {
                                 callbackFile();
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
                         }
@@ -902,8 +928,8 @@ function CargarFileuploadFicheroFacturaComercial() {
                                                 showErrors(data.Errors);
                                             } else {
                                                 tempEstado.text(itemMenu.data('data').Descripcion);
-                                                //if (!isNull(tableSeguimientos.data().ifTable))
-                                                //    tableSeguimientos.table('update');
+                                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                    $('#tb-seguimientos').table('update');
                                                 tempEstado.data('data',
                                                 {
                                                     Id: itemMenu.data('data').Id
@@ -936,6 +962,9 @@ function CargarFileuploadFicheroFacturaComercial() {
                                 });
                             }
                         }));
+
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -958,6 +987,8 @@ function CargarFileuploadFicheroFacturaComercial() {
                                 return false;
                             } else {
                                 $('#box-estado-factura-comercial').html('');
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 callbackFile();
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
@@ -1056,8 +1087,8 @@ function CargarFileuploadFicheroFacturaSicoin() {
                                             showErrors(data.Errors);
                                         } else {
                                             tempEstado.text(itemMenu.data('data').Descripcion);
-                                            //if (!isNull(tableSeguimientos.data().ifTable))
-                                            //    tableSeguimientos.table('update');
+                                            if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                $('#tb-seguimientos').table('update');
                                             tempEstado.data('data',
                                             {
                                                 Id: itemMenu.data('data').Id
@@ -1090,6 +1121,8 @@ function CargarFileuploadFicheroFacturaSicoin() {
                                 });
                             }
                         }));
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -1112,6 +1145,8 @@ function CargarFileuploadFicheroFacturaSicoin() {
                                 return false;
                             } else {
                                 $('#box-estado-sicoin').html('');
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 callbackFile();
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
@@ -1210,8 +1245,8 @@ function CargarFileuploadFicheroFacturaDam() {
                                             showErrors(data.Errors);
                                         } else {
                                             tempEstado.text(itemMenu.data('data').Descripcion);
-                                            //if (!isNull(tableSeguimientos.data().ifTable))
-                                            //    tableSeguimientos.table('update');
+                                            if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                $('#tb-seguimientos').table('update');
                                             tempEstado.data('data',
                                             {
                                                 Id: itemMenu.data('data').Id
@@ -1244,6 +1279,8 @@ function CargarFileuploadFicheroFacturaDam() {
                                 });
                             }
                         }));
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -1266,6 +1303,8 @@ function CargarFileuploadFicheroFacturaDam() {
                                 return false;
                             } else {
                                 $('#box-estado-dam').html('');
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 callbackFile();
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
@@ -1340,7 +1379,8 @@ function CargarFileuploadFicheroMic() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Mic,
                         data: dataDocumento.Data
                     });
-                    //ActualizarActaTipoFichero(IdActa, false);
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -1363,6 +1403,8 @@ function CargarFileuploadFicheroMic() {
                                 return false;
                             } else {
                                 callbackFile();
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
                         }
@@ -1436,7 +1478,8 @@ function CargarFileuploadFicheroCrt() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Crt,
                         data: dataDocumento.Data
                     });
-                    //ActualizarActaTipoFichero(IdActa, false);
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -1459,6 +1502,8 @@ function CargarFileuploadFicheroCrt() {
                                 return false;
                             } else {
                                 callbackFile();
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
                         }
@@ -1556,8 +1601,8 @@ function CargarFileuploadFicheroGoc() {
                                             showErrors(data.Errors);
                                         } else {
                                             tempEstado.text(itemMenu.data('data').Descripcion);
-                                            //if (!isNull(tableSeguimientos.data().ifTable))
-                                            //    tableSeguimientos.table('update');
+                                            if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                $('#tb-seguimientos').table('update');
                                             tempEstado.data('data',
                                             {
                                                 Id: itemMenu.data('data').Id
@@ -1590,6 +1635,8 @@ function CargarFileuploadFicheroGoc() {
                                 });
                             }
                         }));
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -1612,6 +1659,8 @@ function CargarFileuploadFicheroGoc() {
                                 return false;
                             } else {
                                 $('#box-estado-goc').html('');
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 callbackFile();
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
@@ -1710,8 +1759,8 @@ function CargarFileuploadFicheroDui() {
                                             showErrors(data.Errors);
                                         } else {
                                             tempEstado.text(itemMenu.data('data').Descripcion);
-                                            //if (!isNull(tableSeguimientos.data().ifTable))
-                                            //    tableSeguimientos.table('update');
+                                            if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                $('#tb-seguimientos').table('update');
                                             tempEstado.data('data',
                                             {
                                                 Id: itemMenu.data('data').Id
@@ -1744,6 +1793,8 @@ function CargarFileuploadFicheroDui() {
                                 });
                             }
                         }));
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -1766,6 +1817,8 @@ function CargarFileuploadFicheroDui() {
                                 return false;
                             } else {
                                 $('#box-estado-dui').html('');
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 callbackFile();
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
@@ -1864,8 +1917,8 @@ function CargarFileuploadFicheroDav() {
                                             showErrors(data.Errors);
                                         } else {
                                             tempEstado.text(itemMenu.data('data').Descripcion);
-                                            //if (!isNull(tableSeguimientos.data().ifTable))
-                                            //    tableSeguimientos.table('update');
+                                            if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                $('#tb-seguimientos').table('update');
                                             tempEstado.data('data',
                                             {
                                                 Id: itemMenu.data('data').Id
@@ -1898,6 +1951,8 @@ function CargarFileuploadFicheroDav() {
                                 });
                             }
                         }));
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -1920,6 +1975,8 @@ function CargarFileuploadFicheroDav() {
                                 return false;
                             } else {
                                 $('#box-estado-dav').html('');
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 callbackFile();
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
@@ -1994,7 +2051,8 @@ function CargarFileuploadFicheroRecibiConforme() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.RecibiConforme,
                         data: dataDocumento.Data
                     });
-                    //ActualizarActaTipoFichero(IdActa, false);
+                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                        $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
@@ -2017,6 +2075,8 @@ function CargarFileuploadFicheroRecibiConforme() {
                                 return false;
                             } else {
                                 callbackFile();
+                                if (!isNull($('#tb-seguimientos').data().ifTable))
+                                    $('#tb-seguimientos').table('update');
                                 $('[name=rd-tipo-fichero]').attr('disabled', false);
                             }
                         }
@@ -2032,4 +2092,82 @@ function CargarFileuploadFicheroRecibiConforme() {
                 });
             }
         });
+}
+
+function CargarSeguimientos() {
+    var tbSeguimientos = $('#tb-seguimientos');
+    tbSeguimientos.table({
+        bInfo: true,
+        aoColumns: [{
+            sTitle: Globalize.localize('ColumnFecha'),
+            sWidth: "150px"
+        }, {
+            sTitle: Globalize.localize('ColumnTipo'),
+            sWidth: "250px",
+            bSortable: false
+        }, {
+            sTitle: Globalize.localize('ColumnDescripcion'),
+            bSortable: false
+        }, {
+            sTitle: Globalize.localize('ColumnOperador'),
+            sWidth: "250px",
+            bSortable: false
+        }],
+        aaSorting: [[0, "desc"]],
+        bServerSide: true,
+        sAjaxSource: SiteUrl + 'Parametrico/GetSeguimientos',
+        fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+            return nRow;
+        },
+        fnServerData: function (sSource, aoData, fnCallback) {
+            var paramsTabla = new Object();
+            $.each(aoData, function (index, value) {
+                paramsTabla[value.name] = value.value;
+            });
+            var params = new Object();
+            params.PageIndex = (paramsTabla.iDisplayStart / paramsTabla.iDisplayLength) + 1;
+            params.ItemsPerPage = paramsTabla.iDisplayLength;
+            params.OrderColumnName = decode(
+                paramsTabla.iSortCol_0,
+                [0, 'fecha']);
+            params.OrderDirection = paramsTabla.sSortDir_0;
+            /******************************************************************/
+            //params.IdTipoSeguimiento = $('#cbx-seguimiento-tipo-seguimiento').combobox('getId');
+            //params.FechaDesde = $('#txt-seguimiento-fecha-desde').datepicker('getDate') == null
+            //? null : convertDateClientToServer($('#txt-seguimiento-fecha-desde').datepicker('getDate'));
+            //params.FechaHasta = $('#txt-seguimiento-fecha-hasta').datepicker('getDate') == null
+            //? null : convertDateClientToServer($('#txt-seguimiento-fecha-hasta').datepicker('getDate'));
+
+            params.IdPedido = IdPedido;
+            tbSeguimientos.table('block');
+            $.ajax({
+                url: sSource,
+                data: $.toJSON(params),
+                success: function (data) {
+                    tbSeguimientos.table('unblock');
+                    if (data.HasErrors) {
+                        showErrors(data.Errors);
+                    } else {
+                        var _data = [];
+                        $.each(data.Data, function (index, value) {
+                            var _row = [];
+                            console.log(value);
+                            _row.push(value.Fecha);
+                            _row.push(value.TipoSeguimiento);
+                            _row.push(value.Descripcion);
+                            _row.push(value.Usuario);
+                            _data.push(_row);
+                        });
+                        fnCallback({
+                            "sEcho": paramsTabla.sEcho,
+                            "aaData": _data,
+                            "iTotalRecords": data.Pagination.TotalDisplayRecords,
+                            "iTotalDisplayRecords": data.Pagination.TotalRecords
+                        });
+                        tbSeguimientos.table('setData', data.Data);
+                    }
+                }
+            });
+        }
+    });
 }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Models.ViewModel;
+using TransHaruhiko.Parameters.Seguimientos;
 using TransHaruhiko.Services;
 
 namespace TransHaruhiko.Controllers
@@ -13,11 +11,13 @@ namespace TransHaruhiko.Controllers
     {
         private readonly IClientesService _clientesService;
         private readonly IFicherosService _ficherosService;
+        private readonly IPedidosService _pedidosService;
 
-        public ParametricoController(IClientesService clientesService, IFicherosService ficherosService)
+        public ParametricoController(IClientesService clientesService, IFicherosService ficherosService, IPedidosService pedidosService)
         {
             _clientesService = clientesService;
             _ficherosService = ficherosService;
+            _pedidosService = pedidosService;
         }
 
         public ActionResult SimpleSearchCliente(SimpleListViewModel parameters)
@@ -60,6 +60,54 @@ namespace TransHaruhiko.Controllers
                 Descripcion = a.Nombre
             });
 
+            return Json(transfer);
+        }
+        public ActionResult GetSeguimientos(SearchParameters parameters)
+        {
+            var queriable = _pedidosService.BuscarSeguimientos();
+
+            queriable = queriable.Where(a => a.PedidoId == parameters.IdPedido);
+           
+            var querySelect = queriable.Select(a => new
+            {
+                FechaSeguimiento = a.Fecha,
+                a.Descripcion,
+                TipoSeguimiento = a.Tipo.Nombre,
+                UsuarioSeguimiento = new { a.Usuario.Trabajador.Nombres, a.Usuario.Trabajador.Apellidos}
+
+            });
+
+            var order = parameters.GetEnum(SearchParameters.SeguimientosOrderColumn.Fecha);
+            switch (order)
+            {
+                case SearchParameters.SeguimientosOrderColumn.Fecha:
+                    querySelect = parameters.Ascendente
+                        ? querySelect.OrderBy(a => a.FechaSeguimiento)
+                        : querySelect.OrderByDescending(a => a.FechaSeguimiento);
+                    break;
+            }
+
+            var listado = querySelect.Skip((parameters.PageIndex - 1) * parameters.ItemsPerPage)
+                .Take(parameters.ItemsPerPage).ToList();
+
+            var returnList = listado.Select(a =>
+            {
+                var returnData = new
+                {
+                    Fecha = a.FechaSeguimiento.ToString("dd/MM/yyyy"),
+                    a.Descripcion,
+                    a.TipoSeguimiento,
+                    Usuario = (a.UsuarioSeguimiento.Nombres + " " + a.UsuarioSeguimiento.Apellidos).Trim()
+                };
+                return returnData;
+            });
+            var transfer = new ClientTransfer();
+            var totalElements = querySelect.Count();
+            var totalPages = totalElements / parameters.ItemsPerPage;
+            transfer.Data = returnList;
+            transfer.Pagination.TotalPages = totalPages + ((totalElements % parameters.ItemsPerPage) > 0 ? 1 : 0);
+            transfer.Pagination.TotalRecords = totalElements; //Total de elementos segun filtro
+            transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
             return Json(transfer);
         }
     }

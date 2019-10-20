@@ -153,6 +153,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Controllers\CommonControllerStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonControllerStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Scripts\Common\CommonStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,6 +177,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ObservacionStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Services\CommonServiceStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonServiceStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Globalization\Services\Ficheros\FicheroStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -222,8 +232,10 @@
     <Compile Include="Models\DbModels\Entidades\Fichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Observacion.cs" />
     <Compile Include="Models\DbModels\Entidades\Rol.cs" />
+    <Compile Include="Models\DbModels\Entidades\Seguimiento.cs" />
     <Compile Include="Models\DbModels\Entidades\TipoFichero.cs" />
     <Compile Include="Models\DbModels\Entidades\TipoMime.cs" />
+    <Compile Include="Models\DbModels\Entidades\TipoSeguimiento.cs" />
     <Compile Include="Models\DbModels\Entidades\Trabajador.cs" />
     <Compile Include="Models\DbModels\Entidades\Usuario.cs" />
     <Compile Include="Models\DbModels\TransHaruhikoDbContext.cs" />
@@ -233,6 +245,7 @@
     <Compile Include="Models\Enum\EstadosEnum.cs" />
     <Compile Include="Models\Enum\FicheroEstadoEnum.cs" />
     <Compile Include="Models\Enum\TipoFicheroEnum.cs" />
+    <Compile Include="Models\Enum\TipoSeguimientoEnum.cs" />
     <Compile Include="Models\TransferStruct\BaseResult.cs" />
     <Compile Include="Models\TransferStruct\ClientTransfer.cs" />
     <Compile Include="Models\TransferStruct\FileTransfer.cs" />
@@ -247,6 +260,7 @@
     <Compile Include="Parameters\Pedidos\SaveFicheroParameters.cs" />
     <Compile Include="Parameters\Pedidos\SaveParameters.cs" />
     <Compile Include="Parameters\Pedidos\SearchParameters.cs" />
+    <Compile Include="Parameters\Seguimientos\SearchParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IClientesService.cs" />
     <Compile Include="Services\IFicherosService.cs" />
@@ -289,6 +303,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Globalization\Controllers\CommonControllerStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonControllerStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Scripts\Common\CommonStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CommonStrings.Designer.cs</LastGenOutput>
@@ -304,6 +322,10 @@
     <EmbeddedResource Include="Globalization\Scripts\Pedidos\ObservacionStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ObservacionStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Services\CommonServiceStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonServiceStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Services\Ficheros\FicheroStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

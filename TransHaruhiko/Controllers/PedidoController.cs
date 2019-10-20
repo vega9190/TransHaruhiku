@@ -7,11 +7,7 @@ using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Parameters.Pedidos;
 using TransHaruhiko.Services;
 using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.Routing;
-using System.Web.Script.Serialization;
-using TransHaruhiko.CustomHelpers.FileManager;
+using TransHaruhiko.Globalization.Controllers;
 
 namespace TransHaruhiko.Controllers
 {
@@ -180,6 +176,14 @@ namespace TransHaruhiko.Controllers
         public ActionResult Guardar(SaveParameters parameters)
         {
             var transfer = new ClientTransfer();
+
+            var user = User.Identity;
+            if (user == null)
+            {
+                transfer.Errors.Add(CommonControllerStrings.ErrorSinUsuario);
+                return Json(transfer);
+            }
+            parameters.IdUsuario = int.Parse(user.Name);
             var res = _pedidosService.Guardar(parameters);
 
             if (res.HasErrors)
@@ -192,7 +196,14 @@ namespace TransHaruhiko.Controllers
         public ActionResult Eliminar(int idPedido)
         {
             var transfer = new ClientTransfer();
-            var res = _pedidosService.Eliminar(idPedido);
+            var user = User.Identity;
+            if (user == null)
+            {
+                transfer.Errors.Add(CommonControllerStrings.ErrorSinUsuario);
+                return Json(transfer);
+            }
+            
+            var res = _pedidosService.Eliminar(idPedido, int.Parse(user.Name));
 
             if (res.HasErrors)
                 transfer.Errors.AddRange(res.Errors);
@@ -202,7 +213,6 @@ namespace TransHaruhiko.Controllers
             return Json(transfer);
         }
 
-       
         #region PopUps
         public ActionResult PopUpCrear()
         {

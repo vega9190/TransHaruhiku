@@ -7,5 +7,6 @@
         public string Contenedor { get; set; }
         public string Direccion { get; set; }
         public string DireccionUrl { get; set; }
+        public int? IdUsuario { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace TransHaruhiko.Services
         BaseResult Eliminar(int idFichero);
         List<TipoMime> GetMimes();
         List<EstadoFichero> GetEstadosPermitidos(int idEstado);
-        BaseResult CambiarEstado(int idFichero, int idNuevoEstado);
+        BaseResult CambiarEstado(int idFichero, int idNuevoEstado, int idUsuario);
     }
 }

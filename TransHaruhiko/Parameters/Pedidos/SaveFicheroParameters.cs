@@ -6,5 +6,6 @@ namespace TransHaruhiko.Parameters.Pedidos
     {
         public int? IdPedido { get; set; }
         public int? IdTipo { get; set; }
+        public int? IdUsuario { get; set; }
     }
 }

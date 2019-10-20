@@ -61,6 +61,42 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Descripción.
+        /// </summary>
+        public static string ColumnDescripcion {
+            get {
+                return ResourceManager.GetString("ColumnDescripcion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fecha.
+        /// </summary>
+        public static string ColumnFecha {
+            get {
+                return ResourceManager.GetString("ColumnFecha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operador.
+        /// </summary>
+        public static string ColumnOperador {
+            get {
+                return ResourceManager.GetString("ColumnOperador", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tipo.
+        /// </summary>
+        public static string ColumnTipo {
+            get {
+                return ResourceManager.GetString("ColumnTipo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to El fichero ha excedido el tamaño permitido..
         /// </summary>
         public static string ErrorArchivoExcedioLongitud {

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using TransHaruhiko.Globalization.Services;
 using TransHaruhiko.Globalization.Services.Ficheros;
 using TransHaruhiko.Models.DbModels;
 using TransHaruhiko.Models.DbModels.Entidades;
@@ -60,7 +62,7 @@ namespace TransHaruhiko.Services.Impl
             var estados = (int)FicheroEstadoEnum.Recibido == idEstado ? _dbContext.EstadosFicheros.Where(a => a.Id != idEstado).ToList() : new List<EstadoFichero>();
             return estados;
         }
-        public BaseResult CambiarEstado(int idFichero, int idNuevoEstado)
+        public BaseResult CambiarEstado(int idFichero, int idNuevoEstado, int idUsuario)
         {
             var result = new BaseResult();
             var fichero = _dbContext.Ficheros.Find(idFichero);
@@ -69,8 +71,17 @@ namespace TransHaruhiko.Services.Impl
                 result.Errors.Add(FicheroStrings.ErrorNoFichero);
                 return result;
             }
-
+            var estadoNuevo = _dbContext.EstadosFicheros.Find(idNuevoEstado);
+            var seguimiento = new Seguimiento
+            {
+                Fecha = DateTime.Now,
+                PedidoId = fichero.PedidoId,
+                TipoId = (int)TipoSeguimientoEnum.EstadoFichero,
+                Descripcion = string.Format(CommonServiceStrings.TextSegCambioEstadoFichero, fichero.Estado.Nombre, estadoNuevo.Nombre),
+                UsuarioId = idUsuario
+            };
             fichero.EstadoId = idNuevoEstado;
+            _dbContext.Seguimientos.Add(seguimiento);
             _dbContext.SaveChanges();
             return result;
         }
