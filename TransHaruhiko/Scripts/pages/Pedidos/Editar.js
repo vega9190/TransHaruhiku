@@ -15,13 +15,23 @@ var TipoFicheroEnum = {
     Bl: 12
 };
 
+var EstadoPedidoEnum = {
+    Inicio: 1,
+    EnProceso: 2,
+    Desaduanizacion: 3,
+    Transportadora: 4,
+    Finalizado: 5,
+    Cancelado: 6
+};
+
 $(document).ready(function () {
     IdPedido = $('#hd-id-pedido').val();
 
     $('#btn-volver').button();
     $('#btn-volver').click(function () {
-        window.location.href = SiteUrl + 'Pedido/List'
+        window.location.href = SiteUrl + 'Pedido/List';
     });
+
     CargarFileuploadFicheroBL();
     CargarFileuploadFicheroImagenes();
     CargarFileuploadFicheroFacturaComercial();
@@ -35,7 +45,9 @@ $(document).ready(function () {
     CargarFileuploadFicheroDav();
     CargarFileuploadFicheroRecibiConforme();
     CargarPedido();
-
+    //$(".tabs").tabs("option", "disabled", [0]);
+    //$(".tabs").tabs("enable", 0);
+    //$(".tabs").tabs({ active: 5 });
     $('.tabs').tabs('option', 'beforeActivate', function (event, ui) {
         switch (ui.newPanel.selector) {
             case '#tab-seguimientos':
@@ -48,6 +60,8 @@ $(document).ready(function () {
         }
     });
 });
+
+
 /**
  * cargar pedido
  */
@@ -72,477 +86,603 @@ function CargarPedido() {
                     $('#txt-direccion').val(data.Data.Pedido.Direccion);
                     $('#txt-direccion-url').val(data.Data.Pedido.DireccionUrl);
                     $('#txt-contenedor').val(data.Data.Pedido.Contenedor);
+
+                    CargarTabs(data.Data.Pedido.Estado.Id);
+
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Bl);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-bl').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Bl,
-                        });
+                        $('#box-fichero-bl').remove();
+                        var lista = $('#box-fichero-text-bl');
+
+                        lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Bl);
+                    } else {
+                        $('#box-fichero-text-bl').remove();
                     }
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Imagenes);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-imagenes').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Imagenes,
-                        });
-                    }
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Finalizado) {
+                            $('#div-fichero-imagenes').remove();
+                            var lista = $('#a-imagenes');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href',
+                                    SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Imagenes);
+                        } else {
+                            $('#frm-fichero-imagenes').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Imagenes
+                                });
+                        }
+                    } 
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.ListaEmpaque);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-lista-empaque').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.ListaEmpaque,
-                        });
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
+                            $('#frm-fichero-lista-empaque').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.ListaEmpaque,
+                                });
+                        } else {
+                            $('#div-fichero-lista-empaque').remove();
+                            var lista = $('#a-lista-empaque');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.ListaEmpaque);
+                        }
                     }
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.FacturaComercial);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-factura-comercial').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.FacturaComercial,
-                        });
-                        var boxEstado = $('#box-estado-factura-comercial');
-                        var tempEstado = $('<span class="menu-estado" />');
-                        boxEstado.append(
-                            tempEstado
-                            .data('data',
-                            {
-                                Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
-                            })
-                            .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
-                            .contextMenu({
-                                fnClick: function () {
-                                    var itemMenu = $(this);
-                                    var params = new Object();
-                                    params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
-                                    params.IdNuevoEstado = itemMenu.data('data').Id;
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
+                            $('#frm-fichero-factura-comercial').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl +
+                                        'DescargarFichero/' +
+                                        IdPedido +
+                                        '/' +
+                                        TipoFicheroEnum.FacturaComercial,
+                                });
+                            var boxEstado = $('#box-estado-factura-comercial');
+                            var tempEstado = $('<span class="menu-estado" />');
+                            boxEstado.append(
+                                tempEstado
+                                .data('data',
+                                    {
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                    })
+                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .contextMenu({
+                                    fnClick: function() {
+                                        var itemMenu = $(this);
+                                        var params = new Object();
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdNuevoEstado = itemMenu.data('data').Id;
 
-                                    $.ajax({
-                                        url: SiteUrl + 'Fichero/CambiarEstado',
-                                        data: $.toJSON(params),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                tempEstado.text(itemMenu.data('data').Descripcion);
-                                                if (!isNull($('#tb-seguimientos').data().ifTable))
-                                                    $('#tb-seguimientos').table('update');
-                                                tempEstado.data('data',
-                                                {
-                                                    Id: itemMenu.data('data').Id
-                                                });
+                                        $.ajax({
+                                            url: SiteUrl + 'Fichero/CambiarEstado',
+                                            data: $.toJSON(params),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                        $('#tb-seguimientos').table('update');
+                                                    tempEstado.data('data',
+                                                        {
+                                                            Id: itemMenu.data('data').Id
+                                                        });
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
 
-                                    return false;
-                                },
-                                fnLoadServerData: function (callbackRender) {
-                                    $.ajax({
-                                        url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
-                                        data: $.toJSON({
-                                            idEstadoActual: tempEstado.data('data').Id
-                                        }),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                callbackRender($.map(data.Data,
-                                                    function (item) {
-                                                        return {
-                                                            value: item.Descripcion,
-                                                            data: item
-                                                        }
-                                                    }));
+                                        return false;
+                                    },
+                                    fnLoadServerData: function(callbackRender) {
+                                        $.ajax({
+                                            url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
+                                            data: $.toJSON({
+                                                idEstadoActual: tempEstado.data('data').Id
+                                            }),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    callbackRender($.map(data.Data,
+                                                        function(item) {
+                                                            return {
+                                                                value: item.Descripcion,
+                                                                data: item
+                                                            }
+                                                        }));
+                                                }
                                             }
-                                        }
-                                    });
-                                }
-                            }));
+                                        });
+                                    }
+                                }));
+                        } else {
+                            $('#div-fichero-factura-comercial').remove();
+                            var lista = $('#a-factura-comercial');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.FacturaComercial);
+                        }
                     }
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Sicoin);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-sicoin').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Sicoin,
-                        });
-                        var boxEstado = $('#box-estado-sicoin');
-                        var tempEstado = $('<span class="menu-estado" />');
-                        boxEstado.append(
-                            tempEstado
-                            .data('data',
-                            {
-                                Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
-                            })
-                            .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
-                            .contextMenu({
-                                fnClick: function () {
-                                    var itemMenu = $(this);
-                                    var params = new Object();
-                                    params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
-                                    params.IdNuevoEstado = itemMenu.data('data').Id;
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
+                            $('#frm-fichero-sicoin').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Sicoin,
+                                });
+                            var boxEstado = $('#box-estado-sicoin');
+                            var tempEstado = $('<span class="menu-estado" />');
+                            boxEstado.append(
+                                tempEstado
+                                .data('data',
+                                    {
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                    })
+                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .contextMenu({
+                                    fnClick: function() {
+                                        var itemMenu = $(this);
+                                        var params = new Object();
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdNuevoEstado = itemMenu.data('data').Id;
 
-                                    $.ajax({
-                                        url: SiteUrl + 'Fichero/CambiarEstado',
-                                        data: $.toJSON(params),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                tempEstado.text(itemMenu.data('data').Descripcion);
-                                                if (!isNull($('#tb-seguimientos').data().ifTable))
-                                                    $('#tb-seguimientos').table('update');
-                                                tempEstado.data('data',
-                                                {
-                                                    Id: itemMenu.data('data').Id
-                                                });
+                                        $.ajax({
+                                            url: SiteUrl + 'Fichero/CambiarEstado',
+                                            data: $.toJSON(params),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                        $('#tb-seguimientos').table('update');
+                                                    tempEstado.data('data',
+                                                        {
+                                                            Id: itemMenu.data('data').Id
+                                                        });
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
 
-                                    return false;
-                                },
-                                fnLoadServerData: function (callbackRender) {
-                                    $.ajax({
-                                        url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
-                                        data: $.toJSON({
-                                            idEstadoActual: tempEstado.data('data').Id
-                                        }),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                callbackRender($.map(data.Data,
-                                                    function (item) {
-                                                        return {
-                                                            value: item.Descripcion,
-                                                            data: item
-                                                        }
-                                                    }));
+                                        return false;
+                                    },
+                                    fnLoadServerData: function(callbackRender) {
+                                        $.ajax({
+                                            url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
+                                            data: $.toJSON({
+                                                idEstadoActual: tempEstado.data('data').Id
+                                            }),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    callbackRender($.map(data.Data,
+                                                        function(item) {
+                                                            return {
+                                                                value: item.Descripcion,
+                                                                data: item
+                                                            }
+                                                        }));
+                                                }
                                             }
-                                        }
-                                    });
-                                }
-                            }));
+                                        });
+                                    }
+                                }));
+                        } else {
+                            $('#div-fichero-sicoin').remove();
+                            var lista = $('#a-sicoin');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Sicoin);
+                        }
                     }
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Dam);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-dam').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dam,
-                        });
-                        var boxEstado = $('#box-estado-dam');
-                        var tempEstado = $('<span class="menu-estado" />');
-                        boxEstado.append(
-                            tempEstado
-                            .data('data',
-                            {
-                                Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
-                            })
-                            .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
-                            .contextMenu({
-                                fnClick: function () {
-                                    var itemMenu = $(this);
-                                    var params = new Object();
-                                    params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
-                                    params.IdNuevoEstado = itemMenu.data('data').Id;
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
+                            $('#frm-fichero-dam').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dam,
+                                });
+                            var boxEstado = $('#box-estado-dam');
+                            var tempEstado = $('<span class="menu-estado" />');
+                            boxEstado.append(
+                                tempEstado
+                                .data('data',
+                                    {
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                    })
+                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .contextMenu({
+                                    fnClick: function() {
+                                        var itemMenu = $(this);
+                                        var params = new Object();
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdNuevoEstado = itemMenu.data('data').Id;
 
-                                    $.ajax({
-                                        url: SiteUrl + 'Fichero/CambiarEstado',
-                                        data: $.toJSON(params),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                tempEstado.text(itemMenu.data('data').Descripcion);
-                                                if (!isNull($('#tb-seguimientos').data().ifTable))
-                                                    $('#tb-seguimientos').table('update');
-                                                tempEstado.data('data',
-                                                {
-                                                    Id: itemMenu.data('data').Id
-                                                });
+                                        $.ajax({
+                                            url: SiteUrl + 'Fichero/CambiarEstado',
+                                            data: $.toJSON(params),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                        $('#tb-seguimientos').table('update');
+                                                    tempEstado.data('data',
+                                                        {
+                                                            Id: itemMenu.data('data').Id
+                                                        });
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
 
-                                    return false;
-                                },
-                                fnLoadServerData: function (callbackRender) {
-                                    $.ajax({
-                                        url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
-                                        data: $.toJSON({
-                                            idEstadoActual: tempEstado.data('data').Id
-                                        }),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                callbackRender($.map(data.Data,
-                                                    function (item) {
-                                                        return {
-                                                            value: item.Descripcion,
-                                                            data: item
-                                                        }
-                                                    }));
+                                        return false;
+                                    },
+                                    fnLoadServerData: function(callbackRender) {
+                                        $.ajax({
+                                            url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
+                                            data: $.toJSON({
+                                                idEstadoActual: tempEstado.data('data').Id
+                                            }),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    callbackRender($.map(data.Data,
+                                                        function(item) {
+                                                            return {
+                                                                value: item.Descripcion,
+                                                                data: item
+                                                            }
+                                                        }));
+                                                }
                                             }
-                                        }
-                                    });
-                                }
-                            }));
+                                        });
+                                    }
+                                }));
+                        } else {
+                            $('#div-fichero-dam').remove();
+                            var lista = $('#a-dam');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dam);
+                        }
                     }
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Mic);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-mic').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Mic,
-                        });
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
+                            $('#frm-fichero-mic').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Mic
+                                });
+                        } else {
+                            $('#div-fichero-mic').remove();
+                            var lista = $('#a-mic');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Mic);
+                        }
                     }
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Crt);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-crt').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Crt,
-                        });
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
+                            $('#frm-fichero-crt').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Crt
+                                });
+                        } else {
+                            $('#div-fichero-crt').remove();
+                            var lista = $('#a-crt');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Crt);
+                        }
                     }
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Goc);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-goc').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Goc,
-                        });
-                        var boxEstado = $('#box-estado-goc');
-                        var tempEstado = $('<span class="menu-estado" />');
-                        boxEstado.append(
-                            tempEstado
-                            .data('data',
-                            {
-                                Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
-                            })
-                            .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
-                            .contextMenu({
-                                fnClick: function () {
-                                    var itemMenu = $(this);
-                                    var params = new Object();
-                                    params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
-                                    params.IdNuevoEstado = itemMenu.data('data').Id;
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
+                            $('#frm-fichero-goc').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Goc,
+                                });
+                            var boxEstado = $('#box-estado-goc');
+                            var tempEstado = $('<span class="menu-estado" />');
+                            boxEstado.append(
+                                tempEstado
+                                .data('data',
+                                    {
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                    })
+                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .contextMenu({
+                                    fnClick: function() {
+                                        var itemMenu = $(this);
+                                        var params = new Object();
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdNuevoEstado = itemMenu.data('data').Id;
 
-                                    $.ajax({
-                                        url: SiteUrl + 'Fichero/CambiarEstado',
-                                        data: $.toJSON(params),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                tempEstado.text(itemMenu.data('data').Descripcion);
-                                                if (!isNull($('#tb-seguimientos').data().ifTable))
-                                                    $('#tb-seguimientos').table('update');
-                                                tempEstado.data('data',
-                                                {
-                                                    Id: itemMenu.data('data').Id
-                                                });
+                                        $.ajax({
+                                            url: SiteUrl + 'Fichero/CambiarEstado',
+                                            data: $.toJSON(params),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                        $('#tb-seguimientos').table('update');
+                                                    tempEstado.data('data',
+                                                        {
+                                                            Id: itemMenu.data('data').Id
+                                                        });
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
 
-                                    return false;
-                                },
-                                fnLoadServerData: function (callbackRender) {
-                                    $.ajax({
-                                        url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
-                                        data: $.toJSON({
-                                            idEstadoActual: tempEstado.data('data').Id
-                                        }),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                callbackRender($.map(data.Data,
-                                                    function (item) {
-                                                        return {
-                                                            value: item.Descripcion,
-                                                            data: item
-                                                        }
-                                                    }));
+                                        return false;
+                                    },
+                                    fnLoadServerData: function(callbackRender) {
+                                        $.ajax({
+                                            url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
+                                            data: $.toJSON({
+                                                idEstadoActual: tempEstado.data('data').Id
+                                            }),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    callbackRender($.map(data.Data,
+                                                        function(item) {
+                                                            return {
+                                                                value: item.Descripcion,
+                                                                data: item
+                                                            }
+                                                        }));
+                                                }
                                             }
-                                        }
-                                    });
-                                }
-                            }));
+                                        });
+                                    }
+                                }));
+                        } else {
+                            $('#div-fichero-goc').remove();
+                            var lista = $('#a-goc');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Goc);
+                        }
                     }
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Dui);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-dui').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dui,
-                        });
-                        var boxEstado = $('#box-estado-dui');
-                        var tempEstado = $('<span class="menu-estado" />');
-                        boxEstado.append(
-                            tempEstado
-                            .data('data',
-                            {
-                                Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
-                            })
-                            .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
-                            .contextMenu({
-                                fnClick: function () {
-                                    var itemMenu = $(this);
-                                    var params = new Object();
-                                    params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
-                                    params.IdNuevoEstado = itemMenu.data('data').Id;
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Desaduanizacion) {
+                            $('#frm-fichero-dui').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dui
+                                });
+                            var boxEstado = $('#box-estado-dui');
+                            var tempEstado = $('<span class="menu-estado" />');
+                            boxEstado.append(
+                                tempEstado
+                                .data('data',
+                                    {
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                    })
+                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .contextMenu({
+                                    fnClick: function() {
+                                        var itemMenu = $(this);
+                                        var params = new Object();
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdNuevoEstado = itemMenu.data('data').Id;
 
-                                    $.ajax({
-                                        url: SiteUrl + 'Fichero/CambiarEstado',
-                                        data: $.toJSON(params),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                tempEstado.text(itemMenu.data('data').Descripcion);
-                                                if (!isNull($('#tb-seguimientos').data().ifTable))
-                                                    $('#tb-seguimientos').table('update');
-                                                tempEstado.data('data',
-                                                {
-                                                    Id: itemMenu.data('data').Id
-                                                });
+                                        $.ajax({
+                                            url: SiteUrl + 'Fichero/CambiarEstado',
+                                            data: $.toJSON(params),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                        $('#tb-seguimientos').table('update');
+                                                    tempEstado.data('data',
+                                                        {
+                                                            Id: itemMenu.data('data').Id
+                                                        });
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
 
-                                    return false;
-                                },
-                                fnLoadServerData: function (callbackRender) {
-                                    $.ajax({
-                                        url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
-                                        data: $.toJSON({
-                                            idEstadoActual: tempEstado.data('data').Id
-                                        }),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                callbackRender($.map(data.Data,
-                                                    function (item) {
-                                                        return {
-                                                            value: item.Descripcion,
-                                                            data: item
-                                                        }
-                                                    }));
+                                        return false;
+                                    },
+                                    fnLoadServerData: function(callbackRender) {
+                                        $.ajax({
+                                            url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
+                                            data: $.toJSON({
+                                                idEstadoActual: tempEstado.data('data').Id
+                                            }),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    callbackRender($.map(data.Data,
+                                                        function(item) {
+                                                            return {
+                                                                value: item.Descripcion,
+                                                                data: item
+                                                            }
+                                                        }));
+                                                }
                                             }
-                                        }
-                                    });
-                                }
-                            }));
+                                        });
+                                    }
+                                }));
+                        } else {
+                            $('#div-fichero-dui').remove();
+                            var lista = $('#a-dui');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dui);
+                        }
                     }
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Dav);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-dav').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dav,
-                        });
-                        var boxEstado = $('#box-estado-dav');
-                        var tempEstado = $('<span class="menu-estado" />');
-                        boxEstado.append(
-                            tempEstado
-                            .data('data',
-                            {
-                                Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
-                            })
-                            .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
-                            .contextMenu({
-                                fnClick: function () {
-                                    var itemMenu = $(this);
-                                    var params = new Object();
-                                    params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
-                                    params.IdNuevoEstado = itemMenu.data('data').Id;
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Desaduanizacion) {
+                            $('#frm-fichero-dav').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dav
+                                });
+                            var boxEstado = $('#box-estado-dav');
+                            var tempEstado = $('<span class="menu-estado" />');
+                            boxEstado.append(
+                                tempEstado
+                                .data('data',
+                                    {
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                    })
+                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .contextMenu({
+                                    fnClick: function() {
+                                        var itemMenu = $(this);
+                                        var params = new Object();
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdNuevoEstado = itemMenu.data('data').Id;
 
-                                    $.ajax({
-                                        url: SiteUrl + 'Fichero/CambiarEstado',
-                                        data: $.toJSON(params),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                tempEstado.text(itemMenu.data('data').Descripcion);
-                                                if (!isNull($('#tb-seguimientos').data().ifTable))
-                                                    $('#tb-seguimientos').table('update');
-                                                tempEstado.data('data',
-                                                {
-                                                    Id: itemMenu.data('data').Id
-                                                });
+                                        $.ajax({
+                                            url: SiteUrl + 'Fichero/CambiarEstado',
+                                            data: $.toJSON(params),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    if (!isNull($('#tb-seguimientos').data().ifTable))
+                                                        $('#tb-seguimientos').table('update');
+                                                    tempEstado.data('data',
+                                                        {
+                                                            Id: itemMenu.data('data').Id
+                                                        });
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
 
-                                    return false;
-                                },
-                                fnLoadServerData: function (callbackRender) {
-                                    $.ajax({
-                                        url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
-                                        data: $.toJSON({
-                                            idEstadoActual: tempEstado.data('data').Id
-                                        }),
-                                        success: function (data) {
-                                            if (data.HasErrors) {
-                                                showErrors(data.Errors);
-                                            } else {
-                                                callbackRender($.map(data.Data,
-                                                    function (item) {
-                                                        return {
-                                                            value: item.Descripcion,
-                                                            data: item
-                                                        }
-                                                    }));
+                                        return false;
+                                    },
+                                    fnLoadServerData: function(callbackRender) {
+                                        $.ajax({
+                                            url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
+                                            data: $.toJSON({
+                                                idEstadoActual: tempEstado.data('data').Id
+                                            }),
+                                            success: function(data) {
+                                                if (data.HasErrors) {
+                                                    showErrors(data.Errors);
+                                                } else {
+                                                    callbackRender($.map(data.Data,
+                                                        function(item) {
+                                                            return {
+                                                                value: item.Descripcion,
+                                                                data: item
+                                                            }
+                                                        }));
+                                                }
                                             }
-                                        }
-                                    });
-                                }
-                            }));
+                                        });
+                                    }
+                                }));
+                        } else {
+                            $('#div-fichero-dav').remove();
+                            var lista = $('#a-dav');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dav);
+                        }
                     }
 
                     var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.RecibiConforme);
                     if (ficheroIndex >= 0) {
-                        $('#frm-fichero-recibi-conforme').compFileupload('setFile', {
-                            documento: Globalize.localize('TextDownload'),
-                            filename: "Archivo",//data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
-                            title: Globalize.localize('TextDownload'),
-                            url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.RecibiConforme,
-                        });
+                        if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Transportadora) {
+                            $('#frm-fichero-recibi-conforme').compFileupload('setFile',
+                                {
+                                    documento: Globalize.localize('TextDownload'),
+                                    filename: "Archivo", //data.Data.Pedido.Ficheros[ficheroIndex].Nombre,
+                                    title: Globalize.localize('TextDownload'),
+                                    url: SiteUrl +
+                                        'DescargarFichero/' +
+                                        IdPedido +
+                                        '/' +
+                                        TipoFicheroEnum.RecibiConforme
+                                });
+                        } else {
+                            $('#div-recibi-conforme').remove();
+                            var lista = $('#a-recibi-conforme');
+
+                            lista.text(Globalize.localize('TextDownload'))
+                                .attr('href', SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.RecibiConforme);
+                        }
                     }
                 }
             }
         }
     });
+}
+
+function CargarTabs(idEstado) {
+    //$(".tabs").tabs("option", "disabled", [0, 1, 2, 3, 4]);
+    if (idEstado === EstadoPedidoEnum.Inicio) {
+        $(".tabs").tabs("option", "disabled", [0, 1, 2, 3, 4]);
+        $(".tabs").tabs({ active: 5 });
+    }
+    if (idEstado === EstadoPedidoEnum.EnProceso) {
+        $(".tabs").tabs("option", "disabled", [3, 4]);
+    }
+    if (idEstado === EstadoPedidoEnum.Desaduanizacion) {
+        $(".tabs").tabs("option", "disabled", [4]);
+    }
 }
 /**
  * cargar componente fileupload para ficheros de pedidos
@@ -603,6 +743,10 @@ function CargarFileuploadFicheroBL() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Bl,
                         data: dataDocumento.Data
                     });
+                    console.log(dataDocumento);
+                    if (dataDocumento.Data.EstadoModificado) {
+                        location.reload();
+                    }
                     if (!isNull($('#tb-seguimientos').data().ifTable))
                         $('#tb-seguimientos').table('update');
                     $('[name=rd-tipo-fichero]').attr('disabled', true);
@@ -911,10 +1055,6 @@ function CargarFileuploadFicheroFacturaComercial() {
                         .text(Globalize.localize('TextRecibido'))
                         .contextMenu({
                             fnClick: function () {
-                                //console.log("click");
-                                //var itemMenu = $(this);
-                                //console.log(dataDocumento.Data.IdFichero);
-                                //console.log(itemMenu.data('data').Id);
                                 var itemMenu = $(this);
                                 var params = new Object();
                                 params.IdFichero = dataDocumento.Data.IdFichero;
@@ -2152,7 +2292,6 @@ function CargarSeguimientos() {
                         var _data = [];
                         $.each(data.Data, function (index, value) {
                             var _row = [];
-                            console.log(value);
                             _row.push(value.Fecha);
                             _row.push(value.TipoSeguimiento);
                             _row.push(value.Descripcion);

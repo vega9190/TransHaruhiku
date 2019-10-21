@@ -49,20 +49,17 @@
                     </li>
                     <li>
                         <label class="grid-10 mobile-grid-100">@EditarStrings.LabelBL</label>
-                        <div class="box-fileupload grid-20 mobile-grid-100">
+                        <div id="box-fichero-bl" class="box-fileupload grid-20 mobile-grid-100">
                             <form id="frm-fichero-bl" action="#"></form>
                         </div>
+                        <a id="box-fichero-text-bl" class="label grid-20 mobile-grid-100"></a>
+
                         <label class="grid-10 mobile-grid-100">@EditarStrings.LabelImagenes</label>
-                        <div class="box-fileupload grid-40 mobile-grid-100">
+                        <div id="div-fichero-imagenes" class="box-fileupload grid-40 mobile-grid-100">
                             <form id="frm-fichero-imagenes" action="#"></form>
                         </div>
+                        <a id="a-imagenes" class="label grid-20 mobile-grid-100"></a>
                     </li>
-                    
-                    @*<li>
-                        <label id="lb-etiqueta-gestor-documental" class="grid-10 mobile-grid-100" style="display: none;">@DatosInfoStrings.LabelCodigoGestorDocumental</label>
-                        <span id="lb-codigo-gestor-documental" class="label grid-65 mobile-grid-100" style="display: none;"></span>
-                        <img id="img-loading" src="~/Content/images/loader.gif" style="display: none;">
-                    </li>*@
                 </ul>
             </div>
         </div>
@@ -85,15 +82,17 @@
                         <ul class="box-form">
                             <li>
                                 <label class="grid-10 mobile-grid-100">@EditarStrings.LabelListaEmpaque</label>
-                                <div class="box-fileupload grid-20 mobile-grid-100">
+                                <div id="div-fichero-lista-empaque" class="box-fileupload grid-20 mobile-grid-100">
                                     <form id="frm-fichero-lista-empaque" action="#"></form>
                                 </div>
+                                <a id="a-lista-empaque" class="label grid-20 mobile-grid-100"></a>
                             </li>
                             <li>
                                 <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelFacturaComercial</label>
-                                <div class="box-fileupload left">
+                                <div id="div-fichero-factura-comercial" class="box-fileupload left">
                                     <form id="frm-fichero-factura-comercial" action="#"></form>
                                 </div>
+                                <a id="a-factura-comercial" class="label grid-20 mobile-grid-100"></a>
                                 <div id="box-estado-factura-comercial" class="left"></div>
                             </li>
                         </ul>
@@ -111,9 +110,10 @@
                         <ul class="box-form">
                             <li>
                                 <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelSicoin</label>
-                                <div class="box-fileupload left">
+                                <div id="div-fichero-sicoin" class="box-fileupload left">
                                     <form id="frm-fichero-sicoin" action="#"></form>
                                 </div>
+                                <a id="a-sicoin" class="label grid-20 mobile-grid-100"></a>
                                 <div id="box-estado-sicoin" class="left"></div>
                             </li>
                         </ul>
@@ -122,9 +122,10 @@
                         <ul class="box-form">
                             <li>
                                 <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelDam</label>
-                                <div class="box-fileupload left">
+                                <div id="div-fichero-dam" class="box-fileupload left">
                                     <form id="frm-fichero-dam" action="#"></form>
                                 </div>
+                                <a id="a-dam" class="label grid-20 mobile-grid-100"></a>
                                 <div id="box-estado-dam" class="left"></div>
                             </li>
                         </ul>
@@ -142,22 +143,25 @@
                         <ul class="box-form">
                             <li>
                                 <label class="grid-10 mobile-grid-100">@EditarStrings.LabelMic</label>
-                                <div class="box-fileupload grid-20 mobile-grid-100">
+                                <div id="div-fichero-mic" class="box-fileupload grid-20 mobile-grid-100">
                                     <form id="frm-fichero-mic" action="#"></form>
                                 </div>
+                                <a id="a-mic" class="label grid-20 mobile-grid-100"></a>
                             </li>
                             <li>
                                 <label class="grid-10 mobile-grid-100">@EditarStrings.LabelCrt</label>
-                                <div class="box-fileupload grid-20 mobile-grid-100">
+                                <div id="div-fichero-crt" class="box-fileupload grid-20 mobile-grid-100">
                                     <form id="frm-fichero-crt" action="#"></form>
                                 </div>
+                                <a id="a-crt" class="label grid-20 mobile-grid-100"></a>
                             </li>
 
                             <li>
                                 <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelGoc</label>
-                                <div class="box-fileupload left">
+                                <div id="div-fichero-goc" class="box-fileupload left">
                                     <form id="frm-fichero-goc" action="#"></form>
                                 </div>
+                                <a id="a-goc" class="label grid-20 mobile-grid-100"></a>
                                 <div id="box-estado-goc" class="left"></div>
                             </li>
                         </ul>
@@ -175,9 +179,10 @@
                         <ul class="box-form">
                             <li>
                                 <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelDui</label>
-                                <div class="box-fileupload left">
+                                <div id="div-fichero-dui" class="box-fileupload left">
                                     <form id="frm-fichero-dui" action="#"></form>
                                 </div>
+                                <a id="a-dui" class="label grid-20 mobile-grid-100"></a>
                                 <div id="box-estado-dui" class="left"></div>
                             </li>
                         </ul>
@@ -186,9 +191,10 @@
                         <ul class="box-form">
                             <li>
                                 <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelDav</label>
-                                <div class="box-fileupload left">
+                                <div id="div-fichero-dav" class="box-fileupload left">
                                     <form id="frm-fichero-dav" action="#"></form>
                                 </div>
+                                <a id="a-dav" class="label grid-20 mobile-grid-100"></a>
                                 <div id="box-estado-dav" class="left"></div>
                             </li>
                         </ul>
@@ -206,9 +212,10 @@
                         <ul class="box-form">
                             <li>
                                 <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelRecibiConforme</label>
-                                <div class="box-fileupload left">
+                                <div id="div-recibi-conforme" class="box-fileupload left">
                                     <form id="frm-fichero-recibi-conforme" action="#"></form>
                                 </div>
+                                <a id="a-recibi-conforme" class="label grid-20 mobile-grid-100"></a>
                             </li>
                         </ul>
                     </div>

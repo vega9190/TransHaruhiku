@@ -73,7 +73,7 @@ namespace TransHaruhiko.Controllers
             if (res.HasWarnings)
                 transfer.Warnings.AddRange(res.Warnings);
 
-            transfer.Data = new { IdFichero = fichero.Id, EstadoModificado = cambiarEstado };
+            transfer.Data = new { IdFichero = fichero.Id, EstadoModificado = cambiarEstado, Estado = fichero.Pedido.Estado.Nombre };
             return Json(transfer);
         }
         [Route("DescargarFichero/{pedidoId}/{idTipo}")]
