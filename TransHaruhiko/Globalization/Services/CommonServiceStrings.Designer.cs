@@ -70,7 +70,7 @@ namespace TransHaruhiko.Globalization.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El estado actual del fichero es &quot;{0}&quot; y ha pasado al estado &quot;{1}&quot;..
+        ///   Looks up a localized string similar to El estado actual del fichero {0} es &quot;{1}&quot; y ha pasado al estado &quot;{2}&quot;..
         /// </summary>
         public static string TextSegCambioEstadoFichero {
             get {
@@ -79,7 +79,7 @@ namespace TransHaruhiko.Globalization.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Se ha añadido correctamente el fichero {0}..
+        ///   Looks up a localized string similar to Se ha añadido el fichero {0}..
         /// </summary>
         public static string TextSegCrearFichero {
             get {
@@ -88,7 +88,7 @@ namespace TransHaruhiko.Globalization.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Se ha añadido correctamente el fichero {0} y su estado es &quot;Recibido&quot;..
+        ///   Looks up a localized string similar to Se ha añadido el fichero {0} y su estado es &quot;Recibido&quot;..
         /// </summary>
         public static string TextSegCrearFicheroEstado {
             get {
@@ -97,7 +97,7 @@ namespace TransHaruhiko.Globalization.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Se ha creado correctamente el pedido y su estado es &quot;Inicio&quot;..
+        ///   Looks up a localized string similar to Se ha creado el pedido y su estado es &quot;Inicio&quot;..
         /// </summary>
         public static string TextSegCrearPedido {
             get {
@@ -106,7 +106,7 @@ namespace TransHaruhiko.Globalization.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Se ha eliminado correctamente el fichero {0}..
+        ///   Looks up a localized string similar to Se ha eliminado el fichero {0}..
         /// </summary>
         public static string TextSegEliminarFichero {
             get {

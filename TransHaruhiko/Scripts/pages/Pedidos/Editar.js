@@ -24,6 +24,12 @@ var EstadoPedidoEnum = {
     Cancelado: 6
 };
 
+var EstadoFicheroEnum = {
+    Recibido: 1,
+    Validado: 2,
+    ConErrores: 3
+}
+
 $(document).ready(function () {
     IdPedido = $('#hd-id-pedido').val();
     $('#btn-volver').button();
@@ -745,22 +751,25 @@ function CargarFileuploadFicheroBL() {
                     if (dataDocumento.Data.EstadoModificado) {
                         var buttons = {};
 
-                        buttons["Ok"] = function () {
+                        buttons["Ok"] = function() {
                             location.reload(true);
                         };
                         showCustomMessage({
                             title: Globalize.localize('TitlePopUp'),
-                            message: Globalize.localize('MessageCambioEstado').replace("REMPLAZAR_ESTADO", dataDocumento.Data.Estado),// 'El pedido ha cambiado al estado "' + dataDocumento.Data.Estado + '", se recargará la página.',
+                            message: Globalize.localize('MessageCambioEstado')
+                                .replace("REMPLAZAR_ESTADO",
+                                    dataDocumento.Data
+                                    .Estado),
                             buttons: buttons,
-                            open: function () {
+                            open: function() {
                                 $('.ui-dialog-titlebar-close').hide();
                             }
                         });
-                        
+
+                    } else {
+                        if (!isNull($('#tb-seguimientos').data().ifTable))
+                            $('#tb-seguimientos').table('update');
                     }
-                    if (!isNull($('#tb-seguimientos').data().ifTable))
-                        $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
             },
@@ -784,7 +793,7 @@ function CargarFileuploadFicheroBL() {
                                 callbackFile();
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -859,7 +868,7 @@ function CargarFileuploadFicheroImagenes() {
                     });
                     if (!isNull($('#tb-seguimientos').data().ifTable))
                         $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
+                    
                     UnblockFullPage();
                 }
             },
@@ -883,7 +892,7 @@ function CargarFileuploadFicheroImagenes() {
                                 callbackFile();
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -956,9 +965,28 @@ function CargarFileuploadFicheroListaEmpaque() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.ListaEmpaque,
                         data: dataDocumento.Data
                     });
-                    if (!isNull($('#tb-seguimientos').data().ifTable))
-                        $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
+                    if (dataDocumento.Data.EstadoModificado) {
+                        var buttons = {};
+
+                        buttons["Ok"] = function() {
+                            location.reload(true);
+                        };
+                        showCustomMessage({
+                            title: Globalize.localize('TitlePopUp'),
+                            message: Globalize.localize('MessageCambioEstado')
+                                .replace("REMPLAZAR_ESTADO",
+                                    dataDocumento.Data
+                                    .Estado),
+                            buttons: buttons,
+                            open: function() {
+                                $('.ui-dialog-titlebar-close').hide();
+                            }
+                        });
+
+                    } else {
+                        if (!isNull($('#tb-seguimientos').data().ifTable))
+                            $('#tb-seguimientos').table('update');
+                    }
                     UnblockFullPage();
                 }
             },
@@ -982,7 +1010,7 @@ function CargarFileuploadFicheroListaEmpaque() {
                                 callbackFile();
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -1085,6 +1113,24 @@ function CargarFileuploadFicheroFacturaComercial() {
                                                 {
                                                     Id: itemMenu.data('data').Id
                                                 });
+                                                if (data.Data.EstadoModificado) {
+                                                    var buttons = {};
+
+                                                    buttons["Ok"] = function () {
+                                                        location.reload(true);
+                                                    };
+                                                    showCustomMessage({
+                                                        title: Globalize.localize('TitlePopUp'),
+                                                        message: Globalize.localize('MessageCambioEstado')
+                                                            .replace("REMPLAZAR_ESTADO",
+                                                                data.Data
+                                                                .Estado),
+                                                        buttons: buttons,
+                                                        open: function () {
+                                                            $('.ui-dialog-titlebar-close').hide();
+                                                        }
+                                                    });
+                                                }
                                             }
                                         }
                                     });
@@ -1116,7 +1162,6 @@ function CargarFileuploadFicheroFacturaComercial() {
 
                     if (!isNull($('#tb-seguimientos').data().ifTable))
                         $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
                     UnblockFullPage();
                 }
             },
@@ -1141,7 +1186,7 @@ function CargarFileuploadFicheroFacturaComercial() {
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
                                 callbackFile();
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -1244,6 +1289,24 @@ function CargarFileuploadFicheroFacturaSicoin() {
                                             {
                                                 Id: itemMenu.data('data').Id
                                             });
+                                            if (data.Data.EstadoModificado) {
+                                                var buttons = {};
+
+                                                buttons["Ok"] = function () {
+                                                    location.reload(true);
+                                                };
+                                                showCustomMessage({
+                                                    title: Globalize.localize('TitlePopUp'),
+                                                    message: Globalize.localize('MessageCambioEstado')
+                                                        .replace("REMPLAZAR_ESTADO",
+                                                            data.Data
+                                                            .Estado),
+                                                    buttons: buttons,
+                                                    open: function () {
+                                                        $('.ui-dialog-titlebar-close').hide();
+                                                    }
+                                                });
+                                            }
                                         }
                                     }
                                 });
@@ -1274,7 +1337,7 @@ function CargarFileuploadFicheroFacturaSicoin() {
                         }));
                     if (!isNull($('#tb-seguimientos').data().ifTable))
                         $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
+                    
                     UnblockFullPage();
                 }
             },
@@ -1299,7 +1362,7 @@ function CargarFileuploadFicheroFacturaSicoin() {
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
                                 callbackFile();
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -1402,6 +1465,24 @@ function CargarFileuploadFicheroFacturaDam() {
                                             {
                                                 Id: itemMenu.data('data').Id
                                             });
+                                            if (data.Data.EstadoModificado) {
+                                                var buttons = {};
+
+                                                buttons["Ok"] = function () {
+                                                    location.reload(true);
+                                                };
+                                                showCustomMessage({
+                                                    title: Globalize.localize('TitlePopUp'),
+                                                    message: Globalize.localize('MessageCambioEstado')
+                                                        .replace("REMPLAZAR_ESTADO",
+                                                            data.Data
+                                                            .Estado),
+                                                    buttons: buttons,
+                                                    open: function () {
+                                                        $('.ui-dialog-titlebar-close').hide();
+                                                    }
+                                                });
+                                            }
                                         }
                                     }
                                 });
@@ -1432,7 +1513,7 @@ function CargarFileuploadFicheroFacturaDam() {
                         }));
                     if (!isNull($('#tb-seguimientos').data().ifTable))
                         $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
+                    
                     UnblockFullPage();
                 }
             },
@@ -1457,7 +1538,7 @@ function CargarFileuploadFicheroFacturaDam() {
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
                                 callbackFile();
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -1530,9 +1611,27 @@ function CargarFileuploadFicheroMic() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Mic,
                         data: dataDocumento.Data
                     });
-                    if (!isNull($('#tb-seguimientos').data().ifTable))
-                        $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
+                    if (dataDocumento.Data.EstadoModificado) {
+                        var buttons = {};
+
+                        buttons["Ok"] = function() {
+                            location.reload(true);
+                        };
+                        showCustomMessage({
+                            title: Globalize.localize('TitlePopUp'),
+                            message: Globalize.localize('MessageCambioEstado')
+                                .replace("REMPLAZAR_ESTADO",
+                                    dataDocumento.Data
+                                    .Estado),
+                            buttons: buttons,
+                            open: function() {
+                                $('.ui-dialog-titlebar-close').hide();
+                            }
+                        });
+                    } else {
+                        if (!isNull($('#tb-seguimientos').data().ifTable))
+                            $('#tb-seguimientos').table('update');
+                    }
                     UnblockFullPage();
                 }
             },
@@ -1556,7 +1655,7 @@ function CargarFileuploadFicheroMic() {
                                 callbackFile();
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -1629,9 +1728,27 @@ function CargarFileuploadFicheroCrt() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Crt,
                         data: dataDocumento.Data
                     });
-                    if (!isNull($('#tb-seguimientos').data().ifTable))
-                        $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
+                    if (dataDocumento.Data.EstadoModificado) {
+                        var buttons = {};
+
+                        buttons["Ok"] = function() {
+                            location.reload(true);
+                        };
+                        showCustomMessage({
+                            title: Globalize.localize('TitlePopUp'),
+                            message: Globalize.localize('MessageCambioEstado')
+                                .replace("REMPLAZAR_ESTADO",
+                                    dataDocumento.Data
+                                    .Estado),
+                            buttons: buttons,
+                            open: function() {
+                                $('.ui-dialog-titlebar-close').hide();
+                            }
+                        });
+                    } else {
+                        if (!isNull($('#tb-seguimientos').data().ifTable))
+                            $('#tb-seguimientos').table('update');
+                    }
                     UnblockFullPage();
                 }
             },
@@ -1655,7 +1772,7 @@ function CargarFileuploadFicheroCrt() {
                                 callbackFile();
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -1758,6 +1875,24 @@ function CargarFileuploadFicheroGoc() {
                                             {
                                                 Id: itemMenu.data('data').Id
                                             });
+                                            if (data.Data.EstadoModificado) {
+                                                var buttons = {};
+
+                                                buttons["Ok"] = function () {
+                                                    location.reload(true);
+                                                };
+                                                showCustomMessage({
+                                                    title: Globalize.localize('TitlePopUp'),
+                                                    message: Globalize.localize('MessageCambioEstado')
+                                                        .replace("REMPLAZAR_ESTADO",
+                                                            data.Data
+                                                            .Estado),
+                                                    buttons: buttons,
+                                                    open: function () {
+                                                        $('.ui-dialog-titlebar-close').hide();
+                                                    }
+                                                });
+                                            }
                                         }
                                     }
                                 });
@@ -1788,7 +1923,7 @@ function CargarFileuploadFicheroGoc() {
                         }));
                     if (!isNull($('#tb-seguimientos').data().ifTable))
                         $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
+                    
                     UnblockFullPage();
                 }
             },
@@ -1813,7 +1948,7 @@ function CargarFileuploadFicheroGoc() {
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
                                 callbackFile();
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -1916,6 +2051,24 @@ function CargarFileuploadFicheroDui() {
                                             {
                                                 Id: itemMenu.data('data').Id
                                             });
+                                            if (data.Data.EstadoModificado) {
+                                                var buttons = {};
+
+                                                buttons["Ok"] = function () {
+                                                    location.reload(true);
+                                                };
+                                                showCustomMessage({
+                                                    title: Globalize.localize('TitlePopUp'),
+                                                    message: Globalize.localize('MessageCambioEstado')
+                                                        .replace("REMPLAZAR_ESTADO",
+                                                            data.Data
+                                                            .Estado),
+                                                    buttons: buttons,
+                                                    open: function () {
+                                                        $('.ui-dialog-titlebar-close').hide();
+                                                    }
+                                                });
+                                            }
                                         }
                                     }
                                 });
@@ -1946,7 +2099,7 @@ function CargarFileuploadFicheroDui() {
                         }));
                     if (!isNull($('#tb-seguimientos').data().ifTable))
                         $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
+                    
                     UnblockFullPage();
                 }
             },
@@ -1971,7 +2124,7 @@ function CargarFileuploadFicheroDui() {
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
                                 callbackFile();
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -2074,6 +2227,24 @@ function CargarFileuploadFicheroDav() {
                                             {
                                                 Id: itemMenu.data('data').Id
                                             });
+                                            if (data.Data.EstadoModificado) {
+                                                var buttons = {};
+
+                                                buttons["Ok"] = function () {
+                                                    location.reload(true);
+                                                };
+                                                showCustomMessage({
+                                                    title: Globalize.localize('TitlePopUp'),
+                                                    message: Globalize.localize('MessageCambioEstado')
+                                                        .replace("REMPLAZAR_ESTADO",
+                                                            data.Data
+                                                            .Estado),
+                                                    buttons: buttons,
+                                                    open: function () {
+                                                        $('.ui-dialog-titlebar-close').hide();
+                                                    }
+                                                });
+                                            }
                                         }
                                     }
                                 });
@@ -2104,7 +2275,7 @@ function CargarFileuploadFicheroDav() {
                         }));
                     if (!isNull($('#tb-seguimientos').data().ifTable))
                         $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
+                    
                     UnblockFullPage();
                 }
             },
@@ -2129,7 +2300,7 @@ function CargarFileuploadFicheroDav() {
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
                                 callbackFile();
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });
@@ -2202,9 +2373,27 @@ function CargarFileuploadFicheroRecibiConforme() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.RecibiConforme,
                         data: dataDocumento.Data
                     });
-                    if (!isNull($('#tb-seguimientos').data().ifTable))
-                        $('#tb-seguimientos').table('update');
-                    $('[name=rd-tipo-fichero]').attr('disabled', true);
+                    if (dataDocumento.Data.EstadoModificado) {
+                        var buttons = {};
+
+                        buttons["Ok"] = function() {
+                            location.reload(true);
+                        };
+                        showCustomMessage({
+                            title: Globalize.localize('TitlePopUp'),
+                            message: Globalize.localize('MessageCambioEstado')
+                                .replace("REMPLAZAR_ESTADO",
+                                    dataDocumento.Data
+                                    .Estado),
+                            buttons: buttons,
+                            open: function() {
+                                $('.ui-dialog-titlebar-close').hide();
+                            }
+                        });
+                    } else {
+                        if (!isNull($('#tb-seguimientos').data().ifTable))
+                            $('#tb-seguimientos').table('update');
+                    }
                     UnblockFullPage();
                 }
             },
@@ -2228,7 +2417,7 @@ function CargarFileuploadFicheroRecibiConforme() {
                                 callbackFile();
                                 if (!isNull($('#tb-seguimientos').data().ifTable))
                                     $('#tb-seguimientos').table('update');
-                                $('[name=rd-tipo-fichero]').attr('disabled', false);
+                                
                             }
                         }
                     });

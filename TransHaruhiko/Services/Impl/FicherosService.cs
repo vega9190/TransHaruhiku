@@ -77,7 +77,7 @@ namespace TransHaruhiko.Services.Impl
                 Fecha = DateTime.Now,
                 PedidoId = fichero.PedidoId,
                 TipoId = (int)TipoSeguimientoEnum.EstadoFichero,
-                Descripcion = string.Format(CommonServiceStrings.TextSegCambioEstadoFichero, fichero.Estado.Nombre, estadoNuevo.Nombre),
+                Descripcion = string.Format(CommonServiceStrings.TextSegCambioEstadoFichero, fichero.Tipo.Nombre, fichero.Estado.Nombre, estadoNuevo.Nombre),
                 UsuarioId = idUsuario
             };
             fichero.EstadoId = idNuevoEstado;

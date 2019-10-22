@@ -284,5 +284,14 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
                 return ResourceManager.GetString("TabTransportadora", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Editar Pedido.
+        /// </summary>
+        public static string TittleListado {
+            get {
+                return ResourceManager.GetString("TittleListado", resourceCulture);
+            }
+        }
     }
 }

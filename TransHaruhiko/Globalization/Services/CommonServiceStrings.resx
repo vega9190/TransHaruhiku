@@ -121,18 +121,18 @@
     <value>El estado actual del pedido es "{0}" y ha pasado al estado "{1}".</value>
   </data>
   <data name="TextSegCambioEstadoFichero" xml:space="preserve">
-    <value>El estado actual del fichero es "{0}" y ha pasado al estado "{1}".</value>
+    <value>El estado actual del fichero {0} es "{1}" y ha pasado al estado "{2}".</value>
   </data>
   <data name="TextSegCrearFichero" xml:space="preserve">
-    <value>Se ha añadido correctamente el fichero {0}.</value>
+    <value>Se ha añadido el fichero {0}.</value>
   </data>
   <data name="TextSegCrearFicheroEstado" xml:space="preserve">
-    <value>Se ha añadido correctamente el fichero {0} y su estado es "Recibido".</value>
+    <value>Se ha añadido el fichero {0} y su estado es "Recibido".</value>
   </data>
   <data name="TextSegCrearPedido" xml:space="preserve">
-    <value>Se ha creado correctamente el pedido y su estado es "Inicio".</value>
+    <value>Se ha creado el pedido y su estado es "Inicio".</value>
   </data>
   <data name="TextSegEliminarFichero" xml:space="preserve">
-    <value>Se ha eliminado correctamente el fichero {0}.</value>
+    <value>Se ha eliminado el fichero {0}.</value>
   </data>
 </root>

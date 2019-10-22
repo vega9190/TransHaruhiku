@@ -192,4 +192,7 @@
   <data name="TabTransportadora" xml:space="preserve">
     <value>Transportadora</value>
   </data>
+  <data name="TittleListado" xml:space="preserve">
+    <value>Editar Pedido</value>
+  </data>
 </root>

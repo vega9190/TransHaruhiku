@@ -213,7 +213,9 @@ namespace TransHaruhiko.Services.Impl
                             (int)TipoFicheroEnum.Sicoin, (int)TipoFicheroEnum.Dam, (int)TipoFicheroEnum.Mic,
                             (int)TipoFicheroEnum.Crt,(int)TipoFicheroEnum.Goc };
 
-                        var perimitodCambiarEstado = pedido.Ficheros.All(a => tiposFicheros.Contains(a.TipoId))
+                        var listaIntersectada = tiposFicheros.Intersect(pedido.Ficheros.Where(a => tiposFicheros.Contains(a.TipoId)).Select(a=> a.TipoId)).ToList();
+
+                        var perimitodCambiarEstado = listaIntersectada.Count == tiposFicheros.Count
                             && pedido.Ficheros.Any(a => a.TipoId == (int)TipoFicheroEnum.FacturaComercial && a.EstadoId == (int)FicheroEstadoEnum.Validado)
                             && pedido.Ficheros.Any(a => a.TipoId == (int)TipoFicheroEnum.Sicoin && a.EstadoId == (int)FicheroEstadoEnum.Validado)
                             && pedido.Ficheros.Any(a => a.TipoId == (int)TipoFicheroEnum.Dam && a.EstadoId == (int)FicheroEstadoEnum.Validado)
@@ -231,7 +233,9 @@ namespace TransHaruhiko.Services.Impl
                     {
                         var tiposFicheros = new List<int> { (int)TipoFicheroEnum.Dui, (int)TipoFicheroEnum.Dav };
 
-                        var perimitodCambiarEstado = pedido.Ficheros.All(a => tiposFicheros.Contains(a.TipoId))
+                        var listaIntersectada = tiposFicheros.Intersect(pedido.Ficheros.Where(a => tiposFicheros.Contains(a.TipoId)).Select(a => a.TipoId)).ToList();
+
+                        var perimitodCambiarEstado = listaIntersectada.Count == tiposFicheros.Count
                             && pedido.Ficheros.Any(a => a.TipoId == (int)TipoFicheroEnum.Dui && a.EstadoId == (int)FicheroEstadoEnum.Validado)
                             && pedido.Ficheros.Any(a => a.TipoId == (int)TipoFicheroEnum.Dav && a.EstadoId == (int)FicheroEstadoEnum.Validado);
 

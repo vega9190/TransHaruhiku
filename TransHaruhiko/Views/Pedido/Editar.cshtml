@@ -2,6 +2,12 @@
 @using TransHaruhiko.Globalization.Scripts.Common
 @using TransHaruhiko.Globalization.Views.Pedido
 
+@{
+    ViewBag.Title = ListStrings.Tittle;
+    ViewBag.TitlePage = EditarStrings.TittleListado;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 @section Stylesheet {
     <link href="@Url.ContentCache("Content/utils/fileupload/jquery.fileupload-ui.css")" rel="stylesheet" type="text/css" />
 }
@@ -21,7 +27,7 @@
     <script type="text/javascript" src="@Url.Content("~/IncludePrivilegesInfo/act_diligencias")"></script>
     <script type="text/javascript" src="@Url.Content("~/IncludePrivilegesInfo/act_procesos")"></script>*@
 }
-<div id="page-acta-editar">
+<div id="page-pedido-editar">
     <input type="hidden" id="hd-id-pedido" value="@ViewBag.IdPedido" />
     <div class="box-fieldset">
         <span class="field-title">@EditarStrings.SectionInformacion</span>
