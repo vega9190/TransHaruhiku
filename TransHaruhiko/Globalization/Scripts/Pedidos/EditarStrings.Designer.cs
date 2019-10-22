@@ -115,6 +115,15 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El pedido ha cambiado al estado &apos;REMPLAZAR_ESTADO&apos;, se recargará la página..
+        /// </summary>
+        public static string MessageCambioEstado {
+            get {
+                return ResourceManager.GetString("MessageCambioEstado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿Está seguro de eliminar el fichero?.
         /// </summary>
         public static string MessageConfirmDeleteFile {

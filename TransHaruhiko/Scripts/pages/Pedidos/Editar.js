@@ -26,7 +26,6 @@ var EstadoPedidoEnum = {
 
 $(document).ready(function () {
     IdPedido = $('#hd-id-pedido').val();
-
     $('#btn-volver').button();
     $('#btn-volver').click(function () {
         window.location.href = SiteUrl + 'Pedido/List';
@@ -743,9 +742,21 @@ function CargarFileuploadFicheroBL() {
                         url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Bl,
                         data: dataDocumento.Data
                     });
-                    console.log(dataDocumento);
                     if (dataDocumento.Data.EstadoModificado) {
-                        location.reload();
+                        var buttons = {};
+
+                        buttons["Ok"] = function () {
+                            location.reload(true);
+                        };
+                        showCustomMessage({
+                            title: Globalize.localize('TitlePopUp'),
+                            message: Globalize.localize('MessageCambioEstado').replace("REMPLAZAR_ESTADO", dataDocumento.Data.Estado),// 'El pedido ha cambiado al estado "' + dataDocumento.Data.Estado + '", se recargará la página.',
+                            buttons: buttons,
+                            open: function () {
+                                $('.ui-dialog-titlebar-close').hide();
+                            }
+                        });
+                        
                     }
                     if (!isNull($('#tb-seguimientos').data().ifTable))
                         $('#tb-seguimientos').table('update');

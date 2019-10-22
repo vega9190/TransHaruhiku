@@ -135,6 +135,9 @@
   <data name="ErrorFicheroVacio" xml:space="preserve">
     <value>El fichero se encuentra vacío.</value>
   </data>
+  <data name="MessageCambioEstado" xml:space="preserve">
+    <value>El pedido ha cambiado al estado 'REMPLAZAR_ESTADO', se recargará la página.</value>
+  </data>
   <data name="MessageConfirmDeleteFile" xml:space="preserve">
     <value>¿Está seguro de eliminar el fichero?</value>
   </data>

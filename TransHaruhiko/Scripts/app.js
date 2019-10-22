@@ -65,3 +65,4 @@ function BlockFullPage() {
 function UnblockFullPage() {
     $('#main-wrapper').unblock();
 }
+
