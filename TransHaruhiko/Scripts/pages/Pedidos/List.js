@@ -126,23 +126,17 @@ $(document).ready(function () {
                     }
                 });
 
-            //$('.btn-editar', nRow).click(function () {
-            //    SiteUrl + 'Acta/Editar/' + $(nRow).data('data').Pedido.Id;
-            //    console.log($(nRow).data('data'));
-            //});
-
             $('.btn-observaciones', nRow).click(function () {
                 PopUpObservaciones($(nRow).data('data').Pedido.Id);
-                console.log($(nRow).data('data'));
             });
 
             $('.btn-pagos', nRow).click(function() {
                 console.log($(nRow).data('data'));
             });
 
-            $('.btn-eliminar', nRow).click(function() {
-                console.log($(nRow).data('data'));
-            });
+            //$('.btn-eliminar', nRow).click(function() {
+            //    console.log($(nRow).data('data'));
+            //});
 
             return nRow;
         },
@@ -158,8 +152,8 @@ $(document).ready(function () {
             params.OrderColumnPosition = paramsTabla.iSortCol_0;
             params.OrderColumnName = decode(paramsTabla.iSortCol_0 - 2,
                 [
-                    1, 'fecha',
-                    2, 'cliente'
+                    1, 'id',
+                    2, 'fecha'
                 ]);
             params.OrderDirection = paramsTabla.sSortDir_0;
             /******************************************************************/
@@ -215,17 +209,23 @@ $(document).ready(function () {
                                     Globalize.localize('TextPagos') +
                                     '" class="btn-pagos ui-icon ui-icon-tag"></span>';
 
-                                tempAcciones += '<span title="' +
-                                    Globalize.localize('TextEliminar') +
-                                    '" class="btn-eliminar ui-icon ui-icon-trash"></span>';
+                                //tempAcciones += '<span title="' +
+                                //    Globalize.localize('TextEliminar') +
+                                //    '" class="btn-eliminar ui-icon ui-icon-trash"></span>';
                                 tempAcciones += '</div>';
 
                                 row.push(value.Pedido.Id);
                                 row.push(value.FechaPedido);
-                                row.push(value.Pedido.Descripcion);
+                                row.push('<span  title="'
+                                        + value.Pedido.Descripcion + '">'
+                                        + summary(value.Pedido.Descripcion, 35, '...')
+                                        + '</span>');
                                 row.push(value.Pedido.Cliente.Carnet);
                                 row.push(value.Pedido.Cliente.NombreCompleto);
-                                row.push(value.Pedido.Contenedor);
+                                row.push(isNull(value.Pedido.Contenedor) ? '' : '<span  title="'
+                                        + value.Pedido.Contenedor + '">'
+                                        + summary(value.Pedido.Contenedor, 20, '...')
+                                        + '</span>');
                                 row.push('<span class="btn-estados" >' + value.Pedido.Estado.Nombre + '</span>');
                                 row.push(tempAcciones);
                                 rows.push(row);

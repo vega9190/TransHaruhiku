@@ -2,6 +2,7 @@
 {
     public class SaveParameters
     {
+        public int? IdPedido { get; set; }
         public int IdCliente { get; set; }
         public string Descripcion { get; set; }
         public string Contenedor { get; set; }

@@ -1,5 +1,6 @@
 ﻿var IdPedido = null;
 var swSeguimientos = false;
+var DireccionUrl = "";
 var TipoFicheroEnum = {
     ListaEmpaque: 1,
     FacturaComercial: 2,
@@ -35,6 +36,136 @@ $(document).ready(function () {
     $('#btn-volver').button();
     $('#btn-volver').click(function () {
         window.location.href = SiteUrl + 'Pedido/List';
+    });
+
+    $('#btn-editar-contenedor').click(function () {
+        if ($("#txt-contenedor").is(':visible')) {
+            var params = {};
+
+            params.Contenedor = $("#txt-contenedor").val();
+            params.IdPedido = IdPedido;
+
+            $.blockUI({ message: null });
+            $.ajax({
+                url: SiteUrl + 'Pedido/Guardar',
+                data: $.toJSON(params),
+                success: function (data) {
+                    $.unblockUI();
+                    if (data.HasErrors) {
+                        showErrors(data.Errors);
+                    } else {
+                        if (data.HasWarnings) {
+                            showCustomErrors({
+                                title: Globalize.localize('TextInformacion'),
+                                warnings: data.Warnings
+                            });
+                        } else {
+                            showMessage(Globalize
+                                .localize('MessageOperacionExitosamente'),
+                                true);
+                        }
+                    }
+                }
+            });
+
+            $("#txt-contenedor").hide();
+            $("#lb-contenedor").text(summary(params.Contenedor, 35, '...'));
+            $('#lb-contenedor').prop('title', params.Contenedor);
+            $("#lb-contenedor").show();
+        } else {
+            $("#lb-contenedor").hide();
+            $("#txt-contenedor").show();
+            $("#txt-contenedor").val($('#lb-contenedor').prop('title'))
+        }
+
+    });
+
+    $('#btn-editar-direccion').click(function () {
+        if ($("#txt-direccion").is(':visible')) {
+            var params = {};
+
+            params.Direccion = $("#txt-direccion").val();
+            params.IdPedido = IdPedido;
+
+            $.blockUI({ message: null });
+            $.ajax({
+                url: SiteUrl + 'Pedido/Guardar',
+                data: $.toJSON(params),
+                success: function (data) {
+                    $.unblockUI();
+                    if (data.HasErrors) {
+                        showErrors(data.Errors);
+                    } else {
+                        if (data.HasWarnings) {
+                            showCustomErrors({
+                                title: Globalize.localize('TextInformacion'),
+                                warnings: data.Warnings
+                            });
+                        } else {
+                            showMessage(Globalize
+                                .localize('MessageOperacionExitosamente'),
+                                true);
+                        }
+                    }
+                }
+            });
+
+            $("#txt-direccion").hide();
+            $("#lb-direccion").text(summary(params.Direccion, 100, '...'));
+            $('#lb-direccion').prop('title', params.Direccion);
+            $("#lb-direccion").show();
+        } else {
+            $("#lb-direccion").hide();
+            $("#txt-direccion").show();
+            $("#txt-direccion").val($('#lb-direccion').prop('title'))
+        }
+
+    });
+
+    $('#btn-editar-direccion-url').click(function () {
+        if ($("#txt-direccion-url").is(':visible')) {
+            var params = {};
+
+            params.DireccionUrl = $("#txt-direccion-url").val();
+            params.IdPedido = IdPedido;
+
+            if (!isNullOrEmpty(params.DireccionUrl) && ValidateURL(params.DireccionUrl)) {
+                $.blockUI({ message: null });
+                $.ajax({
+                    url: SiteUrl + 'Pedido/Guardar',
+                    data: $.toJSON(params),
+                    success: function (data) {
+                        $.unblockUI();
+                        if (data.HasErrors) {
+                            showErrors(data.Errors);
+                        } else {
+                            if (data.HasWarnings) {
+                                showCustomErrors({
+                                    title: Globalize.localize('TextInformacion'),
+                                    warnings: data.Warnings
+                                });
+                            } else {
+                                DireccionUrl = params.DireccionUrl;
+                                $('#lb-direccion-url').attr('href', DireccionUrl);
+                                $("#lb-direccion-url").text("Dirección");
+                                showMessage(Globalize
+                                    .localize('MessageOperacionExitosamente'),
+                                    true);
+                            }
+                        }
+                    }
+                });
+                //$("#lb-direccion-url").text("Dirección");
+                //$('#lb-direccion-url').attr('href', DireccionUrl);
+            }
+            $("#txt-direccion-url").hide();
+            $("#lb-direccion-url").show();
+        } else {
+            $("#lb-direccion-url").hide();
+            $("#txt-direccion-url").show();
+            $("#txt-direccion-url").val(DireccionUrl)
+        }
+
     });
 
     CargarFileuploadFicheroBL();
@@ -88,9 +219,30 @@ function CargarPedido() {
                     $('#lb-cliente').text(data.Data.Pedido.Cliente.NombreCompleto);
                     $('#lb-estado').text(data.Data.Pedido.Estado.Nombre);
                     $('#lb-telefono').text(data.Data.Pedido.Cliente.Telefono);
-                    $('#txt-direccion').val(data.Data.Pedido.Direccion);
-                    $('#txt-direccion-url').val(data.Data.Pedido.DireccionUrl);
-                    $('#txt-contenedor').val(data.Data.Pedido.Contenedor);
+
+                    $('#txt-direccion').hide();
+                    if (!isNullOrEmpty(data.Data.Pedido.Direccion)) {
+                        $('#lb-direccion').text(summary(data.Data.Pedido.Direccion, 100, '...'));
+                        $('#lb-direccion').prop('title', data.Data.Pedido.Direccion);
+                    }
+
+                    $('#txt-direccion-url').hide();
+                    if (!isNullOrEmpty(data.Data.Pedido.DireccionUrl)) {
+                        $('#lb-direccion-url').text("Dirección");
+                        $('#lb-direccion-url').attr('href', data.Data.Pedido.DireccionUrl);
+                        DireccionUrl = data.Data.Pedido.DireccionUrl;
+                    }
+
+                    $('#txt-contenedor').hide();
+                    if (!isNullOrEmpty(data.Data.Pedido.Contenedor)) {
+                        $('#lb-contenedor').text(summary(data.Data.Pedido.Contenedor, 35, '...'));
+                        $('#lb-contenedor').prop('title', data.Data.Pedido.Contenedor);
+                    }
+                    if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Cancelado || data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Finalizado) {
+                        $('#btn-editar-contenedor').hide();
+                        $('#btn-editar-direccion').hide();
+                        $('#btn-editar-direccion-url').hide();
+                    }
 
                     CargarTabs(data.Data.Pedido.Estado.Id);
 
@@ -678,7 +830,7 @@ function CargarPedido() {
 
 function CargarTabs(idEstado) {
     //$(".tabs").tabs("option", "disabled", [0, 1, 2, 3, 4]);
-    if (idEstado === EstadoPedidoEnum.Inicio) {
+    if (idEstado === EstadoPedidoEnum.Inicio || idEstado === EstadoPedidoEnum.Cancelado) {
         $(".tabs").tabs("option", "disabled", [0, 1, 2, 3, 4]);
         $(".tabs").tabs({ active: 5 });
     }
@@ -2511,3 +2663,4 @@ function CargarSeguimientos() {
         }
     });
 }
+

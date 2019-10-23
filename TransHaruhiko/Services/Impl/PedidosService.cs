@@ -37,29 +37,41 @@ namespace TransHaruhiko.Services.Impl
         public BaseResult Guardar(SaveParameters parameters)
         {
             var result = new BaseResult();
-
-            var pedido = new Pedido
+            if (parameters.IdPedido.HasValue)
             {
-                ClienteId = parameters.IdCliente,
-                Contenedor = parameters.Contenedor,
-                Descripcion = parameters.Descripcion,
-                Direccion = parameters.Direccion,
-                DireccionUrl = parameters.DireccionUrl,
-                Fecha = DateTime.Now,
-                EstadoId = (int)EstadosEnum.Inicio
-            };
-
-            var seguimiento = new Seguimiento
+                var pedido = _dbContext.Pedidos.Find(parameters.IdPedido);
+                if (!string.IsNullOrEmpty(parameters.Contenedor))
+                    pedido.Contenedor = parameters.Contenedor;
+                if (!string.IsNullOrEmpty(parameters.Direccion))
+                    pedido.Direccion = parameters.Direccion;
+                if (!string.IsNullOrEmpty(parameters.DireccionUrl))
+                    pedido.DireccionUrl = parameters.DireccionUrl;
+            }
+            else
             {
-                PedidoId = pedido.Id,
-                Fecha = DateTime.Now,
-                Descripcion = CommonServiceStrings.TextSegCrearPedido,
-                TipoId = (int)TipoSeguimientoEnum.EstadoPedido,
-                UsuarioId = parameters.IdUsuario.Value
-            };
+                var pedido = new Pedido
+                {
+                    ClienteId = parameters.IdCliente,
+                    Contenedor = parameters.Contenedor,
+                    Descripcion = parameters.Descripcion,
+                    Direccion = parameters.Direccion,
+                    DireccionUrl = parameters.DireccionUrl,
+                    Fecha = DateTime.Now.Date,
+                    EstadoId = (int)EstadosEnum.Inicio
+                };
 
-            _dbContext.Pedidos.Add(pedido);
-            _dbContext.Seguimientos.Add(seguimiento);
+                var seguimiento = new Seguimiento
+                {
+                    PedidoId = pedido.Id,
+                    Fecha = DateTime.Now,
+                    Descripcion = CommonServiceStrings.TextSegCrearPedido,
+                    TipoId = (int)TipoSeguimientoEnum.EstadoPedido,
+                    UsuarioId = parameters.IdUsuario.Value
+                };
+
+                _dbContext.Pedidos.Add(pedido);
+                _dbContext.Seguimientos.Add(seguimiento);
+            }
             _dbContext.SaveChanges();
             return result;
         }

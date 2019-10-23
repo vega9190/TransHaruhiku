@@ -8,6 +8,7 @@ using TransHaruhiko.Parameters.Pedidos;
 using TransHaruhiko.Services;
 using System.Linq;
 using TransHaruhiko.Globalization.Controllers;
+using TransHaruhiko.Models.Enum;
 
 namespace TransHaruhiko.Controllers
 {
@@ -35,6 +36,7 @@ namespace TransHaruhiko.Controllers
         public ActionResult Buscar(SearchParameters parameters)
         {
             var queriable = _pedidosService.Buscar();
+            queriable = queriable.Where(a => a.EstadoId != (int)EstadosEnum.Cancelado);
             if (!string.IsNullOrEmpty(parameters.Nombre))
             {
                 queriable = queriable.Where(a => a.Cliente.Nombres.Contains(parameters.Nombre));
@@ -48,17 +50,17 @@ namespace TransHaruhiko.Controllers
                 queriable = queriable.Where(a => a.Contenedor.Contains(parameters.Contenedor));
             }
 
-            if (parameters.FechaInicio.HasValue && parameters.FechaFin.HasValue)
+            if (parameters.FechaDesde.HasValue && parameters.FechaHasta.HasValue)
             {
-                queriable = queriable.Where(a => a.Fecha >= parameters.FechaInicio.Value && a.Fecha <= parameters.FechaFin.Value);
+                queriable = queriable.Where(a => a.Fecha >= parameters.FechaDesde.Value && a.Fecha <= parameters.FechaHasta.Value);
             }
-            else if (parameters.FechaInicio.HasValue)
+            else if (parameters.FechaDesde.HasValue)
             {
-                queriable = queriable.Where(a => a.Fecha >= parameters.FechaInicio.Value);
+                queriable = queriable.Where(a => a.Fecha >= parameters.FechaDesde.Value);
             }
-            else if (parameters.FechaFin.HasValue)
+            else if (parameters.FechaHasta.HasValue)
             {
-                queriable = queriable.Where(a => a.Fecha <= parameters.FechaFin.Value);
+                queriable = queriable.Where(a => a.Fecha <= parameters.FechaHasta.Value);
             }
             var querySelect = queriable.Select(a => new
             {
@@ -84,7 +86,7 @@ namespace TransHaruhiko.Controllers
                 }
             });
 
-            var order = parameters.GetEnum(SearchParameters.PedidoOrderColumn.Nombre);
+            var order = parameters.GetEnum(SearchParameters.PedidoOrderColumn.Fecha);
             switch (order)
             {
                 case SearchParameters.PedidoOrderColumn.Id:
@@ -99,7 +101,7 @@ namespace TransHaruhiko.Controllers
                     break;
                 case SearchParameters.PedidoOrderColumn.Fecha:
                     querySelect = parameters.Ascendente
-                        ? querySelect.OrderBy(a => a.Pedido.Fecha)
+                        ? querySelect.OrderByDescending(a => a.Pedido.Fecha)
                         : querySelect.OrderByDescending(a => a.Pedido.Fecha);
                     break;
             }

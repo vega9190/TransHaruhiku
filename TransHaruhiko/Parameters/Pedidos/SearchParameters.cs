@@ -8,15 +8,15 @@ namespace TransHaruhiko.Parameters.Pedidos
         public enum PedidoOrderColumn
         {
             Id,
+            Fecha,
             Nombre,
-            Carnet,
-            Fecha
+            Carnet
         }
 
         public string Nombre { get; set; }
         public string Carnet { get; set; }
         public string Contenedor { get; set; }
-        public DateTime? FechaInicio { get; set; }
-        public DateTime? FechaFin { get; set; }
+        public DateTime? FechaDesde { get; set; }
+        public DateTime? FechaHasta { get; set; }
     }
 }
