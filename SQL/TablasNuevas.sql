@@ -118,6 +118,7 @@ Descripcion NVARCHAR(50) NOT NULL
 
 CREATE TABLE th.Pagos(
 IdPago INT PRIMARY KEY IDENTITY(1,1),
+NombreFile NVARCHAR(100) NOT NULL,
 Monto DECIMAL(10,2) NOT NULL,
 Fecha DATETIME NOT NULL,
 IdPedido INT NOT NULL,
@@ -183,8 +184,10 @@ INSERT INTO th.TiposMimes VALUES ('application/x-rar-compressed;application/octe
 INSERT INTO th.TiposSeguimientos VALUES ('Documentos', 'Todos los documentos del pedido')
 INSERT INTO th.TiposSeguimientos VALUES ('Estado Pedido', 'Todos los cambios de estados del pedido')
 INSERT INTO th.TiposSeguimientos VALUES ('Estado Fichero', 'Todos los cambios de estados del fichero')
+INSERT INTO th.TiposSeguimientos VALUES ('Pagos', 'Todos los pagos del pedido')
 
-
+INSERT INTO th.TiposPagos VALUES ('DAV', '`Documento DAV')
+INSERT INTO th.TiposPagos VALUES ('Multa DAV', 'Multa por DAV')
 
 
 select * from th.TiposSeguimientos

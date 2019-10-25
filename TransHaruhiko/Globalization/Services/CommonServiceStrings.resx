@@ -129,10 +129,16 @@
   <data name="TextSegCrearFicheroEstado" xml:space="preserve">
     <value>Se ha añadido el fichero {0} y su estado es "Recibido".</value>
   </data>
+  <data name="TextSegCrearPago" xml:space="preserve">
+    <value>Se ha añadido el pago "{0}".</value>
+  </data>
   <data name="TextSegCrearPedido" xml:space="preserve">
     <value>Se ha creado el pedido y su estado es "Inicio".</value>
   </data>
   <data name="TextSegEliminarFichero" xml:space="preserve">
     <value>Se ha eliminado el fichero {0}.</value>
+  </data>
+  <data name="TextSegEliminarPago" xml:space="preserve">
+    <value>Se ha eliminado el pago "{0}".</value>
   </data>
 </root>

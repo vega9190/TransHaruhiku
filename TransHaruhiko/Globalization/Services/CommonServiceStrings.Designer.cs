@@ -97,6 +97,15 @@ namespace TransHaruhiko.Globalization.Services {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Se ha añadido el pago &quot;{0}&quot;..
+        /// </summary>
+        public static string TextSegCrearPago {
+            get {
+                return ResourceManager.GetString("TextSegCrearPago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Se ha creado el pedido y su estado es &quot;Inicio&quot;..
         /// </summary>
         public static string TextSegCrearPedido {
@@ -111,6 +120,15 @@ namespace TransHaruhiko.Globalization.Services {
         public static string TextSegEliminarFichero {
             get {
                 return ResourceManager.GetString("TextSegEliminarFichero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Se ha eliminado el pago &quot;{0}&quot;..
+        /// </summary>
+        public static string TextSegEliminarPago {
+            get {
+                return ResourceManager.GetString("TextSegEliminarPago", resourceCulture);
             }
         }
     }

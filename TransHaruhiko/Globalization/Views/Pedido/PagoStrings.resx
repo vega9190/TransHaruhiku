@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DirectorioFichero" xml:space="preserve">
-    <value>Pedidos/{0}/{2}_{0}{1}</value>
+  <data name="LabelComprobante" xml:space="preserve">
+    <value>Comprobante:</value>
   </data>
-  <data name="DirectorioFicheroPago" xml:space="preserve">
-    <value>Pedidos/{0}/Pagos/{1}_{2}{3}</value>
+  <data name="LabelMonto" xml:space="preserve">
+    <value>Monto:</value>
+  </data>
+  <data name="LabelTipoPago" xml:space="preserve">
+    <value>Tipo de pago:</value>
+  </data>
+  <data name="TextSeccionResultado" xml:space="preserve">
+    <value>Pagos</value>
   </data>
 </root>

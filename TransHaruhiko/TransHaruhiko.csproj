@@ -145,6 +145,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ObservacionController.cs" />
+    <Compile Include="Controllers\PagoController.cs" />
     <Compile Include="Controllers\ParametricoController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="CustomHelpers\FileManager\FileHelper.cs" />
@@ -198,6 +199,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ObservacionStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Services\Pagos\PagoStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PagoStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Services\Pedidos\PedidoStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -223,6 +229,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ObservacionStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Views\Pedido\PagoStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PagoStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Views\Shared\LayoutStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -231,10 +242,12 @@
     <Compile Include="Models\DbModels\Entidades\EstadoFichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Fichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Observacion.cs" />
+    <Compile Include="Models\DbModels\Entidades\Pago.cs" />
     <Compile Include="Models\DbModels\Entidades\Rol.cs" />
     <Compile Include="Models\DbModels\Entidades\Seguimiento.cs" />
     <Compile Include="Models\DbModels\Entidades\TipoFichero.cs" />
     <Compile Include="Models\DbModels\Entidades\TipoMime.cs" />
+    <Compile Include="Models\DbModels\Entidades\TipoPago.cs" />
     <Compile Include="Models\DbModels\Entidades\TipoSeguimiento.cs" />
     <Compile Include="Models\DbModels\Entidades\Trabajador.cs" />
     <Compile Include="Models\DbModels\Entidades\Usuario.cs" />
@@ -245,6 +258,7 @@
     <Compile Include="Models\Enum\EstadosEnum.cs" />
     <Compile Include="Models\Enum\FicheroEstadoEnum.cs" />
     <Compile Include="Models\Enum\TipoFicheroEnum.cs" />
+    <Compile Include="Models\Enum\TipoPagoEnum.cs" />
     <Compile Include="Models\Enum\TipoSeguimientoEnum.cs" />
     <Compile Include="Models\TransferStruct\BaseResult.cs" />
     <Compile Include="Models\TransferStruct\ClientTransfer.cs" />
@@ -257,6 +271,8 @@
     <Compile Include="Parameters\Ficheros\SaveParameter.cs" />
     <Compile Include="Parameters\Observaciones\SaveParameters.cs" />
     <Compile Include="Parameters\Observaciones\SearchParameters.cs" />
+    <Compile Include="Parameters\Pagos\SaveParameters.cs" />
+    <Compile Include="Parameters\Pagos\SearchParameters.cs" />
     <Compile Include="Parameters\Pedidos\SaveFicheroParameters.cs" />
     <Compile Include="Parameters\Pedidos\SaveParameters.cs" />
     <Compile Include="Parameters\Pedidos\SearchParameters.cs" />
@@ -267,9 +283,11 @@
     <Compile Include="Services\Impl\ClienteService.cs" />
     <Compile Include="Services\Impl\FicherosService.cs" />
     <Compile Include="Services\Impl\ObservacionesService.cs" />
+    <Compile Include="Services\Impl\PagosService.cs" />
     <Compile Include="Services\Impl\PedidosService.cs" />
     <Compile Include="Services\Impl\UsuariosService.cs" />
     <Compile Include="Services\IObservacionesService.cs" />
+    <Compile Include="Services\IPagosService.cs" />
     <Compile Include="Services\IPedidosService.cs" />
     <Compile Include="Services\IUsuariosService.cs" />
     <Compile Include="Startup.cs" />
@@ -339,6 +357,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ObservacionStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Services\Pagos\PagoStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PagoStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Services\Pedidos\PedidoStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PedidoStrings.Designer.cs</LastGenOutput>
@@ -359,6 +381,10 @@
     <EmbeddedResource Include="Globalization\Views\Pedido\ObservacionStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ObservacionStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Views\Pedido\PagoStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PagoStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Views\Shared\LayoutStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -391,6 +417,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ApplicationError\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Pedido\PopUpPago.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

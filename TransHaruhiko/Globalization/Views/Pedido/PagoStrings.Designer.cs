@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TransHaruhiko.Globalization.Services.Ficheros {
+namespace TransHaruhiko.Globalization.Views.Pedido {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace TransHaruhiko.Globalization.Services.Ficheros {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class PlantillasGestionFicherosStrings {
+    public class PagoStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PlantillasGestionFicherosStrings() {
+        internal PagoStrings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace TransHaruhiko.Globalization.Services.Ficheros {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Services.Ficheros.PlantillasGestionFicherosStrings", typeof(PlantillasGestionFicherosStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Views.Pedido.PagoStrings", typeof(PagoStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,38 @@ namespace TransHaruhiko.Globalization.Services.Ficheros {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pedidos/{0}/{2}_{0}{1}.
+        ///   Looks up a localized string similar to Comprobante:.
         /// </summary>
-        public static string DirectorioFichero {
+        public static string LabelComprobante {
             get {
-                return ResourceManager.GetString("DirectorioFichero", resourceCulture);
+                return ResourceManager.GetString("LabelComprobante", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pedidos/{0}/Pagos/{1}_{2}{3}.
+        ///   Looks up a localized string similar to Monto:.
         /// </summary>
-        public static string DirectorioFicheroPago {
+        public static string LabelMonto {
             get {
-                return ResourceManager.GetString("DirectorioFicheroPago", resourceCulture);
+                return ResourceManager.GetString("LabelMonto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tipo de pago:.
+        /// </summary>
+        public static string LabelTipoPago {
+            get {
+                return ResourceManager.GetString("LabelTipoPago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pagos.
+        /// </summary>
+        public static string TextSeccionResultado {
+            get {
+                return ResourceManager.GetString("TextSeccionResultado", resourceCulture);
             }
         }
     }

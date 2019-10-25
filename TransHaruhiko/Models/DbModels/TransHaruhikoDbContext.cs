@@ -25,5 +25,6 @@ namespace TransHaruhiko.Models.DbModels
         public DbSet<EstadoFichero> EstadosFicheros { get; set; }
         public DbSet<Seguimiento> Seguimientos { get; set; }
         public DbSet<TipoFichero> TiposFicheros { get; set; }
+        public DbSet<Pago> Pagos { get; set; }
     }
 }

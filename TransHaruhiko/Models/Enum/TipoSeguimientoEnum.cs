@@ -4,6 +4,7 @@
     {
         Documentos = 1,
         EstadoPedido,
-        EstadoFichero
+        EstadoFichero,
+        Pagos
     }
 }
