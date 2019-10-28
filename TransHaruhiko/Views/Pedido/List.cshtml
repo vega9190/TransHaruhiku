@@ -5,16 +5,17 @@
     ViewBag.TitlePage = ListStrings.TittleListado;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*@section Stylesheet
-{
-    <link href="@Url.Content("~/Content/plugins/qtip2.3.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/plugins/jstree/default/style.min.css")" rel="stylesheet" type="text/css" />
-}*@
+@section Stylesheet {
+    <link href="@Url.ContentCache("Content/utils/fileupload/jquery.fileupload-ui.css")" rel="stylesheet" type="text/css" />
+}
 @section JavaScript{
     <script type="text/javascript" src="@Url.Content("~/Globalization/Pedidos/List")"></script>
     <script type="text/javascript" src="@Url.Content("~/Globalization/Pedidos/Observacion")"></script>
+<script type="text/javascript" src="@Url.Content("~/Globalization/Pedidos/Pago")"></script>
     <script type="text/javascript" src="@Url.Content("~/Globalization/Common/Common")"></script>
-
+<script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.iframe-transport.js")"></script>
+<script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.fileupload.js")"></script>
+<script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.xdr-transport.js")"></script>
     @*<script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/plugins/jstree.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/plugins/qtip2.3.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/plugins/combo-multiselect.js")"></script>*@

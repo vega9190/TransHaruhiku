@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using TransHaruhiko.CustomHelpers.FileManager;
 using TransHaruhiko.Globalization.Services;
 using TransHaruhiko.Globalization.Services.Ficheros;
 using TransHaruhiko.Models.DbModels;
@@ -8,6 +10,7 @@ using TransHaruhiko.Models.DbModels.Entidades;
 using TransHaruhiko.Models.Enum;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Parameters.Ficheros;
+using TransHaruhiko.Parameters.Pedidos;
 
 namespace TransHaruhiko.Services.Impl
 {
@@ -51,7 +54,136 @@ namespace TransHaruhiko.Services.Impl
             _dbContext.SaveChanges();
             return result;
         }
+        public BaseResult GuardarTemporal(SaveFicheroParameters parameters)
+        {
+            var result = new BaseResult();
+            var extension = Path.GetExtension(parameters.Name);
+            var pedido = _dbContext.Pedidos.Find(parameters.IdPedido);
+            var mimes = GetMimes();
+            var tipoFicheroNuevo = _dbContext.TiposFicheros.Find(parameters.IdTipo);
+            if (!mimes.Any(a =>
+                a.Nombre.Contains(parameters.MimeType) && a.Extension.Contains(extension?.ToLower() ?? "")))
+            {
+                result.Errors.Add("Fichero no válido.");
+            }
+            else if (pedido == null)
+            {
+                result.Errors.Add("No existe el pedido.");
+            }
+            else
+            {
+                var rutaArchivo = FileHelper.GetPath(pedido.Id, parameters.IdTipo.Value, extension);
+                var ficheroActual = Get(parameters.IdPedido.Value, parameters.IdTipo.Value);
+                if (ficheroActual != null)
+                {
+                    var rutaFicheroActual = FileHelper.GetPath(pedido.Id, parameters.IdTipo.Value, Path.GetExtension(ficheroActual.Nombre));
 
+                    if (FileHelper.Exist(rutaFicheroActual))
+                    {
+                        if (!FileHelper.RemoveFile(rutaFicheroActual))
+                            result.Errors.Add("El fichero no se puede eliminar.");
+                    }
+                    _dbContext.Ficheros.Remove(ficheroActual);
+                }
+
+                if (!FileHelper.WriteFile(rutaArchivo, parameters.Content))
+                    result.Errors.Add("El fichero no se puede subir.");
+
+                if (result.HasErrors) return result;
+
+                var fichero = new Fichero
+                {
+                    PedidoId = pedido.Id,
+                    TipoId = parameters.IdTipo.Value,
+                    EstadoId = (int)FicheroEstadoEnum.Recibido,
+                    Nombre = parameters.Name
+                };
+
+                _dbContext.Ficheros.Add(fichero);
+                _dbContext.SaveChanges();
+            }
+
+            return result;
+        }
+
+        public BaseResult EliminarTemporal(int idPedido, int idTipo)
+        {
+            var result = new ResultFileContent();
+            var fichero = Get(idPedido, idTipo);
+
+            if (fichero == null)
+                result.Errors.Add("No existe el fichero del pedido");
+            else
+            {
+                var rutaFichero = FileHelper.GetPath(idPedido, idTipo, Path.GetExtension(fichero.Nombre));
+
+                if (FileHelper.Exist(rutaFichero))
+                {
+                    if (!FileHelper.RemoveFile(rutaFichero))
+                    {
+                        result.Errors.Add("El fichero no se puede eliminar.");
+                        return result;
+                    }
+                    _dbContext.Ficheros.Remove(fichero);
+                    _dbContext.SaveChanges();
+                }
+                else
+                {
+                    result.Errors.Add("No existe el fichero del pedido");
+                }
+            }
+
+            return result;
+        }
+        public ResultFileContent GetFicheroTemporal(int idPedido, int idTipo)
+        {
+            var result = new ResultFileContent();
+            var fichero = Get(idPedido, idTipo);
+
+            if (fichero == null)
+                result.Errors.Add("No existe el fichero del pedido");
+            else
+            {
+                var rutaFichero = FileHelper.GetPath(idPedido, idTipo, Path.GetExtension(fichero.Nombre));
+
+                if (FileHelper.Exist(rutaFichero))
+                {
+                    result.FileName = fichero.Nombre;
+                    result.Content = FileHelper.ReadFile(rutaFichero);
+                }
+                else
+                {
+                    result.Errors.Add("No existe el fichero del pedido");
+                }
+            }
+
+            return result;
+        }
+        public ResultFileContent GetFicheroPago(int idPago)
+        {
+            var result = new ResultFileContent();
+            var pago = _dbContext.Pagos.Find(idPago);
+            
+            if (pago == null)
+                result.Errors.Add("No existe el fichero del pedido");
+            else
+            {
+                var rutaFichero = string.Format(PlantillasGestionFicherosStrings.DirectorioFicheroPago, pago.PedidoId, pago.Tipo.Nombre, pago.Id,
+                            Path.GetExtension(pago.NombreFile));
+
+                if (FileHelper.Exist(rutaFichero))
+                {
+                    result.FileName = pago.NombreFile;
+                    result.Content = FileHelper.ReadFile(rutaFichero);
+                }
+                else
+                {
+                    result.Errors.Add("No existe el fichero del pedido");
+                }
+            }
+
+            return result;
+        }
         public List<TipoMime> GetMimes()
         {
             var mimes = _dbContext.TiposMimes.Where(a => true).ToList();

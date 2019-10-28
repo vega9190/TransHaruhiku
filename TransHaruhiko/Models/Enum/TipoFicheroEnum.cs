@@ -13,6 +13,7 @@
         Dav,
         RecibiConforme,
         Imagenes,
-        Bl
+        Bl,
+        Temporal
     }
 }

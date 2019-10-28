@@ -13,7 +13,8 @@ var TipoFicheroEnum = {
     Dav: 9,
     RecibiConforme: 10,
     Imagenes: 11,
-    Bl: 12
+    Bl: 12,
+    Temporal: 13
 };
 
 var EstadoPedidoEnum = {

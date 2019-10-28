@@ -61,7 +61,7 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cliente:.
+        ///   Looks up a localized string similar to Cliente*:.
         /// </summary>
         public static string LabelCliente {
             get {
@@ -79,7 +79,7 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Descripción:.
+        ///   Looks up a localized string similar to Descripción*:.
         /// </summary>
         public static string LabelDescripcion {
             get {

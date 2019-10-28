@@ -2,6 +2,7 @@
 using TransHaruhiko.Models.DbModels.Entidades;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Parameters.Ficheros;
+using TransHaruhiko.Parameters.Pedidos;
 
 namespace TransHaruhiko.Services
 {
@@ -11,6 +12,10 @@ namespace TransHaruhiko.Services
         Fichero Get(int idPedido, int idTipoFichero);
         BaseResult Guardar(Fichero parameters);
         BaseResult Eliminar(int idFichero);
+        BaseResult GuardarTemporal(SaveFicheroParameters parameters);
+        BaseResult EliminarTemporal(int idPedido, int idTipo);
+        ResultFileContent GetFicheroTemporal(int idPedido, int idTipo);
+        ResultFileContent GetFicheroPago(int idPago);
         List<TipoMime> GetMimes();
         List<EstadoFichero> GetEstadosPermitidos(int idEstado);
         BaseResult CambiarEstado(int idFichero, int idNuevoEstado, int idUsuario);

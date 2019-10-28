@@ -7,6 +7,8 @@ namespace TransHaruhiko.Services
 {
     public interface IPagosService
     {
+        IQueryable<TipoPago> GetTiposPagos();
+        IQueryable<TipoMoneda> GetTiposMonedas();
         IQueryable<Pago> Buscar();
         BaseResult Guardar(SaveParameters parameters);
         BaseResult Eliminar(int idPago, int idUsuario);

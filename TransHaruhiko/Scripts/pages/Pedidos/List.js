@@ -1,4 +1,20 @@
 ﻿
+var TipoFicheroEnum = {
+    ListaEmpaque: 1,
+    FacturaComercial: 2,
+    Sicoin: 3,
+    Dam: 4,
+    Mic: 5,
+    Crt: 6,
+    Goc: 7,
+    Dui: 8,
+    Dav: 9,
+    RecibiConforme: 10,
+    Imagenes: 11,
+    Bl: 12,
+    Temporal: 13
+};
+
 $(document).ready(function () {
     var tabla = $('#tb-pedidos');
     $('#btn-buscar').button();
@@ -131,12 +147,8 @@ $(document).ready(function () {
             });
 
             $('.btn-pagos', nRow).click(function() {
-                console.log($(nRow).data('data'));
+                PopUpPagos($(nRow).data('data').Pedido.Id);
             });
-
-            //$('.btn-eliminar', nRow).click(function() {
-            //    console.log($(nRow).data('data'));
-            //});
 
             return nRow;
         },
@@ -320,6 +332,7 @@ function PopUpCrear() {
     });
 }
 
+/////////////////// PopUp Observaciones /////////////////////////
 function PopUpObservaciones(idPedido) {
     $.blockUI({ message: null });
     var popup = null;
@@ -538,6 +551,350 @@ function PopUpObservaciones(idPedido) {
                                 "iTotalDisplayRecords": data.Pagination.TotalRecords
                             });
                             tablaObservaciones.table('setData', data.Data);
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+}
+
+/////////////////// PopUp Pagos /////////////////////////
+function PopUpPagos(idPedido) {
+    $.blockUI({ message: null });
+    var popup = null;
+    var buttons = {};
+    /***************************************************************************/
+    buttons[Globalize.localize('Cerrar')] = function () {
+        popup.dialog('close');
+    };
+    /***************************************************************************/
+    showPopupPage({
+        title: Globalize.localize('TituloPopUp'),
+        url: SiteUrl + 'Pedido/PopUpPago',
+        open: function (event, ui) {
+            popup = $(this);
+            $.unblockUI();
+        },
+        buttons: buttons,
+        heigth: 500,
+        width: 700
+    }, false, function () {
+        var tablaPagos = $('#tb-pagos', popup);
+        $('#btn-limpiar-pago', popup).button();
+        $('#btn-guardar-pago', popup).button();
+        $('#txt-monto', popup).autoNumeric(AutoNumericDecimal);
+
+        $('#cbx-tipo-pago').combobox(DefaultCombobox({
+            url: SiteUrl + 'Parametrico/SimpleSearchTipoPago',
+            toolbar: {
+                reset: function () { }
+            }
+        }));
+
+        $('#cbx-tipo-moneda').combobox(DefaultCombobox({
+            url: SiteUrl + 'Parametrico/SimpleSearchTipoMoneda',
+            toolbar: {
+                reset: function () { }
+            }
+        }));
+
+        var buttons = new Object();
+        var tempForm = $('#frm-fichero-pago', popup);
+        tempForm
+            .attr('action', SiteUrl + 'GuardarFicheroTemporal/' + idPedido + '/' + TipoFicheroEnum.Temporal)
+            .compFileupload({
+                labels: {
+                    btnUpload: Globalize.localize('TextSubir'),
+                    btnDelete: Globalize.localize('TextDelete')
+                },
+                params: {
+                    IdPedido: idPedido
+                },
+                fnAdd: function (e, data) {
+                    var fileSize = data.originalFiles[0].size / 1024;
+
+                    if (fileSize > UploadSizeLimit) {
+                        showErrors([Globalize.localize('ErrorArchivoExcedioLongitud')]);
+                        return false;
+                    }
+
+                    if (fileSize === 0) {
+                        showErrors([Globalize.localize('ErrorFicheroVacio')]);
+                        return false;
+                    }
+                    BlockFullPage();
+                    return true;
+                },
+                fnSend: function (e, data) {
+                    if ($.browser.msie === false) {
+                        var fileSize = data.originalFiles[0].size / 1024;
+
+                        if (fileSize > UploadSizeLimit) {
+                            UnblockFullPage();
+                            showErrors([Globalize.localize('ErrorArchivoExcedioLongitud')]);
+                            return false;
+                        }
+                    }
+                },
+                fnError: function (e, data) {
+                    UnblockFullPage();
+                    showErrors([Globalize.localize('ErrorArchivoExcedioLongitud')]);
+                },
+                fnSuccess: function (dataDocumento, callbackFile) {
+                    if (dataDocumento.HasErrors) {
+                        UnblockFullPage();
+                        showErrors(dataDocumento.Errors);
+                        return false;
+                    } else {
+                        callbackFile({
+                            filename: dataDocumento.Data.NombreFichero,
+                            title: Globalize.localize('TextDownload'),
+                            dataFichero: dataDocumento.Data,
+                            url: SiteUrl + 'DescargarFicheroTemporal/' + idPedido + '/' + TipoFicheroEnum.Temporal,
+                            data: dataDocumento.Data
+                        });
+
+                        UnblockFullPage();
+                    }
+                },
+                fnDelete: function (dataFile, callbackFile) {
+                    //var popup = $(this);
+                    BlockFullPage();
+                    $.ajax({
+                        url: SiteUrl + 'Fichero/EliminarFicheroTemporal',
+                        data: $.toJSON({
+                            idPedido: idPedido,
+                            idTipo: TipoFicheroEnum.Temporal
+                        }),
+                        success: function (data) {
+                            UnblockFullPage();
+                            //popup.dialog('close');
+                            if (data.HasErrors) {
+                                showErrors(data.Errors);
+                                return false;
+                            } else {
+                                callbackFile();
+                            }
+                        }
+                    });
+                }
+            });
+        
+        $('#btn-limpiar-pago', popup).click(function () {
+            $('#cbx-tipo-pago').combobox('reset');
+            $('#cbx-tipo-moneda').combobox('reset');
+            $('#txt-monto', popup).val("");
+            if ($('#frm-fichero-pago', popup).compFileupload('hasFile')) {
+                $('.btn-delete').click();
+            }
+        });
+
+        $('#btn-guardar-pago', popup).click(function () {
+            var params = {};
+
+            params.IdTipo = $('#cbx-tipo-pago').combobox('getId');
+            params.IdTipoMoneda = $('#cbx-tipo-moneda').combobox('getId');
+            params.Monto = $('#txt-monto', popup).val()
+            params.IdPedido = idPedido;
+            
+            var warnings = new Array();
+
+            if (isEmpty(params.Monto))
+                warnings.push(Globalize.localize('ErrorNoMonto'));
+
+            if (isNull(params.IdTipo))
+                warnings.push(Globalize.localize('ErrorNoTipo'));
+
+            if (isNull(params.IdTipoMoneda))
+                warnings.push(Globalize.localize('ErrorNoTipoMoneda'));
+
+            if (!$('#frm-fichero-pago', popup).compFileupload('hasFile'))
+                warnings.push(Globalize.localize('ErrorNoFile'));
+
+
+            if (warnings.length > 0) {
+                showCustomErrors({
+                    title: Globalize.localize('TextInformacion'),
+                    warnings: warnings
+                });
+                return false;
+            } else {
+                $.blockUI({ message: null });
+                $.ajax({
+                    url: SiteUrl + 'Pago/Guardar',
+                    data: $.toJSON(params),
+                    success: function (data) {
+                        $.unblockUI();
+                        if (data.HasErrors) {
+                            showErrors(data.Errors);
+                        } else {
+                            if (data.HasWarnings) {
+                                showCustomErrors({
+                                    title: Globalize.localize('TextInformacion'),
+                                    warnings: data.Warnings
+                                });
+                            } else {
+                                showMessage(Globalize
+                                    .localize('MessageOperacionExitosamente'),
+                                    true);
+                                $('#btn-limpiar-pago', popup).click();
+                                tablaPagos.table('update');
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        //////////// TABLA  //////////////////////
+        tablaPagos.table({
+            bInfo: true,
+            bJQueryUI: true,
+            responsive: {
+                details: {
+                    type: 'inline'
+                }
+            },
+            //aaSorting: [[5, 'asc']],
+            aoColumns: [
+                {
+                    className: 'hide',
+                    sTitle: "Id",
+                    sWidth: "70px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnFecha'),
+                    sWidth: "75px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnTipo'),
+                    sWidth: "75px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnMonto'),
+                    sWidth: "75px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnUsuario'),
+                    sWidth: "130px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnAcciones'),
+                    sWidth: "100px",
+                    bSortable: false
+                }
+            ],
+            bServerSide: true,
+            sAjaxSource: SiteUrl + 'Pago/Buscar',
+            fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                $('.btn-eliminar-pago', nRow).click(function () {
+                    data = $(nRow).data('data');
+                    var popup = null;
+                    showConfirmation({
+                        title: Globalize.localize('TitlePopUp'),
+                        open: function (event, ui) {
+                            popup = $(this);
+                        },
+                        message: Globalize.localize('TextConfirmarEliminar'),
+                        buttonFunctionYes: function () {
+                            $.blockUI({ message: null });
+                            $.ajax({
+                                url: SiteUrl + 'Pago/Eliminar',
+                                data: $.toJSON({ idPago: data.Pago.Id }),
+                                success: function (data) {
+                                    popup.dialog('close');
+                                    if (data.HasErrors) {
+                                        showErrors(data.Errors);
+                                    } else {
+                                        if (data.HasWarnings) {
+                                            showCustomErrors({
+                                                title: Globalize.localize('TextInformacion'),
+                                                warnings: data.Warnings
+                                            });
+                                        } else {
+                                            showMessage(Globalize
+                                                .localize('MessageOperacionExitosamente'),
+                                                true);
+                                            tablaPagos.table('update');
+                                        }
+                                    }
+                                    $.unblockUI();
+                                }
+                            });
+                        }
+                    });
+                });
+
+                return nRow;
+            },
+            fnServerData: function (sSource, aoData, fnCallback) {
+                var paramsTabla = {};
+                $.each(aoData,
+                    function (index, value) {
+                        paramsTabla[value.name] = value.value;
+                    });
+                var params = {};
+                params.PageIndex = (paramsTabla.iDisplayStart / paramsTabla.iDisplayLength) + 1;
+                params.ItemsPerPage = paramsTabla.iDisplayLength;
+                params.OrderColumnPosition = paramsTabla.iSortCol_0;
+                params.OrderColumnName = decode(paramsTabla.iSortCol_0 - 2,
+                    [
+                        1, 'fecha'
+                    ]);
+                params.OrderDirection = paramsTabla.sSortDir_0;
+                /******************************************************************/
+
+                params.IdPedido = idPedido;
+
+                /******************************************************************/
+                tablaPagos.block({ message: null });
+                $.ajax({
+                    url: sSource,
+                    data: $.toJSON(params),
+                    success: function (data) {
+                        tablaPagos.unblock();
+                        if (data.HasErrors) {
+                            showErrors(data.Errors);
+                        } else {
+                            var rows = [];
+                            $.each(data.Data,
+                                function (index, value) {
+                                    var row = [];
+                                    var tempAcciones = '<div class="box-icons">';
+
+                                    tempAcciones += '<span title="' +
+                                        Globalize.localize('TextEliminar') +
+                                        '" class="btn-eliminar-pago ui-icon ui-icon-trash"></span>';
+                                    
+                                    tempAcciones += '<a '
+                                            + 'href="' + SiteUrl + 'DescargarFicheroPago/' + value.Pago.Id + '" '
+                                            + 'title="' + Globalize.localize('TextDescargar') + '" '
+                                            + 'class="ui-icon ui-icon-document"></a>';
+
+                                    tempAcciones += '</div>';
+
+                                    row.push(value.Pago.Id);
+                                    row.push(value.FechaPago);
+                                    row.push(value.Pago.Tipo.Nombre);
+                                    row.push(value.Pago.TipoMoneda.Abreviacion + " " + formatNumber(value.Pago.Monto));
+                                    row.push(value.Pago.Usuario.NombreCompleto);
+                                    row.push(tempAcciones);
+                                    rows.push(row);
+                                });
+                            fnCallback({
+                                "sEcho": paramsTabla.sEcho,
+                                "aaData": rows,
+                                "iTotalRecords": data.Pagination.TotalDisplayRecords,
+                                "iTotalDisplayRecords": data.Pagination.TotalRecords
+                            });
+                            tablaPagos.table('setData', data.Data);
                         }
                     }
                 });

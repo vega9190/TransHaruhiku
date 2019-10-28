@@ -26,5 +26,7 @@ namespace TransHaruhiko.Models.DbModels
         public DbSet<Seguimiento> Seguimientos { get; set; }
         public DbSet<TipoFichero> TiposFicheros { get; set; }
         public DbSet<Pago> Pagos { get; set; }
+        public DbSet<TipoPago> TiposPagos { get; set; }
+        public DbSet<TipoMoneda> TiposMonedas { get; set; }
     }
 }

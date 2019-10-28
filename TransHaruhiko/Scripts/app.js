@@ -71,3 +71,13 @@ function ValidateURL(textval) {
           "^(http:\/\/www.|https:\/\/www.|ftp:\/\/www.|www.){1}([0-9A-Za-z]+\.)");
     return urlregex.test(textval);
 }
+
+var AutoNumericDecimal = {
+    mDec: 2,
+    aSep: ',',
+    aDec: '.'
+};
+
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}

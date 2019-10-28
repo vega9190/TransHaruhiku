@@ -179,6 +179,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ObservacionStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Scripts\Pedidos\PagoStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PagoStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Services\CommonServiceStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -247,6 +252,7 @@
     <Compile Include="Models\DbModels\Entidades\Seguimiento.cs" />
     <Compile Include="Models\DbModels\Entidades\TipoFichero.cs" />
     <Compile Include="Models\DbModels\Entidades\TipoMime.cs" />
+    <Compile Include="Models\DbModels\Entidades\TipoMoneda.cs" />
     <Compile Include="Models\DbModels\Entidades\TipoPago.cs" />
     <Compile Include="Models\DbModels\Entidades\TipoSeguimiento.cs" />
     <Compile Include="Models\DbModels\Entidades\Trabajador.cs" />
@@ -340,6 +346,10 @@
     <EmbeddedResource Include="Globalization\Scripts\Pedidos\ObservacionStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ObservacionStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Scripts\Pedidos\PagoStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PagoStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Services\CommonServiceStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

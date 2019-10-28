@@ -117,10 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LabelObservacion" xml:space="preserve">
-    <value>Observación*:</value>
+  <data name="ColumnAcciones" xml:space="preserve">
+    <value>Acciones</value>
   </data>
-  <data name="TextSeccionResultado" xml:space="preserve">
-    <value>Observaciones</value>
+  <data name="ColumnFecha" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="ColumnMonto" xml:space="preserve">
+    <value>Monto</value>
+  </data>
+  <data name="ColumnTipo" xml:space="preserve">
+    <value>Tipo de Pago</value>
+  </data>
+  <data name="ColumnUsuario" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="ErrorNoFile" xml:space="preserve">
+    <value>Debe subir un archivo con el pago realizado.</value>
+  </data>
+  <data name="ErrorNoMonto" xml:space="preserve">
+    <value>Debe ingresar el monto del pago.</value>
+  </data>
+  <data name="ErrorNoTipo" xml:space="preserve">
+    <value>Debe seleccionar el tipo del pago realizado.</value>
+  </data>
+  <data name="ErrorNoTipoMoneda" xml:space="preserve">
+    <value>Debe seleccioar el tipo de moneda.</value>
+  </data>
+  <data name="TextDescargar" xml:space="preserve">
+    <value>Descargar</value>
   </data>
 </root>

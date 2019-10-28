@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TransHaruhiko.Globalization.Views.Pedido {
+namespace TransHaruhiko.Globalization.Scripts.Pedidos {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Views.Pedido.PagoStrings", typeof(PagoStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Scripts.Pedidos.PagoStrings", typeof(PagoStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,92 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Comprobante*:.
+        ///   Looks up a localized string similar to Acciones.
         /// </summary>
-        public static string LabelComprobante {
+        public static string ColumnAcciones {
             get {
-                return ResourceManager.GetString("LabelComprobante", resourceCulture);
+                return ResourceManager.GetString("ColumnAcciones", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Monto*:.
+        ///   Looks up a localized string similar to Fecha.
         /// </summary>
-        public static string LabelMonto {
+        public static string ColumnFecha {
             get {
-                return ResourceManager.GetString("LabelMonto", resourceCulture);
+                return ResourceManager.GetString("ColumnFecha", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tipo de moneda*:.
+        ///   Looks up a localized string similar to Monto.
         /// </summary>
-        public static string LabelTipoMoneda {
+        public static string ColumnMonto {
             get {
-                return ResourceManager.GetString("LabelTipoMoneda", resourceCulture);
+                return ResourceManager.GetString("ColumnMonto", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tipo de pago*:.
+        ///   Looks up a localized string similar to Tipo de Pago.
         /// </summary>
-        public static string LabelTipoPago {
+        public static string ColumnTipo {
             get {
-                return ResourceManager.GetString("LabelTipoPago", resourceCulture);
+                return ResourceManager.GetString("ColumnTipo", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Crear pago.
+        ///   Looks up a localized string similar to Usuario.
         /// </summary>
-        public static string TextCrearPago {
+        public static string ColumnUsuario {
             get {
-                return ResourceManager.GetString("TextCrearPago", resourceCulture);
+                return ResourceManager.GetString("ColumnUsuario", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pagos.
+        ///   Looks up a localized string similar to Debe subir un archivo con el pago realizado..
         /// </summary>
-        public static string TextSeccionResultado {
+        public static string ErrorNoFile {
             get {
-                return ResourceManager.GetString("TextSeccionResultado", resourceCulture);
+                return ResourceManager.GetString("ErrorNoFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debe ingresar el monto del pago..
+        /// </summary>
+        public static string ErrorNoMonto {
+            get {
+                return ResourceManager.GetString("ErrorNoMonto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debe seleccionar el tipo del pago realizado..
+        /// </summary>
+        public static string ErrorNoTipo {
+            get {
+                return ResourceManager.GetString("ErrorNoTipo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debe seleccioar el tipo de moneda..
+        /// </summary>
+        public static string ErrorNoTipoMoneda {
+            get {
+                return ResourceManager.GetString("ErrorNoTipoMoneda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Descargar.
+        /// </summary>
+        public static string TextDescargar {
+            get {
+                return ResourceManager.GetString("TextDescargar", resourceCulture);
             }
         }
     }

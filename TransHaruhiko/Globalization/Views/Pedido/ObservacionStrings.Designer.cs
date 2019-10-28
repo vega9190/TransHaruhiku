@@ -61,7 +61,7 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Observación:.
+        ///   Looks up a localized string similar to Observación*:.
         /// </summary>
         public static string LabelObservacion {
             get {

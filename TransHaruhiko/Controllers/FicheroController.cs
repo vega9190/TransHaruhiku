@@ -115,7 +115,102 @@ namespace TransHaruhiko.Controllers
 
             return Json(transfer);
         }
+        [Route("DescargarFicheroPago/{idPago}")]
+        public ActionResult DescargarFicheroPago(int idPago)
+        {
+            var res = _ficherosService.GetFicheroPago(idPago);
+            var transfer = new FileTransfer();
+            if (res.HasErrors)
+            {
+                return RedirectToError(res.Errors.ToArray());
+            }
 
+            transfer.Content = res.Content;
+            transfer.FileName = res.FileName;
+
+            return File(transfer);
+        }
+        [HttpPost]
+        [Route("GuardarFicheroTemporal/{pedidoId}/{idTipo}")]
+        public ActionResult GuardarFicheroTemporal(int pedidoId, int idTipo)
+        {
+            var transfer = new ClientTransfer();
+            var parameters = new SaveFicheroParameters();
+            if (Request.Files.Count > 0)
+            {
+                var file = Request.Files[0];
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    if (file.ContentLength / 1024 > 20480)
+                    {
+                        transfer.Errors.Add("Este fichero ha excedido el tamaño permitido.");
+                        return Json(transfer);
+                    }
+                    var content = ReadFully(file.InputStream);
+                    parameters.Content = content;
+                    parameters.IdPedido = pedidoId;
+                    parameters.IdTipo = idTipo;
+                    parameters.Name = file.FileName;
+                    parameters.MimeType = file.ContentType;
+                }
+            }
+            var user = User.Identity;
+            if (user == null)
+            {
+                transfer.Errors.Add(CommonControllerStrings.ErrorSinUsuario);
+                return Json(transfer);
+            }
+
+            var res = _ficherosService.GuardarTemporal(parameters);
+
+            if (res.HasErrors)
+                transfer.Errors.AddRange(res.Errors);
+            if (res.HasWarnings)
+                transfer.Warnings.AddRange(res.Warnings);
+
+
+            //transfer.Data = new { IdFichero = fichero.Id, EstadoModificado = cambiarEstado, Estado = fichero.Pedido.Estado.Nombre };
+            return Json(transfer);
+        }
+        [HttpPost]
+        public ActionResult EliminarFicheroTemporal(int idPedido, int idTipo)
+        {
+            var transfer = new ClientTransfer();
+            var user = User.Identity;
+            if (user == null)
+            {
+                transfer.Errors.Add(CommonControllerStrings.ErrorSinUsuario);
+                return Json(transfer);
+            }
+
+            var res = _ficherosService.EliminarTemporal(idPedido, idTipo);
+
+            if (res.HasErrors)
+                transfer.Errors.AddRange(res.Errors);
+            if (res.HasWarnings)
+                transfer.Warnings.AddRange(res.Warnings);
+
+            return Json(transfer);
+        }
+        [Route("DescargarFicheroTemporal/{pedidoId}/{idTipo}")]
+        public ActionResult DescargarFicheroTemporal(int pedidoId, int idTipo)
+        {
+            //var transfer = new ClientTransfer();
+
+            var res = _ficherosService.GetFicheroTemporal(pedidoId, idTipo);
+            var transfer = new FileTransfer();
+            if (res.HasErrors)
+            {
+                //transfer.Errors.AddRange(res.Errors);
+                return RedirectToError(res.Errors.ToArray());
+            }
+
+            transfer.Content = res.Content;
+            transfer.FileName = res.FileName;
+
+            return File(transfer);
+        }
         public ActionResult CambiarEstado(int idFichero, int idNuevoEstado)
         {
             var transfer = new ClientTransfer();

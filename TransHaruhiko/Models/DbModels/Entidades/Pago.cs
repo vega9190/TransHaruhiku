@@ -21,5 +21,13 @@ namespace TransHaruhiko.Models.DbModels.Entidades
         public int TipoId { get; set; }
         [ForeignKey(nameof(TipoId))]
         public virtual TipoPago Tipo { get; set; }
+        [Column("IdUsuario")]
+        public int UsuarioId { get; set; }
+        [ForeignKey(nameof(UsuarioId))]
+        public virtual Usuario Usuario { get; set; }
+        [Column("IdTipoMoneda")]
+        public int TipoMonedaId { get; set; }
+        [ForeignKey(nameof(TipoMonedaId))]
+        public virtual TipoMoneda TipoMoneda { get; set; }
     }
 }

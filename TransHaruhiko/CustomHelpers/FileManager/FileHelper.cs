@@ -68,6 +68,10 @@ namespace TransHaruhiko.CustomHelpers.FileManager
                     rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
                             extension, "Bl");
                     break;
+                case (int)TipoFicheroEnum.Temporal:
+                    rutaArchivo = string.Format(PlantillasGestionFicherosStrings.DirectorioFichero, idPedido,
+                            extension, "Temporal");
+                    break;
             }
             return rutaArchivo;
         }

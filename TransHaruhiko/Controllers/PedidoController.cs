@@ -225,8 +225,12 @@ namespace TransHaruhiko.Controllers
         {
             return View();
         }
+        public ActionResult PopUpPago()
+        {
+            return View();
+        }
         #endregion
 
-       
+
     }
 }

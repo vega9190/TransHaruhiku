@@ -4,32 +4,40 @@
 }
 
 <div id="popup-pago" class="grid-container">
-    <div class="grid-100 mobile-grid-100">
-        <div class="grid-70">
-            <ul class="box-form">
-                <li>
-                    <label for="cbx-tipo-pago" class="grid-10 mobile-grid-100">@PagoStrings.LabelTipoPago</label>
-                    <select id="cbx-tipo-pago" class="grid-50 mobile-grid-100"></select>
-                </li>
-                <li>
-                    <label for="txt-monto" class="grid-10 mobile-grid-100">@PagoStrings.LabelMonto </label>
-                    <input id="txt-monto" class="grid-50 mobile-grid-100" type="text" />
-                </li>
-                <li>
-                    <label class="grid-10 mobile-grid-100">@PagoStrings.LabelComprobante</label>
-                    <div id="div-fichero-pago" class="box-fileupload grid-40 mobile-grid-100">
-                        <form id="frm-fichero-pago" action="#"></form>
-                    </div>
-                </li>
-            </ul>
+    <div class="box-fieldset">
+        <span class="field-title">@PagoStrings.TextCrearPago</span>
+        <div class="grid-100 mobile-grid-100">
+            <div class="grid-70">
+                <ul class="box-form">
+                    <li>
+                        <label for="cbx-tipo-pago" class="grid-30 mobile-grid-100">@PagoStrings.LabelTipoPago</label>
+                        <select id="cbx-tipo-pago" class="grid-50 mobile-grid-100"></select>
+                    </li>
+                    <li>
+                        <label for="cbx-tipo-moneda" class="grid-30 mobile-grid-100">@PagoStrings.LabelTipoMoneda</label>
+                        <select id="cbx-tipo-moneda" class="grid-50 mobile-grid-100"></select>
+                    </li>
+                    <li>
+                        <label for="txt-monto" class="grid-30 mobile-grid-100">@PagoStrings.LabelMonto </label>
+                        <input id="txt-monto" class="grid-50 mobile-grid-100" type="text" />
+                    </li>
+                    <li>
+                        <label class="grid-30 mobile-grid-100">@PagoStrings.LabelComprobante</label>
+                        <div id="div-fichero-pago" class="box-fileupload grid-40 mobile-grid-100">
+                            <form id="frm-fichero-pago" action="#"></form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="align-right">
+            <button id="btn-limpiar-pago" class="button">@ListStrings.ButtonLimpiar</button>
+            <button id="btn-guardar-pago" class="button">@ListStrings.ButtonGuardar</button>
         </div>
     </div>
-    <div class="align-right">
-        <button id="btn-limpiar-pago" class="button">@ListStrings.ButtonLimpiar</button>
-        <button id="btn-guardar-pago" class="button">@ListStrings.ButtonGuardar</button>
+        <div class="box-fieldset">
+            <span class="field-title">@PagoStrings.TextSeccionResultado</span>
+            <table id="tb-pagos" class="display"></table>
+        </div>
     </div>
-    <div class="box-fieldset">
-        <span class="field-title">@PagoStrings.TextSeccionResultado</span>
-        <table id="tb-pagos" class="display"></table>
-    </div>
-</div>

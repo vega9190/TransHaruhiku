@@ -116,6 +116,12 @@ Nombre NVARCHAR(25) NOT NULL,
 Descripcion NVARCHAR(50) NOT NULL
 )
 
+CREATE TABLE th.TiposMonedas(
+IdTipoMoneda INT PRIMARY KEY IDENTITY(1,1),
+Nombre NVARCHAR(250) NOT NULL,
+Abreviacion NVARCHAR(50) NOT NULL
+)
+
 CREATE TABLE th.Pagos(
 IdPago INT PRIMARY KEY IDENTITY(1,1),
 NombreFile NVARCHAR(100) NOT NULL,
@@ -123,8 +129,12 @@ Monto DECIMAL(10,2) NOT NULL,
 Fecha DATETIME NOT NULL,
 IdPedido INT NOT NULL,
 IdTipoPago INT NOT NULL,
+IdUsuario INT NOT NULL,
+IdTipoMoneda INT NOT NULL,
 FOREIGN KEY (IdPedido) REFERENCES th.Pedidos(IdPedido),
-FOREIGN KEY (IdTipoPago) REFERENCES th.TiposPagos(IdTipoPago)
+FOREIGN KEY (IdTipoPago) REFERENCES th.TiposPagos(IdTipoPago),
+FOREIGN KEY (IdUsuario) REFERENCES th.Usuarios(IdUsuario),
+FOREIGN KEY (IdTipoMoneda) REFERENCES th.TiposMonedas(IdTipoMoneda)
 )
 
 CREATE TABLE th.TiposMimes(
@@ -165,6 +175,7 @@ INSERT INTO th.TiposFicheros VALUES ('DAV', 'DAV')
 INSERT INTO th.TiposFicheros VALUES ('Recibi Conforme', 'Recií Conforme')
 INSERT INTO th.TiposFicheros VALUES ('Imagenes', 'Imagenes del pedido')
 INSERT INTO th.TiposFicheros VALUES ('BL', 'BL')
+INSERT INTO th.TiposFicheros VALUES ('Temp', 'Archivos Temporales')
 
 INSERT INTO th.EstadosFicheros VALUES ('Recibido')
 INSERT INTO th.EstadosFicheros VALUES ('Validado')
@@ -189,7 +200,9 @@ INSERT INTO th.TiposSeguimientos VALUES ('Pagos', 'Todos los pagos del pedido')
 INSERT INTO th.TiposPagos VALUES ('DAV', '`Documento DAV')
 INSERT INTO th.TiposPagos VALUES ('Multa DAV', 'Multa por DAV')
 
+INSERT INTO th.TiposMonedas VALUES ('Bolivianos', 'BOB')
+INSERT INTO th.TiposMonedas VALUES ('Dólar Americano', '$')
 
-select * from th.TiposSeguimientos
+select * from th.TiposFicheros
 
 
