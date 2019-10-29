@@ -10,6 +10,7 @@ using TransHaruhiko.Services;
 
 namespace TransHaruhiko.Controllers
 {
+    [Authorize]
     public class PagoController : Controller
     {
         private readonly IPagosService _pagosService;

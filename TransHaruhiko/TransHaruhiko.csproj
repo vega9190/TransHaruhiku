@@ -140,6 +140,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ApplicationErrorController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\FicheroController.cs" />
     <Compile Include="Controllers\GlobalizationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -322,6 +323,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\pages\Clientes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -430,6 +432,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Pedido\PopUpPago.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Cliente\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Cliente\PopUpCrear.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

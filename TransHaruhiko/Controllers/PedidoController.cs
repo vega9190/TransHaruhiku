@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Parameters.Pedidos;
 using TransHaruhiko.Services;
@@ -12,6 +8,7 @@ using TransHaruhiko.Models.Enum;
 
 namespace TransHaruhiko.Controllers
 {
+    [Authorize]
     public class PedidoController : Controller
     {
         private readonly IPedidosService _pedidosService;
