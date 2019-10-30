@@ -5,6 +5,6 @@ namespace TransHaruhiko.Services
 {
     public interface IClientesService
     {
-        IQueryable<Cliente> GetClientes();
+        IQueryable<Cliente> Buscar();
     }
 }

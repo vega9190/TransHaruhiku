@@ -36,7 +36,7 @@ namespace TransHaruhiko.Controllers
             queriable = queriable.Where(a => a.EstadoId != (int)EstadosEnum.Cancelado);
             if (!string.IsNullOrEmpty(parameters.Nombre))
             {
-                queriable = queriable.Where(a => a.Cliente.Nombres.Contains(parameters.Nombre));
+                queriable = queriable.Where(a => (a.Cliente.Nombres + " " + a.Cliente.Apellidos).Contains(parameters.Nombre));
             }
             if (!string.IsNullOrEmpty(parameters.Carnet))
             {

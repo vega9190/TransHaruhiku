@@ -12,7 +12,8 @@ Nombres NVARCHAR(50) NOT NULL,
 Apellidos NVARCHAR(50) NOT NULL,
 Direccion NVARCHAR(500) NOT NULL,
 Email NVARCHAR(50) NOT NULL,
-Telefono NVARCHAR(25) NOT NULL
+Telefono NVARCHAR(25) NOT NULL,
+Activo BIT NOT NULL
 )
 
 CREATE TABLE th.EstadosPedidos(
@@ -151,7 +152,7 @@ INSERT INTO th.EstadosPedidos VALUES ('Transportadora')
 INSERT INTO th.EstadosPedidos VALUES ('Finalizado')
 INSERT INTO th.EstadosPedidos VALUES ('Cancelado')
 
-INSERT INTO th.Clientes VALUES ('123456', 'Douglas', 'Vega', 'direcci�n asd', 'hola@sd.com', '486')
+INSERT INTO th.Clientes VALUES ('123456', 'Douglas', 'Vega', 'direcci�n asd', 'hola@sd.com', '486', 0)
 
 INSERT INTO th.Pedidos VALUES ('ASD','4561',GETDATE(),'Direcci�n','direcci�n url',1,1)
 

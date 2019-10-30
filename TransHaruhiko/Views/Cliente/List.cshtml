@@ -1,7 +1,51 @@
-﻿
+﻿@using TransHaruhiko.CustomHelpers
+@using TransHaruhiko.Globalization.Views.Cliente
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = ListStrings.Tittle;
+    ViewBag.TitlePage = ListStrings.TittleListado;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>List</h2>
+@section JavaScript{
+    <script type="text/javascript" src="@Url.Content("~/Globalization/Clientes/List")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Globalization/Clientes/Crear")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Globalization/Common/Common")"></script>
+    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.xdr-transport.js")"></script>
+    <script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Clientes/List.js")"></script>
+    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.iframe-transport.js")"></script>
 
+}
+
+<div id="page-cliente-listar">
+    <div class="box-fieldset">
+        <span class="field-title">@ListStrings.TextFiltros</span>
+        <div class="clearfix">
+            <div class="grid-100 mobile-grid-100">
+                <div class="grid-75">
+                    <ul class="box-form">
+                        <li>
+                            <label for="txt-nombre" class="grid-20 mobile-grid-100">@ListStrings.LabelNombre </label>
+                            <input id="txt-nombre" class="grid-55 mobile-grid-100" type="text" />
+                        </li>
+                        <li>
+                            <label for="txt-carnet" class="grid-20 mobile-grid-100">@ListStrings.LabelCarnet </label>
+                            <input id="txt-carnet" class="grid-55 mobile-grid-100" type="text" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="align-right">
+            <button id="btn-limpiar" class="button">@ListStrings.ButtonLimpiar</button>
+            <button id="btn-buscar" class="button">@ListStrings.ButtonBuscar</button>
+        </div>
+
+    </div>
+    <div class="box-fieldset">
+        <span class="field-title">@ListStrings.TextSeccionResultado</span>
+        <div class="box-buttons">
+            <button id="btn-crear" class="button">@ListStrings.ButtonNuevo</button>
+        </div>
+        <table id="tb-clientes" class="display"></table>
+    </div>
+</div>

@@ -26,7 +26,7 @@ namespace TransHaruhiko.Controllers
         public ActionResult SimpleSearchCliente(SimpleListViewModel parameters)
         {
             var transfer = new ClientTransfer();
-            var anyoQueriable = _clientesService.GetClientes();
+            var anyoQueriable = _clientesService.Buscar();
 
             if (!string.IsNullOrEmpty(parameters.Descripcion))
                 anyoQueriable = anyoQueriable.Where(a => a.Nombres.Contains(parameters.Descripcion));

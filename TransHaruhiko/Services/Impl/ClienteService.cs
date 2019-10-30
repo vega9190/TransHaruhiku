@@ -13,7 +13,7 @@ namespace TransHaruhiko.Services.Impl
             _dbContext = dbContext;
         }
 
-        public IQueryable<Cliente> GetClientes()
+        public IQueryable<Cliente> Buscar()
         {
             return _dbContext.Clientes;
         }

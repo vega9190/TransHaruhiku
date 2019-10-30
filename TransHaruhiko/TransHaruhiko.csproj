@@ -160,6 +160,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonControllerStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Scripts\Clientes\CrearStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrearStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Scripts\Clientes\ListStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Scripts\Common\CommonStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -214,6 +224,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PedidoStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Views\Cliente\ListStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Globalization\Views\Pedido\CreateStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -275,6 +290,7 @@
     <Compile Include="Models\ViewModel\BaseListViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\SimpleListViewModel.cs" />
+    <Compile Include="Parameters\Clientes\SearchParameters.cs" />
     <Compile Include="Parameters\Ficheros\SaveParameter.cs" />
     <Compile Include="Parameters\Observaciones\SaveParameters.cs" />
     <Compile Include="Parameters\Observaciones\SearchParameters.cs" />
@@ -304,6 +320,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\pages\Clientes\List.js" />
     <Content Include="Scripts\pages\Pedidos\Crear.js" />
     <Content Include="Scripts\pages\Pedidos\Editar.js" />
     <Content Include="Scripts\pages\Pedidos\List.js" />
@@ -323,7 +340,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\pages\Clientes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -332,6 +348,14 @@
     <EmbeddedResource Include="Globalization\Controllers\CommonControllerStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CommonControllerStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Scripts\Clientes\CrearStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CrearStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Scripts\Clientes\ListStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Scripts\Common\CommonStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -376,6 +400,10 @@
     <EmbeddedResource Include="Globalization\Services\Pedidos\PedidoStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PedidoStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Views\Cliente\ListStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Views\Pedido\CreateStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
