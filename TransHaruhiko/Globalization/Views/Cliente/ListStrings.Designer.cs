@@ -124,7 +124,7 @@ namespace TransHaruhiko.Globalization.Views.Cliente {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trans Haruhiko.
+        ///   Looks up a localized string similar to Transporte Haruhiko.
         /// </summary>
         public static string Tittle {
             get {

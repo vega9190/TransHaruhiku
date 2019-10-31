@@ -79,7 +79,7 @@ namespace TransHaruhiko.Globalization.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UNIR - Gran Via Rey Juan Carlos I, 41. 26002 Logroño (La Rioja) - Teléfono: +34 941 20 97 43 - Fax -34 902 87 70 37.
+        ///   Looks up a localized string similar to Transporte Haruhiko - Powered By Ing. Douglas Vega.
         /// </summary>
         public static string InfoFooter {
             get {
@@ -115,7 +115,7 @@ namespace TransHaruhiko.Globalization.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gestión de Alcances de Encuestas..
+        ///   Looks up a localized string similar to Gestión de Pedidos.
         /// </summary>
         public static string MensajeGestion {
             get {

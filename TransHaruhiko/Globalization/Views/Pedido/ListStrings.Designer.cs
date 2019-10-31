@@ -160,7 +160,7 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trans Haruhiko.
+        ///   Looks up a localized string similar to Transporte Haruhiko.
         /// </summary>
         public static string Tittle {
             get {

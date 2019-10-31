@@ -124,7 +124,7 @@
     <value>Esta cuenta se ha bloqueado, inténtelo de nuevo más tarde.</value>
   </data>
   <data name="InfoFooter" xml:space="preserve">
-    <value>UNIR - Gran Via Rey Juan Carlos I, 41. 26002 Logroño (La Rioja) - Teléfono: +34 941 20 97 43 - Fax -34 902 87 70 37</value>
+    <value>Transporte Haruhiko - Powered By Ing. Douglas Vega</value>
   </data>
   <data name="MensajeBloqueo" xml:space="preserve">
     <value>Bloqueado.</value>
@@ -136,7 +136,7 @@
     <value>An error occurred while processing your request.</value>
   </data>
   <data name="MensajeGestion" xml:space="preserve">
-    <value>Gestión de Alcances de Encuestas.</value>
+    <value>Gestión de Pedidos</value>
   </data>
   <data name="TextHeader" xml:space="preserve">
     <value>Gestión de actas y exámenes</value>
