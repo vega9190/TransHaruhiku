@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TransHaruhiko.Globalization.Scripts.Clientes {
+namespace TransHaruhiko.Globalization.Views.Cliente {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace TransHaruhiko.Globalization.Scripts.Clientes {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ListStrings {
+    public class CreateStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ListStrings() {
+        internal CreateStrings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace TransHaruhiko.Globalization.Scripts.Clientes {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Scripts.Clientes.ListStrings", typeof(ListStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Views.Cliente.CreateStrings", typeof(CreateStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,119 +61,74 @@ namespace TransHaruhiko.Globalization.Scripts.Clientes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Acciones.
-        /// </summary>
-        public static string ColumnAcciones {
-            get {
-                return ResourceManager.GetString("ColumnAcciones", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Activo.
         /// </summary>
-        public static string ColumnActivo {
+        public static string LabelActivo {
             get {
-                return ResourceManager.GetString("ColumnActivo", resourceCulture);
+                return ResourceManager.GetString("LabelActivo", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Carnet.
+        ///   Looks up a localized string similar to Apellidos*:.
         /// </summary>
-        public static string ColumnCarnet {
+        public static string LabelApellidos {
             get {
-                return ResourceManager.GetString("ColumnCarnet", resourceCulture);
+                return ResourceManager.GetString("LabelApellidos", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email.
+        ///   Looks up a localized string similar to Carnet*:.
         /// </summary>
-        public static string ColumnEmail {
+        public static string LabelCarnet {
             get {
-                return ResourceManager.GetString("ColumnEmail", resourceCulture);
+                return ResourceManager.GetString("LabelCarnet", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Id.
+        ///   Looks up a localized string similar to Direccion:.
         /// </summary>
-        public static string ColumnId {
+        public static string LabelDireccion {
             get {
-                return ResourceManager.GetString("ColumnId", resourceCulture);
+                return ResourceManager.GetString("LabelDireccion", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nombre.
+        ///   Looks up a localized string similar to Email*:.
         /// </summary>
-        public static string ColumnNombre {
+        public static string LabelEmail {
             get {
-                return ResourceManager.GetString("ColumnNombre", resourceCulture);
+                return ResourceManager.GetString("LabelEmail", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Telefono.
+        ///   Looks up a localized string similar to Nombres*:.
         /// </summary>
-        public static string ColumnTelefono {
+        public static string LabelNombre {
             get {
-                return ResourceManager.GetString("ColumnTelefono", resourceCulture);
+                return ResourceManager.GetString("LabelNombre", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Debe ingresar el Apellido..
+        ///   Looks up a localized string similar to Teléfono*:.
         /// </summary>
-        public static string ErrorNoApellidos {
+        public static string LabelTelefono {
             get {
-                return ResourceManager.GetString("ErrorNoApellidos", resourceCulture);
+                return ResourceManager.GetString("LabelTelefono", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Debe ingresar el Carnet..
+        ///   Looks up a localized string similar to Cliente.
         /// </summary>
-        public static string ErrorNoCarnet {
+        public static string TitleCrear {
             get {
-                return ResourceManager.GetString("ErrorNoCarnet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Debe ingresar el Email..
-        /// </summary>
-        public static string ErrorNoEmail {
-            get {
-                return ResourceManager.GetString("ErrorNoEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Debe ingresar el Nombre..
-        /// </summary>
-        public static string ErrorNoNombres {
-            get {
-                return ResourceManager.GetString("ErrorNoNombres", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Debe ingresar el Teléfono..
-        /// </summary>
-        public static string ErrorNoTelefono {
-            get {
-                return ResourceManager.GetString("ErrorNoTelefono", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Editar.
-        /// </summary>
-        public static string TextEditar {
-            get {
-                return ResourceManager.GetString("TextEditar", resourceCulture);
+                return ResourceManager.GetString("TitleCrear", resourceCulture);
             }
         }
     }

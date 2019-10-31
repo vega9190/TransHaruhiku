@@ -117,43 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ColumnAcciones" xml:space="preserve">
-    <value>Acciones</value>
-  </data>
-  <data name="ColumnActivo" xml:space="preserve">
+  <data name="LabelActivo" xml:space="preserve">
     <value>Activo</value>
   </data>
-  <data name="ColumnCarnet" xml:space="preserve">
-    <value>Carnet</value>
+  <data name="LabelApellidos" xml:space="preserve">
+    <value>Apellidos*:</value>
   </data>
-  <data name="ColumnEmail" xml:space="preserve">
-    <value>Email</value>
+  <data name="LabelCarnet" xml:space="preserve">
+    <value>Carnet*:</value>
   </data>
-  <data name="ColumnId" xml:space="preserve">
-    <value>Id</value>
+  <data name="LabelDireccion" xml:space="preserve">
+    <value>Direccion:</value>
   </data>
-  <data name="ColumnNombre" xml:space="preserve">
-    <value>Nombre</value>
+  <data name="LabelEmail" xml:space="preserve">
+    <value>Email*:</value>
   </data>
-  <data name="ColumnTelefono" xml:space="preserve">
-    <value>Telefono</value>
+  <data name="LabelNombre" xml:space="preserve">
+    <value>Nombres*:</value>
   </data>
-  <data name="ErrorNoApellidos" xml:space="preserve">
-    <value>Debe ingresar el Apellido.</value>
+  <data name="LabelTelefono" xml:space="preserve">
+    <value>Teléfono*:</value>
   </data>
-  <data name="ErrorNoCarnet" xml:space="preserve">
-    <value>Debe ingresar el Carnet.</value>
-  </data>
-  <data name="ErrorNoEmail" xml:space="preserve">
-    <value>Debe ingresar el Email.</value>
-  </data>
-  <data name="ErrorNoNombres" xml:space="preserve">
-    <value>Debe ingresar el Nombre.</value>
-  </data>
-  <data name="ErrorNoTelefono" xml:space="preserve">
-    <value>Debe ingresar el Teléfono.</value>
-  </data>
-  <data name="TextEditar" xml:space="preserve">
-    <value>Editar</value>
+  <data name="TitleCrear" xml:space="preserve">
+    <value>Cliente</value>
   </data>
 </root>

@@ -85,5 +85,38 @@ namespace TransHaruhiko.Controllers
             transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
             return Json(transfer);
         }
+        
+        public ActionResult PopUpCrear()
+        {
+            return View();
+        }
+        public ActionResult PopUpEditar()
+        {
+            return View();
+        }
+        public ActionResult Guardar(SaveParameters parameters)
+        {
+            var transfer = new ClientTransfer();
+
+            var res = _clientesService.Guardar(parameters);
+
+            if (res.HasErrors)
+                transfer.Errors.AddRange(res.Errors);
+            if (res.HasWarnings)
+                transfer.Warnings.AddRange(res.Warnings);
+            return Json(transfer);
+        }
+        public ActionResult Eliminar(int idCliente)
+        {
+            var transfer = new ClientTransfer();
+
+            var res = _clientesService.Eliminar(idCliente);
+
+            if (res.HasErrors)
+                transfer.Errors.AddRange(res.Errors);
+            if (res.HasWarnings)
+                transfer.Warnings.AddRange(res.Warnings);
+            return Json(transfer);
+        }
     }
 }

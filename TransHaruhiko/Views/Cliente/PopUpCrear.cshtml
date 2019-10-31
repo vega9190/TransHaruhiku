@@ -1,7 +1,45 @@
-﻿
+﻿@using TransHaruhiko.Globalization.Views.Cliente
+
 @{
-    ViewBag.Title = "PopUpCrear";
+    Layout = null;
 }
 
-<h2>PopUpCrear</h2>
 
+<div id="popup-cliente-crear" class="grid-container">
+    <h2 align="center"> @CreateStrings.TitleCrear </h2>
+    <div class="grid-100 mobile-grid-100">
+        <div class="grid-50">
+            <ul class="box-form">
+                <li>
+                    <label for="txt-carnet-crear" class="grid-25 mobile-grid-100">@CreateStrings.LabelCarnet</label>
+                    <input id="txt-carnet-crear" class="grid-70 mobile-grid-100" type="text" maxlength="25"/>
+                </li>
+                <li>
+                    <label for="txt-nombre-crear" class="grid-25 mobile-grid-100">@CreateStrings.LabelNombre</label>
+                    <input id="txt-nombre-crear" class="grid-70 mobile-grid-100" type="text" maxlength="50"/>
+                </li>
+                <li>
+                    <label for="txt-apellido-crear" class="grid-25 mobile-grid-100">@CreateStrings.LabelApellidos</label>
+                    <input id="txt-apellido-crear" class="grid-70 mobile-grid-100" type="text" maxlength="50"/>
+                </li>
+            </ul>
+        </div>
+        <div class="grid-50">
+            <ul class="box-form">
+                <li>
+                    <label for="txt-telefono-crear" class="grid-25 mobile-grid-100">@CreateStrings.LabelTelefono</label>
+                    <input id="txt-telefono-crear" class="grid-70 mobile-grid-100" type="text" maxlength="25"/>
+                </li>
+                <li>
+                    <label for="txt-direccion-crear" class="grid-25 mobile-grid-100">@CreateStrings.LabelDireccion</label>
+                    <input id="txt-direccion-crear" class="grid-70 mobile-grid-100" type="text" maxlength="500" />
+                </li>
+                <li>
+                    <label for="txt-email-crear" class="grid-25 mobile-grid-100">@CreateStrings.LabelEmail</label>
+                    <input id="txt-email-crear" class="grid-70 mobile-grid-100" type="text" maxlength="50" />
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="@Url.Content("~/Globalization/Clientes/List")"></script>

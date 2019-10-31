@@ -225,6 +225,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PedidoStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Views\Cliente\CreateStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Views\Cliente\ListStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -290,6 +295,7 @@
     <Compile Include="Models\ViewModel\BaseListViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\SimpleListViewModel.cs" />
+    <Compile Include="Parameters\Clientes\SaveParameters.cs" />
     <Compile Include="Parameters\Clientes\SearchParameters.cs" />
     <Compile Include="Parameters\Ficheros\SaveParameter.cs" />
     <Compile Include="Parameters\Observaciones\SaveParameters.cs" />
@@ -400,6 +406,10 @@
     <EmbeddedResource Include="Globalization\Services\Pedidos\PedidoStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PedidoStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Views\Cliente\CreateStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Views\Cliente\ListStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -115,10 +115,6 @@
 
                                 row.push(value.Cliente.Id);
                                 row.push(value.Cliente.Carnet);
-                                //row.push('<span  title="'
-                                //        + value.Pedido.Descripcion + '">'
-                                //        + summary(value.Pedido.Descripcion, 35, '...')
-                                //        + '</span>');
                                 row.push(value.Cliente.NombreCompleto);
                                 row.push(value.Cliente.Telefono);
                                 row.push(value.Cliente.Email);
@@ -141,3 +137,80 @@
         }
     });
 });
+
+/////////////////// PopUp Crear /////////////////////////
+function PopUpCrear() {
+    $.blockUI({ message: null });
+    var popup = null;
+    var buttons = {};
+    /***************************************************************************/
+    buttons[Globalize.localize('Guardar')] = function () {
+        var params = {};
+
+        params.Carnet = $('#txt-carnet-crear').val().trim();
+        params.Nombres = $('#txt-nombre-crear').val().trim();
+        params.Apellidos = $('#txt-apellido-crear').val().trim();
+        params.Telefono = $('#txt-telefono-crear').val().trim();
+        params.Direccion = $('#txt-direccion-crear').val().trim();
+        params.Email = $('#txt-email-crear').val().trim();        
+
+        var warnings = new Array();
+
+        if (isNull(params.IdCliente))
+            warnings.push(Globalize.localize('ErrorNoCliente'));
+
+        if (isEmpty(params.Descripcion))
+            warnings.push(Globalize.localize('ErrorNoDescripcion'));
+
+
+        if (warnings.length > 0) {
+            showCustomErrors({
+                title: Globalize.localize('TextInformacion'),
+                warnings: warnings
+            });
+            return false;
+        } else {
+            $.blockUI({ message: null });
+            $.ajax({
+                url: SiteUrl + 'Pedido/Guardar',
+                data: $.toJSON(params),
+                success: function (data) {
+                    $.unblockUI();
+                    if (data.HasErrors) {
+                        showErrors(data.Errors);
+                    } else {
+                        if (data.HasWarnings) {
+                            showCustomErrors({
+                                title: Globalize.localize('TextInformacion'),
+                                warnings: data.Warnings
+                            });
+                        } else {
+                            showMessage(Globalize
+                                .localize('MessageOperacionExitosamente'),
+                                true);
+                            popup.dialog('close');
+                            $('#tb-pedidos').table('update');
+                        }
+                    }
+                }
+            });
+        }
+
+    };
+    buttons[Globalize.localize('Cerrar')] = function () {
+        popup.dialog('close');
+    };
+    /***************************************************************************/
+    showPopupPage({
+        title: Globalize.localize('TituloPopUp'),
+        url: SiteUrl + 'Pedido/PopUpCrear',
+        open: function (event, ui) {
+            popup = $(this);
+            $.unblockUI();
+        },
+        buttons: buttons,
+        heigth: 500,
+        width: 800
+    }, false, function () {
+    });
+}
