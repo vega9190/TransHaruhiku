@@ -13,11 +13,13 @@ namespace TransHaruhiko.Controllers
     {
         private readonly IPedidosService _pedidosService;
         private readonly IFicherosService _ficherosService;
+        private readonly IReportesService _reportesService;
         
-        public PedidoController(IPedidosService pedidosService, IFicherosService ficherosService)
+        public PedidoController(IPedidosService pedidosService, IFicherosService ficherosService, IReportesService reportesService)
         {
             _pedidosService = pedidosService;
             _ficherosService = ficherosService;
+            _reportesService = reportesService;
         }
 
         public ActionResult List()
@@ -191,7 +193,6 @@ namespace TransHaruhiko.Controllers
                 transfer.Warnings.AddRange(res.Warnings);
             return Json(transfer);
         }
-
         public ActionResult Eliminar(int idPedido)
         {
             var transfer = new ClientTransfer();
@@ -210,6 +211,13 @@ namespace TransHaruhiko.Controllers
                 transfer.Warnings.AddRange(res.Warnings);
 
             return Json(transfer);
+        }
+        [HttpGet]
+        [Route("GenedarRecibiConforme/{idPedido}")]
+        public ActionResult GenedarRecibiConforme(int idPedido)
+        {
+            _reportesService.GenerarRecibiConforme(idPedido, Response);
+            return null;
         }
 
         #region PopUps

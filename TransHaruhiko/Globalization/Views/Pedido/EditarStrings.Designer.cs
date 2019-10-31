@@ -61,6 +61,15 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Descargar Recibí Conforme.
+        /// </summary>
+        public static string BtnRecibiConforme {
+            get {
+                return ResourceManager.GetString("BtnRecibiConforme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BL:.
         /// </summary>
         public static string LabelBL {

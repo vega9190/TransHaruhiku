@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dtsPedidos" targetNamespace="http://tempuri.org/dtsPedidos.xsd" xmlns:mstns="http://tempuri.org/dtsPedidos.xsd" xmlns="http://tempuri.org/dtsPedidos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dtsPedidos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dtsPedidos" msprop:Generator_UserDSName="dtsPedidos">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DatosPedido" msprop:Generator_TableClassName="DatosPedidoDataTable" msprop:Generator_TableVarName="tableDatosPedido" msprop:Generator_RowChangedName="DatosPedidoRowChanged" msprop:Generator_TablePropName="DatosPedido" msprop:Generator_RowDeletingName="DatosPedidoRowDeleting" msprop:Generator_RowChangingName="DatosPedidoRowChanging" msprop:Generator_RowEvHandlerName="DatosPedidoRowChangeEventHandler" msprop:Generator_RowDeletedName="DatosPedidoRowDeleted" msprop:Generator_RowClassName="DatosPedidoRow" msprop:Generator_UserTableName="DatosPedido" msprop:Generator_RowEvArgName="DatosPedidoRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NombreCompleto" msprop:Generator_ColumnVarNameInTable="columnNombreCompleto" msprop:Generator_ColumnPropNameInRow="NombreCompleto" msprop:Generator_ColumnPropNameInTable="NombreCompletoColumn" msprop:Generator_UserColumnName="NombreCompleto" type="xs:string" minOccurs="0" />
+              <xs:element name="Direccion" msprop:Generator_ColumnVarNameInTable="columnDireccion" msprop:Generator_ColumnPropNameInRow="Direccion" msprop:Generator_ColumnPropNameInTable="DireccionColumn" msprop:Generator_UserColumnName="Direccion" type="xs:string" minOccurs="0" />
+              <xs:element name="Telefono" msprop:Generator_ColumnVarNameInTable="columnTelefono" msprop:Generator_ColumnPropNameInRow="Telefono" msprop:Generator_ColumnPropNameInTable="TelefonoColumn" msprop:Generator_UserColumnName="Telefono" type="xs:string" minOccurs="0" />
+              <xs:element name="Descripcion" msprop:Generator_ColumnVarNameInTable="columnDescripcion" msprop:Generator_ColumnPropNameInRow="Descripcion" msprop:Generator_ColumnPropNameInTable="DescripcionColumn" msprop:Generator_UserColumnName="Descripcion" type="xs:string" minOccurs="0" />
+              <xs:element name="LugarFecha" msprop:Generator_ColumnVarNameInTable="columnLugarFecha" msprop:Generator_ColumnPropNameInRow="LugarFecha" msprop:Generator_ColumnPropNameInTable="LugarFechaColumn" msprop:Generator_UserColumnName="LugarFecha" type="xs:string" minOccurs="0" />
+              <xs:element name="Contenedor" msprop:Generator_ColumnVarNameInTable="columnContenedor" msprop:Generator_ColumnPropNameInRow="Contenedor" msprop:Generator_ColumnPropNameInTable="ContenedorColumn" msprop:Generator_UserColumnName="Contenedor" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

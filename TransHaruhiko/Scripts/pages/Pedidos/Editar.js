@@ -35,6 +35,7 @@ var EstadoFicheroEnum = {
 $(document).ready(function () {
     IdPedido = $('#hd-id-pedido').val();
     $('#btn-volver').button();
+    $('#btn-generar-recibi-conforme').button();
     $('#btn-volver').click(function () {
         window.location.href = SiteUrl + 'Pedido/List';
     });
@@ -167,6 +168,11 @@ $(document).ready(function () {
             $("#txt-direccion-url").val(DireccionUrl)
         }
 
+    });
+
+    $('#btn-generar-recibi-conforme').click(function () {
+        console.log(IdPedido);
+        gotoController('GenedarRecibiConforme/' + IdPedido);
     });
 
     CargarFileuploadFicheroBL();

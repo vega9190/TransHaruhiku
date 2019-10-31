@@ -81,3 +81,12 @@ var AutoNumericDecimal = {
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
+
+/******************************************************************************/
+function gotoController(controller) {
+    if (controller) {
+        window.location.href = SiteUrl + controller;
+    } else {
+        window.location.href = SiteUrl;
+    }
+}

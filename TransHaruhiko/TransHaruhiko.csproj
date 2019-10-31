@@ -80,6 +80,10 @@
     <Reference Include="Microsoft.Owin.Security.Cookies">
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.v12.12.0.0.0\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -265,6 +269,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LayoutStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbModels\Dto\Reportes\RecibiConformeDto.cs" />
     <Compile Include="Models\DbModels\Entidades\EstadoFichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Fichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Observacion.cs" />
@@ -307,6 +312,17 @@
     <Compile Include="Parameters\Pedidos\SearchParameters.cs" />
     <Compile Include="Parameters\Seguimientos\SearchParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\dtsPedidos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dtsPedidos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ReportesResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Specification\ProcesadorReporte.cs" />
     <Compile Include="Services\IClientesService.cs" />
     <Compile Include="Services\IFicherosService.cs" />
     <Compile Include="Services\Impl\ClienteService.cs" />
@@ -314,10 +330,12 @@
     <Compile Include="Services\Impl\ObservacionesService.cs" />
     <Compile Include="Services\Impl\PagosService.cs" />
     <Compile Include="Services\Impl\PedidosService.cs" />
+    <Compile Include="Services\Impl\ReporteService.cs" />
     <Compile Include="Services\Impl\UsuariosService.cs" />
     <Compile Include="Services\IObservacionesService.cs" />
     <Compile Include="Services\IPagosService.cs" />
     <Compile Include="Services\IPedidosService.cs" />
+    <Compile Include="Services\IReportesService.cs" />
     <Compile Include="Services\IUsuariosService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -441,6 +459,10 @@
       <LastGenOutput>LayoutStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RecibiConforme.rdlc" />
+    <EmbeddedResource Include="Reportes\ReportesResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReportesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
@@ -477,6 +499,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Cliente\PopUpCrear.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reportes\dtsPedidos.xsc">
+      <DependentUpon>dtsPedidos.xsd</DependentUpon>
+    </Content>
+    <None Include="Reportes\dtsPedidos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dtsPedidos.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reportes\dtsPedidos.xss">
+      <DependentUpon>dtsPedidos.xsd</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
