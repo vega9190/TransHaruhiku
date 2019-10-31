@@ -9,6 +9,7 @@ namespace TransHaruhiko.Services
     {
         IQueryable<Cliente> Buscar();
         BaseResult Guardar(SaveParameters parameters);
-        BaseResult Eliminar(int idCliente);
+        BaseResult CambiarActivo(int idCliente, bool activo);
+        Cliente Obtener(int idCliente);
     }
 }

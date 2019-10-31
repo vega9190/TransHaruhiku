@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using TransHaruhiko.CustomHelpers.FileManager;
@@ -112,10 +111,10 @@ namespace TransHaruhiko.Services.Impl
             if (!mimes.Any(a =>
                 a.Nombre.Contains(parameters.MimeType) && a.Extension.Contains(extension?.ToLower() ?? "")))
             {
-                result.Errors.Add("Fichero no válido.");
+                result.Errors.Add(PedidoStrings.ErrorFicheroNoValido);
             }else if (pedido == null)
             {
-                result.Errors.Add("No existe el pedido.");
+                result.Errors.Add(PedidoStrings.ErrorNoPedido);
             }
             else
             {
@@ -128,7 +127,7 @@ namespace TransHaruhiko.Services.Impl
                     if (FileHelper.Exist(rutaFicheroActual))
                     {
                         if(!FileHelper.RemoveFile(rutaFicheroActual))
-                            result.Errors.Add("El fichero no se puede eliminar.");
+                            result.Errors.Add(PedidoStrings.ErrorEliminarFichero);
                         else
                         {
                             var seguimiento = new Seguimiento
@@ -146,7 +145,7 @@ namespace TransHaruhiko.Services.Impl
                 }
 
                 if(!FileHelper.WriteFile(rutaArchivo, parameters.Content))
-                    result.Errors.Add("El fichero no se puede subir.");
+                    result.Errors.Add(PedidoStrings.ErrorSubirFichero);
 
                 if (result.HasErrors) return result;
 
@@ -183,7 +182,7 @@ namespace TransHaruhiko.Services.Impl
             var fichero = _ficherosService.Get(idPedido, idTipo);
 
             if(fichero == null)
-                result.Errors.Add("No existe el fichero del pedido");
+                result.Errors.Add(PedidoStrings.ErrorNoFichero);
             else
             {
                 var rutaFichero = FileHelper.GetPath(idPedido, idTipo, Path.GetExtension(fichero.Nombre));
@@ -195,13 +194,13 @@ namespace TransHaruhiko.Services.Impl
                 }
                 else
                 {
-                    result.Errors.Add("No existe el fichero del pedido");
+                    result.Errors.Add(PedidoStrings.ErrorNoFichero);
                 }
             }
 
             return result;
         }
-        public bool CambiarEstado(int idPedido)
+        public bool CambiarEstado(int idPedido, int idUsuario)
         {
             var cambiarEstado = false;
 
@@ -213,7 +212,16 @@ namespace TransHaruhiko.Services.Impl
                         var tieneBl = pedido.Ficheros.Any(a => a.TipoId == (int)TipoFicheroEnum.Bl);
                         if (tieneBl)
                         {
+                            var seguimiento = new Seguimiento
+                            {
+                                PedidoId = pedido.Id,
+                                Fecha = DateTime.Now,
+                                Descripcion = string.Format(CommonServiceStrings.TextSegCambioEstado, pedido.Estado.Nombre, "En Proceso"),
+                                TipoId = (int)TipoSeguimientoEnum.EstadoPedido,
+                                UsuarioId = idUsuario
+                            };
                             pedido.EstadoId = (int)EstadosEnum.EnProceso;
+                            _dbContext.Seguimientos.Add(seguimiento);
                             _dbContext.SaveChanges();
                             cambiarEstado = true;
                         }
@@ -235,7 +243,16 @@ namespace TransHaruhiko.Services.Impl
 
                         if (perimitodCambiarEstado)
                         {
+                            var seguimiento = new Seguimiento
+                            {
+                                PedidoId = pedido.Id,
+                                Fecha = DateTime.Now,
+                                Descripcion = string.Format(CommonServiceStrings.TextSegCambioEstado, pedido.Estado.Nombre, "Desaduanizacion"),
+                                TipoId = (int)TipoSeguimientoEnum.EstadoPedido,
+                                UsuarioId = idUsuario
+                            };
                             pedido.EstadoId = (int)EstadosEnum.Desaduanizacion;
+                            _dbContext.Seguimientos.Add(seguimiento);
                             _dbContext.SaveChanges();
                             cambiarEstado = true;
                         }
@@ -253,7 +270,16 @@ namespace TransHaruhiko.Services.Impl
 
                         if (perimitodCambiarEstado)
                         {
+                            var seguimiento = new Seguimiento
+                            {
+                                PedidoId = pedido.Id,
+                                Fecha = DateTime.Now,
+                                Descripcion = string.Format(CommonServiceStrings.TextSegCambioEstado, pedido.Estado.Nombre, "Transportadora"),
+                                TipoId = (int)TipoSeguimientoEnum.EstadoPedido,
+                                UsuarioId = idUsuario
+                            };
                             pedido.EstadoId = (int)EstadosEnum.Transportadora;
+                            _dbContext.Seguimientos.Add(seguimiento);
                             _dbContext.SaveChanges();
                             cambiarEstado = true;
                         }
@@ -264,7 +290,16 @@ namespace TransHaruhiko.Services.Impl
                         var tieneRecibiConforme = pedido.Ficheros.Any(a => a.TipoId == (int)TipoFicheroEnum.RecibiConforme);
                         if (tieneRecibiConforme)
                         {
+                            var seguimiento = new Seguimiento
+                            {
+                                PedidoId = pedido.Id,
+                                Fecha = DateTime.Now,
+                                Descripcion = string.Format(CommonServiceStrings.TextSegCambioEstado, pedido.Estado.Nombre, "Finalizado"),
+                                TipoId = (int)TipoSeguimientoEnum.EstadoPedido,
+                                UsuarioId = idUsuario
+                            };
                             pedido.EstadoId = (int)EstadosEnum.Finalizado;
+                            _dbContext.Seguimientos.Add(seguimiento);
                             _dbContext.SaveChanges();
                             cambiarEstado = true;
                         }
@@ -280,7 +315,7 @@ namespace TransHaruhiko.Services.Impl
             var fichero = _ficherosService.Get(idPedido, idTipo);
 
             if (fichero == null)
-                result.Errors.Add("No existe el fichero del pedido");
+                result.Errors.Add(PedidoStrings.ErrorNoFichero);
             else
             {
                 var rutaFichero = FileHelper.GetPath(idPedido, idTipo, Path.GetExtension(fichero.Nombre));
@@ -289,7 +324,7 @@ namespace TransHaruhiko.Services.Impl
                 {
                     if (!FileHelper.RemoveFile(rutaFichero))
                     {
-                        result.Errors.Add("El fichero no se puede eliminar.");
+                        result.Errors.Add(PedidoStrings.ErrorEliminarFichero);
                         return result;
                     }
                         
@@ -309,7 +344,7 @@ namespace TransHaruhiko.Services.Impl
                 }
                 else
                 {
-                    result.Errors.Add("No existe el fichero del pedido");
+                    result.Errors.Add(PedidoStrings.ErrorNoFichero);
                 }
             }
 

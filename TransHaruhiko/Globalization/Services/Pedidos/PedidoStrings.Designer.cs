@@ -61,11 +61,47 @@ namespace TransHaruhiko.Globalization.Services.Pedidos {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El fichero no se puede eliminar..
+        /// </summary>
+        public static string ErrorEliminarFichero {
+            get {
+                return ResourceManager.GetString("ErrorEliminarFichero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El fichero no es válido..
+        /// </summary>
+        public static string ErrorFicheroNoValido {
+            get {
+                return ResourceManager.GetString("ErrorFicheroNoValido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No existe el fichero del pedido..
+        /// </summary>
+        public static string ErrorNoFichero {
+            get {
+                return ResourceManager.GetString("ErrorNoFichero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No existe el pedido..
         /// </summary>
         public static string ErrorNoPedido {
             get {
                 return ResourceManager.GetString("ErrorNoPedido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se puede subir el fichero..
+        /// </summary>
+        public static string ErrorSubirFichero {
+            get {
+                return ResourceManager.GetString("ErrorSubirFichero", resourceCulture);
             }
         }
     }

@@ -156,4 +156,7 @@
   <data name="TextEditar" xml:space="preserve">
     <value>Editar</value>
   </data>
+  <data name="TituloPopUp" xml:space="preserve">
+    <value>Gestión de clientes</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Xml;
 using TransHaruhiko.Models.DbModels;
 using TransHaruhiko.Models.DbModels.Entidades;
 using TransHaruhiko.Models.TransferStruct;
@@ -25,10 +26,17 @@ namespace TransHaruhiko.Services.Impl
             if (parameters.IdCliente.HasValue)
             {
                 var cliente = _dbContext.Clientes.Find(parameters.IdCliente);
+
+                if (cliente == null)
+                {
+                    result.Errors.Add("No existe el Cliente.");
+                    return result;
+                }
+
                 cliente.Carnet = parameters.Carnet;
                 cliente.Apellidos = parameters.Apellidos;
                 cliente.Nombres = parameters.Nombres;
-                cliente.Direccion = parameters.Direccion;
+                cliente.Direccion = string.IsNullOrWhiteSpace(parameters.Direccion) ? "" : parameters.Direccion;
                 cliente.Telefono = parameters.Telefono;
                 cliente.Email = parameters.Email;
             }
@@ -39,7 +47,7 @@ namespace TransHaruhiko.Services.Impl
                     Carnet = parameters.Carnet,
                     Nombres = parameters.Nombres,
                     Apellidos = parameters.Apellidos,
-                    Direccion = parameters.Direccion,
+                    Direccion = string.IsNullOrWhiteSpace(parameters.Direccion) ? "" : parameters.Direccion,
                     Telefono = parameters.Telefono,
                     Email = parameters.Email,
                     Activo = true
@@ -50,16 +58,27 @@ namespace TransHaruhiko.Services.Impl
             _dbContext.SaveChanges();
             return result;
         }
-        public BaseResult Eliminar(int idCliente)
+        public BaseResult CambiarActivo(int idCliente, bool activo)
         {
             var result = new BaseResult();
 
             var cliente = _dbContext.Clientes.Find(idCliente);
 
-            cliente.Activo = false;
+            if (cliente == null)
+            {
+                result.Errors.Add("No existe el Cliente.");
+                return result;
+            }
+
+            cliente.Activo = activo;
 
             _dbContext.SaveChanges();
             return result;
+        }
+
+        public Cliente Obtener(int idCliente)
+        {
+            return _dbContext.Clientes.Find(idCliente);
         }
     }
 }

@@ -117,7 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorEliminarFichero" xml:space="preserve">
+    <value>El fichero no se puede eliminar.</value>
+  </data>
+  <data name="ErrorFicheroNoValido" xml:space="preserve">
+    <value>El fichero no es válido.</value>
+  </data>
+  <data name="ErrorNoFichero" xml:space="preserve">
+    <value>No existe el fichero del pedido.</value>
+  </data>
   <data name="ErrorNoPedido" xml:space="preserve">
     <value>No existe el pedido.</value>
+  </data>
+  <data name="ErrorSubirFichero" xml:space="preserve">
+    <value>No se puede subir el fichero.</value>
   </data>
 </root>

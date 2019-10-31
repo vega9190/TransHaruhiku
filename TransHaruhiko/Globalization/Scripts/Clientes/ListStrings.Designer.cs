@@ -176,5 +176,14 @@ namespace TransHaruhiko.Globalization.Scripts.Clientes {
                 return ResourceManager.GetString("TextEditar", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gestión de clientes.
+        /// </summary>
+        public static string TituloPopUp {
+            get {
+                return ResourceManager.GetString("TituloPopUp", resourceCulture);
+            }
+        }
     }
 }

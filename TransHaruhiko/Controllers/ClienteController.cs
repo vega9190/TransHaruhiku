@@ -106,16 +106,43 @@ namespace TransHaruhiko.Controllers
                 transfer.Warnings.AddRange(res.Warnings);
             return Json(transfer);
         }
-        public ActionResult Eliminar(int idCliente)
+        public ActionResult CambiarActivo(int idCliente, bool activo)
         {
             var transfer = new ClientTransfer();
 
-            var res = _clientesService.Eliminar(idCliente);
+            var res = _clientesService.CambiarActivo(idCliente, activo);
 
             if (res.HasErrors)
                 transfer.Errors.AddRange(res.Errors);
             if (res.HasWarnings)
                 transfer.Warnings.AddRange(res.Warnings);
+            return Json(transfer);
+        }
+        public ActionResult Obtener(int idCliente)
+        {
+            var transfer = new ClientTransfer();
+            var cliente = _clientesService.Obtener(idCliente);
+
+
+            if (cliente == null)
+            {
+                return null;
+            }
+            transfer.Data = new
+            {
+                Cliente = new
+                {
+                    cliente.Id,
+                    cliente.Nombres,
+                    cliente.Apellidos,
+                    cliente.Carnet,
+                    cliente.Telefono,
+                    cliente.Direccion,
+                    cliente.Activo,
+                    cliente.Email
+                }
+            };
+
             return Json(transfer);
         }
     }

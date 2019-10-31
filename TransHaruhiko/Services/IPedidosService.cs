@@ -16,6 +16,6 @@ namespace TransHaruhiko.Services
         BaseResult EliminarFichero(int idPedido, int idTipo, int idUsuario);
         Pedido Get(int idPedido);
         IQueryable<Seguimiento> BuscarSeguimientos();
-        bool CambiarEstado(int idPedido);
+        bool CambiarEstado(int idPedido, int idUsuario);
     }
 }

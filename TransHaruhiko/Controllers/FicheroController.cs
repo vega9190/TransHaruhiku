@@ -72,7 +72,7 @@ namespace TransHaruhiko.Controllers
                 transfer.Warnings.AddRange(res.Warnings);
 
             var fichero = _ficherosService.Get(parameters.IdPedido.Value, parameters.IdTipo.Value);
-            var cambiarEstado = _pedidosService.CambiarEstado(pedidoId);
+            var cambiarEstado = _pedidosService.CambiarEstado(pedidoId, int.Parse(user.Name));
 
             transfer.Data = new { IdFichero = fichero.Id, EstadoModificado = cambiarEstado, Estado = fichero.Pedido.Estado.Nombre };
             return Json(transfer);
@@ -229,7 +229,7 @@ namespace TransHaruhiko.Controllers
 
 
             var fichero = _ficherosService.Get(idFichero);
-            var cambiarEstado = _pedidosService.CambiarEstado(fichero.PedidoId);
+            var cambiarEstado = _pedidosService.CambiarEstado(fichero.PedidoId, int.Parse(user.Name));
             var pedido = _pedidosService.Get(fichero.PedidoId);
 
             transfer.Data = new { EstadoModificado = cambiarEstado, Estado = pedido.Estado.Nombre };
