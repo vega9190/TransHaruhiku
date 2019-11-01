@@ -9,5 +9,6 @@
         public string Direccion { get; set; }
         public string DireccionUrl { get; set; }
         public int? IdUsuario { get; set; }
+        public string Precio { get; set; }
     }
 }

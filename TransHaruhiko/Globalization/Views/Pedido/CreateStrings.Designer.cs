@@ -106,6 +106,24 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Precio:.
+        /// </summary>
+        public static string LabelPrecio {
+            get {
+                return ResourceManager.GetString("LabelPrecio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registro de Cobro.
+        /// </summary>
+        public static string TitleCobro {
+            get {
+                return ResourceManager.GetString("TitleCobro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Añadir nuevo pedido.
         /// </summary>
         public static string TitleCrear {

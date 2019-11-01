@@ -130,7 +130,7 @@
     <value>Direccion:</value>
   </data>
   <data name="LabelEmail" xml:space="preserve">
-    <value>Email*:</value>
+    <value>Email:</value>
   </data>
   <data name="LabelNombre" xml:space="preserve">
     <value>Nombres*:</value>

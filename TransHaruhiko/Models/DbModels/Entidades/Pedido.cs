@@ -16,6 +16,7 @@ namespace TransHaruhiko.Models.DbModels.Entidades
         public DateTime Fecha { get; set; }
         public string Direccion { get; set; }
         public string DireccionUrl { get; set; }
+        public decimal? Precio { get; set; }
         [Column("IdCliente")]
         public int ClienteId { get; set; }
         [ForeignKey(nameof(ClienteId))]

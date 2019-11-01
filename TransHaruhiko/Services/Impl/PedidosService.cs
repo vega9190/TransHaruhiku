@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using TransHaruhiko.CustomHelpers.FileManager;
@@ -75,6 +76,27 @@ namespace TransHaruhiko.Services.Impl
             return result;
         }
 
+        public BaseResult GuardarPrecio(SaveParameters parameters)
+        {
+            var result = new BaseResult();
+            var pedido = _dbContext.Pedidos.Find(parameters.IdPedido);
+
+            var precio = pedido.Precio.HasValue ? pedido.Precio : 0;
+            pedido.Precio = decimal.Parse(parameters.Precio, CultureInfo.InvariantCulture);
+
+            var seguimiento = new Seguimiento
+            {
+                PedidoId = pedido.Id,
+                Fecha = DateTime.Now,
+                Descripcion = string.Format(CommonServiceStrings.TextSegPrecioPedido, precio , pedido.Precio),
+                TipoId = (int)TipoSeguimientoEnum.Precios,
+                UsuarioId = parameters.IdUsuario.Value
+            };
+
+            _dbContext.Seguimientos.Add(seguimiento);
+            _dbContext.SaveChanges();
+            return result;
+        }
         public BaseResult Eliminar(int idPedido, int idUsuario)
         {
             var result = new BaseResult();

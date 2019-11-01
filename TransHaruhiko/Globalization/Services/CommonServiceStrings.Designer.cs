@@ -131,5 +131,14 @@ namespace TransHaruhiko.Globalization.Services {
                 return ResourceManager.GetString("TextSegEliminarPago", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Se ha registrado el precio al pedido.. Pasó de &quot;{0}&quot; a &quot;{1}&quot;. .
+        /// </summary>
+        public static string TextSegPrecioPedido {
+            get {
+                return ResourceManager.GetString("TextSegPrecioPedido", resourceCulture);
+            }
+        }
     }
 }

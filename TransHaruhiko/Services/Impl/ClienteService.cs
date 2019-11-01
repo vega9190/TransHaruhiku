@@ -38,7 +38,7 @@ namespace TransHaruhiko.Services.Impl
                 cliente.Nombres = parameters.Nombres;
                 cliente.Direccion = string.IsNullOrWhiteSpace(parameters.Direccion) ? "" : parameters.Direccion;
                 cliente.Telefono = parameters.Telefono;
-                cliente.Email = parameters.Email;
+                cliente.Email = string.IsNullOrWhiteSpace(parameters.Email) ? "" : parameters.Email;
             }
             else
             {
@@ -49,7 +49,7 @@ namespace TransHaruhiko.Services.Impl
                     Apellidos = parameters.Apellidos,
                     Direccion = string.IsNullOrWhiteSpace(parameters.Direccion) ? "" : parameters.Direccion,
                     Telefono = parameters.Telefono,
-                    Email = parameters.Email,
+                    Email = string.IsNullOrWhiteSpace(parameters.Email) ? "" : parameters.Email,
                     Activo = true
                 };
 

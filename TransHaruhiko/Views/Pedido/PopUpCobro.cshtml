@@ -1,0 +1,21 @@
+﻿@using TransHaruhiko.Globalization.Views.Pedido
+
+@{
+    Layout = null;
+}
+
+
+<div id="popup-pedido-cobro" class="grid-container">
+    <h2 align="center"> @CreateStrings.TitleCobro </h2>
+    <div class="grid-100 mobile-grid-100">
+        <div class="grid-100">
+            <ul class="box-form">
+                <li>
+                    <label for="txt-precio" class="grid-15 mobile-grid-100">@CreateStrings.LabelPrecio </label>
+                    <input id="txt-precio" class="grid-70 mobile-grid-100" type="text"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="@Url.Content("~/Globalization/Pedidos/List")"></script>

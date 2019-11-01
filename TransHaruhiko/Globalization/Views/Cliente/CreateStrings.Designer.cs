@@ -97,7 +97,7 @@ namespace TransHaruhiko.Globalization.Views.Cliente {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email*:.
+        ///   Looks up a localized string similar to Email:.
         /// </summary>
         public static string LabelEmail {
             get {

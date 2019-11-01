@@ -150,6 +150,10 @@ $(document).ready(function () {
                 PopUpPagos($(nRow).data('data').Pedido.Id);
             });
 
+            $('.btn-precio', nRow).click(function () {
+                PopUpCobro($(nRow).data('data').Pedido.Id, $(nRow).data('data').Pedido.Precio);
+            });
+
             return nRow;
         },
         fnServerData: function(sSource, aoData, fnCallback) {
@@ -221,9 +225,13 @@ $(document).ready(function () {
                                     Globalize.localize('TextPagos') +
                                     '" class="btn-pagos ui-icon ui-icon-tag"></span>';
 
-                                //tempAcciones += '<span title="' +
-                                //    Globalize.localize('TextEliminar') +
-                                //    '" class="btn-eliminar ui-icon ui-icon-trash"></span>';
+                                if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+                                    tempAcciones += '<span title="' +
+                                        Globalize.localize('TextPrecio') +
+                                        '" class="btn-precio ui-icon ui-icon-suitcase" ' + (isNull(value.Pedido.Precio) ? '' : 'style="background-color: greenyellow;"')
+                                        +'></span>';
+                                }
+
                                 tempAcciones += '</div>';
 
                                 row.push(value.Pedido.Id);
@@ -258,7 +266,7 @@ $(document).ready(function () {
 
 /////////////////// PopUp Crear /////////////////////////
 function PopUpCrear() {
-    $.blockUI({ message: null });
+    //$.blockUI({ message: null });
     var popup = null;
     var buttons = {};
     /***************************************************************************/
@@ -323,7 +331,7 @@ function PopUpCrear() {
         url: SiteUrl + 'Pedido/PopUpCrear',
         open: function (event, ui) {
             popup = $(this);
-            $.unblockUI();
+            //$.unblockUI();
         },
         buttons: buttons,
         heigth: 500,
@@ -334,7 +342,7 @@ function PopUpCrear() {
 
 /////////////////// PopUp Observaciones /////////////////////////
 function PopUpObservaciones(idPedido) {
-    $.blockUI({ message: null });
+    //$.blockUI({ message: null });
     var popup = null;
     var buttons = {};
     /***************************************************************************/
@@ -347,7 +355,7 @@ function PopUpObservaciones(idPedido) {
         url: SiteUrl + 'Pedido/PopUpObservacion',
         open: function (event, ui) {
             popup = $(this);
-            $.unblockUI();
+            //$.unblockUI();
         },
         buttons: buttons,
         heigth: 500,
@@ -562,7 +570,7 @@ function PopUpObservaciones(idPedido) {
 
 /////////////////// PopUp Pagos /////////////////////////
 function PopUpPagos(idPedido) {
-    $.blockUI({ message: null });
+    //$.blockUI({ message: null });
     var popup = null;
     var buttons = {};
     /***************************************************************************/
@@ -575,7 +583,7 @@ function PopUpPagos(idPedido) {
         url: SiteUrl + 'Pedido/PopUpPago',
         open: function (event, ui) {
             popup = $(this);
-            $.unblockUI();
+            //$.unblockUI();
         },
         buttons: buttons,
         heigth: 500,
@@ -901,5 +909,75 @@ function PopUpPagos(idPedido) {
             }
         });
 
+    });
+}
+
+/////////////////// PopUp Cobros /////////////////////////
+function PopUpCobro(idPedido, precio) {
+    //$.blockUI({ message: null });
+    var popup = null;
+    var buttons = {};
+    buttons[Globalize.localize('Guardar')] = function () {
+        var params = {};
+
+        params.Precio = $('#txt-precio', popup).val()
+        params.IdPedido = idPedido;
+
+        var warnings = new Array();
+
+        if (isEmpty(params.Precio))
+            warnings.push(Globalize.localize('ErrorNoPrecio'));
+
+        if (warnings.length > 0) {
+            showCustomErrors({
+                title: Globalize.localize('TextInformacion'),
+                warnings: warnings
+            });
+            return false;
+        } else {
+            $.blockUI({ message: null });
+            $.ajax({
+                url: SiteUrl + 'Pedido/GuardarPrecio',
+                data: $.toJSON(params),
+                success: function (data) {
+                    $.unblockUI();
+                    if (data.HasErrors) {
+                        showErrors(data.Errors);
+                    } else {
+                        if (data.HasWarnings) {
+                            showCustomErrors({
+                                title: Globalize.localize('TextInformacion'),
+                                warnings: data.Warnings
+                            });
+                        } else {
+                            showMessage(Globalize
+                                .localize('MessageOperacionExitosamente'),
+                                true);
+                            popup.dialog('close');
+                            $('#tb-pedidos').table('update');
+                        }
+                    }
+                }
+            });
+        }
+    };
+    /***************************************************************************/
+    buttons[Globalize.localize('Cerrar')] = function () {
+        popup.dialog('close');
+    };
+    /***************************************************************************/
+    showPopupPage({
+        title: Globalize.localize('TituloPopUp'),
+        url: SiteUrl + 'Pedido/PopUpCobro',
+        open: function (event, ui) {
+            popup = $(this);
+            //$.unblockUI();
+        },
+        buttons: buttons,
+        //heigth: 500,
+        width: 500
+    }, false, function () {
+        $('#txt-precio', popup).autoNumeric(AutoNumericDecimal);
+        $('#txt-precio', popup).val(precio);
     });
 }

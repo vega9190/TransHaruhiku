@@ -171,7 +171,6 @@ $(document).ready(function () {
     });
 
     $('#btn-generar-recibi-conforme').click(function () {
-        console.log(IdPedido);
         gotoController('GenedarRecibiConforme/' + IdPedido);
     });
 

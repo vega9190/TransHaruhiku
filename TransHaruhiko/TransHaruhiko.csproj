@@ -512,6 +512,7 @@
     <Content Include="Reportes\dtsPedidos.xss">
       <DependentUpon>dtsPedidos.xsd</DependentUpon>
     </Content>
+    <Content Include="Views\Pedido\PopUpCobro.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

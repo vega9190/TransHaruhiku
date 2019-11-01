@@ -150,20 +150,23 @@
   <data name="ErrorNoDescripcion" xml:space="preserve">
     <value>Introduzca un valor en el campo Descripción.</value>
   </data>
+  <data name="ErrorNoPrecio" xml:space="preserve">
+    <value>Debe ingresar el precio del pedido.</value>
+  </data>
   <data name="TextConfirmarEliminar" xml:space="preserve">
     <value>Está a punto de eliminar el registro, ¿Desea continuar?</value>
   </data>
   <data name="TextEditar" xml:space="preserve">
     <value>Editar</value>
   </data>
-  <data name="TextEliminar" xml:space="preserve">
-    <value>Eliminar</value>
-  </data>
   <data name="TextObservaciones" xml:space="preserve">
     <value>Observaciones</value>
   </data>
   <data name="TextPagos" xml:space="preserve">
     <value>Pagos</value>
+  </data>
+  <data name="TextPrecio" xml:space="preserve">
+    <value>Precio</value>
   </data>
   <data name="TituloPopUp" xml:space="preserve">
     <value>Gestión de pedidos</value>

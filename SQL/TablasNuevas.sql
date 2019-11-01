@@ -28,6 +28,7 @@ Contenedor NVARCHAR(100) NULL,
 Fecha DATETIME NOT NULL,
 Direccion NVARCHAR(500) NULL,
 DireccionUrl NVARCHAR(500) NULL,
+Precio DECIMAL(10,2) NULL,
 IdCliente INT NOT NULL,
 IdEstadoPedido INT NOT NULL,
 FOREIGN KEY(IdCliente) REFERENCES th.Clientes(IdCliente),
@@ -152,17 +153,17 @@ INSERT INTO th.EstadosPedidos VALUES ('Transportadora')
 INSERT INTO th.EstadosPedidos VALUES ('Finalizado')
 INSERT INTO th.EstadosPedidos VALUES ('Cancelado')
 
-INSERT INTO th.Clientes VALUES ('123456', 'Douglas', 'Vega', 'direcci�n asd', 'hola@sd.com', '486', 0)
+--INSERT INTO th.Clientes VALUES ('123456', 'Douglas', 'Vega', 'direcci�n asd', 'hola@sd.com', '486', 0)
 
-INSERT INTO th.Pedidos VALUES ('ASD','4561',GETDATE(),'Direcci�n','direcci�n url',1,1)
+--INSERT INTO th.Pedidos VALUES ('ASD','4561',GETDATE(),'Direcci�n','direcci�n url',1,1)
 
 INSERT INTO th.Roles VALUES ('Operador')
 INSERT INTO th.Roles VALUES ('Gerente')
 INSERT INTO th.Roles VALUES ('Administrador')
 
-INSERT INTO th.Trabajadores VALUES ('Trabajador', 'Trabajador APP', '123', 'asd@hotmail.com', '8794', 'direcci�n', 1)
+--INSERT INTO th.Trabajadores VALUES ('Trabajador', 'Trabajador APP', '123', 'asd@hotmail.com', '8794', 'direcci�n', 1)
 
-INSERT INTO th.Usuarios VALUES ('adm', 'adm', 1, 1, 1)
+--INSERT INTO th.Usuarios VALUES ('adm', 'adm', 1, 1, 1)
 
 INSERT INTO th.TiposFicheros VALUES ('Lista de Empaque', 'Lista de Empaque')
 INSERT INTO th.TiposFicheros VALUES ('Factura Comercial', 'Factura Comercial')
@@ -196,7 +197,7 @@ INSERT INTO th.TiposMimes VALUES ('application/x-rar-compressed;application/octe
 INSERT INTO th.TiposSeguimientos VALUES ('Documentos', 'Todos los documentos del pedido')
 INSERT INTO th.TiposSeguimientos VALUES ('Estado Pedido', 'Todos los cambios de estados del pedido')
 INSERT INTO th.TiposSeguimientos VALUES ('Estado Fichero', 'Todos los cambios de estados del fichero')
-INSERT INTO th.TiposSeguimientos VALUES ('Pagos', 'Todos los pagos del pedido')
+INSERT INTO th.TiposSeguimientos VALUES ('Precios', 'Los precios registrados en el pedido')
 
 INSERT INTO th.TiposPagos VALUES ('DAV', '`Documento DAV')
 INSERT INTO th.TiposPagos VALUES ('Multa DAV', 'Multa por DAV')

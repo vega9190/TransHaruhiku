@@ -132,6 +132,12 @@
   <data name="LabelDireccionUrl" xml:space="preserve">
     <value>URL Dirección:</value>
   </data>
+  <data name="LabelPrecio" xml:space="preserve">
+    <value>Precio:</value>
+  </data>
+  <data name="TitleCobro" xml:space="preserve">
+    <value>Registro de Cobro</value>
+  </data>
   <data name="TitleCrear" xml:space="preserve">
     <value>Añadir nuevo pedido</value>
   </data>

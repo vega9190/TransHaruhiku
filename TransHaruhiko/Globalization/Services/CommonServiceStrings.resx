@@ -141,4 +141,7 @@
   <data name="TextSegEliminarPago" xml:space="preserve">
     <value>Se ha eliminado el pago "{0}".</value>
   </data>
+  <data name="TextSegPrecioPedido" xml:space="preserve">
+    <value>Se ha registrado el precio al pedido.. Pasó de "{0}" a "{1}". </value>
+  </data>
 </root>

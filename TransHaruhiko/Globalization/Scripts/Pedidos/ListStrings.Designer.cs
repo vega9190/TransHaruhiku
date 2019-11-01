@@ -160,6 +160,15 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Debe ingresar el precio del pedido..
+        /// </summary>
+        public static string ErrorNoPrecio {
+            get {
+                return ResourceManager.GetString("ErrorNoPrecio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Está a punto de eliminar el registro, ¿Desea continuar?.
         /// </summary>
         public static string TextConfirmarEliminar {
@@ -178,15 +187,6 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Eliminar.
-        /// </summary>
-        public static string TextEliminar {
-            get {
-                return ResourceManager.GetString("TextEliminar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Observaciones.
         /// </summary>
         public static string TextObservaciones {
@@ -201,6 +201,15 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         public static string TextPagos {
             get {
                 return ResourceManager.GetString("TextPagos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Precio.
+        /// </summary>
+        public static string TextPrecio {
+            get {
+                return ResourceManager.GetString("TextPrecio", resourceCulture);
             }
         }
         

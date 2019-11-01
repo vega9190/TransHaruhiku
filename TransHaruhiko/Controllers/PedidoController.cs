@@ -69,6 +69,7 @@ namespace TransHaruhiko.Controllers
                     a.Descripcion,
                     a.Contenedor,
                     a.Fecha,
+                    a.Precio,
                     Cliente = new
                     {
                         a.Cliente.Id,
@@ -193,6 +194,25 @@ namespace TransHaruhiko.Controllers
                 transfer.Warnings.AddRange(res.Warnings);
             return Json(transfer);
         }
+        public ActionResult GuardarPrecio(SaveParameters parameters)
+        {
+            var transfer = new ClientTransfer();
+
+            var user = User.Identity;
+            if (user == null)
+            {
+                transfer.Errors.Add(CommonControllerStrings.ErrorSinUsuario);
+                return Json(transfer);
+            }
+            parameters.IdUsuario = int.Parse(user.Name);
+            var res = _pedidosService.GuardarPrecio(parameters);
+
+            if (res.HasErrors)
+                transfer.Errors.AddRange(res.Errors);
+            if (res.HasWarnings)
+                transfer.Warnings.AddRange(res.Warnings);
+            return Json(transfer);
+        }
         public ActionResult Eliminar(int idPedido)
         {
             var transfer = new ClientTransfer();
@@ -231,6 +251,10 @@ namespace TransHaruhiko.Controllers
             return View();
         }
         public ActionResult PopUpPago()
+        {
+            return View();
+        }
+        public ActionResult PopUpCobro()
         {
             return View();
         }

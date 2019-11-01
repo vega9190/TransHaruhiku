@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using TransHaruhiko.Models.Enum;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Models.ViewModel;
 using TransHaruhiko.Parameters.Seguimientos;
@@ -27,6 +28,7 @@ namespace TransHaruhiko.Controllers
         {
             var transfer = new ClientTransfer();
             var anyoQueriable = _clientesService.Buscar();
+            anyoQueriable = anyoQueriable.Where(a => a.Activo);
 
             if (!string.IsNullOrEmpty(parameters.Descripcion))
                 anyoQueriable = anyoQueriable.Where(a => a.Nombres.Contains(parameters.Descripcion));
@@ -69,7 +71,7 @@ namespace TransHaruhiko.Controllers
         {
             var queriable = _pedidosService.BuscarSeguimientos();
 
-            queriable = queriable.Where(a => a.PedidoId == parameters.IdPedido);
+            queriable = queriable.Where(a => a.PedidoId == parameters.IdPedido && a.TipoId != (int)TipoSeguimientoEnum.Precios);
            
             var querySelect = queriable.Select(a => new
             {

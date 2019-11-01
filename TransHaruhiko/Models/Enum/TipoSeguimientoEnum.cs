@@ -5,6 +5,7 @@
         Documentos = 1,
         EstadoPedido,
         EstadoFichero,
-        Pagos
+        Pagos,
+        Precios
     }
 }

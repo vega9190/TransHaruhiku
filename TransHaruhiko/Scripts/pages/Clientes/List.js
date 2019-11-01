@@ -172,7 +172,7 @@
 
 /////////////////// PopUp Crear /////////////////////////
 function PopUpCrear() {
-    $.blockUI({ message: null });
+    //$.blockUI({ message: null });
     var popup = null;
     var buttons = {};
     /***************************************************************************/
@@ -200,8 +200,8 @@ function PopUpCrear() {
         if (isEmpty(params.Telefono))
             warnings.push(Globalize.localize('ErrorNoTelefono'));
 
-        if (isEmpty(params.Email))
-            warnings.push(Globalize.localize('ErrorNoEmail'));
+        //if (isEmpty(params.Email))
+        //    warnings.push(Globalize.localize('ErrorNoEmail'));
 
         if (warnings.length > 0) {
             showCustomErrors({
@@ -246,7 +246,7 @@ function PopUpCrear() {
         url: SiteUrl + 'Cliente/PopUpCrear',
         open: function (event, ui) {
             popup = $(this);
-            $.unblockUI();
+            //$.unblockUI();
         },
         buttons: buttons,
         heigth: 500,
@@ -257,7 +257,7 @@ function PopUpCrear() {
 
 /////////////////// PopUp Editar /////////////////////////
 function PopUpEditar(idCliente) {
-    $.blockUI({ message: null });
+    //$.blockUI({ message: null });
     var popup = null;
     var buttons = {};
     /***************************************************************************/
@@ -286,8 +286,8 @@ function PopUpEditar(idCliente) {
         if (isEmpty(params.Telefono))
             warnings.push(Globalize.localize('ErrorNoTelefono'));
 
-        if (isEmpty(params.Email))
-            warnings.push(Globalize.localize('ErrorNoEmail'));
+        //if (isEmpty(params.Email))
+        //    warnings.push(Globalize.localize('ErrorNoEmail'));
 
         if (warnings.length > 0) {
             showCustomErrors({
@@ -332,7 +332,7 @@ function PopUpEditar(idCliente) {
         url: SiteUrl + 'Cliente/PopUpCrear',
         open: function (event, ui) {
             popup = $(this);
-            $.unblockUI();
+          //  $.unblockUI();
         },
         buttons: buttons,
         heigth: 500,
