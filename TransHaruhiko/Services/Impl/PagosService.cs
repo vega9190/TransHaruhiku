@@ -73,7 +73,7 @@ namespace TransHaruhiko.Services.Impl
             if (!FileHelper.WriteFile(rutaFichero, ficheroData.Content))
                 result.Errors.Add("El fichero no se puede subir.");
 
-            _ficherosService.EliminarTemporal(pago.PedidoId, parameters.IdTipo);
+            _ficherosService.EliminarTemporal(pago.PedidoId, (int)TipoFicheroEnum.Temporal);
 
             return result;
         }
