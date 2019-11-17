@@ -146,6 +146,24 @@ Descripcion NVARCHAR(500) NOT NULL,
 Extension NVARCHAR(100) NOT NULL
 )
 
+CREATE TABLE th.Contenedores(
+IdContenedor INT PRIMARY KEY IDENTITY(1,1),
+Codigo NVARCHAR(50) NOT NULL,
+Nombre NVARCHAR(250) NULL,
+Poliza NVARCHAR(250) NULL,
+IdPedido INT NOT NULL,
+FOREIGN KEY (IdPedido) REFERENCES th.Pedidos(IdPedido)
+)
+
+CREATE TABLE th.DespachoContenedores(
+IdDespachoContenedor INT PRIMARY KEY IDENTITY(1,1),
+Concepto NVARCHAR(250) NOT NULL,
+Precio DECIMAL(10,2) NOT NULL,
+IdContenedor INT NOT NULL,
+FOREIGN KEY (IdContenedor) REFERENCES th.Contenedores (IdContenedor)
+)
+
+
 INSERT INTO th.EstadosPedidos VALUES ('Inicio')
 INSERT INTO th.EstadosPedidos VALUES ('En Proceso')
 INSERT INTO th.EstadosPedidos VALUES ('Desaduanizacion')

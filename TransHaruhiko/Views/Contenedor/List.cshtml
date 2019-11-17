@@ -1,0 +1,259 @@
+﻿@using TransHaruhiko.CustomHelpers
+@using TransHaruhiko.Globalization.Scripts.Common
+@using TransHaruhiko.Globalization.Views.Contenedor
+
+@{
+    ViewBag.Title = ListStrings.Tittle;
+    ViewBag.TitlePage = ListStrings.TittleListado;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Stylesheet {
+    <link href="@Url.ContentCache("Content/utils/fileupload/jquery.fileupload-ui.css")" rel="stylesheet" type="text/css" />
+}
+@section Javascript {
+    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.iframe-transport.js")"></script>
+    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.fileupload.js")"></script>
+    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.xdr-transport.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Globalization/Pedidos/Editar")"></script>
+<script type="text/javascript" src="@Url.Content("~/Globalization/Common/Common")"></script>
+    
+    @*<script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/popupProgressBar.js")"></script>*@
+    <script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Pedidos/Editar.js")"></script>
+
+    @*<script type="text/javascript" src="@Url.Content("~/AccountSavedParams/SeguimientosMainListParams")"></script>
+    <script type="text/javascript" src="@Url.Content("~/IncludePrivilegesInfo/act_actas")"></script>
+    <script type="text/javascript" src="@Url.Content("~/IncludePrivilegesInfo/act_diligencias")"></script>
+    <script type="text/javascript" src="@Url.Content("~/IncludePrivilegesInfo/act_procesos")"></script>*@
+}
+<div id="page-pedido-editar">
+    <input type="hidden" id="hd-id-pedido" value="@ViewBag.IdPedido" />
+    <div class="box-fieldset">
+        <span class="field-title">@ListStrings.SectionInformacion</span>
+        <div class="clearfix">
+            <div class="grid-100 mobile-grid-100">
+                <ul class="box-form">
+                    <li>
+                        <label class="grid-10 mobile-grid-100">@EditarStrings.LabelCliente</label>
+                        <span id="lb-cliente" class="label grid-65 mobile-grid-100"></span>
+                    </li>
+                    <li>
+                        <label class="grid-10 mobile-grid-100">@EditarStrings.LabelTelefono</label>
+                        <span id="lb-telefono" class="label grid-20 mobile-grid-100"></span>
+                        <label for="txt-direccion" class="grid-15 mobile-grid-100">@EditarStrings.LabelDireccion </label>
+                        <a id="btn-editar-direccion" class="ui-icon ui-icon-pencil" style="display: inline-block"></a>
+                        <span id="lb-direccion" class="label grid-30 mobile-grid-100"></span>
+                        <textarea id="txt-direccion" class="grid-30 mobile-grid-100" maxlength="500"> </textarea>
+                    </li>
+                    <li>
+                        <label class="grid-10 mobile-grid-100">@EditarStrings.LabelEstado</label>
+                        <span id="lb-estado" class="label grid-20 mobile-grid-100"></span>
+                        <label class="grid-15 mobile-grid-100">@EditarStrings.LabelDireccionUrl</label>
+                        <a id="btn-editar-direccion-url" class="ui-icon ui-icon-pencil" style="display: inline-block"></a>
+                        <a id="lb-direccion-url" target="_blank" class="label grid-10 mobile-grid-100"></a>
+                        <input id="txt-direccion-url" class="grid-40 mobile-grid-100" type="text" maxlength="500"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="tabs">
+        <ul>
+            <li><a href="#tab-importadora">@EditarStrings.TabImportadora</a></li>
+            <li><a href="#tab-agencia-despachante">@EditarStrings.TabAgenciaDespachante</a></li>
+            <li><a href="#tab-transportadora">@EditarStrings.TabTransportadora</a></li>
+            <li><a href="#tab-desaduanizacion">@EditarStrings.TabDesaduanizacion</a></li>
+            <li><a href="#tab-entrega">@EditarStrings.TabEntrega</a></li>
+            <li><a href="#tab-seguimientos">@EditarStrings.TabSeguimientos</a></li>
+        </ul>
+        <div id="tab-importadora">
+            <div class="box-fieldset">
+                <span class="field-title"></span>
+                <div class="clearfix">
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100">@EditarStrings.LabelListaEmpaque</label>
+                                <div id="div-fichero-lista-empaque" class="box-fileupload grid-20 mobile-grid-100">
+                                    <form id="frm-fichero-lista-empaque" action="#"></form>
+                                </div>
+                                <a id="a-lista-empaque" class="label grid-20 mobile-grid-100"></a>
+                            </li>
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelFacturaComercial</label>
+                                <div id="div-fichero-factura-comercial" class="box-fileupload left">
+                                    <form id="frm-fichero-factura-comercial" action="#"></form>
+                                </div>
+                                <a id="a-factura-comercial" class="label grid-20 mobile-grid-100"></a>
+                                <div id="box-estado-factura-comercial" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    
+        <div id="tab-agencia-despachante">
+            <div class="box-fieldset">
+                <span class="field-title"></span>
+                <div class="clearfix">
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelSicoin</label>
+                                <div id="div-fichero-sicoin" class="box-fileupload left">
+                                    <form id="frm-fichero-sicoin" action="#"></form>
+                                </div>
+                                <a id="a-sicoin" class="label grid-20 mobile-grid-100"></a>
+                                <div id="box-estado-sicoin" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelDam</label>
+                                <div id="div-fichero-dam" class="box-fileupload left">
+                                    <form id="frm-fichero-dam" action="#"></form>
+                                </div>
+                                <a id="a-dam" class="label grid-20 mobile-grid-100"></a>
+                                <div id="box-estado-dam" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-transportadora">
+            <div class="box-fieldset">
+                <span class="field-title"></span>
+                <div class="clearfix">
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100">@EditarStrings.LabelMic</label>
+                                <div id="div-fichero-mic" class="box-fileupload grid-20 mobile-grid-100">
+                                    <form id="frm-fichero-mic" action="#"></form>
+                                </div>
+                                <a id="a-mic" class="label grid-20 mobile-grid-100"></a>
+                            </li>
+                            <li>
+                                <label class="grid-10 mobile-grid-100">@EditarStrings.LabelCrt</label>
+                                <div id="div-fichero-crt" class="box-fileupload grid-20 mobile-grid-100">
+                                    <form id="frm-fichero-crt" action="#"></form>
+                                </div>
+                                <a id="a-crt" class="label grid-20 mobile-grid-100"></a>
+                            </li>
+
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelGoc</label>
+                                <div id="div-fichero-goc" class="box-fileupload left">
+                                    <form id="frm-fichero-goc" action="#"></form>
+                                </div>
+                                <a id="a-goc" class="label grid-20 mobile-grid-100"></a>
+                                <div id="box-estado-goc" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-desaduanizacion">
+            <div class="box-fieldset">
+                <span class="field-title"></span>
+                <div class="clearfix">
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelDui</label>
+                                <div id="div-fichero-dui" class="box-fileupload left">
+                                    <form id="frm-fichero-dui" action="#"></form>
+                                </div>
+                                <a id="a-dui" class="label grid-20 mobile-grid-100"></a>
+                                <div id="box-estado-dui" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelDav</label>
+                                <div id="div-fichero-dav" class="box-fileupload left">
+                                    <form id="frm-fichero-dav" action="#"></form>
+                                </div>
+                                <a id="a-dav" class="label grid-20 mobile-grid-100"></a>
+                                <div id="box-estado-dav" class="left"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-entrega">
+            <div class="box-buttons">
+                <button id="btn-generar-recibi-conforme" class="button">@EditarStrings.BtnRecibiConforme</button>
+            </div>
+            <div class="box-fieldset">
+                <span class="field-title"></span>
+                <div class="clearfix">
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-10 mobile-grid-100 left">@EditarStrings.LabelRecibiConforme</label>
+                                <div id="div-recibi-conforme" class="box-fileupload left">
+                                    <form id="frm-fichero-recibi-conforme" action="#"></form>
+                                </div>
+                                <a id="a-recibi-conforme" class="label grid-20 mobile-grid-100"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-seguimientos">
+            @*<div class="box-fieldset">
+                <span class="field-title">@EditarStrings.TabSeguimientos</span>
+                <div class="clearfix">
+                    <div class="grid-100 mobile-grid-100">
+                        <ul class="box-form">
+                            <li>
+                                <label class="grid-5 mobile-grid-100">@SeguimientosStrings.LabelTipoSeguimiento</label>
+                                <select id="cbx-seguimiento-tipo-seguimiento" class="grid-25 mobile-grid-100"></select>
+                            </li>
+                            <li>
+                                <label class="grid-5 mobile-grid-100">@SeguimientosStrings.LabelFecha</label>
+                                <input type="text" id="txt-seguimiento-fecha-desde" class="datepicker grid-10 mobile-grid-100" />
+                                <label class="grid-5 mobile-grid-100">@CommonStrings.TextHasta</label>
+                                <input type="text" id="txt-seguimiento-fecha-hasta" class="datepicker grid-10 mobile-grid-100" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="align-right">
+                    <button id="btn-seguimiento-buscar" class="button">@CommonStrings.TextBuscar</button>
+                    <button id="btn-seguimiento-limpiar" class="button">@CommonStrings.TextLimpiar</button>
+                </div>
+            </div>*@
+            <div class="box-fieldset">
+                <span class="field-title">@EditarStrings.TabSeguimientos</span>
+                <table id="tb-seguimientos" class="display"></table>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div>
+        <button id="btn-volver" class="button">volver</button>
+    </div>
+</div>

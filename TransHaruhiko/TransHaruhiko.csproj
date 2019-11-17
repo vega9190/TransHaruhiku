@@ -145,6 +145,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ApplicationErrorController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\ContenedorController.cs" />
     <Compile Include="Controllers\FicheroController.cs" />
     <Compile Include="Controllers\GlobalizationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -239,6 +240,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ListStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Views\Contenedor\ListStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Views\Pedido\CreateStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -270,6 +276,8 @@
       <DependentUpon>LayoutStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModels\Dto\Reportes\RecibiConformeDto.cs" />
+    <Compile Include="Models\DbModels\Entidades\Contenedor.cs" />
+    <Compile Include="Models\DbModels\Entidades\DespachoContenedor.cs" />
     <Compile Include="Models\DbModels\Entidades\EstadoFichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Fichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Observacion.cs" />
@@ -302,6 +310,8 @@
     <Compile Include="Models\ViewModel\SimpleListViewModel.cs" />
     <Compile Include="Parameters\Clientes\SaveParameters.cs" />
     <Compile Include="Parameters\Clientes\SearchParameters.cs" />
+    <Compile Include="Parameters\Contenedores\SaveParameters.cs" />
+    <Compile Include="Parameters\Contenedores\SearchParameters.cs" />
     <Compile Include="Parameters\Ficheros\SaveParameter.cs" />
     <Compile Include="Parameters\Observaciones\SaveParameters.cs" />
     <Compile Include="Parameters\Observaciones\SearchParameters.cs" />
@@ -324,8 +334,10 @@
     </Compile>
     <Compile Include="Reportes\Specification\ProcesadorReporte.cs" />
     <Compile Include="Services\IClientesService.cs" />
+    <Compile Include="Services\IContenedoresService.cs" />
     <Compile Include="Services\IFicherosService.cs" />
     <Compile Include="Services\Impl\ClienteService.cs" />
+    <Compile Include="Services\Impl\ContenedoresServices.cs" />
     <Compile Include="Services\Impl\FicherosService.cs" />
     <Compile Include="Services\Impl\ObservacionesService.cs" />
     <Compile Include="Services\Impl\PagosService.cs" />
@@ -348,7 +360,9 @@
     <Content Include="Scripts\pages\Pedidos\Crear.js" />
     <Content Include="Scripts\pages\Pedidos\Editar.js" />
     <Content Include="Scripts\pages\Pedidos\List.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -433,6 +447,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Views\Contenedor\ListStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Views\Pedido\CreateStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateStrings.Designer.cs</LastGenOutput>
@@ -513,6 +531,7 @@
       <DependentUpon>dtsPedidos.xsd</DependentUpon>
     </Content>
     <Content Include="Views\Pedido\PopUpCobro.cshtml" />
+    <Content Include="Views\Contenedor\List.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -65,15 +65,11 @@ namespace TransHaruhiko.Services.Impl
             _dbContext.Pagos.Add(pago);
             _dbContext.SaveChanges();
 
-            //var pagoNew = _dbContext.Pagos.Find(pago.Id);
-
             var rutaFichero = string.Format(PlantillasGestionFicherosStrings.DirectorioFicheroPago, parameters.IdPedido, tipoPago.Nombre, pago.Id,
                             Path.GetExtension(ficheroData.FileName));
 
             if (!FileHelper.WriteFile(rutaFichero, ficheroData.Content))
                 result.Errors.Add("El fichero no se puede subir.");
-
-            _ficherosService.EliminarTemporal(pago.PedidoId, (int)TipoFicheroEnum.Temporal);
 
             return result;
         }
