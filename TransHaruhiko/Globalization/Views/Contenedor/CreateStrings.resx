@@ -117,34 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ButtonNuevo" xml:space="preserve">
-    <value>Crear</value>
+  <data name="LabelCodigo" xml:space="preserve">
+    <value>Código*:</value>
   </data>
-  <data name="LabelCliente" xml:space="preserve">
-    <value>Cliente:</value>
+  <data name="LabelNombre" xml:space="preserve">
+    <value>Nombre:</value>
   </data>
-  <data name="LabelDireccion" xml:space="preserve">
-    <value>Dirección:</value>
-  </data>
-  <data name="LabelDireccionUrl" xml:space="preserve">
-    <value>URL Dirección:</value>
-  </data>
-  <data name="LabelEstado" xml:space="preserve">
-    <value>Estado:</value>
-  </data>
-  <data name="LabelTelefono" xml:space="preserve">
-    <value>Teléfono:</value>
-  </data>
-  <data name="SectionInformacion" xml:space="preserve">
-    <value>Información</value>
+  <data name="LabelPoliza" xml:space="preserve">
+    <value>Póliza:</value>
   </data>
   <data name="TextSeccionResultado" xml:space="preserve">
-    <value>Contenedores</value>
+    <value>Detalle</value>
   </data>
-  <data name="Tittle" xml:space="preserve">
-    <value>Transporte Haruhiko</value>
-  </data>
-  <data name="TittleListado" xml:space="preserve">
-    <value>Contenedores</value>
+  <data name="TitleCrear" xml:space="preserve">
+    <value>Añadir nuevo contenedor</value>
   </data>
 </root>

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Parameters.Contenedores;
 using TransHaruhiko.Services;
@@ -17,8 +15,10 @@ namespace TransHaruhiko.Controllers
         {
             _contenedorService = contenedorService;
         }
-        public ActionResult List()
+        public ActionResult List(int? id)
         {
+            if (!id.HasValue) return RedirectToError(new [] {"No existe el contenedor para el acta"});
+            ViewBag.IdPedido = id;
             return View();
         }
         public ActionResult Buscar(SearchParameters parameters)
@@ -74,6 +74,20 @@ namespace TransHaruhiko.Controllers
             if (res.HasWarnings)
                 transfer.Warnings.AddRange(res.Warnings);
             return Json(transfer);
+        }
+        public ActionResult PopUpCrear()
+        {
+            return View();
+        }
+        public RedirectToRouteResult RedirectToError(string[] errors)
+        {
+            return RedirectToAction("FatalMessage", "ApplicationError", new RouteValueDictionary()
+            {
+                {
+                    "message",
+                    (object) string.Join(";", errors)
+                }
+            });
         }
     }
 }

@@ -1,0 +1,38 @@
+﻿@using TransHaruhiko.CustomHelpers
+@using TransHaruhiko.Globalization.Views.Contenedor
+
+@{
+    Layout = null;
+}
+
+
+<div id="popup-pedido-crear" class="grid-container">
+    <h2 align="center"> @CreateStrings.TitleCrear </h2>
+    <div class="grid-100 mobile-grid-100">
+        <div class="grid-90">
+            <ul class="box-form">
+                <li>
+                    <label for="txt-codigo" class="grid-25 mobile-grid-100">@CreateStrings.LabelCodigo </label>
+                    <input id="txt-codigo" class="grid-70 mobile-grid-100" type="text" maxlength="100" />
+                </li>
+                <li>
+                    <label for="txt-nombre" class="grid-25 mobile-grid-100">@CreateStrings.LabelNombre </label>
+                    <input id="txt-nombre" class="grid-70 mobile-grid-100" type="text" maxlength="100" />
+                </li>
+                <li>
+                    <label for="txt-poliza" class="grid-25 mobile-grid-100">@CreateStrings.LabelPoliza </label>
+                    <input id="txt-poliza" class="grid-70 mobile-grid-100" type="text" maxlength="100" />
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="box-fieldset">
+        <span class="field-title">@CreateStrings.TextSeccionResultado</span>
+        <div class="box-buttons">
+            <button id="btn-crear-contenedor" class="button">@ListStrings.ButtonNuevo</button>
+        </div>
+        <table id="tb-detalles" class="display"></table>
+    </div>
+</div>
+@*<script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Pedidos/Crear.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Globalization/Pedidos/List")"></script>*@

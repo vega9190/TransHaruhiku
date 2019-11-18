@@ -7,10 +7,10 @@ using TransHaruhiko.Parameters.Contenedores;
 
 namespace TransHaruhiko.Services.Impl
 {
-    public class ContenedoresServices : IContenedoresService
+    public class ContenedoresService : IContenedoresService
     {
         private readonly TransHaruhikoDbContext _dbContext;
-        public ContenedoresServices(TransHaruhikoDbContext dbContext)
+        public ContenedoresService(TransHaruhikoDbContext dbContext)
         {
             _dbContext = dbContext;
         }

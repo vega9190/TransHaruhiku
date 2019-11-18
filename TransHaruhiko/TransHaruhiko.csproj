@@ -180,6 +180,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Globalization\Scripts\Contenedores\ListStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\Scripts\Pedidos\EditarStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -239,6 +244,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ListStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Views\Contenedor\CreateStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Globalization\Views\Contenedor\ListStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -337,7 +347,7 @@
     <Compile Include="Services\IContenedoresService.cs" />
     <Compile Include="Services\IFicherosService.cs" />
     <Compile Include="Services\Impl\ClienteService.cs" />
-    <Compile Include="Services\Impl\ContenedoresServices.cs" />
+    <Compile Include="Services\Impl\ContenedoresService.cs" />
     <Compile Include="Services\Impl\FicherosService.cs" />
     <Compile Include="Services\Impl\ObservacionesService.cs" />
     <Compile Include="Services\Impl\PagosService.cs" />
@@ -357,6 +367,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\pages\Clientes\List.js" />
+    <Content Include="Scripts\pages\Contenedores\List.js" />
     <Content Include="Scripts\pages\Pedidos\Crear.js" />
     <Content Include="Scripts\pages\Pedidos\Editar.js" />
     <Content Include="Scripts\pages\Pedidos\List.js" />
@@ -398,6 +409,10 @@
     <EmbeddedResource Include="Globalization\Scripts\Common\CommonStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CommonStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Scripts\Contenedores\ListStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Scripts\Pedidos\EditarStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -446,6 +461,10 @@
     <EmbeddedResource Include="Globalization\Views\Cliente\ListStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Views\Contenedor\CreateStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Views\Contenedor\ListStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -532,6 +551,7 @@
     </Content>
     <Content Include="Views\Pedido\PopUpCobro.cshtml" />
     <Content Include="Views\Contenedor\List.cshtml" />
+    <Content Include="Views\Contenedor\PopUpCrear.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

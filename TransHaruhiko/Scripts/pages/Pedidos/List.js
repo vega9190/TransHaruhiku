@@ -229,7 +229,12 @@ $(document).ready(function () {
                                     tempAcciones += '<span title="' +
                                         Globalize.localize('TextPrecio') +
                                         '" class="btn-precio ui-icon ui-icon-suitcase" ' + (isNull(value.Pedido.Precio) ? '' : 'style="background-color: greenyellow;"')
-                                        +'></span>';
+                                        + '></span>';
+
+                                    tempAcciones += '<a '
+                                        + 'href="' + SiteUrl + 'Contenedor/List/' + value.Pedido.Id + '" '
+                                        + 'title="' + Globalize.localize('TextEditar') + '" '
+                                        + 'class="ui-icon ui-icon-pencil"></a>';
                                 }
 
                                 tempAcciones += '</div>';

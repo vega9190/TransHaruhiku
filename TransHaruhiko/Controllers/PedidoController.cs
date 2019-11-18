@@ -12,13 +12,11 @@ namespace TransHaruhiko.Controllers
     public class PedidoController : Controller
     {
         private readonly IPedidosService _pedidosService;
-        private readonly IFicherosService _ficherosService;
         private readonly IReportesService _reportesService;
         
-        public PedidoController(IPedidosService pedidosService, IFicherosService ficherosService, IReportesService reportesService)
+        public PedidoController(IPedidosService pedidosService, IReportesService reportesService)
         {
             _pedidosService = pedidosService;
-            _ficherosService = ficherosService;
             _reportesService = reportesService;
         }
 

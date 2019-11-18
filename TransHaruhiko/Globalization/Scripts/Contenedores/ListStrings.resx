@@ -117,34 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ButtonNuevo" xml:space="preserve">
-    <value>Crear</value>
+  <data name="ColumnAcciones" xml:space="preserve">
+    <value>Acciones</value>
   </data>
-  <data name="LabelCliente" xml:space="preserve">
-    <value>Cliente:</value>
+  <data name="ColumnCodigo" xml:space="preserve">
+    <value>Código</value>
   </data>
-  <data name="LabelDireccion" xml:space="preserve">
-    <value>Dirección:</value>
+  <data name="ColumnId" xml:space="preserve">
+    <value>Id</value>
   </data>
-  <data name="LabelDireccionUrl" xml:space="preserve">
-    <value>URL Dirección:</value>
+  <data name="ColumnNombre" xml:space="preserve">
+    <value>Nombre</value>
   </data>
-  <data name="LabelEstado" xml:space="preserve">
-    <value>Estado:</value>
+  <data name="TextEditar" xml:space="preserve">
+    <value>Editar</value>
   </data>
-  <data name="LabelTelefono" xml:space="preserve">
-    <value>Teléfono:</value>
-  </data>
-  <data name="SectionInformacion" xml:space="preserve">
-    <value>Información</value>
-  </data>
-  <data name="TextSeccionResultado" xml:space="preserve">
-    <value>Contenedores</value>
-  </data>
-  <data name="Tittle" xml:space="preserve">
-    <value>Transporte Haruhiko</value>
-  </data>
-  <data name="TittleListado" xml:space="preserve">
-    <value>Contenedores</value>
+  <data name="TextEliminar" xml:space="preserve">
+    <value>Eliminar</value>
   </data>
 </root>

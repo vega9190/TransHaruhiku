@@ -223,6 +223,6 @@ INSERT INTO th.TiposPagos VALUES ('Multa DAV', 'Multa por DAV')
 INSERT INTO th.TiposMonedas VALUES ('Bolivianos', 'BOB')
 INSERT INTO th.TiposMonedas VALUES ('Dólar Americano', '$')
 
+select * from th.Usuarios
+update th.usuarios set IdRol = 2
 select * from th.Roles
-
-
