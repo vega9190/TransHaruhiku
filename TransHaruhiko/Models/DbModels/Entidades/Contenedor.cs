@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TransHaruhiko.Models.DbModels.Entidades
@@ -16,5 +17,6 @@ namespace TransHaruhiko.Models.DbModels.Entidades
         public int PedidoId { get; set; }
         [ForeignKey(nameof(PedidoId))]
         public virtual Pedido Pedido { get; set; }
+        public virtual ICollection<DespachoContenedor> DespachoContenedores { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace TransHaruhiko.Controllers
         {
             var queriable = _contenedorService.Buscar();
             queriable = queriable.Where(a => a.PedidoId == parameters.IdPedido);
-            
+
             var querySelect = queriable.Select(a => new
             {
                 Contenedor = new
@@ -41,7 +41,7 @@ namespace TransHaruhiko.Controllers
             var listado = querySelect.Skip((parameters.PageIndex - 1) * parameters.ItemsPerPage)
                 .Take(parameters.ItemsPerPage).ToList();
 
-           
+
             var transfer = new ClientTransfer();
             var totalElements = querySelect.Count();
             var totalPages = totalElements / parameters.ItemsPerPage;
@@ -49,6 +49,66 @@ namespace TransHaruhiko.Controllers
             transfer.Pagination.TotalPages = totalPages + ((totalElements % parameters.ItemsPerPage) > 0 ? 1 : 0);
             transfer.Pagination.TotalRecords = totalElements; //Total de elementos segun filtro
             transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
+            return Json(transfer);
+        }
+        public ActionResult BuscarDetalle(SearchDetalleParameters parameters)
+        {
+            var queriable = _contenedorService.BuscarDetalle();
+
+            queriable = queriable.Where(a => a.ContenedorId == parameters.IdContenedor);
+            
+
+            var querySelect = queriable.Select(a => new
+            {
+                Detalle = new
+                {
+                    a.Id,
+                    a.Concepto,
+                    a.Precio
+                }
+            });
+
+            querySelect = querySelect.OrderByDescending(a => a.Detalle.Id);
+
+            var listado = querySelect.Skip((parameters.PageIndex - 1) * parameters.ItemsPerPage)
+                .Take(parameters.ItemsPerPage).ToList();
+
+
+            var transfer = new ClientTransfer();
+            var totalElements = querySelect.Count();
+            var totalPages = totalElements / parameters.ItemsPerPage;
+            transfer.Data = listado;
+            transfer.Pagination.TotalPages = totalPages + ((totalElements % parameters.ItemsPerPage) > 0 ? 1 : 0);
+            transfer.Pagination.TotalRecords = totalElements; //Total de elementos segun filtro
+            transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
+            return Json(transfer);
+        }
+        public ActionResult ObtenerDetalle(int idContenedor)
+        {
+            var transfer = new ClientTransfer();
+            var contenedor = _contenedorService.Get(idContenedor);
+
+
+            if (contenedor == null)
+            {
+                return null;
+            }
+            transfer.Data = new
+            {
+                Contenedor = new
+                {
+                    contenedor.Id,
+                    contenedor.Codigo,
+                    contenedor.Nombre,
+                    contenedor.Poliza,
+                    DatalleContenedor = contenedor.DespachoContenedores.Select(a => new {
+                        a.Id,
+                        a.Concepto,
+                        a.Precio
+                    })
+                }
+            };
+
             return Json(transfer);
         }
         public ActionResult Guardar(SaveParameters parameters)

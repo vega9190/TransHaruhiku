@@ -20,6 +20,15 @@ namespace TransHaruhiko.Services.Impl
             IQueryable<Contenedor> queriable = _dbContext.Contenedores;
             return queriable;
         }
+        public IQueryable<DespachoContenedor> BuscarDetalle()
+        {
+            IQueryable<DespachoContenedor> queriable = _dbContext.DespachoContenedores;
+            return queriable;
+        }
+        public Contenedor Get(int idContenedor)
+        {
+            return _dbContext.Contenedores.Find(idContenedor);
+        }
         public BaseResult Guardar(SaveParameters parameters)
         {
             var result = new BaseResult();

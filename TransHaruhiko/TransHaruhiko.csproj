@@ -321,6 +321,7 @@
     <Compile Include="Parameters\Clientes\SaveParameters.cs" />
     <Compile Include="Parameters\Clientes\SearchParameters.cs" />
     <Compile Include="Parameters\Contenedores\SaveParameters.cs" />
+    <Compile Include="Parameters\Contenedores\SearchDetalleParameters.cs" />
     <Compile Include="Parameters\Contenedores\SearchParameters.cs" />
     <Compile Include="Parameters\Ficheros\SaveParameter.cs" />
     <Compile Include="Parameters\Observaciones\SaveParameters.cs" />
