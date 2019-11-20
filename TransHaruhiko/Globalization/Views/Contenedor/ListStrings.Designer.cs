@@ -79,6 +79,15 @@ namespace TransHaruhiko.Globalization.Views.Contenedor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generar Planilla de Despacho.
+        /// </summary>
+        public static string ButtonPlanillaDespacho {
+            get {
+                return ResourceManager.GetString("ButtonPlanillaDespacho", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cliente:.
         /// </summary>
         public static string LabelCliente {

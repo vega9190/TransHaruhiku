@@ -7,11 +7,17 @@ $(document).ready(function () {
     $('#btn-volver').click(function () {
         window.location.href = SiteUrl + 'Pedido/List';
     });
-
+    
     $('#btn-crear').button();
     $('#btn-crear').click(function () {
         PopUpCrear();
     });
+
+    $('#btn-planilla-despacho').button();
+    $('#btn-planilla-despacho').click(function () {
+        gotoController('GenerarPlanillaDespacho/' +IdPedido);
+    });
+
     CargarInformacion();
 
     //////////// TABLA  //////////////////////

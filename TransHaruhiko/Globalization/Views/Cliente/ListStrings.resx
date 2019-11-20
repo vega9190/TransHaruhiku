@@ -127,7 +127,7 @@
     <value>Crear</value>
   </data>
   <data name="LabelCarnet" xml:space="preserve">
-    <value>Carnet:</value>
+    <value>NIT/CI:</value>
   </data>
   <data name="LabelNombre" xml:space="preserve">
     <value>Nombre:</value>

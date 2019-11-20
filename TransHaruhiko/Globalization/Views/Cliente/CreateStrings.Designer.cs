@@ -79,7 +79,7 @@ namespace TransHaruhiko.Globalization.Views.Cliente {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Carnet*:.
+        ///   Looks up a localized string similar to NIT/CI*:.
         /// </summary>
         public static string LabelCarnet {
             get {

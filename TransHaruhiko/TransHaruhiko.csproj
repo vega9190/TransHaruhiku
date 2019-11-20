@@ -285,6 +285,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LayoutStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbModels\Dto\Reportes\PlanillaDespachoDto.cs" />
     <Compile Include="Models\DbModels\Dto\Reportes\RecibiConformeDto.cs" />
     <Compile Include="Models\DbModels\Entidades\Contenedor.cs" />
     <Compile Include="Models\DbModels\Entidades\DespachoContenedor.cs" />
@@ -496,9 +497,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LayoutStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RecibiConforme.rdlc" />
+    <EmbeddedResource Include="Reportes\Rdlc\PlanillaDespacho.rdlc" />
+    <EmbeddedResource Include="Reportes\Rdlc\RecibiConforme.rdlc" />
+    <EmbeddedResource Include="Reportes\Rdlc\SubDetalleContenedor.rdlc" />
     <EmbeddedResource Include="Reportes\ReportesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>ReportesResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

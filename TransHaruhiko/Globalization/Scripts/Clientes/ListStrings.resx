@@ -124,7 +124,7 @@
     <value>Activo</value>
   </data>
   <data name="ColumnCarnet" xml:space="preserve">
-    <value>Carnet</value>
+    <value>NIT/CI</value>
   </data>
   <data name="ColumnEmail" xml:space="preserve">
     <value>Email</value>
@@ -142,7 +142,7 @@
     <value>Debe ingresar el Apellido.</value>
   </data>
   <data name="ErrorNoCarnet" xml:space="preserve">
-    <value>Debe ingresar el Carnet.</value>
+    <value>Debe ingresar el NIT o Carnet.</value>
   </data>
   <data name="ErrorNoEmail" xml:space="preserve">
     <value>Debe ingresar el Email.</value>

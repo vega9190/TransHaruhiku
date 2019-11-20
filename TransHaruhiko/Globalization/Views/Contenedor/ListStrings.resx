@@ -123,6 +123,9 @@
   <data name="ButtonNuevo" xml:space="preserve">
     <value>Crear</value>
   </data>
+  <data name="ButtonPlanillaDespacho" xml:space="preserve">
+    <value>Generar Planilla de Despacho</value>
+  </data>
   <data name="LabelCliente" xml:space="preserve">
     <value>Cliente:</value>
   </data>

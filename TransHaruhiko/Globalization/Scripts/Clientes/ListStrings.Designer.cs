@@ -79,7 +79,7 @@ namespace TransHaruhiko.Globalization.Scripts.Clientes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Carnet.
+        ///   Looks up a localized string similar to NIT/CI.
         /// </summary>
         public static string ColumnCarnet {
             get {
@@ -133,7 +133,7 @@ namespace TransHaruhiko.Globalization.Scripts.Clientes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Debe ingresar el Carnet..
+        ///   Looks up a localized string similar to Debe ingresar el NIT o Carnet..
         /// </summary>
         public static string ErrorNoCarnet {
             get {

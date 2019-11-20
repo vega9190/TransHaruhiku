@@ -11,9 +11,11 @@ namespace TransHaruhiko.Controllers
     public class ContenedorController : Controller
     {
         private readonly IContenedoresService _contenedorService;
-        public ContenedorController(IContenedoresService contenedorService)
+        private readonly IReportesService _reportesService;
+        public ContenedorController(IContenedoresService contenedorService, IReportesService reportesService)
         {
             _contenedorService = contenedorService;
+            _reportesService = reportesService;
         }
         public ActionResult List(int? id)
         {
@@ -134,6 +136,13 @@ namespace TransHaruhiko.Controllers
             if (res.HasWarnings)
                 transfer.Warnings.AddRange(res.Warnings);
             return Json(transfer);
+        }
+        [HttpGet]
+        [Route("GenerarPlanillaDespacho/{idPedido}")]
+        public ActionResult GenerarPlanillaDespacho(int idPedido)
+        {
+            _reportesService.GenerarPlanillaDespacho(idPedido, Response);
+            return null;
         }
         public ActionResult PopUpCrear()
         {

@@ -63,9 +63,29 @@ namespace TransHaruhiko.Reportes {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] PlanillaDespacho {
+            get {
+                object obj = ResourceManager.GetObject("PlanillaDespacho", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] RecibiConforme {
             get {
                 object obj = ResourceManager.GetObject("RecibiConforme", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] SubDetalleContenedor {
+            get {
+                object obj = ResourceManager.GetObject("SubDetalleContenedor", resourceCulture);
                 return ((byte[])(obj));
             }
         }
