@@ -44,7 +44,7 @@ namespace TransHaruhiko.Controllers
             }
             if (!string.IsNullOrEmpty(parameters.Contenedor))
             {
-                queriable = queriable.Where(a => a.Contenedor.Contains(parameters.Contenedor));
+                queriable = queriable.Where(a => a.Contenedores.Any(b=> b.Codigo.Contains(parameters.Contenedor)));
             }
 
             if (parameters.FechaDesde.HasValue && parameters.FechaHasta.HasValue)
@@ -65,7 +65,7 @@ namespace TransHaruhiko.Controllers
                 {
                     a.Id,
                     a.Descripcion,
-                    a.Contenedor,
+                    Contenedores = a.Contenedores.Select(b=> b.Codigo),
                     a.Fecha,
                     a.Precio,
                     Cliente = new
@@ -112,7 +112,8 @@ namespace TransHaruhiko.Controllers
                 var returnData = new
                 {
                     a.Pedido,
-                    FechaPedido = a.Pedido.Fecha.ToString("dd/MM/yyyy")
+                    FechaPedido = a.Pedido.Fecha.ToString("dd/MM/yyyy"),
+                    Contenedor = string.Join(", ", a.Pedido.Contenedores)
                 };
                 return returnData;
             });
@@ -142,7 +143,7 @@ namespace TransHaruhiko.Controllers
                     pedido.Id,
                     pedido.Direccion,
                     pedido.DireccionUrl,
-                    pedido.Contenedor,
+                    Contenedor = string.Join(", ", pedido.Contenedores.Select(a=> a.Codigo)),
                     Cliente = new
                     {
                         pedido.Cliente.Id,

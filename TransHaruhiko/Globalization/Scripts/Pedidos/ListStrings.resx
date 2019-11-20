@@ -156,6 +156,9 @@
   <data name="TextConfirmarEliminar" xml:space="preserve">
     <value>Está a punto de eliminar el registro, ¿Desea continuar?</value>
   </data>
+  <data name="TextContenedor" xml:space="preserve">
+    <value>Contenedores</value>
+  </data>
   <data name="TextEditar" xml:space="preserve">
     <value>Editar</value>
   </data>

@@ -133,7 +133,7 @@
     <value>Carnet:</value>
   </data>
   <data name="LabelContainer" xml:space="preserve">
-    <value>Container:</value>
+    <value>Contenedor:</value>
   </data>
   <data name="LabelFechaDesde" xml:space="preserve">
     <value>Fecha Desde:</value>

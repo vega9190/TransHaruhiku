@@ -79,6 +79,15 @@ namespace TransHaruhiko.Globalization.Scripts.Contenedores {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Concepto.
+        /// </summary>
+        public static string ColumnConcepto {
+            get {
+                return ResourceManager.GetString("ColumnConcepto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
         public static string ColumnId {
@@ -88,11 +97,56 @@ namespace TransHaruhiko.Globalization.Scripts.Contenedores {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Precio.
+        /// </summary>
+        public static string ColumnMonto {
+            get {
+                return ResourceManager.GetString("ColumnMonto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nombre.
         /// </summary>
         public static string ColumnNombre {
             get {
                 return ResourceManager.GetString("ColumnNombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debe ingresar el código del contenedor..
+        /// </summary>
+        public static string ErrorNoCodigo {
+            get {
+                return ResourceManager.GetString("ErrorNoCodigo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debe ingresar un concepto en cada uno de los registros..
+        /// </summary>
+        public static string ErrorNoConcepto {
+            get {
+                return ResourceManager.GetString("ErrorNoConcepto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debe ingresar un precio en cada uno de los registros..
+        /// </summary>
+        public static string ErrorNoPrecio {
+            get {
+                return ResourceManager.GetString("ErrorNoPrecio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Está a punto de eliminar el registro, ¿Desea continuar?.
+        /// </summary>
+        public static string TextConfirmarEliminar {
+            get {
+                return ResourceManager.GetString("TextConfirmarEliminar", resourceCulture);
             }
         }
         
@@ -111,6 +165,15 @@ namespace TransHaruhiko.Globalization.Scripts.Contenedores {
         public static string TextEliminar {
             get {
                 return ResourceManager.GetString("TextEliminar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gestión de pedidos.
+        /// </summary>
+        public static string TituloPopUp {
+            get {
+                return ResourceManager.GetString("TituloPopUp", resourceCulture);
             }
         }
     }

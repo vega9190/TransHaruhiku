@@ -123,16 +123,37 @@
   <data name="ColumnCodigo" xml:space="preserve">
     <value>Código</value>
   </data>
+  <data name="ColumnConcepto" xml:space="preserve">
+    <value>Concepto</value>
+  </data>
   <data name="ColumnId" xml:space="preserve">
     <value>Id</value>
   </data>
+  <data name="ColumnMonto" xml:space="preserve">
+    <value>Precio</value>
+  </data>
   <data name="ColumnNombre" xml:space="preserve">
     <value>Nombre</value>
+  </data>
+  <data name="ErrorNoCodigo" xml:space="preserve">
+    <value>Debe ingresar el código del contenedor.</value>
+  </data>
+  <data name="ErrorNoConcepto" xml:space="preserve">
+    <value>Debe ingresar un concepto en cada uno de los registros.</value>
+  </data>
+  <data name="ErrorNoPrecio" xml:space="preserve">
+    <value>Debe ingresar un precio en cada uno de los registros.</value>
+  </data>
+  <data name="TextConfirmarEliminar" xml:space="preserve">
+    <value>Está a punto de eliminar el registro, ¿Desea continuar?</value>
   </data>
   <data name="TextEditar" xml:space="preserve">
     <value>Editar</value>
   </data>
   <data name="TextEliminar" xml:space="preserve">
     <value>Eliminar</value>
+  </data>
+  <data name="TituloPopUp" xml:space="preserve">
+    <value>Gestión de pedidos</value>
   </data>
 </root>

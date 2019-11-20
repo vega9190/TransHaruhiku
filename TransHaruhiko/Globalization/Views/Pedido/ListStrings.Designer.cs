@@ -106,7 +106,7 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Container:.
+        ///   Looks up a localized string similar to Contenedor:.
         /// </summary>
         public static string LabelContainer {
             get {

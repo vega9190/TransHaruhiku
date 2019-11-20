@@ -178,6 +178,15 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contenedores.
+        /// </summary>
+        public static string TextContenedor {
+            get {
+                return ResourceManager.GetString("TextContenedor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Editar.
         /// </summary>
         public static string TextEditar {

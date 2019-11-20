@@ -36,21 +36,24 @@ namespace TransHaruhiko.Services.Impl
             {
                 var contenedor = _dbContext.Contenedores.Find(parameters.IdContenedor);
                 contenedor.Codigo = parameters.Codigo;
-                contenedor.Nombre = parameters.Nombre;
-                contenedor.Poliza = parameters.Poliza;
+                contenedor.Nombre = string.IsNullOrEmpty(parameters.Nombre) ? "" : parameters.Nombre;
+                contenedor.Poliza = string.IsNullOrEmpty(parameters.Poliza) ? "" : parameters.Poliza;
 
                 var despachoContenedores = _dbContext.DespachoContenedores.Where(a => a.ContenedorId == parameters.IdContenedor).ToList();
                 _dbContext.DespachoContenedores.RemoveRange(despachoContenedores);
 
-                foreach(var despachoContenedor in parameters.Despachos)
+                if (parameters.Despachos != null && parameters.Despachos.Any())
                 {
-                    var despacho = new DespachoContenedor
+                    foreach (var despachoContenedor in parameters.Despachos)
                     {
-                        Concepto = despachoContenedor.Concepto,
-                        Precio = decimal.Parse(despachoContenedor.Precio, CultureInfo.InvariantCulture),
-                        ContenedorId = parameters.IdContenedor.Value
-                    };
-                    _dbContext.DespachoContenedores.Add(despacho);
+                        var despacho = new DespachoContenedor
+                        {
+                            Concepto = despachoContenedor.Concepto,
+                            Precio = decimal.Parse(despachoContenedor.Precio, CultureInfo.InvariantCulture),
+                            ContenedorId = parameters.IdContenedor.Value
+                        };
+                        _dbContext.DespachoContenedores.Add(despacho);
+                    }
                 }
             }
             else
@@ -58,21 +61,24 @@ namespace TransHaruhiko.Services.Impl
                 var contenedor = new Contenedor
                 {
                     Codigo = parameters.Codigo,
-                    Nombre = parameters.Nombre,
-                    Poliza = parameters.Poliza,
+                    Nombre = string.IsNullOrEmpty(parameters.Nombre) ? "" : parameters.Nombre,
+                    Poliza = string.IsNullOrEmpty(parameters.Poliza) ? "" : parameters.Poliza,
                     PedidoId = parameters.IdPedido
                 };
 
                 _dbContext.Contenedores.Add(contenedor);
-                foreach (var despachoContenedor in parameters.Despachos)
+                if (parameters.Despachos != null && parameters.Despachos.Any())
                 {
-                    var despacho = new DespachoContenedor
+                    foreach (var despachoContenedor in parameters.Despachos)
                     {
-                        Concepto = despachoContenedor.Concepto,
-                        Precio = decimal.Parse(despachoContenedor.Precio, CultureInfo.InvariantCulture),
-                        ContenedorId = contenedor.Id
-                    };
-                    _dbContext.DespachoContenedores.Add(despacho);
+                        var despacho = new DespachoContenedor
+                        {
+                            Concepto = despachoContenedor.Concepto,
+                            Precio = decimal.Parse(despachoContenedor.Precio, CultureInfo.InvariantCulture),
+                            ContenedorId = contenedor.Id
+                        };
+                        _dbContext.DespachoContenedores.Add(despacho);
+                    }
                 }
             }
             _dbContext.SaveChanges();

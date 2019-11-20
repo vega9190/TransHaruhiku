@@ -12,7 +12,6 @@ namespace TransHaruhiko.Models.DbModels.Entidades
         [Column("IdPedido")]
         public int Id { get; set; }
         public string Descripcion { get; set; }
-        public string Contenedor { get; set; }
         public DateTime Fecha { get; set; }
         public string Direccion { get; set; }
         public string DireccionUrl { get; set; }
@@ -26,5 +25,6 @@ namespace TransHaruhiko.Models.DbModels.Entidades
         [ForeignKey(nameof(EstadoId))]
         public virtual EstadoPedido Estado { get; set; }
         public virtual ICollection<Fichero> Ficheros { get; set; }
+        public virtual ICollection<Contenedor> Contenedores { get; set; }
     }
 }

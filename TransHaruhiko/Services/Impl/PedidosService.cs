@@ -40,8 +40,6 @@ namespace TransHaruhiko.Services.Impl
             if (parameters.IdPedido.HasValue)
             {
                 var pedido = _dbContext.Pedidos.Find(parameters.IdPedido);
-                if (!string.IsNullOrEmpty(parameters.Contenedor))
-                    pedido.Contenedor = parameters.Contenedor;
                 if (!string.IsNullOrEmpty(parameters.Direccion))
                     pedido.Direccion = parameters.Direccion;
                 if (!string.IsNullOrEmpty(parameters.DireccionUrl))
@@ -52,7 +50,6 @@ namespace TransHaruhiko.Services.Impl
                 var pedido = new Pedido
                 {
                     ClienteId = parameters.IdCliente,
-                    Contenedor = parameters.Contenedor,
                     Descripcion = parameters.Descripcion,
                     Direccion = parameters.Direccion,
                     DireccionUrl = parameters.DireccionUrl,

@@ -61,6 +61,15 @@ namespace TransHaruhiko.Globalization.Views.Contenedor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Añadir.
+        /// </summary>
+        public static string ButtonAnhadir {
+            get {
+                return ResourceManager.GetString("ButtonAnhadir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crear.
         /// </summary>
         public static string ButtonNuevo {

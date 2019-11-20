@@ -233,8 +233,8 @@ $(document).ready(function () {
 
                                     tempAcciones += '<a '
                                         + 'href="' + SiteUrl + 'Contenedor/List/' + value.Pedido.Id + '" '
-                                        + 'title="' + Globalize.localize('TextEditar') + '" '
-                                        + 'class="ui-icon ui-icon-pencil"></a>';
+                                        + 'title="' + Globalize.localize('TextContenedor') + '" '
+                                        + 'class="ui-icon ui-icon-clipboard"></a>';
                                 }
 
                                 tempAcciones += '</div>';
@@ -247,9 +247,9 @@ $(document).ready(function () {
                                         + '</span>');
                                 row.push(value.Pedido.Cliente.Carnet);
                                 row.push(value.Pedido.Cliente.NombreCompleto);
-                                row.push(isNull(value.Pedido.Contenedor) ? '' : '<span  title="'
-                                        + value.Pedido.Contenedor + '">'
-                                        + summary(value.Pedido.Contenedor, 20, '...')
+                                row.push(isNull(value.Contenedor) ? '' : '<span  title="'
+                                        + value.Contenedor + '">'
+                                        + summary(value.Contenedor, 20, '...')
                                         + '</span>');
                                 row.push('<span class="btn-estados" >' + value.Pedido.Estado.Nombre + '</span>');
                                 row.push(tempAcciones);
@@ -280,7 +280,6 @@ function PopUpCrear() {
 
         params.IdCliente = $('#cbx-clientes-crear').combobox('getId');
         params.Descripcion = $('#txt-descripcion-crear').val().trim();
-        params.Contenedor = $('#txt-contenedor-crear').val().trim();
         params.Direccion = $('#txt-direccion-crear').val().trim();
         params.DireccionUrl = $('#txt-direccion-url-crear').val().trim();
         
@@ -613,7 +612,6 @@ function PopUpPagos(idPedido) {
             }
         }));
 
-        var buttons = new Object();
         var tempForm = $('#frm-fichero-pago', popup);
         tempForm
             .attr('action', SiteUrl + 'GuardarFicheroTemporal/' + idPedido + '/' + TipoFicheroEnum.Temporal)

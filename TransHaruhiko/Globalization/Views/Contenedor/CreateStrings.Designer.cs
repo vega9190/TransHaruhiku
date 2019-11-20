@@ -97,7 +97,7 @@ namespace TransHaruhiko.Globalization.Views.Contenedor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Añadir nuevo contenedor.
+        ///   Looks up a localized string similar to Contenedor.
         /// </summary>
         public static string TitleCrear {
             get {

@@ -120,9 +120,6 @@
   <data name="LabelCliente" xml:space="preserve">
     <value>Cliente*:</value>
   </data>
-  <data name="LabelContenedor" xml:space="preserve">
-    <value>Contenedor:</value>
-  </data>
   <data name="LabelDescripcion" xml:space="preserve">
     <value>Descripción*:</value>
   </data>

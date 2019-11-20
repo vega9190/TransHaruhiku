@@ -4,6 +4,7 @@ using Microsoft.Reporting.WebForms;
 using System.Web;
 using TransHaruhiko.Models.DbModels;
 using System.IO;
+using System.Linq;
 using TransHaruhiko.Reportes;
 using TransHaruhiko.Models.DbModels.Dto.Reportes;
 using TransHaruhiko.Reportes.Specification;
@@ -34,7 +35,7 @@ namespace TransHaruhiko.Services.Impl
             {
                 new RecibiConformeDto {
                     NombreCompleto = pedido.Cliente.NombreCompleto,
-                    Contenedor = string.IsNullOrEmpty(pedido.Contenedor) ? "" : pedido.Contenedor,
+                    Contenedor = pedido.Contenedores.Any() ? string.Join(", ", pedido.Contenedores.Select(a=> a.Codigo)) : "",
                     Descripcion = pedido.Descripcion,
                     Direccion = string.IsNullOrEmpty(pedido.Direccion) ? "" : pedido.Direccion,
                     Telefono = pedido.Cliente.Telefono,
