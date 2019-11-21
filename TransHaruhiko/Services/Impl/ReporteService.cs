@@ -30,7 +30,7 @@ namespace TransHaruhiko.Services.Impl
         public void GenerarPlanillaDespacho(int idPedido, HttpResponseBase response)
         {
             var localReport = GetReportePlanillaDespacho(idPedido);
-            ProcesadorReporte.GenerarExcel(localReport, "PlanillaDespacho", response);
+            ProcesadorReporte.GenerarWord(localReport, "PlanillaDespacho", response);
         }
         private LocalReport GetReporteRecibiConforme(int idPedido)
         {
