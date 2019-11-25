@@ -165,6 +165,9 @@
   <data name="LabelMic" xml:space="preserve">
     <value>MIC:</value>
   </data>
+  <data name="LabelParteRecepcion" xml:space="preserve">
+    <value>Parte Recepción:</value>
+  </data>
   <data name="LabelRecibiConforme" xml:space="preserve">
     <value>Recibí Conforme:</value>
   </data>

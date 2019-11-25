@@ -546,6 +546,7 @@
     <Content Include="Reportes\dtsPedidos.xsc">
       <DependentUpon>dtsPedidos.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\PRO.pubxml" />
     <None Include="Reportes\dtsPedidos.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

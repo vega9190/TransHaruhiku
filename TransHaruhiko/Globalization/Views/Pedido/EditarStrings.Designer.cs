@@ -205,6 +205,15 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parte Recepción:.
+        /// </summary>
+        public static string LabelParteRecepcion {
+            get {
+                return ResourceManager.GetString("LabelParteRecepcion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recibí Conforme:.
         /// </summary>
         public static string LabelRecibiConforme {
