@@ -1,4 +1,5 @@
 ﻿var IdPedido = null;
+var Finalizado = false;
 
 $(document).ready(function () {
     IdPedido = $('#hd-id-pedido').val();
@@ -138,10 +139,13 @@ $(document).ready(function () {
                                     Globalize.localize('TextEditar') +
                                     '" class="btn-editar ui-icon ui-icon-pencil"></span>';
 
-                                tempAcciones += '<span title="' +
-                                    Globalize.localize('TextEliminar') +
-                                    '" class="btn-eliminar ui-icon ui-icon-trash"></span>';
-
+                                if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+                                    if (!Finalizado) {
+                                        tempAcciones += '<span title="' +
+                                        Globalize.localize('TextEliminar') +
+                                        '" class="btn-eliminar ui-icon ui-icon-trash"></span>';
+                                    }
+                                }
 
                                 tempAcciones += '</div>';
 
@@ -187,6 +191,12 @@ function CargarInformacion() {
                     $('#lb-estado').text(data.Data.Pedido.Estado.Nombre);
                     $('#lb-telefono').text(data.Data.Pedido.Cliente.Telefono);
 
+                    Finalizado = data.Data.Pedido.Estado.Id === 5;
+
+                    if (Finalizado) {
+                        $('#btn-crear').button('disable');
+                    }
+
                     $('#txt-direccion').hide();
                     if (!isNullOrEmpty(data.Data.Pedido.Direccion)) {
                         $('#lb-direccion').text(summary(data.Data.Pedido.Direccion, 100, '...'));
@@ -220,35 +230,36 @@ function PopUpCrear(idContenedor) {
         params.IdPedido = IdPedido;
         params.IdContenedor = idContenedor;
 
-        var detalles = [];
-        var noTieneConcepto = false;
-        var noTienePrecio = false;
-        $.each($('#tb-detalles').table('getRows'),
-            function (index, value) {
-                var paramDetalle = {}
-                paramDetalle.Concepto = $('.concepto', value).val();
-                paramDetalle.Precio = $('.precio', value).val();
-                if (isEmpty(paramDetalle.Concepto))
-                    noTieneConcepto = true;
+        if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+            var detalles = [];
+            var noTieneConcepto = false;
+            var noTienePrecio = false;
+            $.each($('#tb-detalles').table('getRows'),
+                function (index, value) {
+                    var paramDetalle = {}
+                    paramDetalle.Concepto = $('.concepto', value).val();
+                    paramDetalle.Precio = $('.precio', value).val();
+                    if (isEmpty(paramDetalle.Concepto))
+                        noTieneConcepto = true;
 
-                if (isEmpty(paramDetalle.Precio))
-                    noTienePrecio = true;
-                detalles.push(paramDetalle);
-            });
-        
-
-        params.Despachos = detalles;
-
+                    if (isEmpty(paramDetalle.Precio))
+                        noTienePrecio = true;
+                    detalles.push(paramDetalle);
+                });
+            params.Despachos = detalles;
+        }
         var warnings = new Array();
 
         if (isEmpty(params.Codigo))
             warnings.push(Globalize.localize('ErrorNoCodigo'));
 
-        if ($('#tb-detalles').table('getRows').length > 0) {
-            if (noTieneConcepto)
-                warnings.push(Globalize.localize('ErrorNoConcepto'));
-            if (noTienePrecio)
-                warnings.push(Globalize.localize('ErrorNoPrecio'));
+        if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+            if ($('#tb-detalles').table('getRows').length > 0) {
+                if (noTieneConcepto)
+                    warnings.push(Globalize.localize('ErrorNoConcepto'));
+                if (noTienePrecio)
+                    warnings.push(Globalize.localize('ErrorNoPrecio'));
+            }
         }
 
         if (warnings.length > 0) {
@@ -294,66 +305,75 @@ function PopUpCrear(idContenedor) {
         url: SiteUrl + 'Contenedor/PopUpCrear',
         open: function (event, ui) {
             popup = $(this);
-            //$.unblockUI();
         },
         buttons: buttons,
         width: 600
     }, false, function () {
-        $('#btn-crear-contenedor').button();
-        $('#btn-crear-contenedor').click(function () {
-            var rowNew = [];
-            rowNew.push('<input type="text" class="concepto" maxlength="250" value="" />');
-            rowNew.push('<input type="text" class="precio" value="" />');
-            rowNew.push('<a class="button btn-contenedor-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
-            $('#tb-detalles').table('addRow', rowNew, null);
-            var rows = $('#tb-detalles').table('getRows');
-            var row = rows[rows.length - 1];
-            var rowCallback = $('#tb-detalles').table('option', 'fnRowCallback');
-            rowCallback(row);
-            $('.precio', popup).autoNumeric(AutoNumericDecimal);
-        });
+        if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+            $('#btn-crear-contenedor').button();
+            $('#btn-crear-contenedor').click(function () {
+                var rowNew = [];
+                rowNew.push('<input type="text" class="concepto" maxlength="250" value="" />');
+                rowNew.push('<input type="text" class="precio" value="" />');
+                rowNew.push('<a class="button btn-contenedor-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+                $('#tb-detalles').table('addRow', rowNew, null);
+                var rows = $('#tb-detalles').table('getRows');
+                var row = rows[rows.length - 1];
+                var rowCallback = $('#tb-detalles').table('option', 'fnRowCallback');
+                rowCallback(row);
+                $('.precio', popup).autoNumeric(AutoNumericDecimal);
+            });
+        } else {
+            $('.box-fieldset', popup).hide();
+        }
+
         CargarDetalle(idContenedor);
     });
 }
 
 function CargarDetalle(idContenedor) {
-    $('#tb-detalles').table({
-        aoColumns: [
-            {
-                sTitle: Globalize.localize('ColumnConcepto'),
-                sWidth: "250px",
-                bSortable: false
-            },
-            {
-                sTitle: Globalize.localize('ColumnMonto'),
-                sWidth: "100px",
-                bSortable: false
-            },
-            {
-                sTitle: Globalize.localize('ColumnAcciones'),
-                sWidth: "100px",
-                bSortable: false
-            }],
-        bScrollAutoCss: true,
-        bAutoWidth: false,
-        sScrollXInner: "100%",
-        fnInitComplete: function () {
-            this.css("visibility", "visible");
-        },
-        bInfo: true,
-        responsive: false,
-        bPaginate: false,
-        bStateSave: false,
-        bServerSide: false,
-        bFirstLoading: true,
-        fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-            $('.btn-contenedor-eliminar', nRow).off('click');
-            $('.btn-contenedor-eliminar', nRow).click(function () {
-                EliminarDetalle(nRow);
-            });
+    if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+        if (Finalizado) {
+            $('#btn-crear-contenedor').button('disable');
         }
-    });
 
+        $('#tb-detalles').table({
+            aoColumns: [
+                {
+                    sTitle: Globalize.localize('ColumnConcepto'),
+                    sWidth: "250px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnMonto'),
+                    sWidth: "100px",
+                    bSortable: false
+                },
+                {
+                    sTitle: Globalize.localize('ColumnAcciones'),
+                    sWidth: "100px",
+                    bSortable: false
+                }],
+            bScrollAutoCss: true,
+            bAutoWidth: false,
+            sScrollXInner: "100%",
+            fnInitComplete: function () {
+                this.css("visibility", "visible");
+            },
+            bInfo: true,
+            responsive: false,
+            bPaginate: false,
+            bStateSave: false,
+            bServerSide: false,
+            bFirstLoading: true,
+            fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                $('.btn-contenedor-eliminar', nRow).off('click');
+                $('.btn-contenedor-eliminar', nRow).click(function () {
+                    EliminarDetalle(nRow);
+                });
+            }
+        });
+    }
     if (idContenedor != null) {
         $.ajax({
             url: SiteUrl + 'Contenedor/ObtenerDetalle',
@@ -367,17 +387,30 @@ function CargarDetalle(idContenedor) {
                     $('#txt-nombre').val(data.Data.Contenedor.Nombre);
                     $('#txt-poliza').val(data.Data.Contenedor.Poliza);
 
-                    $.each(data.Data.Contenedor.DatalleContenedor, function (index, element) {
-                        var row = [];
-                        
-                        row.push('<input type="text" class="concepto" maxlength="250" value="' + element.Concepto + ' " />');
-                        row.push('<input type="text" class="precio" value="' + element.Precio + '" />');
-                        row.push('<a class="button btn-contenedor-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+                    if (Finalizado) {
+                        $('#txt-codigo').prop('disabled', true);
+                        $('#txt-nombre').prop('disabled', true);
+                        $('#txt-poliza').prop('disabled', true);
+                    }
 
-                        $('#tb-detalles').table('addRow', row, element);
-                        $('.precio').autoNumeric(AutoNumericDecimal);
-                    });
-                    
+                    if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+                        $.each(data.Data.Contenedor.DatalleContenedor, function (index, element) {
+                            var row = [];
+
+                            if (Finalizado) {
+                                row.push('<input type="text" class="concepto" maxlength="250" value="' + element.Concepto + ' " disabled/>');
+                                row.push('<input type="text" class="precio" value="' + element.Precio + '" disabled />');
+                                row.push('');
+                            } else {
+                                row.push('<input type="text" class="concepto" maxlength="250" value="' + element.Concepto + ' " />');
+                                row.push('<input type="text" class="precio" value="' + element.Precio + '" />');
+                                row.push('<a class="button btn-contenedor-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+                            }                                
+
+                            $('#tb-detalles').table('addRow', row, element);
+                            $('.precio').autoNumeric(AutoNumericDecimal);
+                        });
+                    }
                 }
             }
         });

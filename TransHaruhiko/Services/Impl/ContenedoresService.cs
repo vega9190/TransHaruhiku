@@ -39,11 +39,11 @@ namespace TransHaruhiko.Services.Impl
                 contenedor.Nombre = string.IsNullOrEmpty(parameters.Nombre) ? "" : parameters.Nombre;
                 contenedor.Poliza = string.IsNullOrEmpty(parameters.Poliza) ? "" : parameters.Poliza;
 
-                var despachoContenedores = _dbContext.DespachoContenedores.Where(a => a.ContenedorId == parameters.IdContenedor).ToList();
-                _dbContext.DespachoContenedores.RemoveRange(despachoContenedores);
-
                 if (parameters.Despachos != null && parameters.Despachos.Any())
                 {
+                    var despachoContenedores = _dbContext.DespachoContenedores.Where(a => a.ContenedorId == parameters.IdContenedor).ToList();
+                    _dbContext.DespachoContenedores.RemoveRange(despachoContenedores);
+
                     foreach (var despachoContenedor in parameters.Despachos)
                     {
                         var despacho = new DespachoContenedor
