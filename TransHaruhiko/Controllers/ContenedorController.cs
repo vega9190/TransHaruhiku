@@ -19,7 +19,7 @@ namespace TransHaruhiko.Controllers
         }
         public ActionResult List(int? id)
         {
-            if (!id.HasValue) return RedirectToError(new [] {"No existe el contenedor para el acta"});
+            if (!id.HasValue) return RedirectToError(new [] {"No existe el contenedor para el pedido."});
             ViewBag.IdPedido = id;
             return View();
         }

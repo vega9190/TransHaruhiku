@@ -143,6 +143,7 @@ namespace TransHaruhiko.Controllers
                     pedido.Id,
                     pedido.Direccion,
                     pedido.DireccionUrl,
+                    pedido.ParteRecepcion,
                     Contenedor = string.Join(", ", pedido.Contenedores.Select(a=> a.Codigo)),
                     Cliente = new
                     {
@@ -210,6 +211,30 @@ namespace TransHaruhiko.Controllers
                 transfer.Errors.AddRange(res.Errors);
             if (res.HasWarnings)
                 transfer.Warnings.AddRange(res.Warnings);
+            return Json(transfer);
+        }
+        public ActionResult GuardarParteRecepcion(SaveParameters parameters)
+        {
+            var transfer = new ClientTransfer();
+
+            var user = User.Identity;
+            if (user == null)
+            {
+                transfer.Errors.Add(CommonControllerStrings.ErrorSinUsuario);
+                return Json(transfer);
+            }
+            parameters.IdUsuario = int.Parse(user.Name);
+            var res = _pedidosService.GuardarParteRecepcion(parameters);
+
+            if (res.HasErrors)
+                transfer.Errors.AddRange(res.Errors);
+            if (res.HasWarnings)
+                transfer.Warnings.AddRange(res.Warnings);
+
+            var cambiarEstado = _pedidosService.CambiarEstado(parameters.IdPedido.Value, parameters.IdUsuario.Value);
+            var pedido = _pedidosService.Get(parameters.IdPedido.Value);
+
+            transfer.Data = new { EstadoModificado = cambiarEstado, Estado = pedido.Estado.Nombre };
             return Json(transfer);
         }
         public ActionResult Eliminar(int idPedido)

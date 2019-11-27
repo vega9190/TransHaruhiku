@@ -174,6 +174,49 @@ $(document).ready(function () {
         gotoController('GenedarRecibiConforme/' + IdPedido);
     });
 
+    $('#chk-parte-recepcion').click(function() {
+        var checked = $(this).prop('checked');
+        var params = new Object();
+        params.IdPedido = IdPedido;
+        params.ParteRecepcion = checked;
+
+        $.ajax({
+            url: SiteUrl + 'Pedido/GuardarParteRecepcion',
+            data: $.toJSON(params),
+            success: function (data) {
+                if (data.HasErrors) {
+                    showErrors(data.Errors);
+                } else {
+                    if (data.HasWarnings) {
+                        showCustomErrors({
+                            title: Globalize.localize('TextInformacion'),
+                            warnings: data.Warnings
+                        });
+                    } else {
+                        if (data.Data.EstadoModificado) {
+                            var buttons = {};
+
+                            buttons["Ok"] = function () {
+                                location.reload(true);
+                            };
+                            showCustomMessage({
+                                title: Globalize.localize('TitlePopUp'),
+                                message: Globalize.localize('MessageCambioEstado')
+                                    .replace("REMPLAZAR_ESTADO",
+                                        data.Data
+                                        .Estado),
+                                buttons: buttons,
+                                open: function () {
+                                    $('.ui-dialog-titlebar-close').hide();
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    });
+
     CargarFileuploadFicheroBL();
     CargarFileuploadFicheroImagenes();
     CargarFileuploadFicheroFacturaComercial();
@@ -187,9 +230,7 @@ $(document).ready(function () {
     CargarFileuploadFicheroDav();
     CargarFileuploadFicheroRecibiConforme();
     CargarPedido();
-    //$(".tabs").tabs("option", "disabled", [0]);
-    //$(".tabs").tabs("enable", 0);
-    //$(".tabs").tabs({ active: 5 });
+    
     $('.tabs').tabs('option', 'beforeActivate', function (event, ui) {
         switch (ui.newPanel.selector) {
             case '#tab-seguimientos':
@@ -238,6 +279,13 @@ function CargarPedido() {
                         $('#lb-direccion-url').attr('href', data.Data.Pedido.DireccionUrl);
                         DireccionUrl = data.Data.Pedido.DireccionUrl;
                     }
+                    $('#chk-parte-recepcion').prop('checked', data.Data.Pedido.ParteRecepcion);
+                    if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Desaduanizacion) {
+                        $('#chk-parte-recepcion').prop('disabled', false);
+                    } else {
+                        $('#chk-parte-recepcion').prop('disabled', true);
+                    }
+
 
                     $('#txt-contenedor').hide();
                     if (!isNullOrEmpty(data.Data.Pedido.Contenedor)) {
@@ -249,11 +297,11 @@ function CargarPedido() {
                         $('#btn-editar-direccion').hide();
                         $('#btn-editar-direccion-url').hide();
                     }
-
+                    
                     CargarTabs(data.Data.Pedido.Estado.Id);
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Bl);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexBl = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Bl);
+                    if (ficheroIndexBl >= 0) {
                         $('#box-fichero-bl').remove();
                         var lista = $('#box-fichero-text-bl');
 
@@ -263,8 +311,8 @@ function CargarPedido() {
                         $('#box-fichero-text-bl').remove();
                     }
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Imagenes);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexImages = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Imagenes);
+                    if (ficheroIndexImages >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Finalizado) {
                             $('#div-fichero-imagenes').remove();
                             var lista = $('#a-imagenes');
@@ -283,8 +331,8 @@ function CargarPedido() {
                         }
                     } 
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.ListaEmpaque);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexListaEmpaque = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.ListaEmpaque);
+                    if (ficheroIndexListaEmpaque >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
                             $('#frm-fichero-lista-empaque').compFileupload('setFile',
                                 {
@@ -302,8 +350,8 @@ function CargarPedido() {
                         }
                     }
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.FacturaComercial);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexFacturaComercial = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.FacturaComercial);
+                    if (ficheroIndexFacturaComercial >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
                             $('#frm-fichero-factura-comercial').compFileupload('setFile',
                                 {
@@ -316,20 +364,20 @@ function CargarPedido() {
                                         '/' +
                                         TipoFicheroEnum.FacturaComercial,
                                 });
-                            var boxEstado = $('#box-estado-factura-comercial');
-                            var tempEstado = $('<span class="menu-estado" />');
-                            boxEstado.append(
-                                tempEstado
+                            var boxEstadoFacturaComercial = $('#box-estado-factura-comercial');
+                            var tempEstadoFacturaComercial = $('<span class="menu-estado" />');
+                            boxEstadoFacturaComercial.append(
+                                tempEstadoFacturaComercial
                                 .data('data',
                                     {
-                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndexFacturaComercial].Estado.Id
                                     })
-                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .text(data.Data.Pedido.Ficheros[ficheroIndexFacturaComercial].Estado.Nombre)
                                 .contextMenu({
                                     fnClick: function() {
                                         var itemMenu = $(this);
                                         var params = new Object();
-                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndexFacturaComercial].Id;
                                         params.IdNuevoEstado = itemMenu.data('data').Id;
 
                                         $.ajax({
@@ -339,10 +387,10 @@ function CargarPedido() {
                                                 if (data.HasErrors) {
                                                     showErrors(data.Errors);
                                                 } else {
-                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    tempEstadoFacturaComercial.text(itemMenu.data('data').Descripcion);
                                                     if (!isNull($('#tb-seguimientos').data().ifTable))
                                                         $('#tb-seguimientos').table('update');
-                                                    tempEstado.data('data',
+                                                    tempEstadoFacturaComercial.data('data',
                                                         {
                                                             Id: itemMenu.data('data').Id
                                                         });
@@ -356,7 +404,7 @@ function CargarPedido() {
                                         $.ajax({
                                             url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
                                             data: $.toJSON({
-                                                idEstadoActual: tempEstado.data('data').Id
+                                                idEstadoActual: tempEstadoFacturaComercial.data('data').Id
                                             }),
                                             success: function(data) {
                                                 if (data.HasErrors) {
@@ -383,8 +431,8 @@ function CargarPedido() {
                         }
                     }
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Sicoin);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexSicoin = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Sicoin);
+                    if (ficheroIndexSicoin >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
                             $('#frm-fichero-sicoin').compFileupload('setFile',
                                 {
@@ -393,20 +441,20 @@ function CargarPedido() {
                                     title: Globalize.localize('TextDownload'),
                                     url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Sicoin,
                                 });
-                            var boxEstado = $('#box-estado-sicoin');
-                            var tempEstado = $('<span class="menu-estado" />');
-                            boxEstado.append(
-                                tempEstado
+                            var boxEstadoSicoin = $('#box-estado-sicoin');
+                            var tempEstadoSicoin = $('<span class="menu-estado" />');
+                            boxEstadoSicoin.append(
+                                tempEstadoSicoin
                                 .data('data',
                                     {
-                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndexSicoin].Estado.Id
                                     })
-                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .text(data.Data.Pedido.Ficheros[ficheroIndexSicoin].Estado.Nombre)
                                 .contextMenu({
                                     fnClick: function() {
                                         var itemMenu = $(this);
                                         var params = new Object();
-                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndexSicoin].Id;
                                         params.IdNuevoEstado = itemMenu.data('data').Id;
 
                                         $.ajax({
@@ -416,10 +464,10 @@ function CargarPedido() {
                                                 if (data.HasErrors) {
                                                     showErrors(data.Errors);
                                                 } else {
-                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    tempEstadoSicoin.text(itemMenu.data('data').Descripcion);
                                                     if (!isNull($('#tb-seguimientos').data().ifTable))
                                                         $('#tb-seguimientos').table('update');
-                                                    tempEstado.data('data',
+                                                    tempEstadoSicoin.data('data',
                                                         {
                                                             Id: itemMenu.data('data').Id
                                                         });
@@ -433,7 +481,7 @@ function CargarPedido() {
                                         $.ajax({
                                             url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
                                             data: $.toJSON({
-                                                idEstadoActual: tempEstado.data('data').Id
+                                                idEstadoActual: tempEstadoSicoin.data('data').Id
                                             }),
                                             success: function(data) {
                                                 if (data.HasErrors) {
@@ -460,8 +508,8 @@ function CargarPedido() {
                         }
                     }
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Dam);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexDam = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Dam);
+                    if (ficheroIndexDam >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
                             $('#frm-fichero-dam').compFileupload('setFile',
                                 {
@@ -470,20 +518,20 @@ function CargarPedido() {
                                     title: Globalize.localize('TextDownload'),
                                     url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dam,
                                 });
-                            var boxEstado = $('#box-estado-dam');
-                            var tempEstado = $('<span class="menu-estado" />');
-                            boxEstado.append(
-                                tempEstado
+                            var boxEstadoDam = $('#box-estado-dam');
+                            var tempEstadoDam = $('<span class="menu-estado" />');
+                            boxEstadoDam.append(
+                                tempEstadoDam
                                 .data('data',
                                     {
-                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndexDam].Estado.Id
                                     })
-                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .text(data.Data.Pedido.Ficheros[ficheroIndexDam].Estado.Nombre)
                                 .contextMenu({
                                     fnClick: function() {
                                         var itemMenu = $(this);
                                         var params = new Object();
-                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndexDam].Id;
                                         params.IdNuevoEstado = itemMenu.data('data').Id;
 
                                         $.ajax({
@@ -493,10 +541,10 @@ function CargarPedido() {
                                                 if (data.HasErrors) {
                                                     showErrors(data.Errors);
                                                 } else {
-                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    tempEstadoDam.text(itemMenu.data('data').Descripcion);
                                                     if (!isNull($('#tb-seguimientos').data().ifTable))
                                                         $('#tb-seguimientos').table('update');
-                                                    tempEstado.data('data',
+                                                    tempEstadoDam.data('data',
                                                         {
                                                             Id: itemMenu.data('data').Id
                                                         });
@@ -510,7 +558,7 @@ function CargarPedido() {
                                         $.ajax({
                                             url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
                                             data: $.toJSON({
-                                                idEstadoActual: tempEstado.data('data').Id
+                                                idEstadoActual: tempEstadoDam.data('data').Id
                                             }),
                                             success: function(data) {
                                                 if (data.HasErrors) {
@@ -537,8 +585,8 @@ function CargarPedido() {
                         }
                     }
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Mic);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexMic = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Mic);
+                    if (ficheroIndexMic >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
                             $('#frm-fichero-mic').compFileupload('setFile',
                                 {
@@ -556,8 +604,8 @@ function CargarPedido() {
                         }
                     }
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Crt);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexCrt = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Crt);
+                    if (ficheroIndexCrt >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
                             $('#frm-fichero-crt').compFileupload('setFile',
                                 {
@@ -575,8 +623,8 @@ function CargarPedido() {
                         }
                     }
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Goc);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexGoc = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Goc);
+                    if (ficheroIndexGoc >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.EnProceso) {
                             $('#frm-fichero-goc').compFileupload('setFile',
                                 {
@@ -585,20 +633,20 @@ function CargarPedido() {
                                     title: Globalize.localize('TextDownload'),
                                     url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Goc,
                                 });
-                            var boxEstado = $('#box-estado-goc');
-                            var tempEstado = $('<span class="menu-estado" />');
-                            boxEstado.append(
-                                tempEstado
+                            var boxEstadoGoc = $('#box-estado-goc');
+                            var tempEstadoGoc = $('<span class="menu-estado" />');
+                            boxEstadoGoc.append(
+                                tempEstadoGoc
                                 .data('data',
                                     {
-                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndexGoc].Estado.Id
                                     })
-                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .text(data.Data.Pedido.Ficheros[ficheroIndexGoc].Estado.Nombre)
                                 .contextMenu({
                                     fnClick: function() {
                                         var itemMenu = $(this);
                                         var params = new Object();
-                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndexGoc].Id;
                                         params.IdNuevoEstado = itemMenu.data('data').Id;
 
                                         $.ajax({
@@ -608,10 +656,10 @@ function CargarPedido() {
                                                 if (data.HasErrors) {
                                                     showErrors(data.Errors);
                                                 } else {
-                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    tempEstadoGoc.text(itemMenu.data('data').Descripcion);
                                                     if (!isNull($('#tb-seguimientos').data().ifTable))
                                                         $('#tb-seguimientos').table('update');
-                                                    tempEstado.data('data',
+                                                    tempEstadoGoc.data('data',
                                                         {
                                                             Id: itemMenu.data('data').Id
                                                         });
@@ -625,7 +673,7 @@ function CargarPedido() {
                                         $.ajax({
                                             url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
                                             data: $.toJSON({
-                                                idEstadoActual: tempEstado.data('data').Id
+                                                idEstadoActual: tempEstadoGoc.data('data').Id
                                             }),
                                             success: function(data) {
                                                 if (data.HasErrors) {
@@ -652,8 +700,9 @@ function CargarPedido() {
                         }
                     }
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Dui);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexDui = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Dui);
+                    
+                    if (ficheroIndexDui >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Desaduanizacion) {
                             $('#frm-fichero-dui').compFileupload('setFile',
                                 {
@@ -662,22 +711,22 @@ function CargarPedido() {
                                     title: Globalize.localize('TextDownload'),
                                     url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dui
                                 });
-                            var boxEstado = $('#box-estado-dui');
-                            var tempEstado = $('<span class="menu-estado" />');
-                            boxEstado.append(
-                                tempEstado
+                            var boxEstadoDui = $('#box-estado-dui');
+                            var tempEstadoDui = $('<span class="menu-estado" />');
+                            boxEstadoDui.append(
+                                tempEstadoDui
                                 .data('data',
                                     {
-                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndexDui].Estado.Id
                                     })
-                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .text(data.Data.Pedido.Ficheros[ficheroIndexDui].Estado.Nombre)
                                 .contextMenu({
                                     fnClick: function() {
                                         var itemMenu = $(this);
                                         var params = new Object();
-                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndexDui].Id;
                                         params.IdNuevoEstado = itemMenu.data('data').Id;
-
+                                        
                                         $.ajax({
                                             url: SiteUrl + 'Fichero/CambiarEstado',
                                             data: $.toJSON(params),
@@ -685,10 +734,10 @@ function CargarPedido() {
                                                 if (data.HasErrors) {
                                                     showErrors(data.Errors);
                                                 } else {
-                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    tempEstadoDui.text(itemMenu.data('data').Descripcion);
                                                     if (!isNull($('#tb-seguimientos').data().ifTable))
                                                         $('#tb-seguimientos').table('update');
-                                                    tempEstado.data('data',
+                                                    tempEstadoDui.data('data',
                                                         {
                                                             Id: itemMenu.data('data').Id
                                                         });
@@ -702,7 +751,7 @@ function CargarPedido() {
                                         $.ajax({
                                             url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
                                             data: $.toJSON({
-                                                idEstadoActual: tempEstado.data('data').Id
+                                                idEstadoActual: tempEstadoDui.data('data').Id
                                             }),
                                             success: function(data) {
                                                 if (data.HasErrors) {
@@ -729,8 +778,8 @@ function CargarPedido() {
                         }
                     }
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Dav);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexDav = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.Dav);
+                    if (ficheroIndexDav >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Desaduanizacion) {
                             $('#frm-fichero-dav').compFileupload('setFile',
                                 {
@@ -739,20 +788,20 @@ function CargarPedido() {
                                     title: Globalize.localize('TextDownload'),
                                     url: SiteUrl + 'DescargarFichero/' + IdPedido + '/' + TipoFicheroEnum.Dav
                                 });
-                            var boxEstado = $('#box-estado-dav');
-                            var tempEstado = $('<span class="menu-estado" />');
-                            boxEstado.append(
-                                tempEstado
+                            var boxEstadoDav = $('#box-estado-dav');
+                            var tempEstadoDav = $('<span class="menu-estado" />');
+                            boxEstadoDav.append(
+                                tempEstadoDav
                                 .data('data',
                                     {
-                                        Id: data.Data.Pedido.Ficheros[ficheroIndex].Estado.Id
+                                        Id: data.Data.Pedido.Ficheros[ficheroIndexDav].Estado.Id
                                     })
-                                .text(data.Data.Pedido.Ficheros[ficheroIndex].Estado.Nombre)
+                                .text(data.Data.Pedido.Ficheros[ficheroIndexDav].Estado.Nombre)
                                 .contextMenu({
                                     fnClick: function() {
                                         var itemMenu = $(this);
                                         var params = new Object();
-                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndex].Id;
+                                        params.IdFichero = data.Data.Pedido.Ficheros[ficheroIndexDav].Id;
                                         params.IdNuevoEstado = itemMenu.data('data').Id;
 
                                         $.ajax({
@@ -762,10 +811,10 @@ function CargarPedido() {
                                                 if (data.HasErrors) {
                                                     showErrors(data.Errors);
                                                 } else {
-                                                    tempEstado.text(itemMenu.data('data').Descripcion);
+                                                    tempEstadoDav.text(itemMenu.data('data').Descripcion);
                                                     if (!isNull($('#tb-seguimientos').data().ifTable))
                                                         $('#tb-seguimientos').table('update');
-                                                    tempEstado.data('data',
+                                                    tempEstadoDav.data('data',
                                                         {
                                                             Id: itemMenu.data('data').Id
                                                         });
@@ -779,7 +828,7 @@ function CargarPedido() {
                                         $.ajax({
                                             url: SiteUrl + 'Parametrico/SearchPosibleEstadosDocumento',
                                             data: $.toJSON({
-                                                idEstadoActual: tempEstado.data('data').Id
+                                                idEstadoActual: tempEstadoDav.data('data').Id
                                             }),
                                             success: function(data) {
                                                 if (data.HasErrors) {
@@ -806,8 +855,8 @@ function CargarPedido() {
                         }
                     }
 
-                    var ficheroIndex = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.RecibiConforme);
-                    if (ficheroIndex >= 0) {
+                    var ficheroIndexRecibiConforme = data.Data.Pedido.Ficheros.findIndex(a=> a.Tipo.Id === TipoFicheroEnum.RecibiConforme);
+                    if (ficheroIndexRecibiConforme >= 0) {
                         if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Transportadora) {
                             $('#frm-fichero-recibi-conforme').compFileupload('setFile',
                                 {

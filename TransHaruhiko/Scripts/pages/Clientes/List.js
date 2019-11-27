@@ -70,8 +70,6 @@
             /******************************************************************/
             $('.chk-activo', nRow)
                 .click(function () {
-
-                    var params = new Object();
                     var dataRow = $(nRow).data('data');
 
                     var checked = $(this).prop('checked');

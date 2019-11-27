@@ -11,6 +11,7 @@ namespace TransHaruhiko.Services
         IQueryable<Pedido> Buscar();
         BaseResult Guardar(SaveParameters parameters);
         BaseResult GuardarPrecio(SaveParameters parameters);
+        BaseResult GuardarParteRecepcion(SaveParameters parameters);
         BaseResult Eliminar(int idPedido, int idUsuario);
         BaseResult GuardarFichero(SaveFicheroParameters parameters);
         ResultFileContent GetFichero(int idPedido, int idTipo);

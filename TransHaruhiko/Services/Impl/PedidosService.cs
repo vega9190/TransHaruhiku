@@ -54,7 +54,8 @@ namespace TransHaruhiko.Services.Impl
                     Direccion = parameters.Direccion,
                     DireccionUrl = parameters.DireccionUrl,
                     Fecha = DateTime.Now.Date,
-                    EstadoId = (int)EstadosEnum.Inicio
+                    EstadoId = (int)EstadosEnum.Inicio,
+                    ParteRecepcion = false
                 };
 
                 var seguimiento = new Seguimiento
@@ -92,6 +93,19 @@ namespace TransHaruhiko.Services.Impl
 
             _dbContext.Seguimientos.Add(seguimiento);
             _dbContext.SaveChanges();
+            return result;
+        }
+
+        public BaseResult GuardarParteRecepcion(SaveParameters parameters)
+        {
+            var result = new BaseResult();
+            var pedido = _dbContext.Pedidos.Find(parameters.IdPedido);
+
+            if (!parameters.ParteRecepcion.HasValue) return result;
+
+            pedido.ParteRecepcion = parameters.ParteRecepcion.Value;
+            _dbContext.SaveChanges();
+
             return result;
         }
         public BaseResult Eliminar(int idPedido, int idUsuario)
@@ -287,7 +301,7 @@ namespace TransHaruhiko.Services.Impl
                             && pedido.Ficheros.Any(a => a.TipoId == (int)TipoFicheroEnum.Dui && a.EstadoId == (int)FicheroEstadoEnum.Validado)
                             && pedido.Ficheros.Any(a => a.TipoId == (int)TipoFicheroEnum.Dav && a.EstadoId == (int)FicheroEstadoEnum.Validado);
 
-                        if (perimitodCambiarEstado)
+                        if (perimitodCambiarEstado && pedido.ParteRecepcion)
                         {
                             var seguimiento = new Seguimiento
                             {
