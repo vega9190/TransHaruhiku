@@ -225,16 +225,16 @@ $(document).ready(function () {
                                     Globalize.localize('TextPagos') +
                                     '" class="btn-pagos ui-icon ui-icon-tag"></span>';
 
+                                tempAcciones += '<a '
+                                       + 'href="' + SiteUrl + 'Contenedor/List/' + value.Pedido.Id + '" '
+                                       + 'title="' + Globalize.localize('TextContenedor') + '" '
+                                       + 'class="ui-icon ui-icon-clipboard"></a>';
+
                                 if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
                                     tempAcciones += '<span title="' +
                                         Globalize.localize('TextPrecio') +
                                         '" class="btn-precio ui-icon ui-icon-suitcase" ' + (isNull(value.Pedido.Precio) ? '' : 'style="background-color: greenyellow;"')
                                         + '></span>';
-
-                                    tempAcciones += '<a '
-                                        + 'href="' + SiteUrl + 'Contenedor/List/' + value.Pedido.Id + '" '
-                                        + 'title="' + Globalize.localize('TextContenedor') + '" '
-                                        + 'class="ui-icon ui-icon-clipboard"></a>';
                                 }
 
                                 tempAcciones += '</div>';
