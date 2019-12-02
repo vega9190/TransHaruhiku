@@ -163,6 +163,22 @@ IdContenedor INT NOT NULL,
 FOREIGN KEY (IdContenedor) REFERENCES th.Contenedores (IdContenedor)
 )
 
+CREATE TABLE th.Polizas(
+IdPoliza INT PRIMARY KEY IDENTITY(1,1),
+Codigo NVARCHAR(50) NOT NULL,
+Nombre NVARCHAR(250) NOT NULL,
+IdContenedor INT NOT NULL,
+FOREIGN KEY (IdContenedor) REFERENCES th.Contenedores(IdContenedor)
+)
+
+CREATE Table th.DetallePolizas(
+IdDetallePoliza INT PRIMARY KEY IDENTITY(1,1),
+Concepto NVARCHAR(250) NOT NULL,
+Precio DECIMAL(10,2) NOT NULL,
+IdPoliza INT NOT NULL,
+FOREIGN KEY (IdPoliza) REFERENCES th.Polizas (IdPoliza)
+)
+
 
 INSERT INTO th.EstadosPedidos VALUES ('Inicio')
 INSERT INTO th.EstadosPedidos VALUES ('En Proceso')

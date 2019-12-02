@@ -15,7 +15,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44348</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -289,10 +289,12 @@
     <Compile Include="Models\DbModels\Dto\Reportes\RecibiConformeDto.cs" />
     <Compile Include="Models\DbModels\Entidades\Contenedor.cs" />
     <Compile Include="Models\DbModels\Entidades\DespachoContenedor.cs" />
+    <Compile Include="Models\DbModels\Entidades\DetallePoliza.cs" />
     <Compile Include="Models\DbModels\Entidades\EstadoFichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Fichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Observacion.cs" />
     <Compile Include="Models\DbModels\Entidades\Pago.cs" />
+    <Compile Include="Models\DbModels\Entidades\Poliza.cs" />
     <Compile Include="Models\DbModels\Entidades\Rol.cs" />
     <Compile Include="Models\DbModels\Entidades\Seguimiento.cs" />
     <Compile Include="Models\DbModels\Entidades\TipoFichero.cs" />

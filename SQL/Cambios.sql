@@ -1,0 +1,22 @@
+USE db_Gestor
+GO
+
+
+ALTER TABLE th.Contenedores ALTER COLUMN Codigo VARCHAR (250) NOT NULL;
+ALTER TABLE th.Contenedores DROP COLUMN Poliza;
+
+CREATE TABLE th.Polizas(
+IdPoliza INT PRIMARY KEY IDENTITY(1,1),
+Codigo NVARCHAR(50) NOT NULL,
+Nombre NVARCHAR(250) NOT NULL,
+IdPedido INT NOT NULL,
+FOREIGN KEY (IdPedido) REFERENCES th.Pedidos(IdPedido)
+)
+
+CREATE Table th.DetallePolizas(
+IdDetallePoliza INT PRIMARY KEY IDENTITY(1,1),
+Concepto NVARCHAR(250) NOT NULL,
+Precio DECIMAL(10,2) NOT NULL,
+IdPoliza INT NOT NULL,
+FOREIGN KEY (IdPoliza) REFERENCES th.Polizas (IdPoliza)
+)
