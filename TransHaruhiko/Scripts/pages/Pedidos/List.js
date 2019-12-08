@@ -20,10 +20,13 @@ $(document).ready(function () {
     $('#btn-buscar').button();
     $('#btn-limpiar').button();
     $('#btn-crear').button();
+    $('#txt-id-pedido').autoNumeric(AutoNumericInteger);
+
 
     $('#btn-limpiar').click(function () {
         $('#txt-nombre').val("");
         $('#txt-carnet').val("");
+        $('#txt-id-pedido').val("");
         $('#txt-container').val("");
         $('#txt-fecha-desde').val("");
         $('#txt-fecha-hasta').val("");
@@ -174,6 +177,7 @@ $(document).ready(function () {
             params.OrderDirection = paramsTabla.sSortDir_0;
             /******************************************************************/
 
+            params.IdPedido = $('#txt-id-pedido').val();
             params.Nombre = $('#txt-nombre').val();
             params.Carnet = $('#txt-carnet').val();
             params.Contenedor = $('#txt-container').val();
@@ -181,6 +185,9 @@ $(document).ready(function () {
             params.FechaDesde = $('#txt-fecha-desde').val();
             params.FechaHasta = $('#txt-fecha-hasta').val();
 
+            if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+                params.Finalizados = $('#chk-finalizados').prop('checked');
+            }
             /*****************************************************************/
             var warnings = new Array();
             if (!isEmpty(params.FechaDesde) && !isEmpty(params.FechaHasta)) {
@@ -225,12 +232,14 @@ $(document).ready(function () {
                                     Globalize.localize('TextPagos') +
                                     '" class="btn-pagos ui-icon ui-icon-tag"></span>';
 
-                                tempAcciones += '<a '
-                                       + 'href="' + SiteUrl + 'Contenedor/List/' + value.Pedido.Id + '" '
-                                       + 'title="' + Globalize.localize('TextContenedor') + '" '
-                                       + 'class="ui-icon ui-icon-clipboard"></a>';
 
                                 if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+
+                                    tempAcciones += '<a '
+                                       + 'href="' + SiteUrl + 'Poliza/List/' + value.Pedido.Id + '" '
+                                       + 'title="' + Globalize.localize('TextPoliza') + '" '
+                                       + 'class="ui-icon ui-icon-clipboard"></a>';
+
                                     tempAcciones += '<span title="' +
                                         Globalize.localize('TextPrecio') +
                                         '" class="btn-precio ui-icon ui-icon-suitcase" ' + (isNull(value.Pedido.Precio) ? '' : 'style="background-color: greenyellow;"')
@@ -281,6 +290,7 @@ function PopUpCrear() {
         params.IdCliente = $('#cbx-clientes-crear').combobox('getId');
         params.Descripcion = $('#txt-descripcion-crear').val().trim();
         params.Direccion = $('#txt-direccion-crear').val().trim();
+        params.Contenedor = $('#txt-contenedor-crear').val().trim();
         params.DireccionUrl = $('#txt-direccion-url-crear').val().trim();
         
         var warnings = new Array();

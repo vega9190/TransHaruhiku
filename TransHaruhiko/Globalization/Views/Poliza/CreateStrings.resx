@@ -123,13 +123,10 @@
   <data name="LabelNombre" xml:space="preserve">
     <value>Nombre:</value>
   </data>
-  <data name="LabelPoliza" xml:space="preserve">
-    <value>Póliza:</value>
-  </data>
   <data name="TextSeccionResultado" xml:space="preserve">
     <value>Detalle</value>
   </data>
   <data name="TitleCrear" xml:space="preserve">
-    <value>Contenedor</value>
+    <value>Poliza</value>
   </data>
 </root>

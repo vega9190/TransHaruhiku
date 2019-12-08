@@ -2,19 +2,19 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using TransHaruhiko.Models.TransferStruct;
-using TransHaruhiko.Parameters.Contenedores;
+using TransHaruhiko.Parameters.Polizas;
 using TransHaruhiko.Services;
 
 namespace TransHaruhiko.Controllers
 {
     [Authorize]
-    public class ContenedorController : Controller
+    public class PolizaController : Controller
     {
-        private readonly IContenedoresService _contenedorService;
+        private readonly IPolizasService _polizaService;
         private readonly IReportesService _reportesService;
-        public ContenedorController(IContenedoresService contenedorService, IReportesService reportesService)
+        public PolizaController(IPolizasService polizaService, IReportesService reportesService)
         {
-            _contenedorService = contenedorService;
+            _polizaService = polizaService;
             _reportesService = reportesService;
         }
         public ActionResult List(int? id)
@@ -25,12 +25,12 @@ namespace TransHaruhiko.Controllers
         }
         public ActionResult Buscar(SearchParameters parameters)
         {
-            var queriable = _contenedorService.Buscar();
+            var queriable = _polizaService.Buscar();
             queriable = queriable.Where(a => a.PedidoId == parameters.IdPedido);
 
             var querySelect = queriable.Select(a => new
             {
-                Contenedor = new
+                Poliza = new
                 {
                     a.Id,
                     a.Codigo,
@@ -38,7 +38,7 @@ namespace TransHaruhiko.Controllers
                 }
             });
 
-            querySelect = querySelect.OrderByDescending(a => a.Contenedor.Id);
+            querySelect = querySelect.OrderByDescending(a => a.Poliza.Id);
 
             var listado = querySelect.Skip((parameters.PageIndex - 1) * parameters.ItemsPerPage)
                 .Take(parameters.ItemsPerPage).ToList();
@@ -55,9 +55,9 @@ namespace TransHaruhiko.Controllers
         }
         public ActionResult BuscarDetalle(SearchDetalleParameters parameters)
         {
-            var queriable = _contenedorService.BuscarDetalle();
+            var queriable = _polizaService.BuscarDetalle();
 
-            queriable = queriable.Where(a => a.ContenedorId == parameters.IdContenedor);
+            queriable = queriable.Where(a => a.PolizaId == parameters.IdPoliza);
             
 
             var querySelect = queriable.Select(a => new
@@ -85,25 +85,24 @@ namespace TransHaruhiko.Controllers
             transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
             return Json(transfer);
         }
-        public ActionResult ObtenerDetalle(int idContenedor)
+        public ActionResult ObtenerDetalle(int idPoliza)
         {
             var transfer = new ClientTransfer();
-            var contenedor = _contenedorService.Get(idContenedor);
+            var poliza = _polizaService.Get(idPoliza);
 
 
-            if (contenedor == null)
+            if (poliza == null)
             {
                 return null;
             }
             transfer.Data = new
             {
-                Contenedor = new
+                Poliza = new
                 {
-                    contenedor.Id,
-                    contenedor.Codigo,
-                    contenedor.Nombre,
-                    contenedor.Poliza,
-                    DatalleContenedor = contenedor.DespachoContenedores.Select(a => new {
+                    poliza.Id,
+                    poliza.Codigo,
+                    poliza.Nombre,
+                    DatallePoliza = poliza.DetallePolizas.Select(a => new {
                         a.Id,
                         a.Concepto,
                         a.Precio
@@ -117,7 +116,7 @@ namespace TransHaruhiko.Controllers
         {
             var transfer = new ClientTransfer();
             
-            var res = _contenedorService.Guardar(parameters);
+            var res = _polizaService.Guardar(parameters);
 
             if (res.HasErrors)
                 transfer.Errors.AddRange(res.Errors);
@@ -125,11 +124,11 @@ namespace TransHaruhiko.Controllers
                 transfer.Warnings.AddRange(res.Warnings);
             return Json(transfer);
         }
-        public ActionResult Eliminar(int idContenedor)
+        public ActionResult Eliminar(int idPoliza)
         {
             var transfer = new ClientTransfer();
             
-            var res = _contenedorService.Eliminar(idContenedor);
+            var res = _polizaService.Eliminar(idPoliza);
 
             if (res.HasErrors)
                 transfer.Errors.AddRange(res.Errors);

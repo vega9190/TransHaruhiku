@@ -133,6 +133,24 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mostrar Finalizados.
+        /// </summary>
+        public static string LabelFinalizados {
+            get {
+                return ResourceManager.GetString("LabelFinalizados", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id Pedido:.
+        /// </summary>
+        public static string LabelIdPedido {
+            get {
+                return ResourceManager.GetString("LabelIdPedido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nombre:.
         /// </summary>
         public static string LabelNombre {

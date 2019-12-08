@@ -10,5 +10,6 @@
         public int? IdUsuario { get; set; }
         public string Precio { get; set; }
         public bool? ParteRecepcion { get; set; }
+        public string Contenedor { get; set; }
     }
 }

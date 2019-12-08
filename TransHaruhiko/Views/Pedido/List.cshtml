@@ -33,6 +33,10 @@
                 <div class="grid-50">
                     <ul class="box-form">
                         <li>
+                            <label for="txt-id-pedido" class="grid-20 mobile-grid-100">@ListStrings.LabelIdPedido</label>
+                            <input id="txt-id-pedido" class="grid-55 mobile-grid-100" type="text" />
+                        </li>
+                        <li>
                             <label for="txt-nombre" class="grid-20 mobile-grid-100">@ListStrings.LabelNombre </label>
                             <input id="txt-nombre" class="grid-55 mobile-grid-100" type="text" />
                         </li>
@@ -56,6 +60,13 @@
                             <label for="txt-fecha-hasta" class="grid-20 mobile-grid-100"> @ListStrings.LabelFechaHasta </label>
                             <input id="txt-fecha-hasta" class="datepicker grid-30 mobile-grid-100" type="text" />
                         </li>
+                        @if (Session["Rol"].Equals("Administrador") || Session["Rol"].Equals("Gerente"))
+                        {
+                            <li>
+                                <label class="grid-20 mobile-grid-100" for="chk-finalizados">@ListStrings.LabelFinalizados</label>
+                                <input class="grid-5 mobile-grid-100" type="checkbox" id="chk-finalizados" />
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

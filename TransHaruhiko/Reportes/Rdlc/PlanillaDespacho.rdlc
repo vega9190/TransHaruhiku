@@ -570,7 +570,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Poliza.Value</Value>
+                              <Value>=Fields!Codigo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -604,8 +604,8 @@
                     <Subreport Name="subReporteDetalle">
                       <ReportName>SubDetalleContenedor</ReportName>
                       <Parameters>
-                        <Parameter Name="IdContenedor">
-                          <Value>=Fields!IdContenedor.Value</Value>
+                        <Parameter Name="IdPoliza">
+                          <Value>=Fields!IdPoliza.Value</Value>
                         </Parameter>
                       </Parameters>
                       <Style>
@@ -615,6 +615,7 @@
                       </Style>
                     </Subreport>
                     <ColSpan>4</ColSpan>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -703,7 +704,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TotalContenedor.Value</Value>
+                              <Value>=Fields!TotalPoliza.Value</Value>
                               <Style>
                                 <Format>#,0.00 '$';(#,0.00 '$')</Format>
                               </Style>
@@ -809,7 +810,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>Contenedor</DataSetName>
+        <DataSetName>Poliza</DataSetName>
         <Top>7.24365cm</Top>
         <Left>0.45384cm</Left>
         <Height>2.4cm</Height>
@@ -1110,7 +1111,7 @@
         <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
-    <DataSet Name="Contenedor">
+    <DataSet Name="Poliza">
       <Query>
         <DataSourceName>dtsPedidos</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -1120,23 +1121,23 @@
           <DataField>Nombre</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Poliza">
-          <DataField>Poliza</DataField>
+        <Field Name="Codigo">
+          <DataField>Codigo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="IdContenedor">
-          <DataField>IdContenedor</DataField>
+        <Field Name="IdPoliza">
+          <DataField>IdPoliza</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="TotalContenedor">
-          <DataField>TotalContenedor</DataField>
+        <Field Name="TotalPoliza">
+          <DataField>TotalPoliza</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dtsPedidos</rd:DataSetName>
-        <rd:SchemaPath>D:\GIT\New\TransHaruhiko\TransHaruhiko\Reportes\dtsPedidos.xsd</rd:SchemaPath>
-        <rd:TableName>Contenedor</rd:TableName>
+        <rd:SchemaPath>E:\GIT\TransHaruhiku\TransHaruhiko\Reportes\dtsPedidos.xsd</rd:SchemaPath>
+        <rd:TableName>Poliza</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />

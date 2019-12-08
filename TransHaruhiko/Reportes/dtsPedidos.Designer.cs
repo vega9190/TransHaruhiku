@@ -28,7 +28,7 @@ namespace TransHaruhiko.Reportes {
         
         private PlantillaDespachoDataTable tablePlantillaDespacho;
         
-        private ContenedorDataTable tableContenedor;
+        private PolizaDataTable tablePoliza;
         
         private DetalleContenedorDataTable tableDetalleContenedor;
         
@@ -66,8 +66,8 @@ namespace TransHaruhiko.Reportes {
                 if ((ds.Tables["PlantillaDespacho"] != null)) {
                     base.Tables.Add(new PlantillaDespachoDataTable(ds.Tables["PlantillaDespacho"]));
                 }
-                if ((ds.Tables["Contenedor"] != null)) {
-                    base.Tables.Add(new ContenedorDataTable(ds.Tables["Contenedor"]));
+                if ((ds.Tables["Poliza"] != null)) {
+                    base.Tables.Add(new PolizaDataTable(ds.Tables["Poliza"]));
                 }
                 if ((ds.Tables["DetalleContenedor"] != null)) {
                     base.Tables.Add(new DetalleContenedorDataTable(ds.Tables["DetalleContenedor"]));
@@ -114,9 +114,9 @@ namespace TransHaruhiko.Reportes {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ContenedorDataTable Contenedor {
+        public PolizaDataTable Poliza {
             get {
-                return this.tableContenedor;
+                return this.tablePoliza;
             }
         }
         
@@ -203,8 +203,8 @@ namespace TransHaruhiko.Reportes {
                 if ((ds.Tables["PlantillaDespacho"] != null)) {
                     base.Tables.Add(new PlantillaDespachoDataTable(ds.Tables["PlantillaDespacho"]));
                 }
-                if ((ds.Tables["Contenedor"] != null)) {
-                    base.Tables.Add(new ContenedorDataTable(ds.Tables["Contenedor"]));
+                if ((ds.Tables["Poliza"] != null)) {
+                    base.Tables.Add(new PolizaDataTable(ds.Tables["Poliza"]));
                 }
                 if ((ds.Tables["DetalleContenedor"] != null)) {
                     base.Tables.Add(new DetalleContenedorDataTable(ds.Tables["DetalleContenedor"]));
@@ -254,10 +254,10 @@ namespace TransHaruhiko.Reportes {
                     this.tablePlantillaDespacho.InitVars();
                 }
             }
-            this.tableContenedor = ((ContenedorDataTable)(base.Tables["Contenedor"]));
+            this.tablePoliza = ((PolizaDataTable)(base.Tables["Poliza"]));
             if ((initTable == true)) {
-                if ((this.tableContenedor != null)) {
-                    this.tableContenedor.InitVars();
+                if ((this.tablePoliza != null)) {
+                    this.tablePoliza.InitVars();
                 }
             }
             this.tableDetalleContenedor = ((DetalleContenedorDataTable)(base.Tables["DetalleContenedor"]));
@@ -280,8 +280,8 @@ namespace TransHaruhiko.Reportes {
             base.Tables.Add(this.tableDatosPedido);
             this.tablePlantillaDespacho = new PlantillaDespachoDataTable();
             base.Tables.Add(this.tablePlantillaDespacho);
-            this.tableContenedor = new ContenedorDataTable();
-            base.Tables.Add(this.tableContenedor);
+            this.tablePoliza = new PolizaDataTable();
+            base.Tables.Add(this.tablePoliza);
             this.tableDetalleContenedor = new DetalleContenedorDataTable();
             base.Tables.Add(this.tableDetalleContenedor);
         }
@@ -300,7 +300,7 @@ namespace TransHaruhiko.Reportes {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeContenedor() {
+        private bool ShouldSerializePoliza() {
             return false;
         }
         
@@ -372,7 +372,7 @@ namespace TransHaruhiko.Reportes {
         public delegate void PlantillaDespachoRowChangeEventHandler(object sender, PlantillaDespachoRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void ContenedorRowChangeEventHandler(object sender, ContenedorRowChangeEvent e);
+        public delegate void PolizaRowChangeEventHandler(object sender, PolizaRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void DetalleContenedorRowChangeEventHandler(object sender, DetalleContenedorRowChangeEvent e);
@@ -1016,20 +1016,20 @@ namespace TransHaruhiko.Reportes {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ContenedorDataTable : global::System.Data.TypedTableBase<ContenedorRow> {
+        public partial class PolizaDataTable : global::System.Data.TypedTableBase<PolizaRow> {
             
             private global::System.Data.DataColumn columnNombre;
             
-            private global::System.Data.DataColumn columnPoliza;
+            private global::System.Data.DataColumn columnCodigo;
             
-            private global::System.Data.DataColumn columnIdContenedor;
+            private global::System.Data.DataColumn columnIdPoliza;
             
-            private global::System.Data.DataColumn columnTotalContenedor;
+            private global::System.Data.DataColumn columnTotalPoliza;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ContenedorDataTable() {
-                this.TableName = "Contenedor";
+            public PolizaDataTable() {
+                this.TableName = "Poliza";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -1037,7 +1037,7 @@ namespace TransHaruhiko.Reportes {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ContenedorDataTable(global::System.Data.DataTable table) {
+            internal PolizaDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -1054,7 +1054,7 @@ namespace TransHaruhiko.Reportes {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected ContenedorDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected PolizaDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -1069,25 +1069,25 @@ namespace TransHaruhiko.Reportes {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PolizaColumn {
+            public global::System.Data.DataColumn CodigoColumn {
                 get {
-                    return this.columnPoliza;
+                    return this.columnCodigo;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IdContenedorColumn {
+            public global::System.Data.DataColumn IdPolizaColumn {
                 get {
-                    return this.columnIdContenedor;
+                    return this.columnIdPoliza;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TotalContenedorColumn {
+            public global::System.Data.DataColumn TotalPolizaColumn {
                 get {
-                    return this.columnTotalContenedor;
+                    return this.columnTotalPoliza;
                 }
             }
             
@@ -1102,48 +1102,48 @@ namespace TransHaruhiko.Reportes {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ContenedorRow this[int index] {
+            public PolizaRow this[int index] {
                 get {
-                    return ((ContenedorRow)(this.Rows[index]));
+                    return ((PolizaRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event ContenedorRowChangeEventHandler ContenedorRowChanging;
+            public event PolizaRowChangeEventHandler PolizaRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event ContenedorRowChangeEventHandler ContenedorRowChanged;
+            public event PolizaRowChangeEventHandler PolizaRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event ContenedorRowChangeEventHandler ContenedorRowDeleting;
+            public event PolizaRowChangeEventHandler PolizaRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event ContenedorRowChangeEventHandler ContenedorRowDeleted;
+            public event PolizaRowChangeEventHandler PolizaRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddContenedorRow(ContenedorRow row) {
+            public void AddPolizaRow(PolizaRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ContenedorRow AddContenedorRow(string Nombre, string Poliza, int IdContenedor, decimal TotalContenedor) {
-                ContenedorRow rowContenedorRow = ((ContenedorRow)(this.NewRow()));
+            public PolizaRow AddPolizaRow(string Nombre, string Codigo, int IdPoliza, decimal TotalPoliza) {
+                PolizaRow rowPolizaRow = ((PolizaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Nombre,
-                        Poliza,
-                        IdContenedor,
-                        TotalContenedor};
-                rowContenedorRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowContenedorRow);
-                return rowContenedorRow;
+                        Codigo,
+                        IdPoliza,
+                        TotalPoliza};
+                rowPolizaRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPolizaRow);
+                return rowPolizaRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                ContenedorDataTable cln = ((ContenedorDataTable)(base.Clone()));
+                PolizaDataTable cln = ((PolizaDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -1151,16 +1151,16 @@ namespace TransHaruhiko.Reportes {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new ContenedorDataTable();
+                return new PolizaDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnNombre = base.Columns["Nombre"];
-                this.columnPoliza = base.Columns["Poliza"];
-                this.columnIdContenedor = base.Columns["IdContenedor"];
-                this.columnTotalContenedor = base.Columns["TotalContenedor"];
+                this.columnCodigo = base.Columns["Codigo"];
+                this.columnIdPoliza = base.Columns["IdPoliza"];
+                this.columnTotalPoliza = base.Columns["TotalPoliza"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1168,38 +1168,38 @@ namespace TransHaruhiko.Reportes {
             private void InitClass() {
                 this.columnNombre = new global::System.Data.DataColumn("Nombre", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNombre);
-                this.columnPoliza = new global::System.Data.DataColumn("Poliza", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPoliza);
-                this.columnIdContenedor = new global::System.Data.DataColumn("IdContenedor", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIdContenedor);
-                this.columnTotalContenedor = new global::System.Data.DataColumn("TotalContenedor", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTotalContenedor);
+                this.columnCodigo = new global::System.Data.DataColumn("Codigo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCodigo);
+                this.columnIdPoliza = new global::System.Data.DataColumn("IdPoliza", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdPoliza);
+                this.columnTotalPoliza = new global::System.Data.DataColumn("TotalPoliza", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalPoliza);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ContenedorRow NewContenedorRow() {
-                return ((ContenedorRow)(this.NewRow()));
+            public PolizaRow NewPolizaRow() {
+                return ((PolizaRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new ContenedorRow(builder);
+                return new PolizaRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(ContenedorRow);
+                return typeof(PolizaRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.ContenedorRowChanged != null)) {
-                    this.ContenedorRowChanged(this, new ContenedorRowChangeEvent(((ContenedorRow)(e.Row)), e.Action));
+                if ((this.PolizaRowChanged != null)) {
+                    this.PolizaRowChanged(this, new PolizaRowChangeEvent(((PolizaRow)(e.Row)), e.Action));
                 }
             }
             
@@ -1207,8 +1207,8 @@ namespace TransHaruhiko.Reportes {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.ContenedorRowChanging != null)) {
-                    this.ContenedorRowChanging(this, new ContenedorRowChangeEvent(((ContenedorRow)(e.Row)), e.Action));
+                if ((this.PolizaRowChanging != null)) {
+                    this.PolizaRowChanging(this, new PolizaRowChangeEvent(((PolizaRow)(e.Row)), e.Action));
                 }
             }
             
@@ -1216,8 +1216,8 @@ namespace TransHaruhiko.Reportes {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.ContenedorRowDeleted != null)) {
-                    this.ContenedorRowDeleted(this, new ContenedorRowChangeEvent(((ContenedorRow)(e.Row)), e.Action));
+                if ((this.PolizaRowDeleted != null)) {
+                    this.PolizaRowDeleted(this, new PolizaRowChangeEvent(((PolizaRow)(e.Row)), e.Action));
                 }
             }
             
@@ -1225,14 +1225,14 @@ namespace TransHaruhiko.Reportes {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.ContenedorRowDeleting != null)) {
-                    this.ContenedorRowDeleting(this, new ContenedorRowChangeEvent(((ContenedorRow)(e.Row)), e.Action));
+                if ((this.PolizaRowDeleting != null)) {
+                    this.PolizaRowDeleting(this, new PolizaRowChangeEvent(((PolizaRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveContenedorRow(ContenedorRow row) {
+            public void RemovePolizaRow(PolizaRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -1259,7 +1259,7 @@ namespace TransHaruhiko.Reportes {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "ContenedorDataTable";
+                attribute2.FixedValue = "PolizaDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1930,15 +1930,15 @@ namespace TransHaruhiko.Reportes {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ContenedorRow : global::System.Data.DataRow {
+        public partial class PolizaRow : global::System.Data.DataRow {
             
-            private ContenedorDataTable tableContenedor;
+            private PolizaDataTable tablePoliza;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ContenedorRow(global::System.Data.DataRowBuilder rb) : 
+            internal PolizaRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableContenedor = ((ContenedorDataTable)(this.Table));
+                this.tablePoliza = ((PolizaDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1946,111 +1946,111 @@ namespace TransHaruhiko.Reportes {
             public string Nombre {
                 get {
                     try {
-                        return ((string)(this[this.tableContenedor.NombreColumn]));
+                        return ((string)(this[this.tablePoliza.NombreColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Nombre\' in table \'Contenedor\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Nombre\' in table \'Poliza\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableContenedor.NombreColumn] = value;
+                    this[this.tablePoliza.NombreColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Poliza {
+            public string Codigo {
                 get {
                     try {
-                        return ((string)(this[this.tableContenedor.PolizaColumn]));
+                        return ((string)(this[this.tablePoliza.CodigoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Poliza\' in table \'Contenedor\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Codigo\' in table \'Poliza\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableContenedor.PolizaColumn] = value;
+                    this[this.tablePoliza.CodigoColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int IdContenedor {
+            public int IdPoliza {
                 get {
                     try {
-                        return ((int)(this[this.tableContenedor.IdContenedorColumn]));
+                        return ((int)(this[this.tablePoliza.IdPolizaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IdContenedor\' in table \'Contenedor\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'IdPoliza\' in table \'Poliza\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableContenedor.IdContenedorColumn] = value;
+                    this[this.tablePoliza.IdPolizaColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal TotalContenedor {
+            public decimal TotalPoliza {
                 get {
                     try {
-                        return ((decimal)(this[this.tableContenedor.TotalContenedorColumn]));
+                        return ((decimal)(this[this.tablePoliza.TotalPolizaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TotalContenedor\' in table \'Contenedor\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalPoliza\' in table \'Poliza\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableContenedor.TotalContenedorColumn] = value;
+                    this[this.tablePoliza.TotalPolizaColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNombreNull() {
-                return this.IsNull(this.tableContenedor.NombreColumn);
+                return this.IsNull(this.tablePoliza.NombreColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNombreNull() {
-                this[this.tableContenedor.NombreColumn] = global::System.Convert.DBNull;
+                this[this.tablePoliza.NombreColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPolizaNull() {
-                return this.IsNull(this.tableContenedor.PolizaColumn);
+            public bool IsCodigoNull() {
+                return this.IsNull(this.tablePoliza.CodigoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPolizaNull() {
-                this[this.tableContenedor.PolizaColumn] = global::System.Convert.DBNull;
+            public void SetCodigoNull() {
+                this[this.tablePoliza.CodigoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsIdContenedorNull() {
-                return this.IsNull(this.tableContenedor.IdContenedorColumn);
+            public bool IsIdPolizaNull() {
+                return this.IsNull(this.tablePoliza.IdPolizaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetIdContenedorNull() {
-                this[this.tableContenedor.IdContenedorColumn] = global::System.Convert.DBNull;
+            public void SetIdPolizaNull() {
+                this[this.tablePoliza.IdPolizaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsTotalContenedorNull() {
-                return this.IsNull(this.tableContenedor.TotalContenedorColumn);
+            public bool IsTotalPolizaNull() {
+                return this.IsNull(this.tablePoliza.TotalPolizaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetTotalContenedorNull() {
-                this[this.tableContenedor.TotalContenedorColumn] = global::System.Convert.DBNull;
+            public void SetTotalPolizaNull() {
+                this[this.tablePoliza.TotalPolizaColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2197,22 +2197,22 @@ namespace TransHaruhiko.Reportes {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class ContenedorRowChangeEvent : global::System.EventArgs {
+        public class PolizaRowChangeEvent : global::System.EventArgs {
             
-            private ContenedorRow eventRow;
+            private PolizaRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ContenedorRowChangeEvent(ContenedorRow row, global::System.Data.DataRowAction action) {
+            public PolizaRowChangeEvent(PolizaRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ContenedorRow Row {
+            public PolizaRow Row {
                 get {
                     return this.eventRow;
                 }

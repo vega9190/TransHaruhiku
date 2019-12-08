@@ -70,6 +70,15 @@ namespace TransHaruhiko.Globalization.Views.Pedido {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contenedores:.
+        /// </summary>
+        public static string LabelContenedor {
+            get {
+                return ResourceManager.GetString("LabelContenedor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Descripción*:.
         /// </summary>
         public static string LabelDescripcion {

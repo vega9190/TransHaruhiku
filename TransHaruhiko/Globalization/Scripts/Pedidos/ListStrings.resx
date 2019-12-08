@@ -156,9 +156,6 @@
   <data name="TextConfirmarEliminar" xml:space="preserve">
     <value>Está a punto de eliminar el registro, ¿Desea continuar?</value>
   </data>
-  <data name="TextContenedor" xml:space="preserve">
-    <value>Contenedores</value>
-  </data>
   <data name="TextEditar" xml:space="preserve">
     <value>Editar</value>
   </data>
@@ -167,6 +164,9 @@
   </data>
   <data name="TextPagos" xml:space="preserve">
     <value>Pagos</value>
+  </data>
+  <data name="TextPoliza" xml:space="preserve">
+    <value>Pólizas</value>
   </data>
   <data name="TextPrecio" xml:space="preserve">
     <value>Precio</value>

@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-namespace TransHaruhiko.Parameters.Contenedores
+namespace TransHaruhiko.Parameters.Polizas
 {
     public class SaveParameters
     {
-        public int? IdContenedor { get; set; }
+        public int? IdPoliza { get; set; }
         public int IdPedido { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
         public string Poliza { get; set; }
-        public List<SaveDespachoContenedorPrameters> Despachos { get; set; }
+        public List<SaveDetallePolizaPrameters> Detalles { get; set; }
     }
-    public class SaveDespachoContenedorPrameters
+    public class SaveDetallePolizaPrameters
     {
         public string Concepto { get; set; }
         public string Precio { get; set; }

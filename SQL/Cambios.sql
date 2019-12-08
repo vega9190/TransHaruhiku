@@ -1,6 +1,7 @@
-USE db_Gestor
+USE Gestor
 GO
 
+ALTER TABLE th.Pedidos ADD Contenedores NVARCHAR(250) NULL;
 
 ALTER TABLE th.Contenedores ALTER COLUMN Codigo VARCHAR (250) NOT NULL;
 ALTER TABLE th.Contenedores DROP COLUMN Poliza;

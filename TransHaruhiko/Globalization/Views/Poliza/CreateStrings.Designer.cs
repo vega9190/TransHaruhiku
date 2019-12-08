@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TransHaruhiko.Globalization.Views.Contenedor {
+namespace TransHaruhiko.Globalization.Views.Poliza {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TransHaruhiko.Globalization.Views.Contenedor {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Views.Contenedor.CreateStrings", typeof(CreateStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Views.Poliza.CreateStrings", typeof(CreateStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -79,15 +79,6 @@ namespace TransHaruhiko.Globalization.Views.Contenedor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Póliza:.
-        /// </summary>
-        public static string LabelPoliza {
-            get {
-                return ResourceManager.GetString("LabelPoliza", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Detalle.
         /// </summary>
         public static string TextSeccionResultado {
@@ -97,7 +88,7 @@ namespace TransHaruhiko.Globalization.Views.Contenedor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contenedor.
+        ///   Looks up a localized string similar to Poliza.
         /// </summary>
         public static string TitleCrear {
             get {

@@ -1,6 +1,6 @@
 ﻿@using TransHaruhiko.CustomHelpers
 @using TransHaruhiko.Globalization.Scripts.Common
-@using TransHaruhiko.Globalization.Views.Contenedor
+@using TransHaruhiko.Globalization.Views.Poliza
 
 @{
     ViewBag.Title = ListStrings.Tittle;
@@ -16,13 +16,13 @@
     <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.fileupload.js")"></script>
     <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.xdr-transport.js")"></script>
 
-    <script type="text/javascript" src="@Url.Content("~/Globalization/Contenedores/List")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Globalization/Polizas/List")"></script>
     <script type="text/javascript" src="@Url.Content("~/Globalization/Common/Common")"></script>
-    <script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Contenedores/List.js")"></script>
+    <script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Polizas/List.js")"></script>
     <script type="text/javascript"> var RolUsuario = "@Session["Rol"]" </script>
 
 }
-<div id="page-pedido-editar">
+<div id="page-poliza-editar">
     <input type="hidden" id="hd-id-pedido" value="@ViewBag.IdPedido" />
     <div class="box-fieldset">
         <span class="field-title">@ListStrings.SectionInformacion</span>
@@ -54,12 +54,9 @@
         <span class="field-title">@ListStrings.TextSeccionResultado</span>
         <div class="box-buttons">
             <button id="btn-crear" class="button">@ListStrings.ButtonNuevo</button>
-            @if (Session["Rol"].Equals("Administrador") || Session["Rol"].Equals("Gerente"))
-            {
-                <button id="btn-planilla-despacho" class="button">@ListStrings.ButtonPlanillaDespacho</button>
-            }            
+            <button id="btn-planilla-despacho" class="button">@ListStrings.ButtonPlanillaDespacho</button>
         </div>
-        <table id="tb-contenedores" class="display"></table>
+        <table id="tb-polizas" class="display"></table>
     </div>
     <br />
     <div>

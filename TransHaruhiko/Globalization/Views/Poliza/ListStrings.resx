@@ -145,12 +145,12 @@
     <value>Información</value>
   </data>
   <data name="TextSeccionResultado" xml:space="preserve">
-    <value>Contenedores</value>
+    <value>Polizas</value>
   </data>
   <data name="Tittle" xml:space="preserve">
     <value>Transporte Haruhiko</value>
   </data>
   <data name="TittleListado" xml:space="preserve">
-    <value>Contenedores</value>
+    <value>Polizas</value>
   </data>
 </root>

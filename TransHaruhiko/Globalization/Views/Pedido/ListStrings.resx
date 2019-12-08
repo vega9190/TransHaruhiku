@@ -141,6 +141,12 @@
   <data name="LabelFechaHasta" xml:space="preserve">
     <value>Fecha Hasta:</value>
   </data>
+  <data name="LabelFinalizados" xml:space="preserve">
+    <value>Mostrar Finalizados</value>
+  </data>
+  <data name="LabelIdPedido" xml:space="preserve">
+    <value>Id Pedido:</value>
+  </data>
   <data name="LabelNombre" xml:space="preserve">
     <value>Nombre:</value>
   </data>

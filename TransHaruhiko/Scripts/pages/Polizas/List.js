@@ -3,7 +3,7 @@ var Finalizado = false;
 
 $(document).ready(function () {
     IdPedido = $('#hd-id-pedido').val();
-    var tabla = $('#tb-contenedores');
+    var tabla = $('#tb-polizas');
     $('#btn-volver').button();
     $('#btn-volver').click(function () {
         window.location.href = SiteUrl + 'Pedido/List';
@@ -54,7 +54,7 @@ $(document).ready(function () {
             }
         ],
         bServerSide: true,
-        sAjaxSource: SiteUrl + 'Contenedor/Buscar',
+        sAjaxSource: SiteUrl + 'Poliza/Buscar',
         fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
             $('.btn-eliminar', nRow).click(function () {
                 //PopUpObservaciones($(nRow).data('data').Pedido.Id);
@@ -67,8 +67,8 @@ $(document).ready(function () {
                     buttonFunctionYes: function () {
                         $.blockUI({ message: null });
                         $.ajax({
-                            url: SiteUrl + 'Contenedor/Eliminar',
-                            data: $.toJSON({ idContenedor: $(nRow).data('data').Contenedor.Id }),
+                            url: SiteUrl + 'Poliza/Eliminar',
+                            data: $.toJSON({ idPoliza: $(nRow).data('data').Poliza.Id }),
                             success: function (data) {
                                 popup.dialog('close');
                                 if (data.HasErrors) {
@@ -94,7 +94,7 @@ $(document).ready(function () {
             });
 
             $('.btn-editar', nRow).click(function () {
-                PopUpCrear($(nRow).data('data').Contenedor.Id);
+                PopUpCrear($(nRow).data('data').Poliza.Id);
             });
 
             return nRow;
@@ -139,19 +139,17 @@ $(document).ready(function () {
                                     Globalize.localize('TextEditar') +
                                     '" class="btn-editar ui-icon ui-icon-pencil"></span>';
 
-                                if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
-                                    if (!Finalizado) {
-                                        tempAcciones += '<span title="' +
-                                        Globalize.localize('TextEliminar') +
-                                        '" class="btn-eliminar ui-icon ui-icon-trash"></span>';
-                                    }
+                                if (!Finalizado) {
+                                    tempAcciones += '<span title="' +
+                                    Globalize.localize('TextEliminar') +
+                                    '" class="btn-eliminar ui-icon ui-icon-trash"></span>';
                                 }
 
                                 tempAcciones += '</div>';
 
-                                row.push(value.Contenedor.Id);
-                                row.push(value.Contenedor.Codigo);
-                                row.push(value.Contenedor.Nombre);
+                                row.push(value.Poliza.Id);
+                                row.push(value.Poliza.Codigo);
+                                row.push(value.Poliza.Nombre);
                                 row.push(tempAcciones);
                                 rows.push(row);
                             });
@@ -217,7 +215,7 @@ function CargarInformacion() {
 }
 
 /////////////////// PopUp Crear /////////////////////////
-function PopUpCrear(idContenedor) {
+function PopUpCrear(idPoliza) {
     var popup = null;
     var buttons = {};
     /***************************************************************************/
@@ -226,41 +224,39 @@ function PopUpCrear(idContenedor) {
 
         params.Codigo = $('#txt-codigo').val().trim();
         params.Nombre = $('#txt-nombre').val().trim();
-        params.Poliza = $('#txt-poliza').val().trim();
         params.IdPedido = IdPedido;
-        params.IdContenedor = idContenedor;
+        params.IdPoliza = idPoliza;
 
-        if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
-            var detalles = [];
-            var noTieneConcepto = false;
-            var noTienePrecio = false;
-            $.each($('#tb-detalles').table('getRows'),
-                function (index, value) {
-                    var paramDetalle = {}
-                    paramDetalle.Concepto = $('.concepto', value).val();
-                    paramDetalle.Precio = $('.precio', value).val();
-                    if (isEmpty(paramDetalle.Concepto))
-                        noTieneConcepto = true;
 
-                    if (isEmpty(paramDetalle.Precio))
-                        noTienePrecio = true;
-                    detalles.push(paramDetalle);
-                });
-            params.Despachos = detalles;
-        }
+        var detalles = [];
+        var noTieneConcepto = false;
+        var noTienePrecio = false;
+        $.each($('#tb-detalles').table('getRows'),
+            function (index, value) {
+                var paramDetalle = {}
+                paramDetalle.Concepto = $('.concepto', value).val();
+                paramDetalle.Precio = $('.precio', value).val();
+                if (isEmpty(paramDetalle.Concepto))
+                    noTieneConcepto = true;
+
+                if (isEmpty(paramDetalle.Precio))
+                    noTienePrecio = true;
+                detalles.push(paramDetalle);
+            });
+        params.Detalles = detalles;
+        
         var warnings = new Array();
 
         if (isEmpty(params.Codigo))
             warnings.push(Globalize.localize('ErrorNoCodigo'));
 
-        if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
-            if ($('#tb-detalles').table('getRows').length > 0) {
-                if (noTieneConcepto)
-                    warnings.push(Globalize.localize('ErrorNoConcepto'));
-                if (noTienePrecio)
-                    warnings.push(Globalize.localize('ErrorNoPrecio'));
-            }
+        if ($('#tb-detalles').table('getRows').length > 0) {
+            if (noTieneConcepto)
+                warnings.push(Globalize.localize('ErrorNoConcepto'));
+            if (noTienePrecio)
+                warnings.push(Globalize.localize('ErrorNoPrecio'));
         }
+        
 
         if (warnings.length > 0) {
             showCustomErrors({
@@ -271,7 +267,7 @@ function PopUpCrear(idContenedor) {
         } else {
             $.blockUI({ message: null });
             $.ajax({
-                url: SiteUrl + 'Contenedor/Guardar',
+                url: SiteUrl + 'Poliza/Guardar',
                 data: $.toJSON(params),
                 success: function (data) {
                     $.unblockUI();
@@ -288,7 +284,7 @@ function PopUpCrear(idContenedor) {
                                 .localize('MessageOperacionExitosamente'),
                                 true);
                             popup.dialog('close');
-                            $('#tb-contenedores').table('update');
+                            $('#tb-polizas').table('update');
                         }
                     }
                 }
@@ -302,115 +298,111 @@ function PopUpCrear(idContenedor) {
     /***************************************************************************/
     showPopupPage({
         title: Globalize.localize('TituloPopUp'),
-        url: SiteUrl + 'Contenedor/PopUpCrear',
+        url: SiteUrl + 'Poliza/PopUpCrear',
         open: function (event, ui) {
             popup = $(this);
         },
         buttons: buttons,
         width: 600
     }, false, function () {
-        if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
-            $('#btn-crear-contenedor').button();
-            $('#btn-crear-contenedor').click(function () {
-                var rowNew = [];
-                rowNew.push('<input type="text" class="concepto" maxlength="250" value="" />');
-                rowNew.push('<input type="text" class="precio" value="" />');
-                rowNew.push('<a class="button btn-contenedor-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
-                $('#tb-detalles').table('addRow', rowNew, null);
-                var rows = $('#tb-detalles').table('getRows');
-                var row = rows[rows.length - 1];
-                var rowCallback = $('#tb-detalles').table('option', 'fnRowCallback');
-                rowCallback(row);
-                $('.precio', popup).autoNumeric(AutoNumericDecimal);
-            });
-        } else {
-            $('.box-fieldset', popup).hide();
-        }
+        
+        $('#btn-crear-poliza').button();
+        $('#btn-crear-poliza').click(function () {
+            var rowNew = [];
+            rowNew.push('<input type="text" class="concepto" maxlength="250" value="" />');
+            rowNew.push('<input type="text" class="precio" value="" />');
+            rowNew.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', rowNew, null);
+            var rows = $('#tb-detalles').table('getRows');
+            var row = rows[rows.length - 1];
+            var rowCallback = $('#tb-detalles').table('option', 'fnRowCallback');
+            rowCallback(row);
+            $('.precio', popup).autoNumeric(AutoNumericDecimal);
+        });
+        
 
-        CargarDetalle(idContenedor);
+        CargarDetalle(idPoliza);
     });
 }
 
-function CargarDetalle(idContenedor) {
-    if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
-        if (Finalizado) {
-            $('#btn-crear-contenedor').button('disable');
-        }
-
-        $('#tb-detalles').table({
-            aoColumns: [
-                {
-                    sTitle: Globalize.localize('ColumnConcepto'),
-                    sWidth: "250px",
-                    bSortable: false
-                },
-                {
-                    sTitle: Globalize.localize('ColumnMonto'),
-                    sWidth: "100px",
-                    bSortable: false
-                },
-                {
-                    sTitle: Globalize.localize('ColumnAcciones'),
-                    sWidth: "100px",
-                    bSortable: false
-                }],
-            bScrollAutoCss: true,
-            bAutoWidth: false,
-            sScrollXInner: "100%",
-            fnInitComplete: function () {
-                this.css("visibility", "visible");
-            },
-            bInfo: true,
-            responsive: false,
-            bPaginate: false,
-            bStateSave: false,
-            bServerSide: false,
-            bFirstLoading: true,
-            fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                $('.btn-contenedor-eliminar', nRow).off('click');
-                $('.btn-contenedor-eliminar', nRow).click(function () {
-                    EliminarDetalle(nRow);
-                });
-            }
-        });
+function CargarDetalle(idPoliza) {
+    
+    if (Finalizado) {
+        $('#btn-crear-poliza').button('disable');
     }
-    if (idContenedor != null) {
+
+    $('#tb-detalles').table({
+        aoColumns: [
+            {
+                sTitle: Globalize.localize('ColumnConcepto'),
+                sWidth: "250px",
+                bSortable: false
+            },
+            {
+                sTitle: Globalize.localize('ColumnMonto'),
+                sWidth: "100px",
+                bSortable: false
+            },
+            {
+                sTitle: Globalize.localize('ColumnAcciones'),
+                sWidth: "100px",
+                bSortable: false
+            }],
+        bScrollAutoCss: true,
+        bAutoWidth: false,
+        sScrollXInner: "100%",
+        fnInitComplete: function () {
+            this.css("visibility", "visible");
+        },
+        bInfo: true,
+        responsive: false,
+        bPaginate: false,
+        bStateSave: false,
+        bServerSide: false,
+        bFirstLoading: true,
+        fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+            $('.btn-poliza-eliminar', nRow).off('click');
+            $('.btn-poliza-eliminar', nRow).click(function () {
+                EliminarDetalle(nRow);
+            });
+        }
+    });
+    
+    if (idPoliza != null) {
         $.ajax({
-            url: SiteUrl + 'Contenedor/ObtenerDetalle',
-            data: $.toJSON({ idContenedor: idContenedor }),
+            url: SiteUrl + 'Poliza/ObtenerDetalle',
+            data: $.toJSON({ idPoliza: idPoliza }),
             success: function (data) {
                 $.unblockUI();
                 if (data.HasErrors) {
                     showErrors(data.Errors);
                 } else {
-                    $('#txt-codigo').val(data.Data.Contenedor.Codigo);
-                    $('#txt-nombre').val(data.Data.Contenedor.Nombre);
-                    $('#txt-poliza').val(data.Data.Contenedor.Poliza);
+                    $('#txt-codigo').val(data.Data.Poliza.Codigo);
+                    $('#txt-nombre').val(data.Data.Poliza.Nombre);
 
                     if (Finalizado) {
                         $('#txt-codigo').prop('disabled', true);
                         $('#txt-nombre').prop('disabled', true);
-                        $('#txt-poliza').prop('disabled', true);
                     }
 
-                    if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
-                        $.each(data.Data.Contenedor.DatalleContenedor, function (index, element) {
-                            var row = [];
+                    
+                    $.each(data.Data.Poliza.DatallePoliza, function (index, element) {
+                        var row = [];
 
-                            if (Finalizado) {
-                                row.push('<input type="text" class="concepto" maxlength="250" value="' + element.Concepto + ' " disabled/>');
-                                row.push('<input type="text" class="precio" value="' + element.Precio + '" disabled />');
-                                row.push('');
-                            } else {
-                                row.push('<input type="text" class="concepto" maxlength="250" value="' + element.Concepto + ' " />');
-                                row.push('<input type="text" class="precio" value="' + element.Precio + '" />');
-                                row.push('<a class="button btn-contenedor-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
-                            }                                
+                        if (Finalizado) {
+                            row.push('<input type="text" class="concepto" maxlength="250" value="' + element.Concepto + ' " disabled/>');
+                            row.push('<input type="text" class="precio" value="' + element.Precio + '" disabled />');
+                            row.push('');
+                        } else {
+                            row.push('<input type="text" class="concepto" maxlength="250" value="' + element.Concepto + ' " />');
+                            row.push('<input type="text" class="precio" value="' + element.Precio + '" />');
+                            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+                        }                                
 
-                            $('#tb-detalles').table('addRow', row, element);
-                            $('.precio').autoNumeric(AutoNumericDecimal);
-                        });
-                    }
+                        $('#tb-detalles').table('addRow', row, element);
+                        $('.precio').autoNumeric(AutoNumericDecimal);
+                    });
+                    
                 }
             }
         });

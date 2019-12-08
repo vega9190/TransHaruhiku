@@ -178,15 +178,6 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contenedores.
-        /// </summary>
-        public static string TextContenedor {
-            get {
-                return ResourceManager.GetString("TextContenedor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Editar.
         /// </summary>
         public static string TextEditar {
@@ -210,6 +201,15 @@ namespace TransHaruhiko.Globalization.Scripts.Pedidos {
         public static string TextPagos {
             get {
                 return ResourceManager.GetString("TextPagos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pólizas.
+        /// </summary>
+        public static string TextPoliza {
+            get {
+                return ResourceManager.GetString("TextPoliza", resourceCulture);
             }
         }
         

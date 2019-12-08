@@ -72,6 +72,12 @@ function ValidateURL(textval) {
     return urlregex.test(textval);
 }
 
+var AutoNumericInteger = {
+    mDec: 0,
+    aSep: '',
+    aDec: ','
+};
+
 var AutoNumericDecimal = {
     mDec: 2,
     aSep: ',',

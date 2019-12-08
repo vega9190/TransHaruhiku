@@ -16,7 +16,7 @@ namespace TransHaruhiko.Services.Impl
     public class ReporteService : IReportesService
     {
         private readonly TransHaruhikoDbContext _dbContext;
-        private List<Contenedor> _tempContenedores;
+        private List<Poliza> _tempPolizas;
         public ReporteService(TransHaruhikoDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -44,7 +44,7 @@ namespace TransHaruhiko.Services.Impl
             {
                 new RecibiConformeDto {
                     NombreCompleto = pedido.Cliente.NombreCompleto,
-                    Contenedor = pedido.Contenedores.Any() ? string.Join(", ", pedido.Contenedores.Select(a=> a.Codigo)) : "",
+                    Contenedor = string.IsNullOrEmpty(pedido.Contenedores) ? "" : pedido.Contenedores,
                     Descripcion = pedido.Descripcion,
                     Direccion = string.IsNullOrEmpty(pedido.Direccion) ? "" : pedido.Direccion,
                     Telefono = pedido.Cliente.Telefono,
@@ -61,9 +61,9 @@ namespace TransHaruhiko.Services.Impl
         {
             var pedido = _dbContext.Pedidos.Find(idPedido);
 
-            var contenedores = pedido.Contenedores.Where(a => a.DespachoContenedores.Any()).ToList();
+            var polizas = pedido.Polizas.Where(a => a.DetallePolizas.Any()).ToList();
 
-            _tempContenedores = contenedores;
+            _tempPolizas = polizas;
 
             var datosCabecera = new List<PlanillaDespachoDto>
             {
@@ -71,26 +71,26 @@ namespace TransHaruhiko.Services.Impl
                 {
                     NombreCompleto = pedido.Cliente.NombreCompleto,
                     NitCi = pedido.Cliente.Carnet,
-                    Descripcion = pedido.Descripcion,
-                    Poliza = string.Join(" - ", contenedores.Select(a => a.Poliza)),
+                    Descripcion = string.IsNullOrEmpty(pedido.Contenedores) ? "": pedido.Contenedores,
+                    Poliza = string.Join(" - ", polizas.Select(a => a.Codigo)),
                     LugarFecha =
                         $"Santa Cruz - {DateTime.Now.Day} de {DateTime.Now.ToString("MMMM")} del {DateTime.Now.Year}",
-                    TotalPedido = contenedores.Sum(a=> a.DespachoContenedores.Sum(b=> b.Precio))
+                    TotalPedido = polizas.Sum(a=> a.DetallePolizas.Sum(b=> b.Precio))
                 }
             };
 
-            var datosContenedores = new List<ContenedorDto>();
+            var datosPolizas = new List<PolizaDto>();
 
-            foreach (var contenedor in contenedores)
+            foreach (var poliza in polizas)
             {
-                var datoContenedor = new ContenedorDto
+                var datoPoliza = new PolizaDto
                 {
-                    IdContenedor = contenedor.Id,
-                    Nombre = contenedor.Nombre,
-                    Poliza = contenedor.Poliza,
-                    TotalContenedor = contenedor.DespachoContenedores.Sum(a=> a.Precio)
+                    IdPoliza = poliza.Id,
+                    Nombre = poliza.Nombre,
+                    Codigo = poliza.Codigo,
+                    TotalPoliza = poliza.DetallePolizas.Sum(a=> a.Precio)
                 };
-                datosContenedores.Add(datoContenedor);
+                datosPolizas.Add(datoPoliza);
             }
 
             var localReport = new LocalReport();
@@ -104,23 +104,23 @@ namespace TransHaruhiko.Services.Impl
 
             ////Agregar nuevo ReportDataSource con el nombre y lista correspondiente.
             localReport.DataSources.Add(new ReportDataSource("PlantillaDespacho", datosCabecera));
-            localReport.DataSources.Add(new ReportDataSource("Contenedor", datosContenedores));
+            localReport.DataSources.Add(new ReportDataSource("Poliza", datosPolizas));
             return localReport;
         }
         private void SubReporteDetalleContenedor(object sender, SubreportProcessingEventArgs e)
         {
-            var detallesContenedores = new List<DetalleContenedorDto>();
+            var detallesContenedores = new List<DetallePolizaDto>();
 
-            var idContenedor = int.Parse(e.Parameters[0].Values[0]);
+            var idPoliza = int.Parse(e.Parameters[0].Values[0]);
 
-            var contenedor = _tempContenedores.First(a => a.Id == idContenedor);
+            var poliza = _tempPolizas.First(a => a.Id == idPoliza);
 
-            foreach (var detalleContenedor in contenedor.DespachoContenedores)
+            foreach (var detallePoliza in poliza.DetallePolizas)
             {
-                var detalle = new DetalleContenedorDto
+                var detalle = new DetallePolizaDto
                 {
-                    Concepto = detalleContenedor.Concepto,
-                    Precio = detalleContenedor.Precio
+                    Concepto = detallePoliza.Concepto,
+                    Precio = detallePoliza.Precio
                 };
                 detallesContenedores.Add(detalle);
             }

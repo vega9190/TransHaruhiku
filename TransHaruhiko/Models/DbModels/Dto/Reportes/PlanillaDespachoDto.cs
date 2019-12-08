@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TransHaruhiko.Models.DbModels.Dto.Reportes
+﻿namespace TransHaruhiko.Models.DbModels.Dto.Reportes
 {
     public class PlanillaDespachoDto
     {
@@ -12,15 +10,15 @@ namespace TransHaruhiko.Models.DbModels.Dto.Reportes
         public decimal TotalPedido { get; set; }
     }
 
-    public class ContenedorDto
+    public class PolizaDto
     {
-        public int IdContenedor { get; set; }
+        public int IdPoliza { get; set; }
         public string Nombre { get; set; }
-        public string Poliza { get; set; }
-        public decimal TotalContenedor { get; set; }
+        public string Codigo { get; set; }
+        public decimal TotalPoliza { get; set; }
     }
 
-    public class DetalleContenedorDto
+    public class DetallePolizaDto
     {
         public string Concepto { get; set; }
         public decimal Precio { get; set; }

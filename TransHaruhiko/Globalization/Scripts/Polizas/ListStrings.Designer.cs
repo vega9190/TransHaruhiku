@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TransHaruhiko.Globalization.Views.Contenedor {
+namespace TransHaruhiko.Globalization.Scripts.Polizas {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TransHaruhiko.Globalization.Views.Contenedor {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Views.Contenedor.ListStrings", typeof(ListStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TransHaruhiko.Globalization.Scripts.Polizas.ListStrings", typeof(ListStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,110 +61,119 @@ namespace TransHaruhiko.Globalization.Views.Contenedor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Añadir.
+        ///   Looks up a localized string similar to Acciones.
         /// </summary>
-        public static string ButtonAnhadir {
+        public static string ColumnAcciones {
             get {
-                return ResourceManager.GetString("ButtonAnhadir", resourceCulture);
+                return ResourceManager.GetString("ColumnAcciones", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Crear.
+        ///   Looks up a localized string similar to Código.
         /// </summary>
-        public static string ButtonNuevo {
+        public static string ColumnCodigo {
             get {
-                return ResourceManager.GetString("ButtonNuevo", resourceCulture);
+                return ResourceManager.GetString("ColumnCodigo", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generar Planilla de Despacho.
+        ///   Looks up a localized string similar to Concepto.
         /// </summary>
-        public static string ButtonPlanillaDespacho {
+        public static string ColumnConcepto {
             get {
-                return ResourceManager.GetString("ButtonPlanillaDespacho", resourceCulture);
+                return ResourceManager.GetString("ColumnConcepto", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cliente:.
+        ///   Looks up a localized string similar to Id.
         /// </summary>
-        public static string LabelCliente {
+        public static string ColumnId {
             get {
-                return ResourceManager.GetString("LabelCliente", resourceCulture);
+                return ResourceManager.GetString("ColumnId", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dirección:.
+        ///   Looks up a localized string similar to Precio.
         /// </summary>
-        public static string LabelDireccion {
+        public static string ColumnMonto {
             get {
-                return ResourceManager.GetString("LabelDireccion", resourceCulture);
+                return ResourceManager.GetString("ColumnMonto", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to URL Dirección:.
+        ///   Looks up a localized string similar to Nombre.
         /// </summary>
-        public static string LabelDireccionUrl {
+        public static string ColumnNombre {
             get {
-                return ResourceManager.GetString("LabelDireccionUrl", resourceCulture);
+                return ResourceManager.GetString("ColumnNombre", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Estado:.
+        ///   Looks up a localized string similar to Debe ingresar el código de la póliza..
         /// </summary>
-        public static string LabelEstado {
+        public static string ErrorNoCodigo {
             get {
-                return ResourceManager.GetString("LabelEstado", resourceCulture);
+                return ResourceManager.GetString("ErrorNoCodigo", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Teléfono:.
+        ///   Looks up a localized string similar to Debe ingresar un concepto en cada uno de los registros..
         /// </summary>
-        public static string LabelTelefono {
+        public static string ErrorNoConcepto {
             get {
-                return ResourceManager.GetString("LabelTelefono", resourceCulture);
+                return ResourceManager.GetString("ErrorNoConcepto", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Información.
+        ///   Looks up a localized string similar to Debe ingresar un precio en cada uno de los registros..
         /// </summary>
-        public static string SectionInformacion {
+        public static string ErrorNoPrecio {
             get {
-                return ResourceManager.GetString("SectionInformacion", resourceCulture);
+                return ResourceManager.GetString("ErrorNoPrecio", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contenedores.
+        ///   Looks up a localized string similar to Está a punto de eliminar el registro, ¿Desea continuar?.
         /// </summary>
-        public static string TextSeccionResultado {
+        public static string TextConfirmarEliminar {
             get {
-                return ResourceManager.GetString("TextSeccionResultado", resourceCulture);
+                return ResourceManager.GetString("TextConfirmarEliminar", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Transporte Haruhiko.
+        ///   Looks up a localized string similar to Editar.
         /// </summary>
-        public static string Tittle {
+        public static string TextEditar {
             get {
-                return ResourceManager.GetString("Tittle", resourceCulture);
+                return ResourceManager.GetString("TextEditar", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contenedores.
+        ///   Looks up a localized string similar to Eliminar.
         /// </summary>
-        public static string TittleListado {
+        public static string TextEliminar {
             get {
-                return ResourceManager.GetString("TittleListado", resourceCulture);
+                return ResourceManager.GetString("TextEliminar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gestión de pedidos.
+        /// </summary>
+        public static string TituloPopUp {
+            get {
+                return ResourceManager.GetString("TituloPopUp", resourceCulture);
             }
         }
     }

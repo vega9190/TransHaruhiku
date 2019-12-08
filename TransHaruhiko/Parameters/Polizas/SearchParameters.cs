@@ -1,6 +1,6 @@
 ﻿using TransHaruhiko.Models.ViewModel;
 
-namespace TransHaruhiko.Parameters.Contenedores
+namespace TransHaruhiko.Parameters.Polizas
 {
     public class SearchParameters : BaseListViewModel
     {

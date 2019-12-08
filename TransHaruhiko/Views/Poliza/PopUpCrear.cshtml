@@ -1,11 +1,11 @@
 ﻿@using TransHaruhiko.CustomHelpers
-@using TransHaruhiko.Globalization.Views.Contenedor
+@using TransHaruhiko.Globalization.Views.Poliza
 
 @{
     Layout = null;
 }
 
-<div id="popup-contenedor-crear" class="grid-container">
+<div id="popup-poliza-crear" class="grid-container">
     <h2 align="center"> @CreateStrings.TitleCrear </h2>
     <div class="grid-100 mobile-grid-100">
         <div class="grid-90">
@@ -18,10 +18,6 @@
                     <label for="txt-nombre" class="grid-15 mobile-grid-100">@CreateStrings.LabelNombre </label>
                     <input id="txt-nombre" class="grid-70 mobile-grid-100" type="text" maxlength="250" />
                 </li>
-                <li>
-                    <label for="txt-poliza" class="grid-15 mobile-grid-100">@CreateStrings.LabelPoliza </label>
-                    <input id="txt-poliza" class="grid-70 mobile-grid-100" type="text" maxlength="250" />
-                </li>
             </ul>
         </div>
     </div>
@@ -29,7 +25,7 @@
     <div class="box-fieldset">
         <span class="field-title">@CreateStrings.TextSeccionResultado</span>
         <div class="box-buttons">
-            <button id="btn-crear-contenedor" class="button">@ListStrings.ButtonAnhadir</button>
+            <button id="btn-crear-poliza" class="button">@ListStrings.ButtonAnhadir</button>
         </div>
         <table id="tb-detalles" class="display"></table>
     </div>

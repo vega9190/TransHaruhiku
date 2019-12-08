@@ -145,7 +145,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ApplicationErrorController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
-    <Compile Include="Controllers\ContenedorController.cs" />
+    <Compile Include="Controllers\PolizaController.cs" />
     <Compile Include="Controllers\FicheroController.cs" />
     <Compile Include="Controllers\GlobalizationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -180,7 +180,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonStrings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Globalization\Scripts\Contenedores\ListStrings.Designer.cs">
+    <Compile Include="Globalization\Scripts\Polizas\ListStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ListStrings.resx</DependentUpon>
@@ -245,12 +245,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ListStrings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Globalization\Views\Contenedor\CreateStrings.Designer.cs">
+    <Compile Include="Globalization\Views\Poliza\CreateStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CreateStrings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Globalization\Views\Contenedor\ListStrings.Designer.cs">
+    <Compile Include="Globalization\Views\Poliza\ListStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ListStrings.resx</DependentUpon>
@@ -323,9 +323,9 @@
     <Compile Include="Models\ViewModel\SimpleListViewModel.cs" />
     <Compile Include="Parameters\Clientes\SaveParameters.cs" />
     <Compile Include="Parameters\Clientes\SearchParameters.cs" />
-    <Compile Include="Parameters\Contenedores\SaveParameters.cs" />
-    <Compile Include="Parameters\Contenedores\SearchDetalleParameters.cs" />
-    <Compile Include="Parameters\Contenedores\SearchParameters.cs" />
+    <Compile Include="Parameters\Polizas\SaveParameters.cs" />
+    <Compile Include="Parameters\Polizas\SearchDetalleParameters.cs" />
+    <Compile Include="Parameters\Polizas\SearchParameters.cs" />
     <Compile Include="Parameters\Ficheros\SaveParameter.cs" />
     <Compile Include="Parameters\Observaciones\SaveParameters.cs" />
     <Compile Include="Parameters\Observaciones\SearchParameters.cs" />
@@ -348,10 +348,10 @@
     </Compile>
     <Compile Include="Reportes\Specification\ProcesadorReporte.cs" />
     <Compile Include="Services\IClientesService.cs" />
-    <Compile Include="Services\IContenedoresService.cs" />
+    <Compile Include="Services\IPolizasService.cs" />
     <Compile Include="Services\IFicherosService.cs" />
     <Compile Include="Services\Impl\ClienteService.cs" />
-    <Compile Include="Services\Impl\ContenedoresService.cs" />
+    <Compile Include="Services\Impl\PolizasService.cs" />
     <Compile Include="Services\Impl\FicherosService.cs" />
     <Compile Include="Services\Impl\ObservacionesService.cs" />
     <Compile Include="Services\Impl\PagosService.cs" />
@@ -371,7 +371,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\pages\Clientes\List.js" />
-    <Content Include="Scripts\pages\Contenedores\List.js" />
+    <Content Include="Scripts\pages\Polizas\List.js" />
     <Content Include="Scripts\pages\Pedidos\Crear.js" />
     <Content Include="Scripts\pages\Pedidos\Editar.js" />
     <Content Include="Scripts\pages\Pedidos\List.js" />
@@ -414,7 +414,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CommonStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Globalization\Scripts\Contenedores\ListStrings.resx">
+    <EmbeddedResource Include="Globalization\Scripts\Polizas\ListStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -466,11 +466,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Globalization\Views\Contenedor\CreateStrings.resx">
+    <EmbeddedResource Include="Globalization\Views\Poliza\CreateStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Globalization\Views\Contenedor\ListStrings.resx">
+    <EmbeddedResource Include="Globalization\Views\Poliza\ListStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -558,8 +558,8 @@
       <DependentUpon>dtsPedidos.xsd</DependentUpon>
     </Content>
     <Content Include="Views\Pedido\PopUpCobro.cshtml" />
-    <Content Include="Views\Contenedor\List.cshtml" />
-    <Content Include="Views\Contenedor\PopUpCrear.cshtml" />
+    <Content Include="Views\Poliza\List.cshtml" />
+    <Content Include="Views\Poliza\PopUpCrear.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -579,7 +579,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2599</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2599/</IISUrl>
+          <IISUrl>http://localhost:2600/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

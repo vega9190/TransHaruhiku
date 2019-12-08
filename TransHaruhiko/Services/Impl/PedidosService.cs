@@ -44,6 +44,8 @@ namespace TransHaruhiko.Services.Impl
                     pedido.Direccion = parameters.Direccion;
                 if (!string.IsNullOrEmpty(parameters.DireccionUrl))
                     pedido.DireccionUrl = parameters.DireccionUrl;
+                if (!string.IsNullOrEmpty(parameters.Contenedor))
+                    pedido.Contenedores = parameters.Contenedor;
             }
             else
             {
@@ -53,6 +55,7 @@ namespace TransHaruhiko.Services.Impl
                     Descripcion = parameters.Descripcion,
                     Direccion = parameters.Direccion,
                     DireccionUrl = parameters.DireccionUrl,
+                    Contenedores = parameters.Contenedor,
                     Fecha = DateTime.Now.Date,
                     EstadoId = (int)EstadosEnum.Inicio,
                     ParteRecepcion = false

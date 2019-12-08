@@ -136,7 +136,7 @@
     <value>Nombre</value>
   </data>
   <data name="ErrorNoCodigo" xml:space="preserve">
-    <value>Debe ingresar el código del contenedor.</value>
+    <value>Debe ingresar el código de la póliza.</value>
   </data>
   <data name="ErrorNoConcepto" xml:space="preserve">
     <value>Debe ingresar un concepto en cada uno de los registros.</value>

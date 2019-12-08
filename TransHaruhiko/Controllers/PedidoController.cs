@@ -34,6 +34,24 @@ namespace TransHaruhiko.Controllers
         {
             var queriable = _pedidosService.Buscar();
             queriable = queriable.Where(a => a.EstadoId != (int)EstadosEnum.Cancelado);
+
+            if (parameters.IdPedido.HasValue)
+            {
+                queriable = queriable.Where(a => a.Id == parameters.IdPedido.Value);
+            }
+
+            if (parameters.Finalizados.HasValue)
+            {
+                if (!parameters.Finalizados.Value)
+                {
+                    queriable = queriable.Where(a => a.EstadoId != (int)EstadosEnum.Finalizado);
+                }
+            }
+            else
+            {
+                queriable = queriable.Where(a => a.EstadoId != (int)EstadosEnum.Finalizado);
+            }
+
             if (!string.IsNullOrEmpty(parameters.Nombre))
             {
                 queriable = queriable.Where(a => (a.Cliente.Nombres + " " + a.Cliente.Apellidos).Contains(parameters.Nombre));
@@ -44,7 +62,7 @@ namespace TransHaruhiko.Controllers
             }
             if (!string.IsNullOrEmpty(parameters.Contenedor))
             {
-                queriable = queriable.Where(a => a.Contenedores.Any(b=> b.Codigo.Contains(parameters.Contenedor)));
+                queriable = queriable.Where(a => a.Contenedores.Contains(parameters.Contenedor));
             }
 
             if (parameters.FechaDesde.HasValue && parameters.FechaHasta.HasValue)
@@ -65,7 +83,7 @@ namespace TransHaruhiko.Controllers
                 {
                     a.Id,
                     a.Descripcion,
-                    Contenedores = a.Contenedores.Select(b=> b.Codigo),
+                    Contenedores = a.Contenedores,
                     a.Fecha,
                     a.Precio,
                     Cliente = new
@@ -144,7 +162,7 @@ namespace TransHaruhiko.Controllers
                     pedido.Direccion,
                     pedido.DireccionUrl,
                     pedido.ParteRecepcion,
-                    Contenedor = string.Join(", ", pedido.Contenedores.Select(a=> a.Codigo)),
+                    Contenedor = pedido.Contenedores,
                     Cliente = new
                     {
                         pedido.Cliente.Id,

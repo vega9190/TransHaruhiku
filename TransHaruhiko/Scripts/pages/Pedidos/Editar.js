@@ -279,6 +279,13 @@ function CargarPedido() {
                         $('#lb-direccion-url').attr('href', data.Data.Pedido.DireccionUrl);
                         DireccionUrl = data.Data.Pedido.DireccionUrl;
                     }
+
+                    $('#txt-contenedor').hide();
+                    if (!isNullOrEmpty(data.Data.Pedido.Contenedor)) {
+                        $('#lb-contenedor').text(summary(data.Data.Pedido.Contenedor, 100, '...'));
+                        $('#lb-contenedor').prop('title', data.Data.Pedido.Contenedor);
+                    }
+
                     $('#chk-parte-recepcion').prop('checked', data.Data.Pedido.ParteRecepcion);
                     if (data.Data.Pedido.Estado.Id === EstadoPedidoEnum.Desaduanizacion) {
                         $('#chk-parte-recepcion').prop('disabled', false);

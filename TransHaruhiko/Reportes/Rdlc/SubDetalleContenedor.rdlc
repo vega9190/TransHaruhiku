@@ -105,7 +105,6 @@
                         <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -186,7 +185,7 @@
     </DataSet>
   </DataSets>
   <ReportParameters>
-    <ReportParameter Name="IdContenedor">
+    <ReportParameter Name="IdPoliza">
       <DataType>Integer</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
