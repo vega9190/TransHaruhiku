@@ -1,5 +1,6 @@
 ﻿var IdPedido = null;
 var Finalizado = false;
+var TieneDetalles = false;
 
 $(document).ready(function () {
     IdPedido = $('#hd-id-pedido').val();
@@ -190,7 +191,7 @@ function CargarInformacion() {
                     $('#lb-telefono').text(data.Data.Pedido.Cliente.Telefono);
 
                     Finalizado = data.Data.Pedido.Estado.Id === 5;
-
+                    TieneDetalles = data.Data.Pedido.TienePolizas;
                     if (Finalizado) {
                         $('#btn-crear').button('disable');
                     }
@@ -280,6 +281,7 @@ function PopUpCrear(idPoliza) {
                                 warnings: data.Warnings
                             });
                         } else {
+                            TieneDetalles = true;
                             showMessage(Globalize
                                 .localize('MessageOperacionExitosamente'),
                                 true);
@@ -406,6 +408,77 @@ function CargarDetalle(idPoliza) {
                 }
             }
         });
+    } else {
+        if (TieneDetalles) {
+            var row = [];
+            row.push('<input type="text" class="concepto" maxlength="250" value="Impuestos" />');
+            row.push('<input type="text" class="precio" value="" />');
+            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row);
+
+            var row2 = [];
+            row2.push('<input type="text" class="concepto" maxlength="250" value="Almacen" />');
+            row2.push('<input type="text" class="precio" value="" />');
+            row2.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row2);
+
+            $('.precio').autoNumeric(AutoNumericDecimal);
+        } else {
+            var row = [];
+            row.push('<input type="text" class="concepto" maxlength="250" value="Impuestos" />');
+            row.push('<input type="text" class="precio" value="" />');
+            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row);
+
+            row = [];
+            row.push('<input type="text" class="concepto" maxlength="250" value="Almacenaje" />');
+            row.push('<input type="text" class="precio" value="" />');
+            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row);
+
+            row = [];
+            row.push('<input type="text" class="concepto" maxlength="250" value="Almacenero" />');
+            row.push('<input type="text" class="precio" value="" />');
+            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row);
+
+            row = [];
+            row.push('<input type="text" class="concepto" maxlength="250" value="Tec. Fiscal" />');
+            row.push('<input type="text" class="precio" value="" />');
+            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row);
+
+            row = [];
+            row.push('<input type="text" class="concepto" maxlength="250" value="Agencia" />');
+            row.push('<input type="text" class="precio" value="" />');
+            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row);
+
+            row = [];
+            row.push('<input type="text" class="concepto" maxlength="250" value="Gastos Grua" />');
+            row.push('<input type="text" class="precio" value="" />');
+            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row);
+
+            row = [];
+            row.push('<input type="text" class="concepto" maxlength="250" value="Transporte Internacional" />');
+            row.push('<input type="text" class="precio" value="" />');
+            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row);
+
+            row = [];
+            row.push('<input type="text" class="concepto" maxlength="250" value="Transporte Nacional" />');
+            row.push('<input type="text" class="precio" value="" />');
+            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row);
+
+            row = [];
+            row.push('<input type="text" class="concepto" maxlength="250" value="Trabajo" />');
+            row.push('<input type="text" class="precio" value="" />');
+            row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
+            $('#tb-detalles').table('addRow', row);
+            $('.precio').autoNumeric(AutoNumericDecimal);
+        }
     }
 }
 function EliminarDetalle(nRow) {
