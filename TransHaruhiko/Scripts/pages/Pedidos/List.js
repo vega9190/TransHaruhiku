@@ -96,7 +96,7 @@ $(document).ready(function () {
                 .contextMenu({
                     fnLoadServerData: function (callbackRender) {
                         var data = $(nRow).data('data');
-                        if (data.Pedido.Estado.Id === 1) {
+                        if (data.Pedido.Estado.Id === 1 || RolUsuario === "Gerente" || RolUsuario === "Administrador") {
                             var menu = [
                                 {
                                     value: 'Cancelar',
