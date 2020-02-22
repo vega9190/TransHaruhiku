@@ -151,7 +151,7 @@ namespace TransHaruhiko.Globalization.Views.Poliza {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Transporte Haruhiko.
+        ///   Looks up a localized string similar to Transportadora Haruhiko.
         /// </summary>
         public static string Tittle {
             get {

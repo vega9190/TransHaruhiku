@@ -8,5 +8,6 @@
         public string LugarFecha { get; set; }
         public string Contenedor { get; set; }
         public string Descripcion { get; set; }
+        public string Poliza { get; set; }
     }
 }

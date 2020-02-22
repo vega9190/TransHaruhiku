@@ -39,7 +39,8 @@ namespace TransHaruhiko.Services.Impl
             localReport.LoadReportDefinition(memory);
             
             var pedido = _dbContext.Pedidos.Find(idPedido);
-            
+            var polizas = pedido.Polizas.Where(a => a.DetallePolizas.Any()).ToList();
+
             var datosPedido = new List<RecibiConformeDto>
             {
                 new RecibiConformeDto {
@@ -48,7 +49,8 @@ namespace TransHaruhiko.Services.Impl
                     Descripcion = pedido.Descripcion,
                     Direccion = string.IsNullOrEmpty(pedido.Direccion) ? "" : pedido.Direccion,
                     Telefono = pedido.Cliente.Telefono,
-                    LugarFecha = $"Santa Cruz - {DateTime.Now.Day} de {DateTime.Now.ToString("MMMM")} del {DateTime.Now.Year}"
+                    LugarFecha = $"Santa Cruz - {DateTime.Now.Day} de {DateTime.Now.ToString("MMMM")} del {DateTime.Now.Year}",
+                    Poliza = string.Join(" - ", polizas.Select(a => a.Codigo))
                 }
             };
             
