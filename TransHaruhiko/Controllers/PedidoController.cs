@@ -42,10 +42,9 @@ namespace TransHaruhiko.Controllers
 
             if (parameters.Finalizados.HasValue)
             {
-                if (!parameters.Finalizados.Value)
-                {
-                    queriable = queriable.Where(a => a.EstadoId != (int)EstadosEnum.Finalizado);
-                }
+                queriable = parameters.Finalizados.Value 
+                    ? queriable.Where(a => a.EstadoId == (int)EstadosEnum.Finalizado) 
+                    : queriable.Where(a => a.EstadoId != (int)EstadosEnum.Finalizado);
             }
             else
             {
