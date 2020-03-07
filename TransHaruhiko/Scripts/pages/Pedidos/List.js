@@ -30,6 +30,7 @@ $(document).ready(function () {
         $('#txt-container').val("");
         $('#txt-fecha-desde').val("");
         $('#txt-fecha-hasta').val("");
+        $('#chk-finalizados').prop('checked', false)
     });
     $('#btn-buscar').click(function () {
         tabla.table('update');
