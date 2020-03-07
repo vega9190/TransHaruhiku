@@ -145,17 +145,64 @@ $(document).ready(function () {
                     }
                 });
 
-            $('.btn-observaciones', nRow).click(function () {
-                PopUpObservaciones($(nRow).data('data').Pedido.Id);
+            $('.btn-opciones', nRow).contextMenu({
+                fnLoadServerData: function (callbackRender) {
+                    var data = $(nRow).data('data');
+                    var menu = [
+                            {
+                                value: Globalize.localize('TextEditar'),
+                                fnClick: function () {
+                                    gotoController('Pedido/Editar/' + data.Pedido.Id)
+                                    return false;
+                                }
+                            },
+                            {
+                                value: Globalize.localize('TextObservaciones'),
+                                fnClick: function () {
+                                    PopUpObservaciones(data.Pedido.Id);
+                                    return false;
+                                }
+                            },
+                            {
+                                value: Globalize.localize('TextPagos'),
+                                fnClick: function () {
+                                    PopUpPagos(data.Pedido.Id);
+                                    return false;
+                                }
+                            },
+                    ];
+                    if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+                        menu.push({
+                            value: Globalize.localize('TextPoliza'),
+                            fnClick: function () {
+                                gotoController('Poliza/List/' + data.Pedido.Id)
+                                return false;
+                            }
+                        });
+                        menu.push({
+                            value: Globalize.localize('TextPrecio'),
+                            fnClick: function () {
+                                PopUpCobro(data.Pedido.Id, data.Pedido.Precio);
+                                return false;
+                            }
+                        });
+                        
+                    }
+                    callbackRender(menu);
+                }
             });
 
-            $('.btn-pagos', nRow).click(function() {
-                PopUpPagos($(nRow).data('data').Pedido.Id);
-            });
+            //$('.btn-observaciones', nRow).click(function () {
+            //    PopUpObservaciones($(nRow).data('data').Pedido.Id);
+            //});
 
-            $('.btn-precio', nRow).click(function () {
-                PopUpCobro($(nRow).data('data').Pedido.Id, $(nRow).data('data').Pedido.Precio);
-            });
+            //$('.btn-pagos', nRow).click(function() {
+            //    PopUpPagos($(nRow).data('data').Pedido.Id);
+            //});
+
+            //$('.btn-precio', nRow).click(function () {
+            //    PopUpCobro($(nRow).data('data').Pedido.Id, $(nRow).data('data').Pedido.Precio);
+            //});
 
             return nRow;
         },
@@ -217,36 +264,36 @@ $(document).ready(function () {
                         $.each(data.Data,
                             function(index, value) {
                                 var row = [];
-                                var tempAcciones = '<div class="box-icons">';
+                                //var tempAcciones = '<div class="box-icons">';
 
-                                tempAcciones += '<a '
-                                    + 'href="' + SiteUrl + 'Pedido/Editar/' + value.Pedido.Id + '" '
-                                    + 'title="' + Globalize.localize('TextEditar') + '" '
-                                    + 'class="ui-icon ui-icon-pencil"></a>';
+                                //tempAcciones += '<a '
+                                //    + 'href="' + SiteUrl + 'Pedido/Editar/' + value.Pedido.Id + '" '
+                                //    + 'title="' + Globalize.localize('TextEditar') + '" '
+                                //    + 'class="ui-icon ui-icon-pencil"></a>';
 
-                                tempAcciones += '<span title="' +
-                                    Globalize.localize('TextObservaciones') +
-                                    '" class="btn-observaciones ui-icon ui-icon-comment"></span>';
+                                //tempAcciones += '<span title="' +
+                                //    Globalize.localize('TextObservaciones') +
+                                //    '" class="btn-observaciones ui-icon ui-icon-comment"></span>';
 
-                                tempAcciones += '<span title="' +
-                                    Globalize.localize('TextPagos') +
-                                    '" class="btn-pagos ui-icon ui-icon-tag"></span>';
+                                //tempAcciones += '<span title="' +
+                                //    Globalize.localize('TextPagos') +
+                                //    '" class="btn-pagos ui-icon ui-icon-tag"></span>';
 
 
-                                if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
+                                //if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
 
-                                    tempAcciones += '<a '
-                                       + 'href="' + SiteUrl + 'Poliza/List/' + value.Pedido.Id + '" '
-                                       + 'title="' + Globalize.localize('TextPoliza') + '" '
-                                       + 'class="ui-icon ui-icon-clipboard"></a>';
+                                //    tempAcciones += '<a '
+                                //       + 'href="' + SiteUrl + 'Poliza/List/' + value.Pedido.Id + '" '
+                                //       + 'title="' + Globalize.localize('TextPoliza') + '" '
+                                //       + 'class="ui-icon ui-icon-clipboard"></a>';
 
-                                    tempAcciones += '<span title="' +
-                                        Globalize.localize('TextPrecio') +
-                                        '" class="btn-precio ui-icon ui-icon-suitcase" ' + (isNull(value.Pedido.Precio) ? '' : 'style="background-color: greenyellow;"')
-                                        + '></span>';
-                                }
+                                //    tempAcciones += '<span title="' +
+                                //        Globalize.localize('TextPrecio') +
+                                //        '" class="btn-precio ui-icon ui-icon-suitcase" ' + (isNull(value.Pedido.Precio) ? '' : 'style="background-color: greenyellow;"')
+                                //        + '></span>';
+                                //}
 
-                                tempAcciones += '</div>';
+                                //tempAcciones += '</div>';
 
                                 row.push(value.Pedido.Id);
                                 row.push(value.FechaPedido);
@@ -261,7 +308,8 @@ $(document).ready(function () {
                                         + summary(value.Contenedor, 20, '...')
                                         + '</span>');
                                 row.push('<span class="btn-estados" >' + value.Pedido.Estado.Nombre + '</span>');
-                                row.push(tempAcciones);
+                                row.push('<span class="btn-opciones" > Opciones </span>');
+                                //row.push(tempAcciones);
                                 rows.push(row);
                             });
                         fnCallback({
