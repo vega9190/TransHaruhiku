@@ -10,6 +10,7 @@ using TransHaruhiko.Reportes;
 using TransHaruhiko.Models.DbModels.Dto.Reportes;
 using TransHaruhiko.Models.DbModels.Entidades;
 using TransHaruhiko.Reportes.Specification;
+using TransHaruhiko.Models.Enum;
 
 namespace TransHaruhiko.Services.Impl
 {
@@ -35,9 +36,7 @@ namespace TransHaruhiko.Services.Impl
         private LocalReport GetReporteRecibiConforme(int idPedido)
         {
             var localReport = new LocalReport();
-            var memory = new MemoryStream(ReportesResources.RecibiConforme);
-            localReport.LoadReportDefinition(memory);
-            
+                        
             var pedido = _dbContext.Pedidos.Find(idPedido);
             var polizas = pedido.Polizas.Where(a => a.DetallePolizas.Any()).ToList();
 
@@ -53,7 +52,11 @@ namespace TransHaruhiko.Services.Impl
                     Poliza = string.Join(" - ", polizas.Select(a => a.Codigo))
                 }
             };
-            
+
+            var memory = pedido.EmpresaId == (int)EmpresaEnum.MaxiTrader 
+                ? new MemoryStream(ReportesResources.RecibiConformeMaxT) 
+                : new MemoryStream(ReportesResources.RecibiConforme);
+            localReport.LoadReportDefinition(memory);
             localReport.DataSources.Clear();
             ////Agregar nuevo ReportDataSource con el nombre y lista correspondiente.
             localReport.DataSources.Add(new ReportDataSource("DatosPedido", datosPedido));
@@ -99,7 +102,9 @@ namespace TransHaruhiko.Services.Impl
             localReport.SubreportProcessing += SubReporteDetalleContenedor;
 
             localReport.DataSources.Clear();
-            var memory = new MemoryStream(ReportesResources.PlanillaDespacho);
+            var memory = pedido.EmpresaId == (int)EmpresaEnum.MaxiTrader
+               ? new MemoryStream(ReportesResources.PlanillaDespachoMaxT)
+               : new MemoryStream(ReportesResources.PlanillaDespacho);
             var subMemory = new MemoryStream(ReportesResources.SubDetalleContenedor);
             localReport.LoadReportDefinition(memory);
             localReport.LoadSubreportDefinition("SubDetalleContenedor", subMemory);

@@ -310,6 +310,7 @@
     <Compile Include="Models\DbModels\Entidades\Cliente.cs" />
     <Compile Include="Models\DbModels\Entidades\EstadoPedido.cs" />
     <Compile Include="Models\DbModels\Entidades\Pedido.cs" />
+    <Compile Include="Models\Enum\EmpresaEnum.cs" />
     <Compile Include="Models\Enum\EstadosEnum.cs" />
     <Compile Include="Models\Enum\FicheroEstadoEnum.cs" />
     <Compile Include="Models\Enum\TipoFicheroEnum.cs" />
@@ -368,6 +369,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\logo-1.png" />
+    <Content Include="Content\images\logo-mt.jpeg" />
+    <Content Include="Content\images\logo-th-1.png" />
+    <Content Include="Content\images\logo-th.png" />
+    <Content Include="Content\images\logo.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -501,7 +507,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LayoutStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Rdlc\PlanillaDespachoMaxT.rdlc" />
     <EmbeddedResource Include="Reportes\Rdlc\PlanillaDespacho.rdlc" />
+    <EmbeddedResource Include="Reportes\Rdlc\RecibiConformeMaxT.rdlc" />
     <EmbeddedResource Include="Reportes\Rdlc\RecibiConforme.rdlc" />
     <EmbeddedResource Include="Reportes\Rdlc\SubDetalleContenedor.rdlc" />
     <EmbeddedResource Include="Reportes\ReportesResources.resx">
