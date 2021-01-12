@@ -21,7 +21,8 @@ namespace TransHaruhiko.Controllers
         public ActionResult Buscar(SearchParameters parameters)
         {
             var queriable = _clientesService.Buscar();
-            
+            queriable = queriable.Where(a => a.EmpresaId == parameters.IdEmpresa);
+
             if (!string.IsNullOrEmpty(parameters.Nombre))
             {
                 queriable = queriable.Where(a => (a.Nombres + " " + a.Apellidos).Contains(parameters.Nombre));
@@ -136,7 +137,11 @@ namespace TransHaruhiko.Controllers
                     cliente.Telefono,
                     cliente.Direccion,
                     cliente.Activo,
-                    cliente.Email
+                    cliente.Email,
+                    Empresa = new {
+                        cliente.Empresa.Id,
+                        cliente.Empresa.Nombre
+                    }
                 }
             };
 

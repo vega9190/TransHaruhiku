@@ -106,6 +106,15 @@ namespace TransHaruhiko.Globalization.Views.Cliente {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Empresa*:.
+        /// </summary>
+        public static string LabelEmpresa {
+            get {
+                return ResourceManager.GetString("LabelEmpresa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nombres*:.
         /// </summary>
         public static string LabelNombre {

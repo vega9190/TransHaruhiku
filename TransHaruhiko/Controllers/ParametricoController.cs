@@ -33,6 +33,9 @@ namespace TransHaruhiko.Controllers
             if (!string.IsNullOrEmpty(parameters.Descripcion))
                 anyoQueriable = anyoQueriable.Where(a => a.Nombres.Contains(parameters.Descripcion));
 
+            if (parameters.IdEmpresa.HasValue)
+                anyoQueriable = anyoQueriable.Where(a => a.EmpresaId == parameters.IdEmpresa);
+
             var selectQuery = anyoQueriable.Select(a => new
             {
                 a.Id,

@@ -129,6 +129,9 @@
   <data name="LabelCarnet" xml:space="preserve">
     <value>NIT/CI:</value>
   </data>
+  <data name="LabelEmpresa" xml:space="preserve">
+    <value>Empresa:</value>
+  </data>
   <data name="LabelNombre" xml:space="preserve">
     <value>Nombre:</value>
   </data>

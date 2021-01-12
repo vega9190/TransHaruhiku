@@ -186,7 +186,11 @@ namespace TransHaruhiko.Controllers
                             a.Tipo.Nombre
                         }
                     }),
-                    TienePolizas = pedido.Polizas.Any()
+                    TienePolizas = pedido.Polizas.Any(),
+                    Empresa = new {
+                        pedido.EmpresaId,
+                        pedido.Empresa.Nombre
+                    }
                 }
             };
             

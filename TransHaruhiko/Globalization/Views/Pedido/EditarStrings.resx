@@ -147,6 +147,9 @@
   <data name="LabelDui" xml:space="preserve">
     <value>DUI:</value>
   </data>
+  <data name="LabelEmpresa" xml:space="preserve">
+    <value>Empresa:</value>
+  </data>
   <data name="LabelEstado" xml:space="preserve">
     <value>Estado:</value>
   </data>

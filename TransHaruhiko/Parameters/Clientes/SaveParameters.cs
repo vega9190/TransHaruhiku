@@ -3,6 +3,7 @@ namespace TransHaruhiko.Parameters.Clientes
 {
     public class SaveParameters
     {
+        public int IdEmpresa { get; set; }
         public int? IdCliente { get; set; }
         public string Carnet { get; set; }
         public string Nombres { get; set; }

@@ -31,6 +31,7 @@ $(document).ready(function () {
         $('#txt-fecha-desde').val("");
         $('#txt-fecha-hasta').val("");
         $('#chk-finalizados').prop('checked', false)
+        ObtenerEmpresaPorDefecto();
     });
     $('#btn-buscar').click(function () {
         tabla.table('update');
@@ -41,9 +42,6 @@ $(document).ready(function () {
     ///// Combos /////
     $('#cbx-empresa').combobox(DefaultCombobox({
         url: SiteUrl + 'Parametrico/SimpleSearchEmpresas',
-        toolbar: {
-            reset: function () { }
-        }
     }));
     ObtenerEmpresaPorDefecto();
     $('#cbx-empresa').combobox('disableText');
@@ -348,6 +346,7 @@ function PopUpCrear() {
     buttons[Globalize.localize('Guardar')] = function () {
         var params = {};
 
+        params.IdEmpresa = $('#cbx-empresa-crear').combobox('getId');
         params.IdCliente = $('#cbx-clientes-crear').combobox('getId');
         params.Descripcion = $('#txt-descripcion-crear').val().trim();
         params.Direccion = $('#txt-direccion-crear').val().trim();

@@ -12,5 +12,6 @@ namespace TransHaruhiko.Parameters.Clientes
 
         public string Nombre { get; set; }
         public string Carnet { get; set; }
+        public int IdEmpresa { get; set; }
     }
 }

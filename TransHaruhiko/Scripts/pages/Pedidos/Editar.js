@@ -263,6 +263,7 @@ function CargarPedido() {
                         warnings: data.Warnings
                     });
                 } else {
+                    $('#lb-empresa').text(data.Data.Pedido.Empresa.Nombre);
                     $('#lb-cliente').text(data.Data.Pedido.Cliente.NombreCompleto);
                     $('#lb-estado').text(data.Data.Pedido.Estado.Nombre);
                     $('#lb-telefono').text(data.Data.Pedido.Cliente.Telefono);

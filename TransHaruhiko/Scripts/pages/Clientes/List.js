@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿var primeraCarga = true;
+$(document).ready(function () {
     var tabla = $('#tb-clientes');
     $('#btn-buscar').button();
     $('#btn-limpiar').button();
@@ -7,6 +8,7 @@
     $('#btn-limpiar').click(function () {
         $('#txt-nombre').val("");
         $('#txt-carnet').val("");
+        ObtenerEmpresaPorDefecto();
     });
     $('#btn-buscar').click(function () {
         tabla.table('update');
@@ -14,6 +16,12 @@
     $('#btn-crear').click(function () {
         PopUpCrear();
     });
+    ///// Combos /////
+    $('#cbx-empresa').combobox(DefaultCombobox({
+        url: SiteUrl + 'Parametrico/SimpleSearchEmpresas',
+    }));
+    ObtenerEmpresaPorDefecto();
+    $('#cbx-empresa').combobox('disableText');
     //////////// TABLA  //////////////////////
     tabla.table({
         bInfo: true,
@@ -118,9 +126,11 @@
             params.OrderDirection = paramsTabla.sSortDir_0;
             /******************************************************************/
 
+            params.IdEmpresa = $('#cbx-empresa').combobox('getId');
             params.Nombre = $('#txt-nombre').val();
             params.Carnet = $('#txt-carnet').val();
-
+            if (primeraCarga)
+                return;
            /******************************************************************/
             tabla.block({ message: null });
             $.ajax({
@@ -177,6 +187,7 @@ function PopUpCrear() {
     buttons[Globalize.localize('Guardar')] = function () {
         var params = {};
 
+        params.IdEmpresa = $('#cbx-empresa-crear').combobox('getId');
         params.Carnet = $('#txt-carnet-crear').val().trim();
         params.Nombres = $('#txt-nombre-crear').val().trim();
         params.Apellidos = $('#txt-apellido-crear').val().trim();
@@ -250,6 +261,26 @@ function PopUpCrear() {
         heigth: 500,
         width: 800
     }, false, function () {
+        ///// Combos /////
+        $('#cbx-empresa-crear').combobox(DefaultCombobox({
+            url: SiteUrl + 'Parametrico/SimpleSearchEmpresas',
+            fnSelect: function () {
+            },
+        }));
+        
+        $('#cbx-empresa-crear').combobox('disableText');
+
+        $.blockUI();
+        $.ajax({
+            url: SiteUrl + 'Parametrico/GetEmpresaPorDefecto',
+            success: function (res) {
+                $.unblockUI();
+                $('#cbx-empresa-crear')
+                    .combobox('setId', res.Data.Empresa.Id)
+                    .combobox('setValue', res.Data.Empresa.Nombre)
+                    .combobox('setData', res.Data.Empresa);
+            }
+        });
     });
 }
 
@@ -337,6 +368,16 @@ function PopUpEditar(idCliente) {
         width: 800
     }, false, function () {
         $.blockUI({ message: null });
+
+        ///// Combos /////
+        $('#cbx-empresa-crear').combobox(DefaultCombobox({
+            url: SiteUrl + 'Parametrico/SimpleSearchEmpresas',
+            fnSelect: function () {
+            },
+        }));
+
+        $('#cbx-empresa-crear').combobox('disable');
+
         $.ajax({
             url: SiteUrl + 'Cliente/Obtener',
             data: $.toJSON({ idCliente: idCliente }),
@@ -357,9 +398,32 @@ function PopUpEditar(idCliente) {
                         $('#txt-telefono-crear').val(data.Data.Cliente.Telefono);
                         $('#txt-direccion-crear').val(data.Data.Cliente.Direccion);
                         $('#txt-email-crear').val(data.Data.Cliente.Email);
+                        $('#cbx-empresa-crear')
+                            .combobox('setId', data.Data.Cliente.Empresa.Id)
+                            .combobox('setValue', data.Data.Cliente.Empresa.Nombre)
+                            .combobox('setData', data.Data.Cliente.Empresa);
                     }
                 }
             }
         });
+    });
+}
+
+function ObtenerEmpresaPorDefecto() {
+    $.blockUI();
+    $.ajax({
+        url: SiteUrl + 'Parametrico/GetEmpresaPorDefecto',
+        success: function (res) {
+            $.unblockUI();
+            $('#cbx-empresa')
+                .combobox('setId', res.Data.Empresa.Id)
+                .combobox('setValue', res.Data.Empresa.Nombre)
+                .combobox('setData', res.Data.Empresa);
+
+            if (primeraCarga) {
+                primeraCarga = false;
+                $('#tb-clientes').table('update');
+            }
+        }
     });
 }

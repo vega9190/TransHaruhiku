@@ -44,6 +44,7 @@ namespace TransHaruhiko.Services.Impl
             {
                 var cliente = new Cliente
                 {
+                    EmpresaId = parameters.IdEmpresa,
                     Carnet = parameters.Carnet,
                     Nombres = parameters.Nombres,
                     Apellidos = parameters.Apellidos,

@@ -132,6 +132,9 @@
   <data name="LabelEmail" xml:space="preserve">
     <value>Email:</value>
   </data>
+  <data name="LabelEmpresa" xml:space="preserve">
+    <value>Empresa*:</value>
+  </data>
   <data name="LabelNombre" xml:space="preserve">
     <value>Nombres*:</value>
   </data>
