@@ -14,7 +14,7 @@ var TipoFicheroEnum = {
     Bl: 12,
     Temporal: 13
 };
-
+var primeraCarga = true;
 $(document).ready(function () {
     var tabla = $('#tb-pedidos');
     $('#btn-buscar').button();
@@ -38,6 +38,15 @@ $(document).ready(function () {
     $('#btn-crear').click(function() {
         PopUpCrear();
     });
+    ///// Combos /////
+    $('#cbx-empresa').combobox(DefaultCombobox({
+        url: SiteUrl + 'Parametrico/SimpleSearchEmpresas',
+        toolbar: {
+            reset: function () { }
+        }
+    }));
+    ObtenerEmpresaPorDefecto();
+    $('#cbx-empresa').combobox('disableText');
     //////////// TABLA  //////////////////////
     tabla.table({
         bInfo: true,
@@ -232,6 +241,7 @@ $(document).ready(function () {
 
             params.FechaDesde = $('#txt-fecha-desde').val();
             params.FechaHasta = $('#txt-fecha-hasta').val();
+            params.IdEmpresa = $('#cbx-empresa').combobox('getId');
 
             if (RolUsuario === "Gerente" || RolUsuario === "Administrador") {
                 params.Finalizados = $('#chk-finalizados').prop('checked');
@@ -251,6 +261,8 @@ $(document).ready(function () {
                 });
                 return false;
             }
+            if (primeraCarga)
+                return;
             /******************************************************************/
             tabla.block({ message: null });
             $.ajax({
@@ -1041,5 +1053,24 @@ function PopUpCobro(idPedido, precio) {
     }, false, function () {
         $('#txt-precio', popup).autoNumeric(AutoNumericDecimal);
         $('#txt-precio', popup).val(precio);
+    });
+}
+
+function ObtenerEmpresaPorDefecto(){
+    $.blockUI();
+    $.ajax({
+        url: SiteUrl + 'Parametrico/GetEmpresaPorDefecto',
+        success: function (res) {
+            $.unblockUI();
+            $('#cbx-empresa')
+                .combobox('setId', res.Data.Empresa.Id)
+                .combobox('setValue', res.Data.Empresa.Nombre)
+                .combobox('setData', res.Data.Empresa);
+
+            if (primeraCarga) {
+                primeraCarga = false;
+                $('#tb-pedidos').table('update');
+            }
+        }
     });
 }

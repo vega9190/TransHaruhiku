@@ -28,5 +28,9 @@ namespace TransHaruhiko.Models.DbModels.Entidades
         public virtual EstadoPedido Estado { get; set; }
         public virtual ICollection<Fichero> Ficheros { get; set; }
         public virtual ICollection<Poliza> Polizas { get; set; }
+        [Column("IdEmpresa")]
+        public int EmpresaId { get; set; }
+        [ForeignKey(nameof(EmpresaId))]
+        public virtual Empresa Empresa { get; set; }
     }
 }

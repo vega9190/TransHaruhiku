@@ -135,6 +135,9 @@
   <data name="LabelContainer" xml:space="preserve">
     <value>Contenedor:</value>
   </data>
+  <data name="LabelEmpresa" xml:space="preserve">
+    <value>Empresa:</value>
+  </data>
   <data name="LabelFechaDesde" xml:space="preserve">
     <value>Fecha Desde:</value>
   </data>

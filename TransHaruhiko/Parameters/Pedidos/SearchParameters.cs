@@ -20,5 +20,6 @@ namespace TransHaruhiko.Parameters.Pedidos
         public DateTime? FechaDesde { get; set; }
         public DateTime? FechaHasta { get; set; }
         public bool? Finalizados { get; set; }
+        public int IdEmpresa { get; set; }
     }
 }

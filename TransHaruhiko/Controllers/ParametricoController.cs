@@ -53,6 +53,51 @@ namespace TransHaruhiko.Controllers
             transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
             return Json(transfer);
         }
+        public ActionResult SimpleSearchEmpresas(SimpleListViewModel parameters)
+        {
+            var transfer = new ClientTransfer();
+            
+            var anyoQueriable = _pedidosService.BuscarEmpresas();
+            anyoQueriable = anyoQueriable.Where(a => a.Activa);
+
+            //if (!string.IsNullOrEmpty(parameters.Descripcion))
+            //    anyoQueriable = anyoQueriable.Where(a => a.Nombre.Contains(parameters.Descripcion));
+
+            var selectQuery = anyoQueriable.Select(a => new
+            {
+                a.Id,
+                Descripcion = a.Nombre.Trim()
+            }).OrderBy(o => o.Descripcion);
+
+            var listado = selectQuery
+                .Skip((parameters.PageIndex - 1) * parameters.ItemsPerPage)
+                .Take(parameters.ItemsPerPage)
+                .ToList();
+
+            var totalElements = selectQuery.Count();
+            var totalpages = totalElements / parameters.ItemsPerPage;
+
+            transfer.Data = listado;
+            transfer.Pagination.TotalPages = totalpages + ((totalElements % parameters.ItemsPerPage) > 0 ? 1 : 0);
+            transfer.Pagination.TotalRecords = totalElements; //Total de elementos segun filtro
+            transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
+            return Json(transfer);
+        }
+        public ActionResult GetEmpresaPorDefecto()
+        {
+            var transfer = new ClientTransfer();
+            var empresas = Session["Empresas"].ToString();
+            var empresa = _pedidosService.ObtenerEmpresaPorDefento(empresas);
+            transfer.Data = new
+            {
+                Empresa = new
+                {
+                    empresa.Id,
+                    empresa.Nombre
+                }
+            };
+            return Json(transfer);
+        }
         public ActionResult SearchPosibleEstadosDocumento(int idEstadoActual)
         {
             var transfer = new ClientTransfer();
@@ -171,5 +216,6 @@ namespace TransHaruhiko.Controllers
             transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
             return Json(transfer);
         }
+
     }
 }

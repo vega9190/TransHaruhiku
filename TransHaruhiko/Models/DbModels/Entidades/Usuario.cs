@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TransHaruhiko.Models.DbModels.Entidades
@@ -21,5 +22,6 @@ namespace TransHaruhiko.Models.DbModels.Entidades
         public int TrabajadorId { get; set; }
         [ForeignKey(nameof(TrabajadorId))]
         public virtual Trabajador Trabajador { get; set; }
+        public virtual ICollection<UsuarioEmpresa> UsuarioEmpresas { get; set; }
     }
 }

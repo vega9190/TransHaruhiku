@@ -1,15 +1,4 @@
-﻿(function ($) {
-    $.widget('if.combobox', $.if.combobox,
-        {
-            setReadOnly: function () {
-                var self = this;
-                self.input.attr('readonly', "");
-            }
-        })
-})(jQuery);
-
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     $.tableSetup({
         bJQueryUI: true,
@@ -42,6 +31,20 @@ $(document).ready(function () {
             icons: {}
         }
     });
+
+    $.widget('if.combobox', $.if.combobox,
+      {
+          disableText: function () {
+              var self = this;
+              self.input.disable();
+              self.input.css("background-color", "white");
+          },
+          enableText: function () {
+              var self = this;
+              self.input.enable();
+              self.input.css("background-color", "");
+          }
+      })
 
     /*********************************/
     $.ajaxSetup({

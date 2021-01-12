@@ -22,7 +22,6 @@
     <script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Pedidos/List.js")"></script>
     @*<script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Alcance/List - Copia.js")"></script>*@
     <script type="text/javascript"> var RolUsuario = "@Session["Rol"]" </script>
-
 }
 
 <div id="page-alcance-listar">
@@ -32,6 +31,10 @@
             <div class="grid-100 mobile-grid-100">
                 <div class="grid-50">
                     <ul class="box-form">
+                        <li>
+                            <label for="cbx-empresa" class="grid-20 mobile-grid-100">@ListStrings.LabelEmpresa </label>
+                            <select id="cbx-empresa" class="grid-55 mobile-grid-100"></select>
+                        </li>
                         <li>
                             <label for="txt-id-pedido" class="grid-20 mobile-grid-100">@ListStrings.LabelIdPedido</label>
                             <input id="txt-id-pedido" class="grid-55 mobile-grid-100" type="text" />

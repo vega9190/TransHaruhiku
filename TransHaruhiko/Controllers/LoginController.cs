@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Microsoft.Owin.Security;
 using TransHaruhiko.Models.ViewModel;
 using TransHaruhiko.Services;
+using System.Linq;
 
 namespace TransHaruhiko.Controllers
 {
@@ -21,8 +22,12 @@ namespace TransHaruhiko.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var usuario = _usuariosService.Get(User.Identity.Name, null);
+                var empresas = usuario.UsuarioEmpresas != null && usuario.UsuarioEmpresas.Any()
+                ? string.Join(",", usuario.UsuarioEmpresas.Where(a => a.Empresa.Activa).Select(a => a.EmpresaId))
+                : "1";
                 Session["Rol"] = usuario.Rol.Nombre;
                 Session["Nombre"] = usuario.Trabajador.NombreCompleto;
+                Session["Empresas"] = empresas;
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -47,15 +52,17 @@ namespace TransHaruhiko.Controllers
                 ModelState.AddModelError(string.Empty, @"Usuario no valido.");
                 return View(model);
             }
-            
-            var identity = CreateIdentity(/*usuario.Nickname*/usuario.Id.ToString(), usuario.Trabajador.NombreCompleto, usuario.Rol.Nombre, usuario.Id);
+            var empresas = usuario.UsuarioEmpresas != null && usuario.UsuarioEmpresas.Any() 
+                ? string.Join(",", usuario.UsuarioEmpresas.Where(a=> a.Empresa.Activa).Select(a => a.EmpresaId)) 
+                : "1";
+            var identity = CreateIdentity(/*usuario.Nickname*/usuario.Id.ToString(), usuario.Trabajador.NombreCompleto, usuario.Rol.Nombre, usuario.Id, empresas);
 
             //authenticationManager.SignOut(MyAuthentication.ApplicationCookie);
             authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
 
             return RedirectToAction("Index", "Home");
         }
-        private ClaimsIdentity CreateIdentity(string userPrincipal, string nombre, string roles, int id)
+        private ClaimsIdentity CreateIdentity(string userPrincipal, string nombre, string roles, int id, string empresas)
         {
             var identity = new ClaimsIdentity(MyAuthentication.ApplicationCookie, ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 
@@ -70,6 +77,7 @@ namespace TransHaruhiko.Controllers
 
                 Session["Rol"] = roles;
                 Session["Nombre"] = nombre;
+                Session["Empresas"] = empresas;
             }
             else
             {

@@ -17,5 +17,9 @@ namespace TransHaruhiko.Models.DbModels.Entidades
         public string Telefono { get; set; }
         public string NombreCompleto => (Nombres + " " + Apellidos).Trim();
         public bool Activo { get; set; }
+        [Column("IdEmpresa")]
+        public int EmpresaId { get; set; }
+        [ForeignKey(nameof(EmpresaId))]
+        public virtual Empresa Empresa { get; set; }
     }
 }

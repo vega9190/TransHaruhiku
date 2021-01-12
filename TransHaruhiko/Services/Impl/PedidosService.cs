@@ -391,5 +391,16 @@ namespace TransHaruhiko.Services.Impl
             IQueryable<Seguimiento> queriable = _dbContext.Seguimientos;
             return queriable;
         }
+        public IQueryable<Empresa> BuscarEmpresas()
+        {
+            IQueryable<Empresa> queriable = _dbContext.Empresas;
+            return queriable;
+        }
+        public Empresa ObtenerEmpresaPorDefento(string id)
+        {
+            var idEmpresa = id.Contains(",") ? int.Parse(id.Split(',')[0]) : int.Parse(id);
+            var empresa = _dbContext.Empresas.Find(idEmpresa);
+            return empresa;
+        }
     }
 }

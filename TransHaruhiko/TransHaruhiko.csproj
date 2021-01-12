@@ -290,6 +290,7 @@
     <Compile Include="Models\DbModels\Entidades\Contenedor.cs" />
     <Compile Include="Models\DbModels\Entidades\DespachoContenedor.cs" />
     <Compile Include="Models\DbModels\Entidades\DetallePoliza.cs" />
+    <Compile Include="Models\DbModels\Entidades\Empresa.cs" />
     <Compile Include="Models\DbModels\Entidades\EstadoFichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Fichero.cs" />
     <Compile Include="Models\DbModels\Entidades\Observacion.cs" />
@@ -304,6 +305,7 @@
     <Compile Include="Models\DbModels\Entidades\TipoSeguimiento.cs" />
     <Compile Include="Models\DbModels\Entidades\Trabajador.cs" />
     <Compile Include="Models\DbModels\Entidades\Usuario.cs" />
+    <Compile Include="Models\DbModels\Entidades\UsuarioEmpresa.cs" />
     <Compile Include="Models\DbModels\TransHaruhikoDbContext.cs" />
     <Compile Include="Models\DbModels\Entidades\Cliente.cs" />
     <Compile Include="Models\DbModels\Entidades\EstadoPedido.cs" />

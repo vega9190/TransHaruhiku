@@ -33,7 +33,7 @@ namespace TransHaruhiko.Controllers
         public ActionResult Buscar(SearchParameters parameters)
         {
             var queriable = _pedidosService.Buscar();
-            queriable = queriable.Where(a => a.EstadoId != (int)EstadosEnum.Cancelado);
+            queriable = queriable.Where(a => a.EstadoId != (int)EstadosEnum.Cancelado && a.EmpresaId == parameters.IdEmpresa);
 
             if (parameters.IdPedido.HasValue)
             {

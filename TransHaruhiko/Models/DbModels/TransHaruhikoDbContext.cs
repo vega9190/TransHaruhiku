@@ -30,5 +30,6 @@ namespace TransHaruhiko.Models.DbModels
         public DbSet<TipoMoneda> TiposMonedas { get; set; }
         public DbSet<Poliza> Polizas { get; set; }
         public DbSet<DetallePoliza> DetallePolizas { get; set; }
+        public DbSet<Empresa> Empresas { get; set; }
     }
 }
