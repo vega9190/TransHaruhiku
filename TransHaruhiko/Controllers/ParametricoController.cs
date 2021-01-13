@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using TransHaruhiko.Models.Enum;
 using TransHaruhiko.Models.TransferStruct;
@@ -62,6 +63,11 @@ namespace TransHaruhiko.Controllers
             
             var anyoQueriable = _pedidosService.BuscarEmpresas();
             anyoQueriable = anyoQueriable.Where(a => a.Activa);
+            var empresas = Session["Empresas"].ToString();
+            var listEmpresas = empresas.Contains(",") 
+                ? empresas.Split(',').Select(a=> int.Parse(a)).ToList() 
+                : new List<int>() { int.Parse(empresas)};
+            anyoQueriable = anyoQueriable.Where(a => listEmpresas.Contains(a.Id));
 
             //if (!string.IsNullOrEmpty(parameters.Descripcion))
             //    anyoQueriable = anyoQueriable.Where(a => a.Nombre.Contains(parameters.Descripcion));
