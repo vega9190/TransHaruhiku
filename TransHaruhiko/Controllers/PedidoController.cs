@@ -13,11 +13,13 @@ namespace TransHaruhiko.Controllers
     {
         private readonly IPedidosService _pedidosService;
         private readonly IReportesService _reportesService;
-        
-        public PedidoController(IPedidosService pedidosService, IReportesService reportesService)
+        private readonly IObservacionesService _observacionesService;
+
+        public PedidoController(IPedidosService pedidosService, IReportesService reportesService, IObservacionesService observacionesService)
         {
             _pedidosService = pedidosService;
             _reportesService = reportesService;
+            _observacionesService = observacionesService;
         }
 
         public ActionResult List()
@@ -126,11 +128,13 @@ namespace TransHaruhiko.Controllers
 
             var returnList = listado.Select(a =>
             {
+                var tieneObservaciones = _observacionesService.TieneObservaciones(a.Pedido.Id);
                 var returnData = new
                 {
                     a.Pedido,
                     FechaPedido = a.Pedido.Fecha.ToString("dd/MM/yyyy"),
-                    Contenedor = string.Join(", ", a.Pedido.Contenedores)
+                    Contenedor = string.Join(", ", a.Pedido.Contenedores),
+                    TieneObservaciones = tieneObservaciones
                 };
                 return returnData;
             });

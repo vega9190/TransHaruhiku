@@ -76,5 +76,9 @@ namespace TransHaruhiko.Services.Impl
             _dbContext.SaveChanges();
             return result;
         }
+        public bool TieneObservaciones(int idPedido) {
+            var observaciones = _dbContext.Observaciones.Where(a => a.PedidoId == idPedido).ToList();
+            return observaciones.Any();
+        }
     }
 }

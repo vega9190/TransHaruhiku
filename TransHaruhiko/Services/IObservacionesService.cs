@@ -10,5 +10,6 @@ namespace TransHaruhiko.Services
         IQueryable<Observacion> Buscar();
         BaseResult Guardar(SaveParameters parameters);
         BaseResult Eliminar(int idObservacion);
+        bool TieneObservaciones(int idPedido);
     }
 }
