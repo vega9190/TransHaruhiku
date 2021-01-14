@@ -186,6 +186,7 @@ function CargarInformacion() {
                         warnings: data.Warnings
                     });
                 } else {
+                    $('#lb-empresa').text(data.Data.Pedido.Empresa.Nombre);
                     $('#lb-cliente').text(data.Data.Pedido.Cliente.NombreCompleto);
                     $('#lb-estado').text(data.Data.Pedido.Estado.Nombre);
                     $('#lb-telefono').text(data.Data.Pedido.Cliente.Telefono);
@@ -271,22 +272,43 @@ function PopUpCrear(idPoliza) {
                 url: SiteUrl + 'Poliza/Guardar',
                 data: $.toJSON(params),
                 success: function (data) {
-                    $.unblockUI();
                     if (data.HasErrors) {
+                        $.unblockUI();
                         showErrors(data.Errors);
                     } else {
                         if (data.HasWarnings) {
+                            $.unblockUI();
                             showCustomErrors({
                                 title: Globalize.localize('TextInformacion'),
                                 warnings: data.Warnings
                             });
                         } else {
-                            TieneDetalles = true;
-                            showMessage(Globalize
-                                .localize('MessageOperacionExitosamente'),
-                                true);
-                            popup.dialog('close');
-                            $('#tb-polizas').table('update');
+                            var paramsPedido = {};
+                            paramsPedido.IdPedido = IdPedido;
+                            $.ajax({
+                                url: SiteUrl + 'Pedido/GuardarPrecio',
+                                data: $.toJSON(paramsPedido),
+                                success: function (data) {
+                                    $.unblockUI();
+                                    if (data.HasErrors) {
+                                        showErrors(data.Errors);
+                                    } else {
+                                        if (data.HasWarnings) {
+                                            showCustomErrors({
+                                                title: Globalize.localize('TextInformacion'),
+                                                warnings: data.Warnings
+                                            });
+                                        } else {
+                                            TieneDetalles = true;
+                                            showMessage(Globalize
+                                                .localize('MessageOperacionExitosamente'),
+                                                true);
+                                            popup.dialog('close');
+                                            $('#tb-polizas').table('update');
+                                        }
+                                    }
+                                }
+                            });
                         }
                     }
                 }
@@ -438,31 +460,31 @@ function CargarDetalle(idPoliza) {
 
             row = [];
             row.push('<input type="text" class="concepto" maxlength="250" value="Almacenero" />');
-            row.push('<input type="text" class="precio" value="" />');
+            row.push('<input type="text" class="precio" value="500" />');
             row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
             $('#tb-detalles').table('addRow', row);
 
             row = [];
             row.push('<input type="text" class="concepto" maxlength="250" value="Tec. Fiscal" />');
-            row.push('<input type="text" class="precio" value="" />');
+            row.push('<input type="text" class="precio" value="2500" />');
             row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
             $('#tb-detalles').table('addRow', row);
 
             row = [];
             row.push('<input type="text" class="concepto" maxlength="250" value="Agencia" />');
-            row.push('<input type="text" class="precio" value="" />');
+            row.push('<input type="text" class="precio" value="500" />');
             row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
             $('#tb-detalles').table('addRow', row);
 
             row = [];
-            row.push('<input type="text" class="concepto" maxlength="250" value="Gastos Grua" />');
-            row.push('<input type="text" class="precio" value="" />');
+            row.push('<input type="text" class="concepto" maxlength="250" value="Gastos Grúa" />');
+            row.push('<input type="text" class="precio" value="500" />');
             row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
             $('#tb-detalles').table('addRow', row);
 
             row = [];
             row.push('<input type="text" class="concepto" maxlength="250" value="Transporte Internacional" />');
-            row.push('<input type="text" class="precio" value="" />');
+            row.push('<input type="text" class="precio" value="2500" />');
             row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
             $('#tb-detalles').table('addRow', row);
 
@@ -474,7 +496,7 @@ function CargarDetalle(idPoliza) {
 
             row = [];
             row.push('<input type="text" class="concepto" maxlength="250" value="Trabajo" />');
-            row.push('<input type="text" class="precio" value="" />');
+            row.push('<input type="text" class="precio" value="1000" />');
             row.push('<a class="button btn-poliza-eliminar"><span class="ui-icon ui-icon-trash"></span></a>');
             $('#tb-detalles').table('addRow', row);
             $('.precio').autoNumeric(AutoNumericDecimal);

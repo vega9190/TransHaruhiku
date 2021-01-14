@@ -1023,50 +1023,6 @@ function PopUpCobro(idPedido, precio) {
     //$.blockUI({ message: null });
     var popup = null;
     var buttons = {};
-    buttons[Globalize.localize('Guardar')] = function () {
-        var params = {};
-
-        params.Precio = $('#txt-precio', popup).val()
-        params.IdPedido = idPedido;
-
-        var warnings = new Array();
-
-        if (isEmpty(params.Precio))
-            warnings.push(Globalize.localize('ErrorNoPrecio'));
-
-        if (warnings.length > 0) {
-            showCustomErrors({
-                title: Globalize.localize('TextInformacion'),
-                warnings: warnings
-            });
-            return false;
-        } else {
-            $.blockUI({ message: null });
-            $.ajax({
-                url: SiteUrl + 'Pedido/GuardarPrecio',
-                data: $.toJSON(params),
-                success: function (data) {
-                    $.unblockUI();
-                    if (data.HasErrors) {
-                        showErrors(data.Errors);
-                    } else {
-                        if (data.HasWarnings) {
-                            showCustomErrors({
-                                title: Globalize.localize('TextInformacion'),
-                                warnings: data.Warnings
-                            });
-                        } else {
-                            showMessage(Globalize
-                                .localize('MessageOperacionExitosamente'),
-                                true);
-                            popup.dialog('close');
-                            $('#tb-pedidos').table('update');
-                        }
-                    }
-                }
-            });
-        }
-    };
     /***************************************************************************/
     buttons[Globalize.localize('Cerrar')] = function () {
         popup.dialog('close');
@@ -1085,6 +1041,7 @@ function PopUpCobro(idPedido, precio) {
     }, false, function () {
         $('#txt-precio', popup).autoNumeric(AutoNumericDecimal);
         $('#txt-precio', popup).val(precio);
+        $('#txt-precio', popup).disable();
     });
 }
 

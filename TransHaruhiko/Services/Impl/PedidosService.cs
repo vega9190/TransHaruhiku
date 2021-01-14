@@ -84,7 +84,7 @@ namespace TransHaruhiko.Services.Impl
             var pedido = _dbContext.Pedidos.Find(parameters.IdPedido);
 
             var precio = pedido.Precio.HasValue ? pedido.Precio : 0;
-            pedido.Precio = decimal.Parse(parameters.Precio, CultureInfo.InvariantCulture);
+            pedido.Precio = pedido.Polizas.Sum(a => a.DetallePolizas.Sum(b => b.Precio));
 
             var seguimiento = new Seguimiento
             {
