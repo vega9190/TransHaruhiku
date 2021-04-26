@@ -24,7 +24,7 @@ Precio DECIMAL(10,2) NOT NULL,
 IdPoliza INT NOT NULL,
 FOREIGN KEY (IdPoliza) REFERENCES th.Polizas (IdPoliza)
 )
-
+---------
 CREATE TABLE th.Empresas(
 IdEmpresa INT PRIMARY KEY IDENTITY(1,1),
 Nombre NVARCHAR(250) NOT NULL,
@@ -53,3 +53,18 @@ FOREIGN KEY (IdEmpresa) REFERENCES th.Empresas(IdEmpresa);
 ALTER TABLE th.Clientes
 ADD CONSTRAINT FK_EmpresaCliente
 FOREIGN KEY (IdEmpresa) REFERENCES th.Empresas(IdEmpresa);
+
+INSERT INTO th.Empresas VALUES ('Transportadora Haruhiko', 1)
+INSERT INTO th.Empresas VALUES ('Maxi Trader', 1)
+
+UPDATE th.EstadosPedidos SET Nombre = 'Desaduanización' WHERE IdEstadoPedido = 3
+-----
+INSERT INTO th.Trabajadores VALUES ('Douglas', 'Vega', '123456','holta@hotmail.com','11456', 'ASD', 1)
+INSERT INTO th.Trabajadores VALUES ('Carla', 'Suarez', '123456','gjru@hotmail.com','854121', 'dfffdf fsdf df', 1)
+
+INSERT INTO th.Usuarios VALUES ('vega@hotmail.com', '123456', 1, 2, 1)
+INSERT INTO th.Usuarios VALUES ('carla@hotmail.com', '123456', 1, 1, 1)
+
+INSERT INTO th.Usuarios_Empresas VALUES (1, 2, GETDATE())
+INSERT INTO th.Usuarios_Empresas VALUES (2, 2, GETDATE())
+
