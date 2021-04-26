@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using TransHaruhiko.Models.DbModels.Entidades;
+using TransHaruhiko.Models.DbModels.Entidades.Contabilidad;
 
 namespace TransHaruhiko.Models.DbModels
 {
@@ -15,7 +16,7 @@ namespace TransHaruhiko.Models.DbModels
             // Mapeo de posibles relaciones muchos a muchos
             // Mapeo de relaciones especiales
         }
-        //Expedientes
+        //TH
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
@@ -31,5 +32,10 @@ namespace TransHaruhiko.Models.DbModels
         public DbSet<Poliza> Polizas { get; set; }
         public DbSet<DetallePoliza> DetallePolizas { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
+
+        //Contabilidad
+        public DbSet<Haber> Haberes { get; set; }
+        public DbSet<TipoHaber> TiposHaberes { get; set; }
+        public DbSet<ServicioBasico> ServiciosBasicos { get; set; }
     }
 }

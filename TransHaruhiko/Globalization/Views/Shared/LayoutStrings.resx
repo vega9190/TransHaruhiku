@@ -126,6 +126,9 @@
   <data name="InfoFooter" xml:space="preserve">
     <value>Transporte Haruhiko - Powered By Ing. Douglas Vega</value>
   </data>
+  <data name="InfoFooterMt" xml:space="preserve">
+    <value>Maxi Trader - Powered By Ing. Douglas Vega</value>
+  </data>
   <data name="MensajeBloqueo" xml:space="preserve">
     <value>Bloqueado.</value>
   </data>

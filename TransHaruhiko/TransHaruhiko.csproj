@@ -22,6 +22,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -287,6 +288,9 @@
     </Compile>
     <Compile Include="Models\DbModels\Dto\Reportes\PlanillaDespachoDto.cs" />
     <Compile Include="Models\DbModels\Dto\Reportes\RecibiConformeDto.cs" />
+    <Compile Include="Models\DbModels\Entidades\Contabilidad\Haber.cs" />
+    <Compile Include="Models\DbModels\Entidades\Contabilidad\TipoHaber.cs" />
+    <Compile Include="Models\DbModels\Entidades\Contabilidad\ServicioBasico.cs" />
     <Compile Include="Models\DbModels\Entidades\Contenedor.cs" />
     <Compile Include="Models\DbModels\Entidades\DespachoContenedor.cs" />
     <Compile Include="Models\DbModels\Entidades\DetallePoliza.cs" />
@@ -313,7 +317,9 @@
     <Compile Include="Models\Enum\EmpresaEnum.cs" />
     <Compile Include="Models\Enum\EstadosEnum.cs" />
     <Compile Include="Models\Enum\FicheroEstadoEnum.cs" />
+    <Compile Include="Models\Enum\ServicioBasicoEnum.cs" />
     <Compile Include="Models\Enum\TipoFicheroEnum.cs" />
+    <Compile Include="Models\Enum\TipoHaberEnum.cs" />
     <Compile Include="Models\Enum\TipoPagoEnum.cs" />
     <Compile Include="Models\Enum\TipoSeguimientoEnum.cs" />
     <Compile Include="Models\TransferStruct\BaseResult.cs" />
@@ -351,6 +357,8 @@
     </Compile>
     <Compile Include="Reportes\Specification\ProcesadorReporte.cs" />
     <Compile Include="Services\IClientesService.cs" />
+    <Compile Include="Services\IHaberesService.cs" />
+    <Compile Include="Services\Impl\HaberesService.cs" />
     <Compile Include="Services\IPolizasService.cs" />
     <Compile Include="Services\IFicherosService.cs" />
     <Compile Include="Services\Impl\ClienteService.cs" />
@@ -506,6 +514,7 @@
     <EmbeddedResource Include="Globalization\Views\Shared\LayoutStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LayoutStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Rdlc\PlanillaDespachoMaxT.rdlc" />
     <EmbeddedResource Include="Reportes\Rdlc\PlanillaDespacho.rdlc" />

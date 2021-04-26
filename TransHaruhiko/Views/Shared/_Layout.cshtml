@@ -88,7 +88,21 @@
     <div id="main-wrapper" class="grid-container">
         <div id="header">
             <div class="box-logo">
-                <img src="@Url.ContentNoCache("images/logo-th-1.png")" alt="Transporte Haruhiko" title="Transporte Haruhiko" />
+                @if (string.IsNullOrEmpty(Session["Empresas"] as string))
+                {
+                    <img src="@Url.ContentNoCache("images/logo-th-1.png")" alt="Transporte Haruhiko" title="Transporte Haruhiko" />
+                }
+                else
+                {
+                    if (Session["Empresas"].ToString() == "2")
+                    {
+                        <img src="@Url.ContentNoCache("images/logo-mt.jpeg")" alt="Transporte Haruhiko" title="Transporte Haruhiko" />
+                    }
+                    else
+                    {
+                        <img src="@Url.ContentNoCache("images/logo-th-1.png")" alt="Transporte Haruhiko" title="Transporte Haruhiko" />
+                    }
+                }
             </div>
             <p class="mensaje">@LayoutStrings.MensajeGestion</p>
             <div class="box-current-user">@Html.Partial("_LogOnPartial")</div>
@@ -119,7 +133,21 @@
             </div>
         </div>
         <div id="footer">
-            <span>@LayoutStrings.InfoFooter</span>
+            @if (string.IsNullOrEmpty(Session["Empresas"] as string))
+            {
+                <span>@LayoutStrings.InfoFooter</span>
+            }
+            else
+            {
+                if (Session["Empresas"].ToString() == "2")
+                {
+                    <span>@LayoutStrings.InfoFooterMt</span>
+                }
+                else
+                {
+                    <span>@LayoutStrings.InfoFooter</span>
+                }
+            }
             <div class="box-build">
                 @Html.Raw(ConfigurationManager.AppSettings["build"])
             </div>
