@@ -19,9 +19,11 @@ namespace TransHaruhiko.Models.DbModels.Entidades.Contabilidad
         public int TipoHaberId { get; set; }
         [Column("IdTipoMoneda")]
         public int TipoMonedaId { get; set; }
+        [Column("IdEmpresa")]
+        public int EmpresaId { get; set; }
         public virtual  ServicioBasico ServicioBasico { get; set; }
         public virtual TipoHaber TipoHaber { get; set; }
         public virtual TipoMoneda TipoMoneda { get; set; }
-
+        public virtual Empresa Empresa { get; set; }
     }
 }

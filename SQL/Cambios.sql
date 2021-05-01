@@ -90,9 +90,11 @@ Fecha DATETIME NOT NULL,
 IdServicioBasico INT NOT NULL,
 IdTipoHaber INT NOT NULL,
 IdTipoMoneda INT NOT NULL,
+IdEmpresa INT NOT NULL,
 FOREIGN KEY (IdServicioBasico) REFERENCES conta.ServiciosBasicos(IdServicioBasico),
 FOREIGN KEY (IdTipoHaber) REFERENCES conta.TiposHaberes(IdTipoHaber),
-FOREIGN KEY (IdTipoMoneda) REFERENCES th.TiposMonedas(IdTipoMoneda)
+FOREIGN KEY (IdTipoMoneda) REFERENCES th.TiposMonedas(IdTipoMoneda),
+FOREIGN KEY (IdEmpresa) REFERENCES th.Empresas(IdEmpresa)
 )
 
 INSERT INTO conta.ServiciosBasicos VALUES ('Luz')
@@ -101,6 +103,7 @@ INSERT INTO conta.ServiciosBasicos VALUES ('Internet')
 INSERT INTO conta.ServiciosBasicos VALUES ('Varios')
 INSERT INTO conta.ServiciosBasicos VALUES ('Alquiler Oficina')
 INSERT INTO conta.ServiciosBasicos VALUES ('Alquiler Interno')
+INSERT INTO conta.ServiciosBasicos VALUES ('Teléfono Móvil')
 
 INSERT INTO conta.TiposHaberes VALUES ('Ingresos')
 INSERT INTO conta.TiposHaberes VALUES ('Egresos')

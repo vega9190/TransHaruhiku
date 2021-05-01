@@ -15,14 +15,16 @@ namespace TransHaruhiko.Controllers
         private readonly IFicherosService _ficherosService;
         private readonly IPedidosService _pedidosService;
         private readonly IPagosService _pagosService;
+        private readonly IHaberesService _haberesService;
 
         public ParametricoController(IClientesService clientesService, IFicherosService ficherosService, 
-            IPedidosService pedidosService, IPagosService pagosService)
+            IPedidosService pedidosService, IPagosService pagosService, IHaberesService haberesService)
         {
             _clientesService = clientesService;
             _ficherosService = ficherosService;
             _pedidosService = pedidosService;
             _pagosService = pagosService;
+            _haberesService = haberesService;
         }
 
         public ActionResult SimpleSearchCliente(SimpleListViewModel parameters)
@@ -225,6 +227,62 @@ namespace TransHaruhiko.Controllers
             transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
             return Json(transfer);
         }
+        public ActionResult SimpleSearchTipoHaber(SimpleListViewModel parameters)
+        {
+            var transfer = new ClientTransfer();
+            var anyoQueriable = _haberesService.GetTiposHaberes();
 
+            if (!string.IsNullOrEmpty(parameters.Descripcion))
+                anyoQueriable = anyoQueriable.Where(a => a.Nombre.Contains(parameters.Descripcion));
+
+            var selectQuery = anyoQueriable.Select(a => new
+            {
+                a.Id,
+                Descripcion = a.Nombre
+            }).OrderBy(o => o.Descripcion);
+
+            var listado = selectQuery
+                .Skip((parameters.PageIndex - 1) * parameters.ItemsPerPage)
+                .Take(parameters.ItemsPerPage)
+                .ToList();
+
+            var totalElements = selectQuery.Count();
+            var totalpages = totalElements / parameters.ItemsPerPage;
+
+            transfer.Data = listado;
+            transfer.Pagination.TotalPages = totalpages + ((totalElements % parameters.ItemsPerPage) > 0 ? 1 : 0);
+            transfer.Pagination.TotalRecords = totalElements; //Total de elementos segun filtro
+            transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
+            return Json(transfer);
+        }
+
+        public ActionResult SimpleSearchServicioBasico(SimpleListViewModel parameters)
+        {
+            var transfer = new ClientTransfer();
+            var anyoQueriable = _haberesService.GetServiciosBasicos();
+
+            if (!string.IsNullOrEmpty(parameters.Descripcion))
+                anyoQueriable = anyoQueriable.Where(a => a.Nombre.Contains(parameters.Descripcion));
+
+            var selectQuery = anyoQueriable.Select(a => new
+            {
+                a.Id,
+                Descripcion = a.Nombre
+            }).OrderBy(o => o.Descripcion);
+
+            var listado = selectQuery
+                .Skip((parameters.PageIndex - 1) * parameters.ItemsPerPage)
+                .Take(parameters.ItemsPerPage)
+                .ToList();
+
+            var totalElements = selectQuery.Count();
+            var totalpages = totalElements / parameters.ItemsPerPage;
+
+            transfer.Data = listado;
+            transfer.Pagination.TotalPages = totalpages + ((totalElements % parameters.ItemsPerPage) > 0 ? 1 : 0);
+            transfer.Pagination.TotalRecords = totalElements; //Total de elementos segun filtro
+            transfer.Pagination.TotalDisplayRecords = listado.Count; //Total de elementos segun pagina
+            return Json(transfer);
+        }
     }
 }

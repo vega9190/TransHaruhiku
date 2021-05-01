@@ -8,6 +8,7 @@ namespace TransHaruhiko.Models.Enum
         Internet,
         Varios,
         AlquilerOficina,
-        AlquilerInterno
+        AlquilerInterno,
+        TelefonoMovil
     }
 }

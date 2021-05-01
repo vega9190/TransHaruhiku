@@ -1,0 +1,84 @@
+﻿@using TransHaruhiko.CustomHelpers
+@using TransHaruhiko.Globalization.Views.Haber
+@{
+    ViewBag.Title = ListStrings.Tittle;
+    ViewBag.TitlePage = ListStrings.TittleListado;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section JavaScript{
+    <script type="text/javascript" src="@Url.Content("~/Globalization/Haberes/List")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Globalization/Common/Common")"></script>
+    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.iframe-transport.js")"></script>
+    <script type="text/javascript" src="@Url.ContentCache("Scripts/utils/jquery.xdr-transport.js")"></script>
+    <script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Haberes/List.js")"></script>
+    @*<script type="text/javascript" src="@Url.ContentNoCache("~/Scripts/pages/Alcance/List - Copia.js")"></script>*@
+    <script type="text/javascript"> var RolUsuario = "@Session["Rol"]" </script>
+}
+
+<div id="page-haber-listar">
+    <div class="box-fieldset">
+        <span class="field-title">@ListStrings.TextFiltros</span>
+        <div class="clearfix">
+            <div class="grid-100 mobile-grid-100">
+                <div class="grid-50">
+                    <ul class="box-form">
+                        <li>
+                            <label for="cbx-empresa" class="grid-20 mobile-grid-100">@ListStrings.LabelEmpresa </label>
+                            <select id="cbx-empresa" class="grid-55 mobile-grid-100"></select>
+                        </li>
+                        <li>
+                            <label for="cbx-tipo-haber" class="grid-20 mobile-grid-100">@ListStrings.LabelTipoHaber</label>
+                            <select id="cbx-tipo-haber" class="grid-55 mobile-grid-100"></select>
+                        </li>
+                        <li>
+                            <label for="cbx-servicio-basico" class="grid-20 mobile-grid-100">@ListStrings.LabelServicioBasico</label>
+                            <select id="cbx-servicio-basico" class="grid-55 mobile-grid-100"></select>
+                        </li>
+                        <li>
+                            <label for="cbx-tipo-moneda" class="grid-20 mobile-grid-100">@ListStrings.LabelTipoMoneda</label>
+                            <select id="cbx-tipo-moneda" class="grid-55 mobile-grid-100"></select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid-50">
+                    <ul class="box-form">
+                        <li>
+                            <label for="txt-fecha-desde" class="grid-20 mobile-grid-100"> @ListStrings.LabelFechaDesde </label>
+                            <input id="txt-fecha-desde" class="datepicker grid-30 mobile-grid-100" type="text" />
+                        </li>
+                        <li>
+                            <label for="txt-fecha-hasta" class="grid-20 mobile-grid-100"> @ListStrings.LabelFechaHasta </label>
+                            <input id="txt-fecha-hasta" class="datepicker grid-30 mobile-grid-100" type="text" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="align-right">
+            <button id="btn-limpiar" class="button">@ListStrings.ButtonLimpiar</button>
+            <button id="btn-buscar" class="button">@ListStrings.ButtonBuscar</button>
+        </div>
+
+    </div>
+    <div class="box-fieldset">
+        <span class="field-title">@ListStrings.TextSeccionResultado</span>
+        @*@if (string.IsNullOrEmpty(Session["Rol"] as string))
+                {
+                <script> window.location.href = '@Url.Action("Logoff", "Login")'; </script>
+            }
+            else
+            {
+                if (!Session["Rol"].Equals("Lector"))
+                {
+                    <div class="box-buttons">
+                        <button id="btn-nuevo-alcance" class="button">@ListStrings.ButtonNuevo</button>
+                    </div>
+                }
+            }*@
+        <div class="box-buttons">
+            <button id="btn-crear" class="button">@ListStrings.ButtonNuevo</button>
+        </div>
+        <table id="tb-haberes" class="display"></table>
+    </div>
+</div>

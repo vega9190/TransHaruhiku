@@ -53,7 +53,7 @@
         contentType: "application/json"
     });
     /********************************/
-    $('input.datepicker').compDatepicker();
+    $('.datepicker').compDatepicker();
     /********************************/
     $('.ui-datepicker-trigger').attr("src", imgCal);
     /********************************/

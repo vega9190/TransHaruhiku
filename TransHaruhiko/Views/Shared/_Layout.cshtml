@@ -96,7 +96,7 @@
                 {
                     if (Session["Empresas"].ToString() == "2")
                     {
-                        <img src="@Url.ContentNoCache("images/logo-mt.jpeg")" alt="Transporte Haruhiko" title="Transporte Haruhiko" />
+                        <img src="@Url.ContentNoCache("images/logo-mt.jpeg")" alt="Maxi Trader" title="Maxi Trader" />
                     }
                     else
                     {
@@ -120,7 +120,19 @@
                     if (Session["Rol"].Equals("Administrador"))
                     {
                         @*<li><a href="@Url.Action("List", "LogRegla")">Log Reglas</a></li>
-                        <li><a href="@Url.Action("Index", "ParametroConfiguracion")">Parametros Configuración</a></li>*@
+                <li><a href="@Url.Action("Index", "ParametroConfiguracion")">Parametros Configuración</a></li>*@
+                    }
+                }
+
+                @if (string.IsNullOrEmpty(Session["Empresas"] as string))
+                {
+                    <script> window.location.href = '@Url.Action("Logoff", "Login")'; </script>
+                }
+                else
+                {
+                    if (Session["Empresas"].ToString().Contains("2"))
+                    {
+                    <li><a href="@Url.Action("List", "Haber")">Haberes</a></li>
                     }
                 }
             </ul>

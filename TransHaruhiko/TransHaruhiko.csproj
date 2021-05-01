@@ -146,6 +146,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ApplicationErrorController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\HaberController.cs" />
     <Compile Include="Controllers\PolizaController.cs" />
     <Compile Include="Controllers\FicheroController.cs" />
     <Compile Include="Controllers\GlobalizationController.cs" />
@@ -180,6 +181,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Scripts\Haberes\ListStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Globalization\Scripts\Polizas\ListStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -242,6 +248,16 @@
       <DependentUpon>CreateStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Globalization\Views\Cliente\ListStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Views\Haber\CreateStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\Views\Haber\ListStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ListStrings.resx</DependentUpon>
@@ -332,6 +348,8 @@
     <Compile Include="Models\ViewModel\SimpleListViewModel.cs" />
     <Compile Include="Parameters\Clientes\SaveParameters.cs" />
     <Compile Include="Parameters\Clientes\SearchParameters.cs" />
+    <Compile Include="Parameters\Haberes\SaveParameters.cs" />
+    <Compile Include="Parameters\Haberes\SearchParameters.cs" />
     <Compile Include="Parameters\Polizas\SaveParameters.cs" />
     <Compile Include="Parameters\Polizas\SearchDetalleParameters.cs" />
     <Compile Include="Parameters\Polizas\SearchParameters.cs" />
@@ -387,6 +405,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\pages\Clientes\List.js" />
+    <Content Include="Scripts\pages\Haberes\Crear.js" />
+    <Content Include="Scripts\pages\Haberes\Editar.js" />
+    <Content Include="Scripts\pages\Haberes\List.js" />
     <Content Include="Scripts\pages\Polizas\List.js" />
     <Content Include="Scripts\pages\Pedidos\Crear.js" />
     <Content Include="Scripts\pages\Pedidos\Editar.js" />
@@ -429,6 +450,10 @@
     <EmbeddedResource Include="Globalization\Scripts\Common\CommonStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CommonStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Scripts\Haberes\ListStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Scripts\Polizas\ListStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -479,6 +504,14 @@
       <LastGenOutput>CreateStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Globalization\Views\Cliente\ListStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Views\Haber\CreateStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Globalization\Views\Haber\ListStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -579,6 +612,8 @@
     <Content Include="Views\Pedido\PopUpCobro.cshtml" />
     <Content Include="Views\Poliza\List.cshtml" />
     <Content Include="Views\Poliza\PopUpCrear.cshtml" />
+    <Content Include="Views\Haber\List.cshtml" />
+    <Content Include="Views\Haber\PopUpCrear.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
