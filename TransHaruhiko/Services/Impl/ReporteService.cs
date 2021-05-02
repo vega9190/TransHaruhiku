@@ -73,16 +73,16 @@ namespace TransHaruhiko.Services.Impl
                     Fecha = ingreso.Fecha
                 });
             }
-            var cabecera = $"Informe del {fechaDesdeTransformada.Day} de {fechaDesdeTransformada.ToString("MMMM")} del {fechaDesdeTransformada.Year} al {fechaHastaTransformada.Day} de {fechaHastaTransformada.ToString("MMMM")} del {fechaHastaTransformada.Year}";
-            var parametros = new ReportParameter[1];
-            parametros[0] = new ReportParameter("Cabecera", cabecera);
-            var memory =  new MemoryStream(ReportesResources.ServicioBasicoMaxT);
+            //var cabecera = $"Informe del {fechaDesdeTransformada.Day} de {fechaDesdeTransformada.ToString("MMMM")} del {fechaDesdeTransformada.Year} al {fechaHastaTransformada.Day} de {fechaHastaTransformada.ToString("MMMM")} del {fechaHastaTransformada.Year}";
+            //var parametros = new ReportParameter[1];
+            //parametros[0] = new ReportParameter("Cabecera", cabecera);
+            var memory =  new MemoryStream(ReportesResources.ServiciosBasicosMaxT);
             localReport.LoadReportDefinition(memory);
             localReport.DataSources.Clear();
             ////Agregar nuevo ReportDataSource con el nombre y lista correspondiente.
             localReport.DataSources.Add(new ReportDataSource("Egresos", datosEgresos));
             localReport.DataSources.Add(new ReportDataSource("Ingresos", datosIngresos));
-            localReport.SetParameters(parametros);
+            //localReport.SetParameters(parametros);
             return localReport;
         }
         private LocalReport GetReporteRecibiConforme(int idPedido)

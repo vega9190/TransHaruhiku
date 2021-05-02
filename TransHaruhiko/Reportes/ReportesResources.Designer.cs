@@ -103,9 +103,9 @@ namespace TransHaruhiko.Reportes {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
-        public static byte[] ServicioBasicoMaxT {
+        public static byte[] ServiciosBasicosMaxT {
             get {
-                object obj = ResourceManager.GetObject("ServicioBasicoMaxT", resourceCulture);
+                object obj = ResourceManager.GetObject("ServiciosBasicosMaxT", resourceCulture);
                 return ((byte[])(obj));
             }
         }
