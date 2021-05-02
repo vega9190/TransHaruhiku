@@ -129,6 +129,9 @@
   <data name="ErrorNoPedido" xml:space="preserve">
     <value>No existe el pedido.</value>
   </data>
+  <data name="ErrorNoRCNoPolizas" xml:space="preserve">
+    <value>Antes de subir el archivo asegúrese de haber registrado las pólizas del pedido.</value>
+  </data>
   <data name="ErrorSubirFichero" xml:space="preserve">
     <value>No se puede subir el fichero.</value>
   </data>

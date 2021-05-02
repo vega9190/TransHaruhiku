@@ -68,6 +68,11 @@ namespace TransHaruhiko.Controllers
             if (res.HasWarnings)
                 transfer.Warnings.AddRange(res.Warnings);
 
+            if(transfer.HasErrors || transfer.HasWarnings)
+            {
+                return Json(transfer);
+            }
+
             var fichero = _ficherosService.Get(parameters.IdPedido.Value, parameters.IdTipo.Value);
             var cambiarEstado = _pedidosService.CambiarEstado(pedidoId, int.Parse(user.Name));
 

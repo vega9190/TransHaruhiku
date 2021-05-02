@@ -155,6 +155,15 @@ namespace TransHaruhiko.Services.Impl
             }
             else
             {
+                if(parameters.IdTipo == (int)TipoFicheroEnum.RecibiConforme)
+                {
+                    if (!pedido.Polizas.Any())
+                    {
+                        result.Errors.Add(PedidoStrings.ErrorNoRCNoPolizas);
+                        return result;
+                    }
+                }
+
                 var rutaArchivo = FileHelper.GetPath(pedido.Id, parameters.IdTipo.Value, extension);
                 var ficheroActual = _ficherosService.Get(parameters.IdPedido.Value, parameters.IdTipo.Value);
                 if (ficheroActual != null)
