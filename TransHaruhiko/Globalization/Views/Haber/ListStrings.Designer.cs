@@ -79,6 +79,15 @@ namespace TransHaruhiko.Globalization.Views.Haber {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Informe Servicios Básicos.
+        /// </summary>
+        public static string ButtonInformeServicios {
+            get {
+                return ResourceManager.GetString("ButtonInformeServicios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Limpiar.
         /// </summary>
         public static string ButtonLimpiar {
@@ -210,6 +219,15 @@ namespace TransHaruhiko.Globalization.Views.Haber {
         public static string TittleListado {
             get {
                 return ResourceManager.GetString("TittleListado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Descargar Informe de Servicios Básicos.
+        /// </summary>
+        public static string TittlePopUpInforme {
+            get {
+                return ResourceManager.GetString("TittlePopUpInforme", resourceCulture);
             }
         }
     }

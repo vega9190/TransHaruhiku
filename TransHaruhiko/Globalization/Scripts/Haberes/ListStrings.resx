@@ -177,6 +177,9 @@
   <data name="TittlePopUp" xml:space="preserve">
     <value>Gestión de Haberes</value>
   </data>
+  <data name="TittlePopUpInforme" xml:space="preserve">
+    <value>Informe de Servicios Básicos</value>
+  </data>
   <data name="TituloPopUp" xml:space="preserve">
     <value>Crear Haber</value>
   </data>

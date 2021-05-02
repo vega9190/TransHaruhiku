@@ -1,0 +1,27 @@
+﻿@using TransHaruhiko.CustomHelpers
+@using TransHaruhiko.Globalization.Views.Haber
+
+@{
+    Layout = null;
+}
+
+<div id="popup-haber-crear" class="grid-container">
+    <h2 align="center"> @ListStrings.TittlePopUpInforme </h2>
+    <div class="grid-100 mobile-grid-100">
+        <div class="grid-80">
+            <ul class="box-form">
+                <li>
+                    <label for="txt-fecha-desde-informe" class="grid-40 mobile-grid-100"> @ListStrings.LabelFechaDesde </label>
+                    <input id="txt-fecha-desde-informe" class="datepicker grid-40 mobile-grid-100" type="text" />
+                </li>
+                <li>
+                    <label for="txt-fecha-hasta-informe" class="grid-40 mobile-grid-100"> @ListStrings.LabelFechaHasta </label>
+                    <input id="txt-fecha-hasta-informe" class="datepicker grid-40 mobile-grid-100" type="text" />
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="@Url.Content("~/Globalization/Haberes/List")"></script>
+

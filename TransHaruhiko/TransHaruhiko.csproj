@@ -302,6 +302,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LayoutStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbModels\Dto\Reportes\HaberDto.cs" />
     <Compile Include="Models\DbModels\Dto\Reportes\PlanillaDespachoDto.cs" />
     <Compile Include="Models\DbModels\Dto\Reportes\RecibiConformeDto.cs" />
     <Compile Include="Models\DbModels\Entidades\Contabilidad\Haber.cs" />
@@ -348,6 +349,7 @@
     <Compile Include="Models\ViewModel\SimpleListViewModel.cs" />
     <Compile Include="Parameters\Clientes\SaveParameters.cs" />
     <Compile Include="Parameters\Clientes\SearchParameters.cs" />
+    <Compile Include="Parameters\Haberes\InformeServicioBasicoParameters.cs" />
     <Compile Include="Parameters\Haberes\SaveParameters.cs" />
     <Compile Include="Parameters\Haberes\SearchParameters.cs" />
     <Compile Include="Parameters\Polizas\SaveParameters.cs" />
@@ -558,6 +560,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>ReportesResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Rdlc\ServicioBasicoMaxT.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
@@ -614,6 +617,7 @@
     <Content Include="Views\Haber\List.cshtml" />
     <Content Include="Views\Haber\PopUpCrear.cshtml" />
     <Content Include="Views\Haber\PopUpEditar.cshtml" />
+    <Content Include="Views\Haber\PopUpInformeServicioBasico.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

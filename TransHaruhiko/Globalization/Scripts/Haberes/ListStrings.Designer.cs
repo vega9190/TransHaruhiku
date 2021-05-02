@@ -241,6 +241,15 @@ namespace TransHaruhiko.Globalization.Scripts.Haberes {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Informe de Servicios Básicos.
+        /// </summary>
+        public static string TittlePopUpInforme {
+            get {
+                return ResourceManager.GetString("TittlePopUpInforme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Crear Haber.
         /// </summary>
         public static string TituloPopUp {

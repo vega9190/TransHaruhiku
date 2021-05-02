@@ -4,6 +4,7 @@ $(document).ready(function () {
     $('#btn-buscar').button();
     $('#btn-limpiar').button();
     $('#btn-crear').button();
+    $('#btn-informe-servicios').button();
 
     $('#btn-limpiar').click(function () {
 
@@ -21,6 +22,9 @@ $(document).ready(function () {
 
     $('#btn-crear').click(function () {
         PopUpCrear();
+    });
+    $('#btn-informe-servicios').click(function () {
+        PopUpInformeServicios();
     });
     ///// Combos /////
     $('#cbx-empresa').combobox(DefaultCombobox({
@@ -489,6 +493,67 @@ function PopUpEditar(idHaber) {
             });
     });
 }
+
+/////////////////// PopUp Informes /////////////////////////
+function PopUpInformeServicios() {
+    //$.blockUI({ message: null });
+    var popup = null;
+    var buttons = {};
+    /***************************************************************************/
+    buttons[Globalize.localize('Guardar')] = function () {
+        var params = {};
+
+        params.FechaDesde = $('#txt-fecha-desde-informe').val();;
+        params.FechaHasta = $('#txt-fecha-hasta-informe').val();
+        
+        var warnings = new Array();
+
+        
+        if (isEmpty(params.FechaDesde) || isEmpty(params.FechaHasta)) {
+            warnings.push(Globalize.localize('ErrorNoFecha'));
+        } else {
+            if ($('#txt-fecha-desde-informe').datepicker('getDate') > $('#txt-fecha-hasta-informe').datepicker('getDate')) {
+                warnings.push(Globalize.localize('ErrorFechaIncoherente'));
+            }
+        }
+
+
+        if (warnings.length > 0) {
+            showCustomErrors({
+                title: Globalize.localize('TextInformacion'),
+                warnings: warnings
+            });
+            return false;
+        } else {
+            var desde = convertDateClientToServer($('#txt-fecha-desde-informe').datepicker('getDate'));
+            var hasta = convertDateClientToServer($('#txt-fecha-hasta-informe').datepicker('getDate'));
+            gotoController('GenerarInformeServicioBasico/' + desde + '/' + hasta);
+        }
+
+    };
+    buttons[Globalize.localize('Cerrar')] = function () {
+        popup.dialog('close');
+    };
+    /***************************************************************************/
+    showPopupPage({
+        title: Globalize.localize('TittlePopUpInforme'),
+        url: SiteUrl + 'Haber/PopUpInformeServicioBasico',
+        open: function (event, ui) {
+            popup = $(this);
+            //$.unblockUI();
+        },
+        buttons: buttons,
+        heigth: 500,
+        width: 500
+    }, false, function () {
+        $('input.datepicker').compDatepicker();
+        /********************************/
+        $('.ui-datepicker-trigger').attr("src", imgCal);
+        /********************************/
+        $('.box-datepicker').removeClass("small");
+    });
+}
+
 function ObtenerEmpresaPorDefecto() {
     $.blockUI();
     $.ajax({

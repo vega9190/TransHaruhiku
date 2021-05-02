@@ -13,10 +13,12 @@ namespace TransHaruhiko.Controllers
     public class HaberController : Controller
     {
         private readonly IHaberesService _haberesService;
+        private readonly IReportesService _reportesService;
 
-        public HaberController(IHaberesService haberesService)
+        public HaberController(IHaberesService haberesService, IReportesService reportesService)
         {
             _haberesService = haberesService;
+            _reportesService = reportesService;
         }
         public ActionResult List()
         {
@@ -189,6 +191,19 @@ namespace TransHaruhiko.Controllers
         public ActionResult PopUpEditar()
         {
             return View();
+        }
+        public ActionResult PopUpInformeServicioBasico()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Route("GenerarInformeServicioBasico/{fechaDesde}/{fechaHasta}")]
+        public ActionResult GenerarInformeServicioBasico(long fechaDesde, long fechaHasta)
+        {
+
+            _reportesService.GenerarInformeServicioBasico(fechaDesde, fechaHasta, Response);
+            return null;
         }
     }
 }

@@ -11,6 +11,7 @@ using TransHaruhiko.Models.DbModels.Dto.Reportes;
 using TransHaruhiko.Models.DbModels.Entidades;
 using TransHaruhiko.Reportes.Specification;
 using TransHaruhiko.Models.Enum;
+using TransHaruhiko.Parameters.Haberes;
 
 namespace TransHaruhiko.Services.Impl
 {
@@ -32,6 +33,57 @@ namespace TransHaruhiko.Services.Impl
         {
             var localReport = GetReportePlanillaDespacho(idPedido);
             ProcesadorReporte.GenerarWord(localReport, "PlanillaDespacho", response);
+        }
+        public void GenerarInformeServicioBasico(long fechaDesde, long fechaHasta, HttpResponseBase response)
+        {
+            var localReport = GetInformeServicioBasico(fechaDesde, fechaHasta);
+            ProcesadorReporte.GenerarWord(localReport, "ServiciosBasicos", response);
+        }
+        private LocalReport GetInformeServicioBasico(long fechaDesde, long fechaHasta)
+        {
+            var localReport = new LocalReport();
+            var fechaDesdeTransformada = ConvertDateClientToServer(fechaDesde);
+            var fechaHastaTransformada = ConvertDateClientToServer(fechaHasta);
+            var haberes = _dbContext.Haberes.Where(a => a.Fecha >= fechaDesdeTransformada && a.Fecha <= fechaHastaTransformada).ToList();
+
+            var egresos = haberes.Where(a => a.TipoHaberId == (int)TipoHaberEnum.Egresos).OrderBy(a=> a.Fecha).ToList();
+            var ingresos = haberes.Where(a => a.TipoHaberId == (int)TipoHaberEnum.Ingresos).OrderBy(a => a.Fecha).ToList();
+            var datosEgresos = new List<HaberDto>();
+            var datosIngresos = new List<HaberDto>();
+            foreach (var egreso in egresos)
+            {
+                datosEgresos.Add(new HaberDto
+                {
+                    ServicioBasico = egreso.ServicioBasico.Nombre,
+                    Moneda = egreso.TipoMoneda.Abreviacion,
+                    Monto = egreso.Monto,
+                    Observacion = egreso.Observacion,
+                    Fecha = egreso.Fecha
+                });
+            }
+
+            foreach (var ingreso in ingresos)
+            {
+                datosIngresos.Add(new HaberDto
+                {
+                    ServicioBasico = ingreso.ServicioBasico.Nombre,
+                    Moneda = ingreso.TipoMoneda.Abreviacion,
+                    Monto = ingreso.Monto,
+                    Observacion = ingreso.Observacion,
+                    Fecha = ingreso.Fecha
+                });
+            }
+            var cabecera = $"Informe del {fechaDesdeTransformada.Day} de {fechaDesdeTransformada.ToString("MMMM")} del {fechaDesdeTransformada.Year} al {fechaHastaTransformada.Day} de {fechaHastaTransformada.ToString("MMMM")} del {fechaHastaTransformada.Year}";
+            var parametros = new ReportParameter[1];
+            parametros[0] = new ReportParameter("Cabecera", cabecera);
+            var memory =  new MemoryStream(ReportesResources.ServicioBasicoMaxT);
+            localReport.LoadReportDefinition(memory);
+            localReport.DataSources.Clear();
+            ////Agregar nuevo ReportDataSource con el nombre y lista correspondiente.
+            localReport.DataSources.Add(new ReportDataSource("Egresos", datosEgresos));
+            localReport.DataSources.Add(new ReportDataSource("Ingresos", datosIngresos));
+            localReport.SetParameters(parametros);
+            return localReport;
         }
         private LocalReport GetReporteRecibiConforme(int idPedido)
         {
@@ -134,6 +186,13 @@ namespace TransHaruhiko.Services.Impl
 
             e.DataSources.Clear();
             e.DataSources.Add(new ReportDataSource("DetalleContenedor", detallesContenedores));
+        }
+
+        protected DateTime ConvertDateClientToServer(long ms)
+        {
+            var tempFecha = new DateTime(1970, 1, 1, 0, 0, 0);
+            tempFecha = tempFecha.AddMilliseconds(Convert.ToDouble(ms));
+            return tempFecha;
         }
     }
 }
