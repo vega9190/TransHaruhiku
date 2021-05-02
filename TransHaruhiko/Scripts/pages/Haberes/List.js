@@ -436,11 +436,9 @@ function PopUpEditar(idHaber) {
             $('.box-datepicker').removeClass("small");
 
             $('#cbx-tipo-moneda-crear').combobox(DefaultCombobox({
-                url: SiteUrl + 'Parametrico/SimpleSearchTipoMoneda',
-                toolbar: {
-                    reset: function () { }
-                }
+                url: SiteUrl + 'Parametrico/SimpleSearchTipoMoneda'
             }));
+            $('#cbx-tipo-moneda-crear').combobox('disable');
 
             $('#cbx-tipo-haber-crear').combobox(DefaultCombobox({
                 url: SiteUrl + 'Parametrico/SimpleSearchTipoHaber',
@@ -500,7 +498,7 @@ function PopUpInformeServicios() {
     var popup = null;
     var buttons = {};
     /***************************************************************************/
-    buttons[Globalize.localize('Guardar')] = function () {
+    buttons["Generar"] = function () {
         var params = {};
 
         params.FechaDesde = $('#txt-fecha-desde-informe').val();;
@@ -510,7 +508,7 @@ function PopUpInformeServicios() {
 
         
         if (isEmpty(params.FechaDesde) || isEmpty(params.FechaHasta)) {
-            warnings.push(Globalize.localize('ErrorNoFecha'));
+            warnings.push(Globalize.localize('ErrorSinFechas'));
         } else {
             if ($('#txt-fecha-desde-informe').datepicker('getDate') > $('#txt-fecha-hasta-informe').datepicker('getDate')) {
                 warnings.push(Globalize.localize('ErrorFechaIncoherente'));

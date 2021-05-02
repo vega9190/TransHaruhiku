@@ -44,7 +44,7 @@ namespace TransHaruhiko.Services.Impl
             var localReport = new LocalReport();
             var fechaDesdeTransformada = ConvertDateClientToServer(fechaDesde);
             var fechaHastaTransformada = ConvertDateClientToServer(fechaHasta);
-            var haberes = _dbContext.Haberes.Where(a => a.Fecha >= fechaDesdeTransformada && a.Fecha <= fechaHastaTransformada).ToList();
+            var haberes = _dbContext.Haberes.Where(a => a.Fecha >= fechaDesdeTransformada && a.Fecha <= fechaHastaTransformada && a.EmpresaId == (int)EmpresaEnum.MaxiTrader).ToList();
 
             var egresos = haberes.Where(a => a.TipoHaberId == (int)TipoHaberEnum.Egresos).OrderBy(a=> a.Fecha).ToList();
             var ingresos = haberes.Where(a => a.TipoHaberId == (int)TipoHaberEnum.Ingresos).OrderBy(a => a.Fecha).ToList();
@@ -73,15 +73,20 @@ namespace TransHaruhiko.Services.Impl
                     Fecha = ingreso.Fecha
                 });
             }
-            //var cabecera = $"Informe del {fechaDesdeTransformada.Day} de {fechaDesdeTransformada.ToString("MMMM")} del {fechaDesdeTransformada.Year} al {fechaHastaTransformada.Day} de {fechaHastaTransformada.ToString("MMMM")} del {fechaHastaTransformada.Year}";
-            //var parametros = new ReportParameter[1];
-            //parametros[0] = new ReportParameter("Cabecera", cabecera);
+            var cabecera = $"INFORME DEL {fechaDesdeTransformada.Day} DE {fechaDesdeTransformada.ToString("MMMM").ToUpper()} DEL {fechaDesdeTransformada.Year} AL {fechaHastaTransformada.Day} DE {fechaHastaTransformada.ToString("MMMM").ToUpper()} DEL {fechaHastaTransformada.Year}";
+            var datosPedido = new List<RecibiConformeDto>
+            {
+                new RecibiConformeDto {
+                    NombreCompleto = cabecera
+                }
+            };
             var memory =  new MemoryStream(ReportesResources.ServiciosBasicosMaxT);
             localReport.LoadReportDefinition(memory);
             localReport.DataSources.Clear();
             ////Agregar nuevo ReportDataSource con el nombre y lista correspondiente.
             localReport.DataSources.Add(new ReportDataSource("Egresos", datosEgresos));
             localReport.DataSources.Add(new ReportDataSource("Ingresos", datosIngresos));
+            localReport.DataSources.Add(new ReportDataSource("DatosPedido", datosPedido));
             //localReport.SetParameters(parametros);
             return localReport;
         }

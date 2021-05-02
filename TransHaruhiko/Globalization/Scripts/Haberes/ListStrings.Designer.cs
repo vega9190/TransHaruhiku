@@ -205,6 +205,15 @@ namespace TransHaruhiko.Globalization.Scripts.Haberes {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Debe ingresar ambas fechas..
+        /// </summary>
+        public static string ErrorSinFechas {
+            get {
+                return ResourceManager.GetString("ErrorSinFechas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Está a punto de eliminar el registro, ¿Desea continuar?.
         /// </summary>
         public static string TextConfirmarEliminar {

@@ -8,12 +8,10 @@ $('input.datepicker').compDatepicker();
     $('.box-datepicker').removeClass("small");
 
 $('#cbx-tipo-moneda-crear').combobox(DefaultCombobox({
-    url: SiteUrl + 'Parametrico/SimpleSearchTipoMoneda',
-    toolbar: {
-        reset: function () { }
-    }
+    url: SiteUrl + 'Parametrico/SimpleSearchTipoMoneda'
 }));
 
+$('#cbx-tipo-moneda-crear').combobox('disable');
 $('#cbx-tipo-haber-crear').combobox(DefaultCombobox({
     url: SiteUrl + 'Parametrico/SimpleSearchTipoHaber',
     toolbar: {
