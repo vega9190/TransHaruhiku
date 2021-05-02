@@ -1,0 +1,52 @@
+﻿@using TransHaruhiko.CustomHelpers
+@using TransHaruhiko.Globalization.Views.Haber
+
+@{
+    Layout = null;
+}
+
+<div id="popup-haber-crear" class="grid-container">
+    <h2 align="center"> @CreateStrings.TitleEditar </h2>
+    
+    <div class="grid-100 mobile-grid-100">
+        <div class="grid-50">
+            <ul class="box-form">
+                <li>
+                    <label for="cbx-empresa-crear" class="grid-35 mobile-grid-100">@CreateStrings.LabelEmpresa </label>
+                    <select id="cbx-empresa-crear" class="grid-50 mobile-grid-100"></select>
+                </li>
+                <li>
+                    <label for="cbx-tipo-haber-crear" class="grid-35 mobile-grid-100">@CreateStrings.LabelTipoHaber </label>
+                    <select id="cbx-tipo-haber-crear" class="grid-50 mobile-grid-100"></select>
+                </li>
+                <li>
+                    <label for="cbx-servicio-basico-crear" class="grid-35 mobile-grid-100">@CreateStrings.LabelServicioBasico </label>
+                    <select id="cbx-servicio-basico-crear" class="grid-50 mobile-grid-100"></select>
+                </li>
+                <li>
+                    <label for="txt-observacion-crear" class="grid-35 mobile-grid-100">@CreateStrings.LabelObservacion </label>
+                    <textarea id="txt-observacion-crear" class="grid-60 mobile-grid-100" maxlength="500"> </textarea>
+                </li>
+            </ul>
+        </div>
+        <div class="grid-50">
+            <ul class="box-form">
+                <li>
+                    <label for="txt-monto-crear" class="grid-30 mobile-grid-100">@CreateStrings.LabelMonto </label>
+                    <input id="txt-monto-crear" class="grid-50 mobile-grid-100" type="text" />
+                </li>
+                <li>
+                    <label for="cbx-tipo-moneda-crear" class="grid-30 mobile-grid-100">@CreateStrings.LabelTipoMoneda </label>
+                    <select id="cbx-tipo-moneda-crear" class="grid-50 mobile-grid-100"></select>
+                </li>
+                <li>
+                    <label for="txt-fecha-crear" class="grid-30 mobile-grid-100"> @CreateStrings.LabelFecha </label>
+                    <input id="txt-fecha-crear" class="datepicker grid-50 mobile-grid-100" type="text" />
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="@Url.Content("~/Globalization/Haberes/List")"></script>
+

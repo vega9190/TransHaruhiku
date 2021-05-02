@@ -165,6 +165,9 @@
   <data name="ErrorNoTipoMoneda" xml:space="preserve">
     <value>Seleccione un tipo de moneda.</value>
   </data>
+  <data name="TextConfirmarEliminar" xml:space="preserve">
+    <value>Está a punto de eliminar el registro, ¿Desea continuar?</value>
+  </data>
   <data name="TextEditar" xml:space="preserve">
     <value>Editar</value>
   </data>
@@ -176,5 +179,8 @@
   </data>
   <data name="TituloPopUp" xml:space="preserve">
     <value>Crear Haber</value>
+  </data>
+  <data name="TituloPopUpEditar" xml:space="preserve">
+    <value>Editar Haber</value>
   </data>
 </root>

@@ -406,7 +406,6 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\pages\Clientes\List.js" />
     <Content Include="Scripts\pages\Haberes\Crear.js" />
-    <Content Include="Scripts\pages\Haberes\Editar.js" />
     <Content Include="Scripts\pages\Haberes\List.js" />
     <Content Include="Scripts\pages\Polizas\List.js" />
     <Content Include="Scripts\pages\Pedidos\Crear.js" />
@@ -614,6 +613,7 @@
     <Content Include="Views\Poliza\PopUpCrear.cshtml" />
     <Content Include="Views\Haber\List.cshtml" />
     <Content Include="Views\Haber\PopUpCrear.cshtml" />
+    <Content Include="Views\Haber\PopUpEditar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

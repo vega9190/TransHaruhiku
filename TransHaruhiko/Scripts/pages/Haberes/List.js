@@ -102,8 +102,7 @@ $(document).ready(function () {
         fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
 
             $('.btn-editar', nRow).click(function () {
-                data = $(nRow).data('data');
-                
+                PopUpEditar($(nRow).data('data').Haber.Id);
             });
 
             $('.btn-eliminar', nRow).click(function () {
@@ -118,8 +117,8 @@ $(document).ready(function () {
                     buttonFunctionYes: function () {
                         $.blockUI({ message: null });
                         $.ajax({
-                            url: SiteUrl + 'Observacion/Eliminar',
-                            data: $.toJSON({ idObservacion: data.Observacion.Id }),
+                            url: SiteUrl + 'Haber/Eliminar',
+                            data: $.toJSON({ idHaber: data.Haber.Id }),
                             success: function (data) {
                                 popup.dialog('close');
                                 if (data.HasErrors) {
@@ -134,7 +133,7 @@ $(document).ready(function () {
                                         showMessage(Globalize
                                             .localize('MessageOperacionExitosamente'),
                                             true);
-                                        tablaObservaciones.table('update');
+                                        tabla.table('update');
                                     }
                                 }
                                 $.unblockUI();
@@ -335,7 +334,161 @@ function PopUpCrear() {
     });
 }
 
+/////////////////// PopUp Editar /////////////////////////
+function PopUpEditar(idHaber) {
+    //$.blockUI({ message: null });
+    var popup = null;
+    var buttons = {};
+    /***************************************************************************/
+    buttons[Globalize.localize('Guardar')] = function () {
+        var params = {};
 
+        params.IdHaber = idHaber;
+        params.IdEmpresa = $('#cbx-empresa-crear').combobox('getId');
+        params.IdTipoHaber = $('#cbx-tipo-haber-crear').combobox('getId');
+        params.IdServicioBasico = $('#cbx-servicio-basico-crear').combobox('getId');
+        params.IdTipoMoneda = $('#cbx-tipo-moneda-crear').combobox('getId');
+        params.Fecha = $('#txt-fecha-crear').val();
+        params.Monto = $('#txt-monto-crear').val();
+        params.Observacion = $('#txt-observacion-crear').val().trim();
+
+        var warnings = new Array();
+
+        if (isNull(params.IdTipoHaber))
+            warnings.push(Globalize.localize('ErrorNoTipoHaber'));
+
+        if (isNull(params.IdServicioBasico))
+            warnings.push(Globalize.localize('ErrorNoServicioBasico'));
+
+        if (isNull(params.IdTipoMoneda))
+            warnings.push(Globalize.localize('ErrorNoTipoMoneda'));
+
+        if (isEmpty(params.Monto))
+            warnings.push(Globalize.localize('ErrorNoMonto'));
+
+        if (isEmpty(params.Fecha)) {
+            warnings.push(Globalize.localize('ErrorNoFecha'));
+        } else {
+            var fechaActual = new Date();
+            if ($('#txt-fecha-crear').datepicker('getDate') > fechaActual)
+                warnings.push(Globalize.localize('ErrorFechaMayorHoy'));
+        }
+
+
+        if (warnings.length > 0) {
+            showCustomErrors({
+                title: Globalize.localize('TextInformacion'),
+                warnings: warnings
+            });
+            return false;
+        } else {
+            $.blockUI({ message: null });
+            $.ajax({
+                url: SiteUrl + 'Haber/Guardar',
+                data: $.toJSON(params),
+                success: function (data) {
+                    $.unblockUI();
+                    if (data.HasErrors) {
+                        showErrors(data.Errors);
+                    } else {
+                        if (data.HasWarnings) {
+                            showCustomErrors({
+                                title: Globalize.localize('TextInformacion'),
+                                warnings: data.Warnings
+                            });
+                        } else {
+                            showMessage(Globalize
+                                .localize('MessageOperacionExitosamente'),
+                                true);
+                            popup.dialog('close');
+                            $('#tb-haberes').table('update');
+                        }
+                    }
+                }
+            });
+        }
+
+    };
+    buttons[Globalize.localize('Cerrar')] = function () {
+        popup.dialog('close');
+    };
+    /***************************************************************************/
+    showPopupPage({
+        title: Globalize.localize('TituloPopUpEditar'),
+        url: SiteUrl + 'Haber/PopUpEditar',
+        open: function (event, ui) {
+            popup = $(this);
+            //$.unblockUI();
+        },
+        buttons: buttons,
+        heigth: 500,
+        width: 800
+    }, false, function () {
+            $('#txt-monto-crear').autoNumeric(AutoNumericDecimal);
+            $('input.datepicker').compDatepicker();
+            /********************************/
+            $('.ui-datepicker-trigger').attr("src", imgCal);
+            /********************************/
+            $('.box-datepicker').removeClass("small");
+
+            $('#cbx-tipo-moneda-crear').combobox(DefaultCombobox({
+                url: SiteUrl + 'Parametrico/SimpleSearchTipoMoneda',
+                toolbar: {
+                    reset: function () { }
+                }
+            }));
+
+            $('#cbx-tipo-haber-crear').combobox(DefaultCombobox({
+                url: SiteUrl + 'Parametrico/SimpleSearchTipoHaber',
+                toolbar: {
+                    reset: function () { }
+                }
+            }));
+
+            $('#cbx-servicio-basico-crear').combobox(DefaultCombobox({
+                url: SiteUrl + 'Parametrico/SimpleSearchServicioBasico',
+                toolbar: {
+                    reset: function () { }
+                }
+            }));
+            $('#cbx-empresa-crear').combobox(DefaultCombobox({
+                url: SiteUrl + 'Parametrico/SimpleSearchEmpresas'
+            }));
+
+            $('#cbx-empresa-crear').combobox('disableText');
+
+            $.ajax({
+                url: SiteUrl + 'Haber/Obtener',
+                data: $.toJSON({ idHaber: idHaber }),
+                success: function (res) {
+                    $.unblockUI();
+                    $('#txt-observacion-crear').val(res.Data.Haber.Observacion);
+                    $('#txt-monto-crear').val(res.Data.Haber.Monto);
+                    $('#txt-fecha-crear').val(res.Data.Haber.Fecha);
+
+                    $('#cbx-empresa-crear')
+                        .combobox('setId', res.Data.Haber.Empresa.Id)
+                        .combobox('setValue', res.Data.Haber.Empresa.Nombre)
+                        .combobox('setData', res.Data.Haber.Empresa);
+
+                    $('#cbx-tipo-haber-crear')
+                        .combobox('setId', res.Data.Haber.TipoHaber.Id)
+                        .combobox('setValue', res.Data.Haber.TipoHaber.Nombre)
+                        .combobox('setData', res.Data.Haber.TipoHaber);
+
+                    $('#cbx-servicio-basico-crear')
+                        .combobox('setId', res.Data.Haber.ServicioBasico.Id)
+                        .combobox('setValue', res.Data.Haber.ServicioBasico.Nombre)
+                        .combobox('setData', res.Data.Haber.ServicioBasico);
+
+                    $('#cbx-tipo-moneda-crear')
+                        .combobox('setId', res.Data.Haber.TipoMoneda.Id)
+                        .combobox('setValue', res.Data.Haber.TipoMoneda.Nombre)
+                        .combobox('setData', res.Data.Haber.TipoMoneda);
+                }
+            });
+    });
+}
 function ObtenerEmpresaPorDefecto() {
     $.blockUI();
     $.ajax({
@@ -349,7 +502,7 @@ function ObtenerEmpresaPorDefecto() {
 
             if (primeraCarga) {
                 primeraCarga = false;
-                $('#tb-pedidos').table('update');
+                $('#tb-haberes').table('update');
             }
         }
     });

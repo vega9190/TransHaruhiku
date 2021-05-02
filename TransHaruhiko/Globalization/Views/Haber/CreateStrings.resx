@@ -141,4 +141,7 @@
   <data name="TitleCrear" xml:space="preserve">
     <value>Añadir nuevo haber</value>
   </data>
+  <data name="TitleEditar" xml:space="preserve">
+    <value>Modificar un haber</value>
+  </data>
 </root>

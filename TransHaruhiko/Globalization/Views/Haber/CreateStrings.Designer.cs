@@ -131,5 +131,14 @@ namespace TransHaruhiko.Globalization.Views.Haber {
                 return ResourceManager.GetString("TitleCrear", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Modificar un haber.
+        /// </summary>
+        public static string TitleEditar {
+            get {
+                return ResourceManager.GetString("TitleEditar", resourceCulture);
+            }
+        }
     }
 }

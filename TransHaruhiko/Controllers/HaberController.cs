@@ -125,12 +125,12 @@ namespace TransHaruhiko.Controllers
             }
             transfer.Data = new
             {
-                haber = new
+                Haber = new
                 {
                     haber.Id,
                     haber.Observacion,
                     haber.Monto,
-                    haber.Fecha,
+                    Fecha = haber.Fecha.ToString("dd/MM/yyyy"),
                     TipoHaber = new
                     {
                         haber.TipoHaber.Id,
@@ -148,7 +148,7 @@ namespace TransHaruhiko.Controllers
                     },
                     Empresa = new
                     {
-                        haber.EmpresaId,
+                        haber.Empresa.Id,
                         haber.Empresa.Nombre
                     }
                 }
@@ -183,6 +183,10 @@ namespace TransHaruhiko.Controllers
         }
 
         public ActionResult PopUpCrear()
+        {
+            return View();
+        }
+        public ActionResult PopUpEditar()
         {
             return View();
         }

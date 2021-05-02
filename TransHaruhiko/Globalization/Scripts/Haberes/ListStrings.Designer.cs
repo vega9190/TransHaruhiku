@@ -205,6 +205,15 @@ namespace TransHaruhiko.Globalization.Scripts.Haberes {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Está a punto de eliminar el registro, ¿Desea continuar?.
+        /// </summary>
+        public static string TextConfirmarEliminar {
+            get {
+                return ResourceManager.GetString("TextConfirmarEliminar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Editar.
         /// </summary>
         public static string TextEditar {
@@ -237,6 +246,15 @@ namespace TransHaruhiko.Globalization.Scripts.Haberes {
         public static string TituloPopUp {
             get {
                 return ResourceManager.GetString("TituloPopUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Editar Haber.
+        /// </summary>
+        public static string TituloPopUpEditar {
+            get {
+                return ResourceManager.GetString("TituloPopUpEditar", resourceCulture);
             }
         }
     }

@@ -37,10 +37,8 @@ namespace TransHaruhiko.Services.Impl
                 haber.TipoMonedaId = parameters.IdTipoMoneda;
                 haber.ServicioBasicoId = parameters.IdServicioBasico;
                 haber.Fecha = parameters.Fecha;
-                if (!string.IsNullOrEmpty(parameters.Observacion))
-                    haber.Observacion = parameters.Observacion;
-                if (!string.IsNullOrEmpty(parameters.Monto))
-                    haber.Monto = decimal.Parse(parameters.Monto);
+                haber.Observacion = parameters.Observacion;
+                haber.Monto = decimal.Parse(parameters.Monto.Replace('.', ','));
             }
             else
             {
