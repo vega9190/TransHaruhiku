@@ -9,8 +9,10 @@ using TransHaruhiko.Globalization.Services.Pagos;
 using TransHaruhiko.Models.DbModels;
 using TransHaruhiko.Models.DbModels.Entidades;
 using TransHaruhiko.Models.Enum;
+using TransHaruhiko.Models.RestModel;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Parameters.Pagos;
+using TransHaruhiko.Parameters.TiposPagos;
 
 namespace TransHaruhiko.Services.Impl
 {
@@ -114,6 +116,22 @@ namespace TransHaruhiko.Services.Impl
             }
 
             return result;
+        }
+        public CommonRestModel GuardarTipoPago(SaveTipoParameters parameters)
+        {
+            var res = new CommonRestModel();
+
+            var tipoPago = new TipoPago
+            {
+                Nombre = parameters.Nombre,
+                Descripcion = parameters.Descripcion
+            };
+
+            _dbContext.TiposPagos.Add(tipoPago);
+            _dbContext.SaveChanges();
+            res.CodigoResultado = "0";
+            res.Mensaje = "Ok";
+            return res;
         }
     }
 }

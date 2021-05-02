@@ -22,15 +22,13 @@ namespace TransHaruhiko
                 .Where(t => t.Name.EndsWith("Service"))
                 .PropertiesAutowired();
 
-            // Registro Controladores
-            builder.RegisterControllers(typeof(MvcApplication).Assembly);
-
             // Registro de DbContext
             builder.RegisterType<TransHaruhikoDbContext>().AsSelf().InstancePerLifetimeScope();
-            
+            // Registro Controladores
+            builder.RegisterControllers(typeof(AutofacConfig).Assembly);
             // Registro de dependencias de autofac
-            var container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            Container = builder.Build();
+            //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }

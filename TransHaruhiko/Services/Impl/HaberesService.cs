@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TransHaruhiko.Models.DbModels;
 using TransHaruhiko.Models.DbModels.Entidades.Contabilidad;
+using TransHaruhiko.Models.RestModel;
 using TransHaruhiko.Models.TransferStruct;
 using TransHaruhiko.Parameters.Haberes;
 
@@ -76,6 +77,21 @@ namespace TransHaruhiko.Services.Impl
         {
             IQueryable<ServicioBasico> queriable = _dbContext.ServiciosBasicos;
             return queriable;
+        }
+        public CommonRestModel GuardarServicioBasico(string nombre)
+        {
+            var res = new CommonRestModel();
+
+            var servicioBasico = new ServicioBasico
+            {
+                Nombre = nombre
+            };
+
+            _dbContext.ServiciosBasicos.Add(servicioBasico);
+            _dbContext.SaveChanges();
+            res.CodigoResultado = "0";
+            res.Mensaje = "Ok";
+            return res;
         }
     }
 }

@@ -20,6 +20,7 @@ namespace TransHaruhiko.Models.DbModels
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<UsuarioEmpresa> UsuariosEmpresas { get; set; }
         public DbSet<Observacion> Observaciones { get; set; }
         public DbSet<Fichero> Ficheros { get; set; }
         public DbSet<TipoMime> TiposMimes { get; set; }
@@ -32,6 +33,7 @@ namespace TransHaruhiko.Models.DbModels
         public DbSet<Poliza> Polizas { get; set; }
         public DbSet<DetallePoliza> DetallePolizas { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
+        public DbSet<Rol> Roles { get; set; }
 
         //Contabilidad
         public DbSet<Haber> Haberes { get; set; }
