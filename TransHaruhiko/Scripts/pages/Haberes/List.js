@@ -526,6 +526,7 @@ function PopUpInformeServicios() {
             var desde = convertDateClientToServer($('#txt-fecha-desde-informe').datepicker('getDate'));
             var hasta = convertDateClientToServer($('#txt-fecha-hasta-informe').datepicker('getDate'));
             gotoController('GenerarInformeServicioBasico/' + desde + '/' + hasta);
+            popup.dialog('close');
         }
 
     };

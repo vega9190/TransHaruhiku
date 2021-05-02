@@ -57,8 +57,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>3.22488cm</Top>
-        <Left>0.44906cm</Left>
+        <Top>3.66585cm</Top>
+        <Left>0.40095cm</Left>
         <Height>0.99688cm</Height>
         <Width>15.61188cm</Width>
         <ZIndex>1</ZIndex>
@@ -96,8 +96,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>7.09993cm</Top>
-        <Left>0.44906cm</Left>
+        <Top>8.33465cm</Top>
+        <Left>0.40095cm</Left>
         <Height>0.99688cm</Height>
         <Width>15.61188cm</Width>
         <ZIndex>2</ZIndex>
@@ -490,6 +490,51 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox12">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox12</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>5</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox66">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -677,14 +722,17 @@
             <TablixMember>
               <KeepWithGroup>Before</KeepWithGroup>
             </TablixMember>
+            <TablixMember>
+              <KeepWithGroup>Before</KeepWithGroup>
+            </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <KeepTogether>true</KeepTogether>
         <DataSetName>Ingresos</DataSetName>
-        <Top>8.9578cm</Top>
-        <Left>0.44906cm</Left>
-        <Height>1.8cm</Height>
+        <Top>10.19252cm</Top>
+        <Left>0.40095cm</Left>
+        <Height>2.4cm</Height>
         <Width>15.61187cm</Width>
         <ZIndex>3</ZIndex>
         <Visibility>
@@ -1071,6 +1119,51 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox5">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>5</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox69">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -1258,14 +1351,17 @@
             <TablixMember>
               <KeepWithGroup>Before</KeepWithGroup>
             </TablixMember>
+            <TablixMember>
+              <KeepWithGroup>Before</KeepWithGroup>
+            </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <KeepTogether>true</KeepTogether>
         <DataSetName>Egresos</DataSetName>
-        <Top>4.98905cm</Top>
-        <Left>0.44906cm</Left>
-        <Height>1.8cm</Height>
+        <Top>5.43002cm</Top>
+        <Left>0.40095cm</Left>
+        <Height>2.4cm</Height>
         <Width>15.61187cm</Width>
         <ZIndex>4</ZIndex>
         <Visibility>
@@ -1314,7 +1410,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>4.30133in</Height>
+    <Height>5.07227in</Height>
     <Style />
   </Body>
   <Width>6.5in</Width>
