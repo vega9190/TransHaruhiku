@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -39,7 +40,7 @@ namespace TransHaruhiko.Services.Impl
                 haber.ServicioBasicoId = parameters.IdServicioBasico;
                 haber.Fecha = parameters.Fecha;
                 haber.Observacion = parameters.Observacion ?? "";
-                haber.Monto = decimal.Parse(parameters.Monto.Replace('.', ','));
+                haber.Monto = decimal.Parse(parameters.Monto, CultureInfo.InvariantCulture);
             }
             else
             {
@@ -50,7 +51,7 @@ namespace TransHaruhiko.Services.Impl
                     TipoMonedaId = parameters.IdTipoMoneda,
                     ServicioBasicoId = parameters.IdServicioBasico,
                     Fecha = parameters.Fecha,
-                    Monto = decimal.Parse(parameters.Monto.Replace('.',',')),
+                    Monto = decimal.Parse(parameters.Monto, CultureInfo.InvariantCulture),
                     Observacion = parameters.Observacion ?? "",
                 };
 
